@@ -1,0 +1,83 @@
+<div class="wrapper">
+
+  <mat-horizontal-stepper class="stepper-wrapper" (selectionChange)="generateDataForBarber($event)">
+    <mat-step label="Barber" state="phone">
+      <div>
+        <div class="barber-gallery">
+
+          <!--          this creates [ n ] number divs based on the array len. and they are all cols to display:grid-->
+          <button matStepperNext class="grid-col transparent-button" *ngFor="let b of barbers"
+                  (click)="selectBarber(b)">
+            <img class="barber-picture" src="../../assets/images/dummy.jpg"/>
+
+            <div class="instagram-icon"></div>
+          </button>
+        </div>
+
+
+        <!--        <button mat-button matStepperNext>Next</button>-->
+      </div>
+    </mat-step>
+    <mat-step label="Service" state="chat">
+      <div class="service-gallery">
+
+        <!--          this creates [ n ] number divs based on the array len. and they are all cols to display:grid-->
+        <button matStepperNext class="grid-col transparent-button" *ngFor="let s of [1,2,3,4,5]"
+                (click)="selectService(s)">
+          <div class="service-element">
+            <p class="service-title">
+              service {{s}}
+            </p>
+          </div>
+        </button>
+      </div>
+    </mat-step>
+    <mat-step label="Time">
+      <div class="date-picker-wrapper">
+        <!--      this will hold the months-->
+        <div class="first-row">
+          <div class="arrow">
+            <button mat-icon-button>
+              <mat-icon (click)="prev()" >keyboard_arrow_left</mat-icon>
+            </button>
+          </div>
+
+          <div class="months">
+            <p> {{month}} </p>
+          </div>
+
+          <div class="arrow">
+            <button mat-icon-button (click)="next()">
+              <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <!--      this will hold the days-->
+        <div class="second-row">
+          <button (click)="getHoursForDay(d)" mat-button color="primary" class="day" *ngFor="let d of week?.days; let i = index"> {{d.date | date : 'EEEEE'}} </button>
+        </div>
+
+        <!--      this will hold the hours-->
+        <div class="third-row">
+          <button mat-stroked-button color="primary"
+                  *ngFor="let hour of hours"> {{hour.hour}}
+          </button>
+        </div>
+      </div>
+    </mat-step>
+
+    <mat-step label="Finished">
+
+
+    </mat-step>
+
+    <!-- Icon overrides. -->
+    <ng-template matStepperIcon="phone">
+      <mat-icon>call_end</mat-icon>
+    </ng-template>
+    <ng-template matStepperIcon="chat">
+      <mat-icon>forum</mat-icon>
+    </ng-template>
+  </mat-horizontal-stepper>
+</div>

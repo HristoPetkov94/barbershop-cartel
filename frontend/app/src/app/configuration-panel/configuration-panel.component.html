@@ -1,0 +1,91 @@
+<div class="wrapper">
+  <!--add barbers-->
+
+  <div class="flex">
+    <mat-card>
+      <mat-card-title>
+        Services add / remove view
+      </mat-card-title>
+      <mat-card-content>
+        <mat-list role="list" *ngFor="let service of services;">
+          <mat-list-item role="listitem">
+            <div class="flex-space-between">
+              <p> {{ service.name }} </p>
+              <mat-icon color="warn" class="cursor-pointer">close</mat-icon>
+            </div>
+          </mat-list-item>
+
+        </mat-list>
+
+        <button mat-raised-button class="full-width-button" color="warn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card style="width: 50%">
+      <mat-card-title>
+        Barbers add / remove view
+      </mat-card-title>
+      <mat-card-content>
+        <mat-list role="list" *ngFor="let barber of barbers;">
+          <mat-card>
+
+            <mat-card-header class="flex-space-between">
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title> <p> {{ barber.name }} </p></mat-card-title>
+              <mat-icon color="warn" class="cursor-pointer">close</mat-icon>
+            </mat-card-header>
+          </mat-card>
+
+        </mat-list>
+
+        <button mat-raised-button class="full-width-button" color="warn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>
+        Barbers add / remove view
+      </mat-card-title>
+      <mat-card-content>
+        <mat-list role="list" *ngFor="let barber of barbers;">
+          <mat-card>
+
+            <mat-card-header class="flex-space-between">
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title> <p> {{ barber.name }} </p></mat-card-title>
+              <mat-icon color="warn" class="cursor-pointer">close</mat-icon>
+            </mat-card-header>
+          </mat-card>
+
+        </mat-list>
+
+        <button mat-raised-button class="full-width-button" color="warn">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card-content>
+    </mat-card>
+
+  </div>
+
+  <div class="flex">
+    <mat-card>
+      <mat-card-title> Monthly income</mat-card-title>
+      <mat-card-content>
+        <app-pie-chart></app-pie-chart>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title> Monthly clients</mat-card-title>
+      <mat-card-content>
+        <app-number-card-chart></app-number-card-chart>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+
+</div>

@@ -1,0 +1,55 @@
+<div class="services-wrapper">
+  <div class="header">
+    <div class="separator">
+      <h1 class="header-title">SERVICES</h1>
+    </div>
+  </div>
+
+
+  <div class="services">
+    <div *ngFor="let service of services">
+
+      <div class="service">
+        <div class="service-content">
+          <div class="image-with-content">
+            <div class="image">
+              <img mat-card-image
+                   src="https://scontent-sof1-1.xx.fbcdn.net/v/t45.5328-4/c0.1.564.564a/21143311_1483096021737959_2308597169877155840_n.jpg?_nc_cat=109&_nc_sid=c48759&_nc_ohc=30IvawdCNVkAX-f2jmA&_nc_ht=scontent-sof1-1.xx&oh=d628afdc541dac5f155bb532bea7ea71&oe=5E908AA7"
+                   alt="Photo of a Shiba Inu">
+            </div>
+            <div class="content">
+              <div class="service-header">
+                {{service.serviceType}}
+              </div>
+              <div class="service-sub-header">
+                {{service.serviceType + ' minutes • ' + service.priceBGN + 'BGN'}}
+              </div>
+
+              <div>
+                <p class="content-description">
+                  Модерна прическа и стил на мъжете от нашите професионални Барбъри / Modern man's haircut and styling from
+                  our professional Barbers
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-actions">
+          <div class="barber-book-now">
+            <button> Резервирай</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="quote-wrapper">
+    <blockquote>
+      You don't ever ask a barber whether you need a haircut.
+      <cite>Warren Buffett</cite>
+    </blockquote>
+  </div>
+
+</div>

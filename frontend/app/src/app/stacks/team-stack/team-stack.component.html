@@ -1,0 +1,50 @@
+<div class="team">
+  <div class="header">
+    <div class="separator">
+      <h1 class="header-title">TEAM</h1>
+    </div>
+
+  </div>
+
+  <div class="quote-wrapper">
+    <blockquote>
+      If you keep walking past the barbers, eventually you'll get a haircut.
+      <cite>Paul Merson</cite>
+    </blockquote>
+  </div>
+
+  <div class="team-wrapper">
+
+    <div class="arrow-left">
+      <div class="arrow"> <</div>
+    </div>
+
+    <div class="column" *ngFor="let barber of barbers">
+
+      <div class="barber">
+        <div class="barber-name">
+          {{barber.firstName + ' ' + barber.lastName}}
+        </div>
+
+        <div class="barber-image">
+          <img src="{{barber.picture}}"/>
+        </div>
+
+        <div class="barber-description">
+          {{barber.description}}
+        </div>
+
+        <div class="barber-book-now">
+          <button> Резервирай </button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="arrow-right">
+      <div class="arrow"> ></div>
+    </div>
+
+  </div>
+
+</div>

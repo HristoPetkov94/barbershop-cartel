@@ -1,0 +1,18 @@
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-wrapper{
+  display: flex;
+  flex-direction: column;
+  padding: 100px 60px;
+
+  border: 1px solid rgba(211, 211, 211, 0.5);
+}
+
+.action-buttons > *{
+  width: 100%;
+}

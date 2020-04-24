@@ -1,0 +1,71 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.contacts-wrapper {
+  flex: 1;
+}
+
+.google-maps-wrapper {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+  background-color: whitesmoke;
+}
+
+.google-maps-wrapper > iframe {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.contacts-logo {
+  border: 1px solid whitesmoke;
+  border-radius: 100px;
+  width: 175px;
+  height: 175px;
+  padding: 10px;
+  margin: auto;
+  text-align: center;
+}
+
+.contact-box {
+  padding: 20px;
+  height: 70%;
+  background-color: #2f2f2f;
+}
+
+.contacts-logo > img {
+  width: 150px;
+  height: 150px;
+}
+
+.contact-info {
+  color: whitesmoke;
+  margin-top: 20px;
+}
+
+.info-row {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.info-row > * {
+  margin:0 10px;
+}
+
+iframe {
+  height: 600px;
+  width: 100%;
+}
+
+@media (orientation: portrait) {
+  .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column-reverse;
+  }
+}
+

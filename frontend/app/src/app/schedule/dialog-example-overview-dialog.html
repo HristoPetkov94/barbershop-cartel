@@ -1,0 +1,26 @@
+<h1 mat-dialog-title> Booking form
+  <button mat-icon-button (click)="onNoClick()" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</h1>
+<div mat-dialog-content class="dialog-grid">
+  <div class="flex">
+    <p> Date: </p>
+    <button mat-button> {{data?.time?.date  | date: 'dd MMMM yyyy'}} </button>
+  </div>
+  <div class="flex">
+    <p> Hour: </p>
+    <button mat-button> {{data?.time?.hour.hour}} </button>
+  </div>
+  <div class="flex">
+    <p> Barber: </p>
+    <button mat-button> {{data?.barber?.firstName + ' ' + data?.barber?.lastName}} </button>
+  </div>
+  <div class="flex">
+    <p> Service: </p>
+    <button mat-button> {{data?.service?.serviceType + ' - ' + data?.service?.priceBGN + 'лв'}} </button>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button class="facebook-approve-button" mat-button tabindex="-1" (click)="approveWithFb()">Approve with Facebook</button>
+</div>

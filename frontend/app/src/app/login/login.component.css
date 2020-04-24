@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  width: 500px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.wrapper {
+  padding: 70px;
+  background-color: #1a1a1a;
+  border-radius: 5px;
+}
+
+.example-full-width{
+  width: 100%;
+  height: 100%;
+}
+
+.example-full-width > mat-form-field {
+  width: 95%;
+}
+
+.example-button-row button{
+  width: 40%;
+}
+
+.flex-box-buttons{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+}
+
+form{
+  text-align: center;
+}
+
+.logo-wrapper{
+  text-align: center;
+}
+
+.logo {
+  max-width: 50%;
+  max-height: 50%;
+}
+
+
+h1 {
+  font-size: 72px;
+  text-align: center;
+  color:white;
+  letter-spacing: 4px;
+}
+
+.action-buttons{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.action-buttons > button {
+  width: 100%;
+  margin: 10px;
+  padding: 10px;
+}
+

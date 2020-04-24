@@ -1,0 +1,65 @@
+<video autoplay muted loop id="myVideo">
+  <source src="../../assets/videos/park.mp4" type="video/mp4">
+</video>
+
+<div class="wrapper" (mousemove)="move($event)">
+
+  <div class="horizontal-menu">
+
+    <div class="flex">
+      <div class="hamburger" #menuicon (click)="expandMenuContent()">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </div>
+
+      <div class="menu-content" #menucontent>
+        <button class="underlined-button" (click)="scrollToElement(team)">
+          <span>Екип</span>
+        </button>
+
+        <button class="underlined-button" (click)="scrollToElement(services)">
+          <span>Услуги</span>
+        </button>
+
+        <button class="underlined-button" (click)="scrollToElement(contacts)">
+          <span>Контакти</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-icon" *ngIf="auth.isUserLoggedIn()">
+      <button mat-raised-button color="warn"  (click)="goToProfile()">  <mat-icon> perm_identity </mat-icon> </button>
+    </div>
+  </div>
+
+  <div class="logo-wrapper">
+    <img class="logo" src="../../assets/images/logo.png" alt="">
+
+    <div class="eye-ball-wrapper">
+
+      <div #eyebg class="eye-ball"></div>
+
+    </div>
+  </div>
+
+</div>
+
+<div #team>
+  <app-team-stack></app-team-stack>
+</div>
+
+<div #services>
+  <app-service-stack></app-service-stack>
+</div>
+
+<div #contacts>
+  <app-contacts-stack></app-contacts-stack>
+</div>
+
+book now button
+
+<button [routerLink]="['schedule']" class="book-now-button">
+<!--  <mat-icon style="color:white" svgIcon="knife">  </mat-icon>-->
+  Резервирайте сега
+</button>

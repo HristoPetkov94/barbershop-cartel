@@ -1,0 +1,95 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100%;
+}
+
+.stepper-wrapper {
+  width: 50%;
+  height: 100%;
+}
+
+.barber-picture {
+  height: 250px;
+  width: 160px;
+  object-fit: cover;
+}
+
+.barber-gallery {
+
+  display: grid;
+  grid-template-columns: repeat(5, 160px);
+  grid-gap: 20px;
+
+  justify-items: center;
+}
+
+.service-gallery {
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+
+  justify-items: center;
+}
+
+.instagram-icon {
+  width: 30px;
+  height: 30px;
+
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_new.svg/512px-Instagram_new.svg.png");
+  background-size: 30px 30px;
+
+  opacity: 0.5;
+
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+/*since the instagram icon has a position absolute we have to declate this to be relative*/
+.grid-col {
+  position: relative;
+}
+
+.transparent-button {
+  border: none;
+  background: transparent;
+}
+
+.service-element {
+  border: 1px solid black;
+  width: 250px;
+}
+
+.service-title {
+  background-color: red;
+}
+
+.barber-element {
+  display: flex;
+}
+
+
+/*// calendar*/
+.first-row, .second-row {
+  display: flex;
+  justify-content: space-evenly;
+
+  margin-bottom: 10px;
+}
+
+.third-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
+}
+
+.date-picker-wrapper {
+  width: 60%;
+  height: 500px;
+  border: 1px solid red;
+  margin: auto;
+}

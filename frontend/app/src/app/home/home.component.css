@@ -1,0 +1,280 @@
+button {
+  cursor: pointer;
+}
+
+h1 {
+  margin-top: 0;
+  color: white;
+}
+
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+}
+
+.header {
+  width: 100%;
+  height: 15%;
+}
+
+.nav-buttons {
+  width: 100%;
+  text-align: center;
+}
+
+.nav-button {
+  border: 2px solid rgb(255, 255, 255);
+  color: #ffffff;
+  padding: 20px 60px;
+  margin: 10px;
+  transition-duration: 0.4s;
+  font-size: 20px;
+}
+
+.logo-wrapper {
+  text-align: center;
+  width: 100%;
+}
+
+.logo {
+  max-width: 30%;
+  max-height: 30%;
+}
+
+.book-now {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px 100px;
+  background: #7b6446;
+  font-size: 25px;
+  margin: auto;
+  color: white;
+  border: 2px solid #ae9774;
+}
+
+.book-now-button {
+  -webkit-box-flex: 1;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 20px 100px;
+  background: #7b6446;
+  font-size: 25px;
+  margin: auto;
+  color: white;
+  border: 2px solid #ae9774;
+  text-align: center;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-transition: .35s;
+  transition: .35s;
+}
+
+.book-now-button:hover:after {
+  left: -10%;
+  width: 120%;
+}
+
+.book-now-button:after {
+  position: absolute;
+  -webkit-transition: .35s;
+  transition: .35s;
+  content: '';
+  width: 0;
+  top: 0;
+  height: 100%;
+  left: -10%;
+  -webkit-transform: skewX(15deg);
+  transform: skewX(15deg);
+  z-index: -1;
+  background: #ae9774;
+}
+
+.book-now:hover {
+  filter: brightness(1.5);
+}
+
+.separator:hover {
+  background-color: black;
+}
+
+.eye-ball-wrapper {
+  position: absolute;
+  padding: 1px;
+  width: 25px;
+  height: 25px;
+  top: 24.5%;
+  left: 50.2%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  margin-left: 2.5%;
+  -webkit-transition: 250ms ease;
+  transition: 250ms ease;
+  /*border: 1px solid red;*/
+}
+
+.eye-ball-wrapper2 {
+  position: relative;
+  padding: 1px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  top: 35%;
+  left: 47.5%;
+  transform: translate(-35%, -55%);
+  transition: 250ms ease;
+  overflow: hidden;
+}
+
+.eye {
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.eye-wrapper {
+  position: relative;
+}
+
+.eye-wrapper2 {
+  position: relative;
+}
+
+.eye-ball {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+  transition: 250ms ease;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background-color: #1a1a1a;
+}
+
+#myVideo {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  filter: grayscale(0.7);
+}
+
+.example-icon {
+  padding: 0 14px;
+}
+
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.horizontal-menu {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+.flex {
+  display: flex;
+}
+
+.menu-button {
+  background: transparent;
+  border: none;
+  margin: 0 30px;
+  display: block;
+  font-size: 20px;
+  outline: none;
+  padding: 10px;
+  color: white;
+}
+
+.underlined-button {
+  background: transparent;
+  border: none;
+  margin: 0 20px;
+  display: block;
+  font-size: 20px;
+  outline: none;
+  position: relative;
+  transition: 0.3s;
+  color: white;
+}
+
+.underlined-button:before {
+  content: '';
+  border-bottom: 1px solid #ffffff;
+  /*padding: 0 10px;*/
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 0;
+  transition: 0.3s;
+}
+
+.underlined-button:hover:before {
+  width: 100%;
+  padding: 0;
+}
+
+.underlined-button:active {
+  color: white;
+  transition: none;
+}
+
+.menu-content {
+  display: flex;
+  overflow: hidden;
+  transition: 0.5s;
+  width: 0;
+}
+
+/*Hamburger icon*/
+
+.hamburger {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: white;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {
+  opacity: 0;
+}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.wraps {
+  position: absolute;
+  width: 100%;
+}
+
+@media (orientation: portrait) {
+  .book-now-button {
+    right: 15%;
+    padding: 20px 20px;
+  }
+}

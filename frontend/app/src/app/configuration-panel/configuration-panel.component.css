@@ -1,0 +1,44 @@
+.wrapper{
+  width: 90%;
+  margin: auto;
+}
+
+.flex {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item {
+
+}
+
+.flex-list{
+  display:flex;
+  flex-direction: column;
+}
+
+.full-width-button{
+  margin: 20px 0 0 0;
+  width: 100%;
+}
+
+.flex-space-between {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+p{
+  margin:0;
+}
+
+.cursor-pointer{
+  cursor:pointer;
+}
+
+.example-header-image {
+  background-image: url('../../assets/images/logo.png');
+  background-size: cover;
+}
