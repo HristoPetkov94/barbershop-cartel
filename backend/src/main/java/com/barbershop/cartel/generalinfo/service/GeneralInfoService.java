@@ -1,9 +1,9 @@
-package com.barbershop.cartel.generalInfo.service;
+package com.barbershop.cartel.generalinfo.service;
 
-import com.barbershop.cartel.generalInfo.entity.GeneralInfoEntity;
-import com.barbershop.cartel.generalInfo.interfaces.GeneralInfoInterface;
-import com.barbershop.cartel.generalInfo.models.GeneralInfoModel;
-import com.barbershop.cartel.generalInfo.repository.GeneralInfoRepository;
+import com.barbershop.cartel.generalinfo.entity.GeneralInfoEntity;
+import com.barbershop.cartel.generalinfo.interfaces.GeneralInfoInterface;
+import com.barbershop.cartel.generalinfo.models.GeneralInfoModel;
+import com.barbershop.cartel.generalinfo.repository.GeneralInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
