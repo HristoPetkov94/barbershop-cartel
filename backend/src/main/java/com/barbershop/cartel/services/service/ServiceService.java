@@ -33,7 +33,7 @@ public class ServiceService implements ServiceInterface {
         service.setPrice(serviceModel.getPriceBGN());
         service.setDuration(serviceModel.getDuration());
         service.setDescription(serviceModel.getDescription());
-        service.setPicture(image(serviceModel.getPicture()));
+        service.setPicture(serviceModel.getPicture());
 
         serviceRepository.save(service);
     }
@@ -49,7 +49,7 @@ public class ServiceService implements ServiceInterface {
         newService.setDescription(service.getDescription());
 
         if (service.getPicture() != null)
-            newService.setPicture(image(service.getPicture()));
+            newService.setPicture(service.getPicture());
 
         serviceRepository.save(newService);
     }

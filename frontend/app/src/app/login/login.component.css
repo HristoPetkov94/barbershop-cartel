@@ -9,7 +9,7 @@
 
 .wrapper {
   padding: 70px;
-  background-color: #1a1a1a;
+  /*background-color: #1a1a1a;*/
   border-radius: 5px;
 }
 
@@ -44,6 +44,7 @@ form{
 .logo {
   max-width: 50%;
   max-height: 50%;
+  filter: invert();
 }
 
 
