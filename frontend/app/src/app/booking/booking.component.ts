@@ -13,7 +13,7 @@ import {ServicesService} from '../services/services.service';
 export class BookingComponent implements OnInit {
 
   private week: Week;
-  private month: string;
+  private firstDayOfWeek: Date;
   private hours = [];
   private barbers: Barber[] = new Array<Barber>();
 
@@ -42,10 +42,9 @@ export class BookingComponent implements OnInit {
       }, err => {
         console.log(err);
       }, () => {
-        const firstDay = this.week.days[0];
-        console.log(firstDay);
-        const m = new Date(firstDay.date).getMonth();
-        this.month = this.monthNames[m];
+
+        console.log(this.week.days[0]);
+        this.firstDayOfWeek = this.week.days[0].date;
       });
     }
   }
@@ -57,10 +56,7 @@ export class BookingComponent implements OnInit {
       err => {
         console.log(err);
       }, () => {
-        const firstDay = this.week.days[0];
-        console.log(firstDay);
-        const m = new Date(firstDay.date).getMonth();
-        this.month = this.monthNames[m];
+        this.firstDayOfWeek = this.week.days[0].date;
       }
     )
     ;
@@ -72,10 +68,7 @@ export class BookingComponent implements OnInit {
     }, err => {
       console.log(err);
     }, () => {
-      const firstDay = this.week.days[0];
-      console.log(firstDay);
-      const m = new Date(firstDay.date).getMonth();
-      this.month = this.monthNames[m];
+      this.firstDayOfWeek = this.week.days[0].date;
     });
   }
 

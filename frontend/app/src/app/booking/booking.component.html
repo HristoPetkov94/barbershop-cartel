@@ -43,7 +43,7 @@
           </div>
 
           <div class="months">
-            <p> {{month}} </p>
+            <p> {{firstDayOfWeek | date }} </p>
           </div>
 
           <div class="arrow">
@@ -55,13 +55,13 @@
 
         <!--      this will hold the days-->
         <div class="second-row">
-          <button (click)="getHoursForDay(d)" mat-button color="primary" class="day" *ngFor="let d of week?.days; let i = index"> {{d.date | date : 'EEEEE'}} </button>
+          <button (click)="getHoursForDay(d)" mat-button class="day" *ngFor="let d of week?.days; let i = index"> {{d.date | date : 'EEE'}} </button>
         </div>
 
         <!--      this will hold the hours-->
         <div class="third-row">
-          <button mat-stroked-button color="primary"
-                  *ngFor="let hour of hours"> {{hour.hour}}
+          <button mat-stroked-button color="primary" disabled = "true"
+                  *ngFor="let hour of hours"> {{hour.hour.substring(0, 5)}}
           </button>
         </div>
       </div>

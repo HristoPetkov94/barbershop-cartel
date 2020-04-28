@@ -78,18 +78,25 @@
   display: flex;
   justify-content: space-evenly;
 
-  margin-bottom: 10px;
+  background-color: #3f51b5;
+  color:white;
+}
+
+.second-row {
+  background-color: rgba(69, 90, 245, 0.82);
+  margin-bottom: 5%;
 }
 
 .third-row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 20px;
+  padding: 0 20px;
 }
 
 .date-picker-wrapper {
   width: 60%;
   height: 500px;
-  border: 1px solid red;
+  border: 1px solid #3f51b5;
   margin: auto;
 }
