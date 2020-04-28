@@ -91,14 +91,15 @@
                   <div class="form-col">
                     <mat-icon> vpn_key</mat-icon>
                     <mat-label>Password</mat-label>
-                    <mat-form-field class=" example-full-width">
-                      <input matInput [disabled]="!isEditable" [(ngModel)]="barber.password">
-
+<!--                    <mat-form-field class=" example-full-width">-->
+<!--                      <input matInput [disabled]="!isEditable" [(ngModel)]="barber.password">-->
+                    <div class="align-right">
                       <button mat-button matSuffix mat-icon-button (click)="openChangePassDialog(theme)"
                               aria-label="Clear" [disabled]="!isEditable">
                         <mat-icon>open_in_new</mat-icon>
                       </button>
-                    </mat-form-field>
+                    </div>
+<!--                    </mat-form-field>-->
                   </div>
 
                   <div class="form-col">
