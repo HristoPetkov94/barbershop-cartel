@@ -23,7 +23,7 @@ export class BarberService {
 
   updateBarberPicture(barberId, image) {
     console.log('barber: ' + barberId + ' image:', image);
-    return this.http.post<Barber>(this.url + '/barbers/picture/' + barberId, image);
+    return this.http.post<Barber>(this.url + '/barbers/' + barberId + '/picture/', image);
   }
 
   updateBarber(barber: Barber) {

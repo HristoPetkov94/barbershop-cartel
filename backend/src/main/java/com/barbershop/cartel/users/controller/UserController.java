@@ -24,8 +24,8 @@ public class UserController {
         userDetailsInterface.updateBarber(barber);
     }
 
-    @PostMapping("/upload-picture")
-    public void uploadPicture(@RequestParam long barberId, @RequestBody byte[] image) {
+    @PostMapping("{barberId}/picture")
+    public void uploadPicture(@PathVariable long barberId, @RequestBody byte[] image) {
         userDetailsInterface.uploadPicture(barberId, image);
     }
 

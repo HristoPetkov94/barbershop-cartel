@@ -49,11 +49,15 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(data => this.barberId = data.get('id'));
 
-    this.barberService.getBarberByUsername(sessionStorage.getItem('username')).subscribe(b => this.barber = b);
+    this.barberService.getBarberByUsername(sessionStorage.getItem('username')).subscribe(b => {
+      this.barber = b;
+      console.log(this.barber);
+    });
 
     this.servicesService.getAllServices().subscribe(s => {
       this.services = s;
     });
+
 
   }
 
@@ -78,7 +82,9 @@ export class ProfileComponent implements OnInit {
 
   update() {
     if (!this.isEditable) {
-      this.barberService.updateBarber(this.barber).subscribe();
+      this.barberService.updateBarber(this.barber).subscribe(response => {
+        sessionStorage.setItem('username', this.barber.email);
+      });
 
       console.log('services: ', this.services);
       console.log('servicesToBeUpdated: ', this.servicesToBeUpdated);

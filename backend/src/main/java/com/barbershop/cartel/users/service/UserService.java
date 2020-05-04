@@ -1,5 +1,6 @@
 package com.barbershop.cartel.users.service;
 
+import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.repository.UserRepository;
 import com.barbershop.cartel.users.entity.UserDetailsEntity;
 import com.barbershop.cartel.users.interfaces.UserDetailsInterface;
@@ -30,7 +31,13 @@ public class UserService implements UserDetailsInterface {
 
         for (UserDetailsEntity user : allUsers) {
 
-            UserDetailsModel userDetails = new UserDetailsModel(user.getId(), user.getFirstName(), user.getLastName(), user.getDescription(), user.getPicture());
+            UserDetailsModel userDetails = UserDetailsModel.builder()
+                    .id(user.getId())
+                    .firstName(user.getFirstName())
+                    .lastName(user.getLastName())
+                    .description(user.getDescription())
+                    .picture(user.getPicture())
+                    .build();
 
             users.add(userDetails);
         }
@@ -50,7 +57,15 @@ public class UserService implements UserDetailsInterface {
         UserDetailsEntity userDetails = userRepository.findByEmail(email).getUserDetails();
 
         if (userDetails != null) {
-            userDetailsModel = new UserDetailsModel(userDetails.getId(), userDetails.getFirstName(), userDetails.getLastName(), userDetails.getDescription(), userDetails.getPicture());
+
+            userDetailsModel = UserDetailsModel.builder()
+                    .id(userDetails.getId())
+                    .email(email)
+                    .firstName(userDetails.getFirstName())
+                    .lastName(userDetails.getLastName())
+                    .description(userDetails.getDescription())
+                    .picture(userDetails.getPicture())
+                    .build();
         }
 
         return userDetailsModel;
@@ -71,17 +86,25 @@ public class UserService implements UserDetailsInterface {
 
     @Override
     public void updateBarber(UserDetailsModel barber) {
-        Optional<UserDetailsEntity> optionalDetails = userDetailsRepository.findById(barber.getId());
+        Optional<UserEntity> userOptional = userRepository.findById(barber.getId());
 
-        if (optionalDetails.isPresent()) {
+        if (userOptional.isPresent()) {
 
-            UserDetailsEntity userDetailsEntity = optionalDetails.get();
+            UserEntity user = userOptional.get();
+            UserDetailsEntity details = user.getUserDetails();
 
-            userDetailsEntity.setFirstName(barber.getFirstName());
-            userDetailsEntity.setLastName(barber.getLastName());
-            userDetailsEntity.setDescription(barber.getDescription());
+            details.setFirstName(barber.getFirstName());
+            details.setLastName(barber.getLastName());
+            details.setDescription(barber.getDescription());
 
-            userDetailsRepository.save(userDetailsEntity);
+            if (!barber.getEmail().equals(user.getEmail())) {
+                user.setEmail(barber.getEmail());
+                userRepository.save(user);
+            }
+
+            userDetailsRepository.save(details);
         }
+
+
     }
 }
