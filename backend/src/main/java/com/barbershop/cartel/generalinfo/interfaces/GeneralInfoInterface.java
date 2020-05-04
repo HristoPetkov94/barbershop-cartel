@@ -1,6 +1,6 @@
-package com.barbershop.cartel.generalInfo.interfaces;
+package com.barbershop.cartel.generalinfo.interfaces;
 
-import com.barbershop.cartel.generalInfo.models.GeneralInfoModel;
+import com.barbershop.cartel.generalinfo.models.GeneralInfoModel;
 
 import java.util.List;
 

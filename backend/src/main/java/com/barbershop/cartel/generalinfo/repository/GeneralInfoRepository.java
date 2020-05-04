@@ -1,6 +1,6 @@
-package com.barbershop.cartel.generalInfo.repository;
+package com.barbershop.cartel.generalinfo.repository;
 
-import com.barbershop.cartel.generalInfo.entity.GeneralInfoEntity;
+import com.barbershop.cartel.generalinfo.entity.GeneralInfoEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

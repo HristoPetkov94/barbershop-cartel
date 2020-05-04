@@ -1,7 +1,7 @@
-package com.barbershop.cartel.generalInfo.controller;
+package com.barbershop.cartel.generalinfo.controller;
 
-import com.barbershop.cartel.generalInfo.interfaces.GeneralInfoInterface;
-import com.barbershop.cartel.generalInfo.models.GeneralInfoModel;
+import com.barbershop.cartel.generalinfo.interfaces.GeneralInfoInterface;
+import com.barbershop.cartel.generalinfo.models.GeneralInfoModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
