@@ -13,7 +13,7 @@ public class ServiceModel {
     private String serviceType;
     private int priceBGN;
     private int duration;
-    private byte[] picture;
+    private String picture;
     private String description;
 
     // for deleting while update
@@ -24,7 +24,7 @@ public class ServiceModel {
         this.serviceType = entity.getServiceType();
         this.priceBGN = entity.getPrice();
         this.duration = entity.getDuration();
-        this.picture = entity.getPicture().getBytes();
+        this.picture = entity.getPicture();
         this.description = entity.getDescription();
     }
 }
