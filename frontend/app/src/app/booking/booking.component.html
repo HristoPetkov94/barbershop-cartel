@@ -43,7 +43,14 @@
           </div>
 
           <div class="months">
-            <p> {{firstDayOfWeek | date }} </p>
+            <span> {{firstDayOfWeek | date }} </span>
+
+            <mat-form-field style="width: 0px; height: 0px">
+              <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+              <mat-datepicker #picker touchUi></mat-datepicker>
+            </mat-form-field>
+
+            <button mat-icon-button (click)="picker.open()"> <mat-icon> calendar_today </mat-icon></button>
           </div>
 
           <div class="arrow">
@@ -55,16 +62,39 @@
 
         <!--      this will hold the days-->
         <div class="second-row">
-          <button (click)="getHoursForDay(d)" mat-button class="day" *ngFor="let d of week?.days; let i = index"> {{d.date | date : 'EEE'}} </button>
+          <button (click)="getHoursForDay(d)" mat-button class="day" *ngFor="let d of week?.days; let i = index">
+            <span>
+              <p class="margin-zero">{{d.date | date : 'EEE'}}</p>
+              <p class="margin-zero">{{d.date | date : 'dd'}}</p>
+            </span>
+          </button>
         </div>
 
         <!--      this will hold the hours-->
         <div class="third-row">
-          <button mat-stroked-button color="primary" disabled = "true"
-                  *ngFor="let hour of hours"> {{hour.hour.substring(0, 5)}}
-          </button>
+          <ng-container *ngIf="editable; else not">
+            <button   mat-stroked-button color="primary" (click)="openDialog()"
+                      *ngFor="let hour of hours"> <span style="display: flex; justify-content: space-between; align-items: center;">
+               <span> {{hour.hour.substring(0, 5)}} </span> <mat-icon> edit </mat-icon>
+            </span>
+            </button>
+          </ng-container>
+
+          <ng-template #not>
+            <button   mat-stroked-button color="primary"
+                      *ngFor="let hour of hours"> {{hour.hour.substring(0, 5)}}
+            </button>
+          </ng-template>
         </div>
       </div>
+
+
+      <mat-card style="width: 60%; margin:auto">
+        <button mat-stroked-button color="primary" (click)="openDialog()"> <mat-icon> edit </mat-icon> </button>
+
+        <div *ngFor="let conf of configs"> {{conf}}</div>
+
+      </mat-card>
     </mat-step>
 
     <mat-step label="Finished">
@@ -81,3 +111,4 @@
     </ng-template>
   </mat-horizontal-stepper>
 </div>
+

@@ -1,0 +1,56 @@
+<h1 mat-dialog-title> Configuration
+
+</h1>
+
+<div class="flex-wrapper">
+  <mat-form-field>
+    <mat-label>From</mat-label>
+    <input matInput [matDatepicker]="picker" [formControl]="dateFrom">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>To</mat-label>
+    <input matInput [matDatepicker]="picker2" [formControl]="dateTo">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+
+
+</div>
+
+<div class="flex-wrapper">
+  <mat-form-field class="form-field">
+    <mat-label>From</mat-label>
+    <!--    <mat-select #fontSize value="16px" (selectionChange)="triggerResize()">-->
+    <mat-select>
+      <mat-option> - - -</mat-option>
+      <mat-option *ngFor="let t of times" [value]="data.firstAppointment"> {{ t }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field class="form-field">
+    <mat-label>To</mat-label>
+    <!--    <mat-select #fontSize value="16px" (selectionChange)="triggerResize()">-->
+    <mat-select>
+      <mat-option> - - -</mat-option>
+      <mat-option *ngFor="let t of times" [value]="data.lastAppointment"> {{ t }} </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</div>
+
+<div class="flex-wrapper">
+  <span> working day </span>
+  <mat-slide-toggle></mat-slide-toggle>
+</div>
+
+<div mat-dialog-content class="dialog-grid">
+</div>
+<div mat-dialog-actions>
+  <button class="facebook-approve-button" color="primary" mat-button tabindex="-1" (click)="save()"> ok</button>
+  <button class="facebook-approve-button" color="primary" mat-button tabindex="-1" (click)="onNoClick()"> cancel
+  </button>
+</div>

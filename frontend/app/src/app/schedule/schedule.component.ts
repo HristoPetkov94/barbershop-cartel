@@ -22,7 +22,7 @@ interface SelectedTime {
 })
 export class ScheduleComponent implements OnInit {
   private services: Service[];
-  private barbers: Barber[];
+  private barbers: Barber[] = new Array<Barber>();
   private date;
 
   private week: Week = {days: []};

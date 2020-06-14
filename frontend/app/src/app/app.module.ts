@@ -22,12 +22,25 @@ export function provideConfig() {
 }
 
 import {
-  MatButtonModule, MatButtonToggleModule, MatCardModule, MatDatepickerModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatProgressSpinnerModule,
-  MatSelectModule, MatSidenavModule, MatSlideToggleModule, MatStepperModule, MatTableModule, MatToolbarModule
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatStepperModule,
+  MatTableModule,
+  MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
@@ -43,7 +56,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
 import {ChangePasswordDialogComponent, ProfileComponent, ServiceDialogComponent} from './profile/profile.component';
 import { BookedUsersTableComponent } from './booked-users-table/booked-users-table.component';
-import { BookingComponent } from './booking/booking.component';
+import {BookingComponent, BookingDialogComponent} from './booking/booking.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +77,8 @@ import { BookingComponent } from './booking/booking.component';
     BookedUsersTableComponent,
     ChangePasswordDialogComponent,
     ServiceDialogComponent,
-    BookingComponent
+    BookingComponent,
+    BookingDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -94,6 +108,7 @@ import { BookingComponent } from './booking/booking.component';
     MatProgressSpinnerModule,
     MatSlideToggleModule,
     MatStepperModule,
+    MatSliderModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },
@@ -106,7 +121,8 @@ import { BookingComponent } from './booking/booking.component';
   entryComponents: [
     DialogOverviewExampleDialogComponent,
     ChangePasswordDialogComponent,
-    ServiceDialogComponent
+    ServiceDialogComponent,
+    BookingDialogComponent
   ]
 })
 export class AppModule {
