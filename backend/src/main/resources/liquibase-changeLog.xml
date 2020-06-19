@@ -1,0 +1,17 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+   http://www.liquibase.org/xml/ns/dbchangelog
+   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet author="pm" id="pm_1">
+        <insert tableName="users">
+            <column name="email" value="hola@abv.bg"/>
+            <column name="password" value="$2y$12$ibUgZenmhv7q0uOSJUg9q.fHyIDOV1Hbp1//AC5IfftlcL.3MJ1Ra"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
