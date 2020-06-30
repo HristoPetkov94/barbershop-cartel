@@ -91,7 +91,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
 
         Optional<UserDetailsEntity> barber = getBarberById(barberId);
 
-        ScheduleConfigModel configuration = null;
+        ScheduleConfigModel configuration = new ScheduleConfigModel();
 
         if (barber.isPresent()) {
 
