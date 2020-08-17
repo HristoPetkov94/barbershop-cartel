@@ -1,0 +1,9 @@
+POST http://localhost:8080/sendMailMessage
+Content-Type: application/json
+
+{
+  "from": "petkovhristo94@gmail.com",
+  "to": "petkov@lexoro.ai",
+  "subject": "Testing my email-notification service",
+  "text": "Hi Hristo! Your email-notification service is great!"
+}
