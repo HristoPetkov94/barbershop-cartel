@@ -1,70 +1,151 @@
 .container {
-  display: flex;
-  width: 500px;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
+  min-width: 100%;
+  min-height: 100%;
 }
 
-.wrapper {
-  padding: 70px;
-  /*background-color: #1a1a1a;*/
-  border-radius: 5px;
-}
-
-.example-full-width{
+.inputs-wrapper {
   width: 100%;
   height: 100%;
+
+  margin-top: 90px;
 }
 
-.example-full-width > mat-form-field {
+.inputs-wrapper > mat-form-field {
   width: 95%;
 }
 
-.example-button-row button{
+.example-button-row button {
   width: 40%;
 }
 
-.flex-box-buttons{
+.flex-box-buttons {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: center;
 }
 
-form{
-  text-align: center;
+.form-wrapper {
+  margin: auto;
+  width: 328px;
 }
 
-.logo-wrapper{
+.logo-wrapper {
+  margin: auto;
+  width: 254px;
+  height: 254px;
   text-align: center;
 }
 
 .logo {
-  max-width: 50%;
-  max-height: 50%;
-  filter: invert();
+  width: 254px;
+  height: 254px;
 }
 
 
 h1 {
   font-size: 72px;
   text-align: center;
-  color:white;
+  color: white;
   letter-spacing: 4px;
 }
 
-.action-buttons{
-  margin-top: 40px;
+.action-buttons {
+  height: 54px;
+  width: 341px;
+  margin: auto;
+}
+
+.login-button {
+  background: #616463 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 2px #0000003D;
+  border: 3px solid #EEF1F3;
+  border-radius: 2px;
+
+  width: 341px;
+  height: 54px;
+
+  transition: 0.3s;
+  color: #CDD2D1;
+}
+
+.login-button:hover {
+  background: #EEF1F3 0 0 no-repeat padding-box;
+  transition: 0.3s;
+  cursor: pointer;
+  color: #b2b7b6;
+}
+
+.login-text {
+  text-align: center;
+  font: 23px Montserrat;
+  letter-spacing: 0;
+
+  opacity: 1;
+  width: 88px;
+  height: 29px;
+  text-transform: uppercase;
+}
+
+input::placeholder {
+  text-align: left;
+  font: 23px Montserrat;
+  letter-spacing: 0;
+  color: #EEF1F3;
+  text-transform: uppercase;
+  opacity: 1;
+}
+
+.remember-me-wrapper {
+  width: 328px;
+  margin: 24px auto 48px auto;
+}
+
+.checkbox-text {
+  color: #EEF1F3;
+  font: 23px Montserrat;
+}
+
+.forgot-pass-text {
+  font: 23px Montserrat;
+  letter-spacing: 0;
+  color: #FFFFFF4D;
+
+  text-align: center;
+
+  margin-top: 43px;
+}
+
+.footer-text{
   display: flex;
-  flex-direction: row;
   justify-content: center;
 }
 
-.action-buttons > button {
-  width: 100%;
-  margin: 10px;
-  padding: 10px;
+.footer-text > span {
+  font: 23px Montserrat;
+  letter-spacing: 0;
+  color: #FFFFFF4D;
+  padding: 0 10px;
 }
 
+.footer-text > a {
+  text-align: center;
+  font: Bold 20px/24px Montserrat;
+  letter-spacing: 0;
+  color: #FFFFFFB3;
+  text-transform: uppercase;
+}
+
+.footer-text > a:link {
+  text-decoration: none;
+}
+
+.footer-text > a:visited {
+  text-decoration: none;
+}
+
+.wrapper {
+  margin: auto;
+  width: 30%;
+  padding-top:137px;
+}

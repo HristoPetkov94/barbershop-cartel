@@ -24,7 +24,7 @@ export function provideConfig() {
 import {
   MatButtonModule,
   MatButtonToggleModule,
-  MatCardModule,
+  MatCardModule, MatCheckboxModule,
   MatDatepickerModule,
   MatDialogModule,
   MatFormFieldModule,
@@ -39,7 +39,7 @@ import {
   MatSliderModule,
   MatSlideToggleModule,
   MatStepperModule,
-  MatTableModule,
+  MatTableModule, MatTabsModule,
   MatToolbarModule
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -109,6 +109,8 @@ import {BookingComponent, BookingDialogComponent} from './booking/booking.compon
     MatSlideToggleModule,
     MatStepperModule,
     MatSliderModule,
+    MatCheckboxModule,
+    MatTabsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },
