@@ -75,6 +75,38 @@ li {
   padding: 13px 115px;
 }
 
+
+.booking-button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+
+
+}
+
+.booking-button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.booking-button:hover span {
+  padding-right: 25px;
+}
+
+.booking-button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.booking-button:hover {
+  background: whitesmoke 0 0 no-repeat padding-box;
+}
+
 .social-media-wrapper {
   display: flex;
   flex-direction: column;
@@ -88,3 +120,29 @@ li {
 
   margin-left: 166px;
 }
+
+.services-wrapper {
+  height: 100%;
+  background: #EEEEEE 0 0 no-repeat padding-box;;
+}
+
+.contacts-wrapper {
+  height: 100%;
+  background: #EEEEEE 0 0 no-repeat padding-box;;
+}
+
+.external-header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+
+  padding: 25px 0;
+
+  background-color: #212121;
+}
+
+a:hover {
+  color: whitesmoke;
+  cursor: pointer;
+}
+

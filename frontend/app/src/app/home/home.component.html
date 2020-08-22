@@ -1,13 +1,13 @@
-<div class="main" [ngSwitch]="tab">
+<div class="main" [ngSwitch]="tab" style="overflow: hidden">
 
   <div *ngSwitchCase="'main'" [@slideInOut]>
     <div class="header-wrapper">
       <img class="logo" src="../../assets/images/logo.png"/>
 
       <ul>
-        <li (click)="tab = 'alter'">team</li>
-        <li>services</li>
-        <li>contact</li>
+        <li> <a (click)="tab = 'main'">team</a></li>
+        <li> <a (click)="tab = 'services'">services</a></li>
+        <li> <a (click)="tab = 'contact'">contact</a></li>
         <li>bg</li>
       </ul>
 
@@ -21,7 +21,7 @@
     </div>
 
     <div class="booking-button-wrapper">
-      <button mat-raised-button class="booking-button"> book now</button>
+      <button mat-raised-button class="booking-button"><span>book now</span></button>
     </div>
 
     <div class="social-media-wrapper">
@@ -31,19 +31,34 @@
 
   </div>
 
-  <div *ngSwitchCase="'alter'" [@slideInOut]>
-    <div class="header-wrapper">
+  <div *ngSwitchCase="'services'" [@slideInOut] class="services-wrapper">
+    <div class="external-header">
       <img class="logo" src="../../assets/images/logo.png"/>
 
-      <ul>
-        <li (click)="tab = 'main'">team</li>
-        <li (click)="tab = 'alter'">services</li>
-        <li>contact</li>
+      <ul class="external-navigation">
+        <li> <a (click)="tab = 'main'">team</a></li>
+        <li> <a (click)="tab = 'services'">services</a></li>
+        <li> <a (click)="tab = 'contact'">contact</a></li>
         <li>bg</li>
       </ul>
 
     </div>
-    <div style="color: white; font-size: 35px"> alo </div>
+    <div style="color: white; font-size: 35px"> services </div>
+  </div>
+
+  <div *ngSwitchCase="'contact'" [@slideInOut] class="contacts-wrapper">
+    <div class="external-header">
+      <img class="logo" src="../../assets/images/logo.png"/>
+
+      <ul>
+        <li> <a (click)="tab = 'main'">team</a></li>
+        <li> <a (click)="tab = 'services'">services</a></li>
+        <li> <a (click)="tab = 'contact'">contact</a></li>
+        <li>bg</li>
+      </ul>
+
+    </div>
+    <div style="color: white; font-size: 35px"> contact </div>
   </div>
 </div>
 
