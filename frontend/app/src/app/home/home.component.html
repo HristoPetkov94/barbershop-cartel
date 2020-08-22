@@ -1,65 +1,49 @@
-<video autoplay muted loop id="myVideo">
-  <source src="../../assets/videos/park.mp4" type="video/mp4">
-</video>
+<div class="main" [ngSwitch]="tab">
 
-<div class="wrapper" (mousemove)="move($event)">
+  <div *ngSwitchCase="'main'" [@slideInOut]>
+    <div class="header-wrapper">
+      <img class="logo" src="../../assets/images/logo.png"/>
 
-  <div class="horizontal-menu">
+      <ul>
+        <li (click)="tab = 'alter'">team</li>
+        <li>services</li>
+        <li>contact</li>
+        <li>bg</li>
+      </ul>
 
-    <div class="flex">
-      <div class="hamburger" #menuicon (click)="expandMenuContent()">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
-      </div>
-
-      <div class="menu-content" #menucontent>
-        <button class="underlined-button" (click)="scrollToElement(team)">
-          <span>Екип</span>
-        </button>
-
-        <button class="underlined-button" (click)="scrollToElement(services)">
-          <span>Услуги</span>
-        </button>
-
-        <button class="underlined-button" (click)="scrollToElement(contacts)">
-          <span>Контакти</span>
-        </button>
-      </div>
     </div>
 
-    <div class="profile-icon" *ngIf="auth.isUserLoggedIn()">
-      <button mat-raised-button color="warn"  (click)="goToProfile()">  <mat-icon> perm_identity </mat-icon> </button>
+    <div class="content-wrapper">
+    <span class="content">
+      Perfect gentlemn's choice
+      lorem ipsum dolor sit amet
+    </span>
     </div>
+
+    <div class="booking-button-wrapper">
+      <button mat-raised-button class="booking-button"> book now</button>
+    </div>
+
+    <div class="social-media-wrapper">
+      <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
+      <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
+    </div>
+
   </div>
 
-  <div class="logo-wrapper">
-    <img class="logo" src="../../assets/images/logo.png" alt="">
+  <div *ngSwitchCase="'alter'" [@slideInOut]>
+    <div class="header-wrapper">
+      <img class="logo" src="../../assets/images/logo.png"/>
 
-    <div class="eye-ball-wrapper">
-
-      <div #eyebg class="eye-ball"></div>
+      <ul>
+        <li (click)="tab = 'main'">team</li>
+        <li (click)="tab = 'alter'">services</li>
+        <li>contact</li>
+        <li>bg</li>
+      </ul>
 
     </div>
+    <div style="color: white; font-size: 35px"> alo </div>
   </div>
-
 </div>
 
-<div #team>
-  <app-team-stack></app-team-stack>
-</div>
-
-<div #services>
-  <app-service-stack></app-service-stack>
-</div>
-
-<div #contacts>
-  <app-contacts-stack></app-contacts-stack>
-</div>
-
-book now button
-
-<button [routerLink]="['schedule']" class="book-now-button">
-<!--  <mat-icon style="color:white" svgIcon="knife">  </mat-icon>-->
-  Резервирайте сега
-</button>
