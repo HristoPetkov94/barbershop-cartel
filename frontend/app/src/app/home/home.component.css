@@ -3,6 +3,8 @@
   background-size: cover;
   height: 100%;
   width: 100%;
+
+  overflow: hidden;
 }
 
 .header-wrapper {
@@ -10,7 +12,7 @@
   justify-content: space-between;
   align-content: center;
 
-  padding-top: 45px;
+  padding: 25px 0;
 }
 
 ul {
@@ -41,6 +43,11 @@ li {
   height: 200px;
 }
 
+.external-header > .logo {
+  width: 100px;
+  height: 100px;
+}
+
 .content-wrapper {
   width: 545px;
   height: 154px;
@@ -55,7 +62,7 @@ li {
   text-align: center;
 }
 
-.booking-button-wrapper{
+.booking-button-wrapper {
   margin-top: 40px;
   text-align: center;
 
@@ -81,8 +88,6 @@ li {
   display: inline-block;
   position: relative;
   transition: 0.5s;
-
-
 }
 
 .booking-button span:after {
@@ -102,7 +107,6 @@ li {
   right: 0;
 }
 
-
 .booking-button:hover {
   background: whitesmoke 0 0 no-repeat padding-box;
 }
@@ -116,7 +120,7 @@ li {
   width: 33px;
   height: 33px;
 
-  padding:10px 0;
+  padding: 10px 0;
 
   margin-left: 166px;
 }
@@ -126,7 +130,7 @@ li {
   background: #EEEEEE 0 0 no-repeat padding-box;;
 }
 
-.contacts-wrapper {
+.team-wrapper {
   height: 100%;
   background: #EEEEEE 0 0 no-repeat padding-box;;
 }
@@ -146,3 +150,261 @@ a:hover {
   cursor: pointer;
 }
 
+.service-card-wrapper {
+  display: flex;
+  width: 80%;
+  margin: auto;
+
+  padding: 50px;
+}
+
+.service-card {
+  width: 20%;
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  box-shadow: 0 3px 6px #000000B3;
+
+  border: none;
+  border-radius: 10px;
+
+  cursor: pointer;
+  margin: 50px;
+}
+
+.service-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.service-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-header-image {
+  background: transparent url('../../assets/images/haircut.png ') 0 0 no-repeat padding-box;
+  background-size: contain;
+  border-radius: 8px;
+  height: 185px;
+
+  margin-bottom: 10px;
+}
+
+.card-title {
+  text-align: center;
+  font: normal normal bold 25px/37px Roboto;
+  letter-spacing: 0;
+  color: #413F3F;
+
+  margin-top: 50px;
+}
+
+.card-content {
+  font: normal normal normal 20px/24px Roboto;
+  letter-spacing: 0.3px;
+  color: #000000B3;
+
+  padding: 20px;
+
+  width: 80%;
+  text-align: left;
+  margin: auto;
+}
+
+.card-action-buttons {
+  text-align: center;
+
+  margin: 40px;
+}
+
+.card-action-buttons > button {
+  padding: 0 60px;
+
+  background: #2B2B2B 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 2px #000000;
+
+  text-align: center;
+  font: normal normal bold 15px/37px Roboto;
+  letter-spacing: 0;
+  color: #FFFFFF;
+
+  border: none;
+  border-radius: 10px;
+
+  text-transform: uppercase;
+}
+
+.separator {
+  opacity: 0.2;
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+
+  position: absolute;
+  bottom: 0;
+}
+
+.footer-icons {
+  display: flex;
+  flex-direction: column;
+  filter: invert();
+
+  float: left;
+}
+
+.footer-info {
+  text-align: center;
+  font: normal normal bold 20px/29px Roboto;
+  color: #000000;
+  text-transform: uppercase;
+
+  width: 100%;
+
+  height: 100px;
+  padding: 20px 0;
+}
+
+.footer-text {
+  width: 100%;
+  position: relative;
+  left: 50%;
+  transform: translateX(-60%);
+}
+
+a:visited {
+  text-decoration: underline;
+}
+
+.title-wrapper > p:nth-child(1) {
+  text-align: center;
+  font: normal normal bold 25px/54px Roboto;
+  letter-spacing: 0;
+  color: #000000;
+  text-transform: uppercase;
+}
+
+.title-wrapper > p:nth-child(2) {
+  text-align: center;
+  font: normal normal normal 25px/24px Roboto;
+  letter-spacing: 0.3px;
+  color: #000000B3;
+  opacity: 1;
+
+  margin: 0;
+}
+
+.team-card-wrapper {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  margin: auto;
+  width: 60%;
+}
+
+.card-barber-wrapper {
+  width: 25%;
+  margin: 20px;
+}
+
+.barber-image {
+  height: 400px;
+  width: 100%;
+
+  background: url('../../assets/images/barber.png');
+  background-size: cover;
+
+  background-repeat: no-repeat;
+}
+
+.barber-info {
+  background-color: black;
+}
+
+.social-info > p {
+  text-align: left;
+  font: normal normal normal 30px/37px Montserrat;
+  color: #FFFFFF;
+}
+
+.social-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-info > img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.social-info > p {
+  margin: 10px;
+}
+
+.barber-info > .name {
+  text-align: center;
+  font: normal normal normal 30px/53px Roboto;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 25%;
+  height: 510px;
+  perspective: 1000px;
+
+  margin: 10px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: black;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.back-card-text {
+  top: 30%;
+  position: relative;
+  text-align: center;
+
+  font: normal normal normal 20px/24px Montserrat;
+  letter-spacing: 0.3px;
+  color: #FFFFFFB3;
+}
+
+.back-card-button {
+
+}
