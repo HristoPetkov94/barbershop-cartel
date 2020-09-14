@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.xml.bind.ValidationException;
 
 @RestController
-@RequestMapping("/sendMailMessage")
+@RequestMapping("/send-email-message")
 public class EmailNotificationController {
 
     @Autowired
