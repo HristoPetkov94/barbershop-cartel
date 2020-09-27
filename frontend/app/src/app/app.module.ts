@@ -61,6 +61,7 @@ import { CompactNavbarComponent } from './compact-navbar/compact-navbar.componen
 import { BarberServicesPanelComponent } from './barber-services-panel/barber-services-panel.component';
 import { BarberTeamPanelComponent } from './barber-team-panel/barber-team-panel.component';
 import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.component';
+import { BarberFooterInfoComponent } from './barber-footer-info/barber-footer-info.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.co
     CompactNavbarComponent,
     BarberServicesPanelComponent,
     BarberTeamPanelComponent,
-    BarberPaginatorComponent
+    BarberPaginatorComponent,
+    BarberFooterInfoComponent
   ],
   imports: [
     BrowserModule,

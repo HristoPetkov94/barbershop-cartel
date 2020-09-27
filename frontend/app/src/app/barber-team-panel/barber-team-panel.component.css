@@ -7,7 +7,13 @@ section {
   background: #EEEEEE 0 0 no-repeat padding-box;
 
   display: grid;
-  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-rows: 100px auto auto;
+
+  height: 90vh;
+}
+
+.title-wrapper {
+  align-self: center;
 }
 
 .title-wrapper > p:nth-child(1) {

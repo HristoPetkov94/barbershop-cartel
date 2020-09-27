@@ -8,6 +8,8 @@ section {
 
   display: grid;
   grid-template-rows: 1fr 2fr 1fr;
+
+  height: 90vh;
 }
 
 .external-nav {
