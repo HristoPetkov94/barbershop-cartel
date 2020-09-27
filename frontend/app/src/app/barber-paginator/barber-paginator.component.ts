@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
 import {Page} from './page';
 import {animate, style, transition, trigger} from "@angular/animations";
 
@@ -37,6 +37,20 @@ export class BarberPaginatorComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.spreadDataIntoPages();
+  }
+
+  switchPage(index) {
+    for (const page of this.pages) {
+      page.active = false;
+    }
+
+    this.pages[index].active = true;
+
+    this.page = index;
+  }
+
+  private spreadDataIntoPages() {
     let page: Page = {content: [], active: false};
 
     for (let i = 1; i <= this.data.length; i++) {
@@ -57,15 +71,5 @@ export class BarberPaginatorComponent implements OnInit {
     this.pages[this.page].active = true;
 
     console.log(this.pages);
-  }
-
-  switchPage(index) {
-    for (const page of this.pages) {
-      page.active = false;
-    }
-
-    this.pages[index].active = true;
-
-    this.page = index;
   }
 }

@@ -190,3 +190,47 @@
   background: rgba(74, 74, 74, 0.92) radial-gradient(circle, transparent 1%,
   rgba(74, 74, 74, 0.92) 1%) center/15000%;
 }
+
+@media (max-width: 1800px) {
+  .team-card-wrapper {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1600px) {
+  .team-card-wrapper {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1300px) {
+  .team-card-wrapper {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1100px) {
+  .team-card-wrapper {
+    width: 30%;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flip-card {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .team-card-wrapper {
+    width: 75%;
+  }
+}
+
+@media (max-width: 768px) {
+  .team-card-wrapper {
+    width: 75%;
+  }
+}

@@ -78,6 +78,25 @@
 
       <app-barber-team-panel></app-barber-team-panel>
     </div>
+
+    <div *ngSwitchCase="'contact'" [@slideInOut] class="team-wrapper">
+
+      <div class="external-header">
+        <img class="logo" (click)="tab = 'main'" src="../../assets/images/logo.png"/>
+
+        <app-compact-navbar (navigation)="navigate($event)"></app-compact-navbar>
+
+        <ul class="external-nav">
+
+          <li><a (click)="tab = 'team'">team</a></li>
+          <li><a (click)="tab = 'services'">services</a></li>
+          <li><a (click)="tab = 'contact'">contact</a></li>
+          <li>bg</li>
+        </ul>
+
+      </div>
+
+    </div>
   </ng-container>
 
 </main>
