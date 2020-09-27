@@ -14,8 +14,8 @@ import {ViewEncapsulation} from '@angular/cli/lib/config/schema';
     [
       trigger('slideInOut', [
         transition(':enter', [
-          style({transform: 'translateX(+100%)', overflow: 'hidden', height: '110%'}),
-          animate('300ms ease-in', style({transform: 'translateX(0%)', transition: '2s', overflow: 'hidden', height: '110%'}))
+          style({opacity: '0'}),
+          animate('0.5s ease-in', style({opacity: '1'}))
         ]),
       ]),
     ],

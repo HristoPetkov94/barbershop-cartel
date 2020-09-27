@@ -7,9 +7,7 @@ section {
   background: #EEEEEE 0 0 no-repeat padding-box;
 
   display: grid;
-  grid-template-rows: 100px auto auto;
-
-  height: 90vh;
+  grid-template-rows: 100px auto 200px;
 }
 
 .title-wrapper {
