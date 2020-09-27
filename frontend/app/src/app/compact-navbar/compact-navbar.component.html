@@ -1,0 +1,19 @@
+<div class="navbar" [style.backgroundColor]="hideBurger ? 'whitesmoke': 'transparent'">
+          <span *ngIf="!hideBurger" (click)="hideBurger = !hideBurger">
+            <mat-icon [style.color]="'white'" class="navbar-icons">menu</mat-icon>
+          </span>
+
+  <span *ngIf="hideBurger" (click)="hideBurger = !hideBurger">
+            <mat-icon [style.color]="'black'" class="navbar-icons">close</mat-icon>
+          </span>
+
+  <div class="hidden-{{!hideBurger}}">
+
+    <ul class="nav-compact-{{!hideBurger}}">
+      <li><a (click)="navigate('team')">team</a></li>
+      <li><a (click)="navigate('services')">services</a></li>
+      <li><a (click)="navigate('contact')">contact</a></li>
+      <li>bg</li>
+    </ul>
+  </div>
+</div>

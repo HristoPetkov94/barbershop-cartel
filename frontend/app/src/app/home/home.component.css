@@ -1,21 +1,34 @@
 .main {
   background-image: url('../../assets/images/barbershop-homepage.png');
-  background-size: cover;
-  height: 100%;
-  width: 100%;
+  /* Full height */
 
-  overflow: hidden;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.home-container {
+  display:grid;
+  /*height: 90vh;*/
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 4fr 2fr;
+  height: 70%;
 }
 
 .header-wrapper {
   display: flex;
   justify-content: space-between;
-  align-content: center;
+  align-items: center;
 
   padding: 25px 0;
 }
 
-ul {
+.nav {
   display: -webkit-box;
   justify-content: center;
   align-items: center;
@@ -26,14 +39,29 @@ ul {
   margin-right: 126px;
 }
 
-li {
+.external-nav {
+  display: -webkit-box;
+  justify-content: center;
+  align-items: center;
+}
+
+.external-nav > li {
+  font: Bold 15px/17px Roboto;
   display: inline;
   padding: 20px;
-  font: Bold 30px/37px Roboto;
   letter-spacing: 0;
   color: #FFFFFFB3;
   text-transform: uppercase;
-  width: 82px;
+  height: 37px;
+}
+
+.nav > li {
+  display: inline;
+  padding: 20px;
+  font: Bold 25px/27px Roboto;
+  letter-spacing: 0;
+  color: #FFFFFFB3;
+  text-transform: uppercase;
   height: 37px;
 }
 
@@ -49,31 +77,50 @@ li {
 }
 
 .content-wrapper {
-  width: 545px;
-  height: 154px;
   text-align: center;
-  font: Bold 45px/54px Roboto;
+  font-size: 45px;
+  font-weight: bold;
   letter-spacing: 0;
   color: #CAC8C8;
-  margin: 200px auto auto auto;
+  margin: auto;
+
+  grid-column: 2/3;
+  object-fit: cover;
+  justify-self: center;
+  align-self: center;
 }
 
 .content {
   text-align: center;
 }
 
+.test-1 {
+  height: 300px;
+}
+
+.test-2 {
+  /*position: absolute;*/
+  /*bottom: 0;*/
+  /*left: 0;*/
+
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
 .booking-button-wrapper {
-  margin-top: 40px;
+  /*margin-top: 40px;*/
   text-align: center;
 
-  padding-bottom: 130px;
+  margin-top: 50px;
 }
 
 .booking-button {
   background: #FFFFFFE6 0 0 no-repeat padding-box;
 
   text-align: center;
-  font: Bold 30px/37px Roboto;
+  /*font: Bold 30px/37px Roboto;*/
+  font-size: 30px;
+  font-weight: bold;
   letter-spacing: 0;
   color: #413F3F;
 
@@ -114,6 +161,10 @@ li {
 .social-media-wrapper {
   display: flex;
   flex-direction: column;
+
+  padding: 20px;
+  justify-self: self-start;
+  align-self: flex-end;
 }
 
 .social-icons {
@@ -125,14 +176,20 @@ li {
   margin-left: 166px;
 }
 
-.services-wrapper {
+.home-wrapper {
   height: 100%;
-  background: #EEEEEE 0 0 no-repeat padding-box;;
+  /*overflow-y: hidden;*/
+}
+
+.services-wrapper {
+  min-height: 100%;
+  background: #EEEEEE 0 0 no-repeat padding-box;
+  /*overflow-y: hidden;*/
 }
 
 .team-wrapper {
-  height: 100%;
-  background: #EEEEEE 0 0 no-repeat padding-box;;
+  min-height: 100%;
+  background: #EEEEEE 0 0 no-repeat padding-box;
 }
 
 .external-header {
@@ -140,7 +197,7 @@ li {
   justify-content: space-between;
   align-content: center;
 
-  padding: 25px 0;
+  padding: 10px 0;
 
   background-color: #212121;
 }
@@ -150,261 +207,159 @@ a:hover {
   cursor: pointer;
 }
 
-.service-card-wrapper {
-  display: flex;
-  width: 80%;
-  margin: auto;
-
-  padding: 50px;
-}
-
-.service-card {
-  width: 20%;
-  background: #FFFFFF 0 0 no-repeat padding-box;
-  box-shadow: 0 3px 6px #000000B3;
-
-  border: none;
-  border-radius: 10px;
-
-  cursor: pointer;
-  margin: 50px;
-}
-
-.service-card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
-}
-
-.service-card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.card-header-image {
-  background: transparent url('../../assets/images/haircut.png ') 0 0 no-repeat padding-box;
-  background-size: contain;
-  border-radius: 8px;
-  height: 185px;
-
-  margin-bottom: 10px;
-}
-
-.card-title {
-  text-align: center;
-  font: normal normal bold 25px/37px Roboto;
-  letter-spacing: 0;
-  color: #413F3F;
-
-  margin-top: 50px;
-}
-
-.card-content {
-  font: normal normal normal 20px/24px Roboto;
-  letter-spacing: 0.3px;
-  color: #000000B3;
-
-  padding: 20px;
-
-  width: 80%;
-  text-align: left;
-  margin: auto;
-}
-
-.card-action-buttons {
-  text-align: center;
-
-  margin: 40px;
-}
-
-.card-action-buttons > button {
-  padding: 0 60px;
-
-  background: #2B2B2B 0 0 no-repeat padding-box;
-  box-shadow: 0 2px 2px #000000;
-
-  text-align: center;
-  font: normal normal bold 15px/37px Roboto;
-  letter-spacing: 0;
-  color: #FFFFFF;
-
-  border: none;
-  border-radius: 10px;
-
-  text-transform: uppercase;
-}
-
-.separator {
-  opacity: 0.2;
-}
-
-.footer {
-  display: flex;
-  width: 100%;
-
-  border-top: 1px solid rgba(0, 0, 0, 0.3);
-
-  position: absolute;
-  bottom: 0;
-}
-
-.footer-icons {
-  display: flex;
-  flex-direction: column;
-  filter: invert();
-
-  float: left;
-}
-
-.footer-info {
-  text-align: center;
-  font: normal normal bold 20px/29px Roboto;
-  color: #000000;
-  text-transform: uppercase;
-
-  width: 100%;
-
-  height: 100px;
-  padding: 20px 0;
-}
-
-.footer-text {
-  width: 100%;
-  position: relative;
-  left: 50%;
-  transform: translateX(-60%);
-}
-
 a:visited {
   text-decoration: underline;
 }
 
-.title-wrapper > p:nth-child(1) {
-  text-align: center;
-  font: normal normal bold 25px/54px Roboto;
-  letter-spacing: 0;
-  color: #000000;
-  text-transform: uppercase;
+.navbar {
+  display: none;
+  transition: 0.5s;
 }
 
-.title-wrapper > p:nth-child(2) {
-  text-align: center;
-  font: normal normal normal 25px/24px Roboto;
-  letter-spacing: 0.3px;
-  color: #000000B3;
-  opacity: 1;
+.nav-compact-true, .nav-compact-false {
+  background-color: whitesmoke;
+  list-style-type: none;
+  margin: 0;
 
+  text-align: center;
+  padding: 0;
+}
+
+.nav-compact-false > li {
+  padding: 20px;
+  font: Bold 15px/17px Roboto;
+  letter-spacing: 0;
+  color: black;
+  text-transform: uppercase;
+  margin: 0;
+  transition: 0.5s;
+}
+
+.nav-compact-true > li{
+
+  font: Bold 15px/17px Roboto;
+  letter-spacing: 0;
+  color: black;
+  text-transform: uppercase;
+  overflow: hidden;
+  opacity: 0;
+  transition: 0.5s;
+
+  height: 0;
   margin: 0;
 }
 
-.team-card-wrapper {
-  display: flex;
-  justify-content: center;
-
+.navbar-icons {
+  font-size: 30px;
   padding: 20px;
-
-  margin: auto;
-  width: 60%;
 }
 
-.card-barber-wrapper {
-  width: 25%;
-  margin: 20px;
+@media (max-width: 992px) {
+  .nav {
+    display: none;
+  }
+
+  .external-nav {
+    display: none;
+  }
+
+  .navbar {
+    text-align: right;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    display: inline-block;
+  }
+
+  .header-wrapper {
+    flex-direction: column;
+  }
+
+  .logo {
+    margin:auto;
+  }
+
+  .main {
+    overflow-y: scroll;
+  }
+
+  .social-media-wrapper {
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .social-icons {
+    margin: 0;
+  }
+
+  .home-container {
+    display: inline;
+  }
 }
 
-.barber-image {
-  height: 400px;
-  width: 100%;
+@media (max-width: 768px) {
+  .home-container {
+    display: inline;
+  }
 
-  background: url('../../assets/images/barber.png');
-  background-size: cover;
+  .nav {
+    display: none;
+  }
 
-  background-repeat: no-repeat;
+  .external-nav {
+    display: none;
+  }
+
+  .navbar {
+    text-align: right;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    width: 100%;
+    display: inline-block;
+  }
+
+  .header-wrapper {
+    flex-direction: column;
+  }
+
+  .logo {
+    margin:auto;
+  }
+
+  .main {
+    overflow-y: scroll;
+  }
+
+  .content-wrapper {
+    width: 70%;
+    font: Bold 24px/34px Roboto;
+    margin-top: 100px;
+  }
+
+  .booking-button {
+    font: Bold 15px/57px Roboto;
+    padding: 0 60px;
+  }
+
+  .social-media-wrapper {
+    flex-direction: row;
+    justify-content: space-evenly;
+    position: relative;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .social-icons {
+    margin: 0;
+  }
 }
 
-.barber-info {
-  background-color: black;
-}
-
-.social-info > p {
-  text-align: left;
-  font: normal normal normal 30px/37px Montserrat;
-  color: #FFFFFF;
-}
-
-.social-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.social-info > img {
-  width: 30px;
-  height: 30px;
-  margin: 10px;
-}
-
-.social-info > p {
-  margin: 10px;
-}
-
-.barber-info > .name {
-  text-align: center;
-  font: normal normal normal 30px/53px Roboto;
-  color: #FFFFFF;
-  text-transform: uppercase;
-}
-
-.flip-card {
-  background-color: transparent;
-  width: 25%;
-  height: 510px;
-  perspective: 1000px;
-
-  margin: 10px;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-}
-
-.flip-card-back {
-  background-color: black;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.back-card-text {
-  top: 30%;
-  position: relative;
-  text-align: center;
-
-  font: normal normal normal 20px/24px Montserrat;
-  letter-spacing: 0.3px;
-  color: #FFFFFFB3;
-}
-
-.back-card-button {
-
-}

@@ -1,0 +1,185 @@
+.team-card-wrapper {
+  display: flex;
+  justify-content: center;
+
+  padding: 20px;
+
+  margin: auto;
+  width: 60%;
+  height: 90%;
+}
+
+.card-barber-wrapper {
+  width: 25%;
+  margin: 20px;
+}
+
+.barber-image {
+  height: 400px;
+  width: 100%;
+
+  background: url('../../assets/images/barber.png');
+  background-size: cover;
+
+  background-repeat: no-repeat;
+}
+
+.barber-info {
+  background-color: black;
+}
+
+.social-info > p {
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  color: #FFFFFF;
+}
+
+.social-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-info > img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.social-info > p {
+  margin: 10px;
+}
+
+.barber-info > .name {
+  text-align: center;
+  font: normal normal normal 30px/53px Roboto;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 25%;
+  height: 510px;
+  perspective: 1000px;
+
+  margin: 10px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+.flip-card-back {
+  background-color: black;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.back-card-text {
+  text-align: left;
+  align-self: center;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+  color: #FFFFFFB3;
+
+  width: 80%;
+  justify-self: center;
+}
+
+.back-card-button {
+
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 2px #000000;
+
+  text-align: center;
+  font: normal normal bold 20px/42px Roboto;
+  color: #413F3F;
+
+  border: none;
+  border-radius: 10px;
+
+  text-transform: uppercase;
+
+  width: 80%;
+  height: 51px;
+
+  justify-self: center;
+}
+
+.flip-card-back {
+  display: grid;
+  grid-template-rows: 1fr 130px;
+}
+
+.navigation-buttons-container {
+  height: 50px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.navigation-button_true {
+  margin: 0 10px;
+  width: 18px;
+  height: 18px;
+  border-radius: 100%;
+
+  background: rgb(147, 147, 147);
+  background: radial-gradient(circle,
+  rgba(74, 74, 74, 0.92) 90%,
+  rgba(79, 79, 80, 0.8547794117647058) 50%,
+  rgba(114, 114, 115, 0.8715861344537815) 16%,
+  rgba(147, 147, 147, 0.9023984593837535) 0%);
+
+  background-color: rgba(49, 43, 57, 0.52);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.navigation-button_false {
+  margin: 0 10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background-color: black;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.ripple:hover {
+  background: rgba(74, 74, 74, 0.92) radial-gradient(circle, transparent 1%,
+  rgba(74, 74, 74, 0.92) 1%) center/15000%;
+}

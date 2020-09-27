@@ -1,6 +1,6 @@
 .container {
   min-width: 100%;
-  min-height: 100%;
+  /*min-height: 100%;*/
 }
 
 .inputs-wrapper {
@@ -33,13 +33,13 @@
 .logo-wrapper {
   margin: auto;
   width: 254px;
-  height: 254px;
+  /*height: 254px;*/
   text-align: center;
 }
 
 .logo {
   width: 254px;
-  height: 254px;
+  /*height: 254px;*/
 }
 
 
@@ -54,6 +54,8 @@ h1 {
   height: 54px;
   width: 341px;
   margin: auto;
+
+  text-align: center;
 }
 
 .login-button {
@@ -116,7 +118,7 @@ input::placeholder {
   margin-top: 43px;
 }
 
-.footer-text{
+.footer-text {
   display: flex;
   justify-content: center;
 }
@@ -146,6 +148,75 @@ input::placeholder {
 
 .wrapper {
   margin: auto;
-  width: 30%;
-  padding-top:137px;
+  /*width: 30%;*/
+  padding-top: 137px;
+}
+
+@media screen and (max-height: 811px), (orientation: portrait) {
+  .wrapper {
+    margin: auto;
+    padding-top: 35px;
+  }
+}
+
+@media screen and (max-width: 400px), (orientation: portrait) {
+  .login-button {
+    width: 290px;
+  }
+
+  .remember-me-wrapper {
+    width: 290px;
+  }
+
+  .form-wrapper {
+    width: 290px;
+  }
+
+  .action-buttons {
+    width: 290px;
+  }
+
+  .footer-text {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    width: 120px;
+  }
+
+  .logo-wrapper {
+    width: 120px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .login-button {
+    width: 200px;
+  }
+
+  .remember-me-wrapper {
+    width: 200px;
+  }
+
+  .form-wrapper {
+    width: 200px;
+  }
+
+  .action-buttons {
+    width: 200px;
+  }
+
+  .footer-text {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .logo {
+    width: 120px;
+  }
+
+  .logo-wrapper {
+    width: 120px;
+  }
 }

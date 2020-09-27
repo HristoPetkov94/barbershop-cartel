@@ -1,0 +1,43 @@
+<div [ngSwitch]="page">
+
+  <div class="team-card-wrapper" *ngSwitchCase="page" >
+
+    <div class="flip-card" *ngFor="let barber of pages[page].content" [@slideInOut]>
+
+      <div class="flip-card-inner">
+
+        <div class="flip-card-front">
+          <div class="barber-image"></div>
+
+          <div class="barber-info">
+            <div class="name">
+              STEVEN
+            </div>
+
+            <div class="social-info">
+              <img src="../../assets/images/instagram-icon.png"/>
+
+              <p> Steven.stevens </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flip-card-back">
+          <p class="back-card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+            incididunt ut labore et
+            dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.</p>
+
+          <button class="back-card-button"> book now</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="navigation-buttons-container" #paginator>
+    <div *ngFor="let page of pages; let i = index" [attr.data-index]="i" id="{{i}}"
+         class="navigation-button_{{page.active}} ripple" (click)="switchPage(i)">
+
+    </div>
+  </div>
+</div>

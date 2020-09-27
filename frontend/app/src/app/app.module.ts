@@ -33,7 +33,7 @@ import {
   MatListModule,
   MatMenuModule,
   MatNativeDateModule,
-  MatProgressSpinnerModule,
+  MatProgressSpinnerModule, MatRadioModule,
   MatSelectModule,
   MatSidenavModule,
   MatSliderModule,
@@ -57,6 +57,10 @@ import { NumberCardChartComponent } from './charts/number-card-chart/number-card
 import {ChangePasswordDialogComponent, ProfileComponent, ServiceDialogComponent} from './profile/profile.component';
 import { BookedUsersTableComponent } from './booked-users-table/booked-users-table.component';
 import {BookingComponent, BookingDialogComponent} from './booking/booking.component';
+import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
+import { BarberServicesPanelComponent } from './barber-services-panel/barber-services-panel.component';
+import { BarberTeamPanelComponent } from './barber-team-panel/barber-team-panel.component';
+import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +82,11 @@ import {BookingComponent, BookingDialogComponent} from './booking/booking.compon
     ChangePasswordDialogComponent,
     ServiceDialogComponent,
     BookingComponent,
-    BookingDialogComponent
+    BookingDialogComponent,
+    CompactNavbarComponent,
+    BarberServicesPanelComponent,
+    BarberTeamPanelComponent,
+    BarberPaginatorComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +119,7 @@ import {BookingComponent, BookingDialogComponent} from './booking/booking.compon
     MatSliderModule,
     MatCheckboxModule,
     MatTabsModule,
+    MatRadioModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },
