@@ -62,6 +62,8 @@ import { BarberServicesPanelComponent } from './barber-services-panel/barber-ser
 import { BarberTeamPanelComponent } from './barber-team-panel/barber-team-panel.component';
 import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.component';
 import { BarberFooterInfoComponent } from './barber-footer-info/barber-footer-info.component';
+import { I18nModule } from './i18n/i18n.module';
+
 
 @NgModule({
   declarations: [
@@ -122,6 +124,7 @@ import { BarberFooterInfoComponent } from './barber-footer-info/barber-footer-in
     MatCheckboxModule,
     MatTabsModule,
     MatRadioModule,
+    I18nModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },

@@ -9,10 +9,11 @@
         <app-compact-navbar (navigation)="navigate($event)"></app-compact-navbar>
 
         <ul class="nav">
-          <li><a (click)="tab = 'team'">team</a></li>
-          <li><a (click)="tab = 'services'">services</a></li>
-          <li><a (click)="tab = 'contact'">contact</a></li>
-          <li>bg</li>
+          <li><a (click)="tab = 'team'">{{ 'home.navigation.team' | translate}}</a></li>
+          <li><a (click)="tab = 'services'">{{ 'home.navigation.services' | translate}}</a></li>
+          <li><a (click)="tab = 'contact'">{{ 'home.navigation.contacts' | translate}}</a></li>
+          <li><a (click)="changeLang()">{{translate.currentLang}}</a></li>
+
         </ul>
       </nav>
 
@@ -20,13 +21,12 @@
 
         <section class="content-wrapper">
           <span class="content">
-            Perfect gentlemn's choice
-            lorem ipsum dolor sit amet
+           {{ 'home.title'  | translate}}
           </span>
 
           <div class="booking-button-wrapper">
             <button mat-raised-button class="booking-button">
-              <span>book now</span>
+              <span>{{'bookingMessage' | translate}}</span>
             </button>
           </div>
         </section>
@@ -48,10 +48,10 @@
 
         <ul class="external-nav">
 
-          <li><a (click)="tab = 'team'">team</a></li>
-          <li><a (click)="tab = 'services'">services</a></li>
-          <li><a (click)="tab = 'contact'">contact</a></li>
-          <li>bg</li>
+          <li><a (click)="tab = 'team'">{{ 'home.navigation.team' | translate}}</a></li>
+          <li><a (click)="tab = 'services'">{{ 'home.navigation.services' | translate}}</a></li>
+          <li><a (click)="tab = 'contact'">{{ 'home.navigation.contacts' | translate}}</a></li>
+          <li><a (click)="changeLang()">{{translate.currentLang}}</a></li>
         </ul>
 
       </div>
@@ -68,10 +68,10 @@
 
         <ul class="external-nav">
 
-          <li><a (click)="tab = 'team'">team</a></li>
-          <li><a (click)="tab = 'services'">services</a></li>
-          <li><a (click)="tab = 'contact'">contact</a></li>
-          <li>bg</li>
+          <li><a (click)="tab = 'team'">{{ 'home.navigation.team' | translate}}</a></li>
+          <li><a (click)="tab = 'services'">{{ 'home.navigation.services' | translate}}</a></li>
+          <li><a (click)="tab = 'contact'">{{ 'home.navigation.contacts' | translate}}</a></li>
+          <li><a (click)="changeLang()">{{translate.currentLang}}</a></li>
         </ul>
 
       </div>
@@ -88,10 +88,10 @@
 
         <ul class="external-nav">
 
-          <li><a (click)="tab = 'team'">team</a></li>
-          <li><a (click)="tab = 'services'">services</a></li>
-          <li><a (click)="tab = 'contact'">contact</a></li>
-          <li>bg</li>
+          <li><a (click)="tab = 'team'">{{ 'home.navigation.team' | translate}}</a></li>
+          <li><a (click)="tab = 'services'">{{ 'home.navigation.services' | translate}}</a></li>
+          <li><a (click)="tab = 'contact'">{{ 'home.navigation.contacts' | translate}}</a></li>
+          <li><a (click)="changeLang()">{{translate.currentLang}}</a></li>
         </ul>
 
       </div>

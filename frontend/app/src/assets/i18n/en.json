@@ -1,0 +1,26 @@
+{
+  "home": {
+    "title": "Perfect gentlemn's choice lorem ipsum dolor sit amet",
+    "navigation": {
+      "team": "team",
+      "services": "services",
+      "contacts": "contacts"
+    }
+  },
+
+  "services": {
+    "title": "we offer you the best services",
+    "subTitle": "Modern man's haircut and styling from our professional Barbers."
+  },
+
+  "team": {
+    "title": "barbers"
+  },
+
+  "bookingMessage": "book now",
+
+  "footer": {
+    "title": "14 IVAN N. MOMCHILOV STREET // 5000 KARTALA,",
+    "subTitle": "VELIKO TARNOVO TUESDAY THROUGH FRIDAY 10 — 7 // SATURDAY 10 — 5 // PHONE 088 881 4999"
+  }
+}

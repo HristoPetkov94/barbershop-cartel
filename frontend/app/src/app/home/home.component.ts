@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {ViewEncapsulation} from '@angular/cli/lib/config/schema';
+import {TranslateService} from '@ngx-translate/core';
 
 
 // TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   public tab = 'main';
   public hideBurger = false;
 
-  constructor() {
+  constructor(public translate: TranslateService) {
   }
 
   ngOnInit() {
@@ -33,5 +33,11 @@ export class HomeComponent implements OnInit {
 
   navigate($event: any) {
     this.tab = $event;
+  }
+
+  changeLang() {
+    const currentLang = this.translate.currentLang;
+    const lang = currentLang === 'en' ? 'bg' : 'en';
+    this.translate.use(lang);
   }
 }

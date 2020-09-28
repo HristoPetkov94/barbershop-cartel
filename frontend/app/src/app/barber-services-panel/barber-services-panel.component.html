@@ -1,7 +1,7 @@
 <section>
   <div class="title-wrapper">
-    <p> we offer YOU the best services </p>
-    <p> Modern man's haircut and styling from our professional Barbers. </p>
+    <p> {{'services.title' | translate}} </p>
+    <p> {{'services.subTitle' | translate}} </p>
   </div>
 
   <div class="service-card-wrapper">
@@ -20,11 +20,12 @@
       </div>
 
       <div class="card-action-buttons">
-        <button><span>book now</span></button>
+        <button><span>{{'bookingMessage' | translate}}</span></button>
       </div>
     </div>
   </div>
 
-  <app-barber-footer-info> </app-barber-footer-info>
-
+  <app-barber-footer-info class="sticky-footer"> </app-barber-footer-info>
 </section>
+
+

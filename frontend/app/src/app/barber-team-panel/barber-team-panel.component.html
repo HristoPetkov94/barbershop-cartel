@@ -1,9 +1,10 @@
 <section>
   <div class="title-wrapper">
-    <p> barbers </p>
+    <p> {{'team.title' | translate}} </p>
   </div>
 
-  <app-barber-paginator [data]="data" [numberOfPages]="3"> </app-barber-paginator>
+  <app-barber-paginator [data]="data" [numberOfPages]="3"></app-barber-paginator>
 
-  <app-barber-footer-info> </app-barber-footer-info>
+  <app-barber-footer-info class="sticky-footer"></app-barber-footer-info>
 </section>
+
