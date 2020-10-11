@@ -24,7 +24,7 @@
     "@ngx-translate/core": "^12.1.2",
     "@ngx-translate/http-loader": "^6.0.0",
     "@swimlane/ngx-charts": "^13.0.2",
-    "angularx-social-login": "^2.2.1",
+    "angularx-social-login": "^3.2.2",
     "crypto": "^1.0.1",
     "hammerjs": "^2.0.8",
     "rxjs": "~6.4.0",

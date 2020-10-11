@@ -25,7 +25,7 @@
           </span>
 
           <div class="booking-button-wrapper">
-            <button mat-raised-button class="booking-button">
+            <button mat-raised-button class="booking-button" routerLink="/book-now">
               <span>{{'bookingMessage' | translate}}</span>
             </button>
           </div>
@@ -36,7 +36,6 @@
           <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
         </footer>
       </div>
-
     </div>
 
     <div *ngSwitchCase="'services'" [@slideInOut] class="services-wrapper">
@@ -95,8 +94,7 @@
         </ul>
 
       </div>
-
     </div>
-  </ng-container>
 
+  </ng-container>
 </main>

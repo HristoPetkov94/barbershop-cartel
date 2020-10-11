@@ -27,7 +27,7 @@ export class ScheduleService {
     return this.http.get<Week>(this.url + '/schedule/getAppointmentWeekByDate?date=' + date);
   }
 
-  bookNow(req: BookRequest) {
+  bookNow(req: AppointmentRequest) {
     return this.http.post(this.url + '/schedule/save-appointment', req);
   }
 }

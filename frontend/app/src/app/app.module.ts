@@ -8,18 +8,7 @@ import {DialogOverviewExampleDialogComponent, ScheduleComponent} from './schedul
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
-import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
-
-const config = new AuthServiceConfig([
-  {
-    id: FacebookLoginProvider.PROVIDER_ID,
-    provider: new FacebookLoginProvider('491244421754834')
-  }
-]);
-
-export function provideConfig() {
-  return config;
-}
+import { SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider } from 'angularx-social-login';
 
 import {
   MatButtonModule,
@@ -63,6 +52,8 @@ import { BarberTeamPanelComponent } from './barber-team-panel/barber-team-panel.
 import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.component';
 import { BarberFooterInfoComponent } from './barber-footer-info/barber-footer-info.component';
 import { I18nModule } from './i18n/i18n.module';
+import { BarberBookNowPanelComponent } from './barber-book-now-panel/barber-book-now-panel.component';
+import { BarberCalendarComponent } from './barber-calendar/barber-calendar.component';
 
 
 @NgModule({
@@ -90,7 +81,9 @@ import { I18nModule } from './i18n/i18n.module';
     BarberServicesPanelComponent,
     BarberTeamPanelComponent,
     BarberPaginatorComponent,
-    BarberFooterInfoComponent
+    BarberFooterInfoComponent,
+    BarberBookNowPanelComponent,
+    BarberCalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -129,8 +122,16 @@ import { I18nModule } from './i18n/i18n.module';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },
     {
-      provide: AuthServiceConfig,
-      useFactory: provideConfig
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('491244421754834'),
+          }
+        ],
+      } as SocialAuthServiceConfig,
     }
   ],
   bootstrap: [AppComponent],

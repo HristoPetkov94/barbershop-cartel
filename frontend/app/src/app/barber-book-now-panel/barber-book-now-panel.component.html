@@ -1,0 +1,76 @@
+<nav class="external-header">
+  <img class="logo" routerLink="/" src="../../assets/images/logo.png"/>
+</nav>
+
+<section>
+  <ng-container [ngSwitch]="step">
+
+    <nav class="navigation">
+      <ul class="steps-parent" #parent>
+        <li id="clicked" (click)="chooseStep($event)" class="one"> Barber</li>
+        <li (click)="chooseStep($event)" class="two"> Service</li>
+        <li (click)="chooseStep($event)" class="three"> Date and Time</li>
+        <li (click)="chooseStep($event)" class="four"> Finish</li>
+      </ul>
+    </nav>
+
+    <div *ngSwitchCase="'one'" [@fadeOut]>
+
+      <div class="barbers-container">
+        <div class="barber" *ngFor="let b of barbers" (click)="chooseBarber(b)">
+          <div class="barber-image"></div>
+
+          <div class="button-wrapper">
+            <a><span>Steve Stevens</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'two'" [@fadeOut]>
+
+      <div class="service" *ngFor="let s of services" (click)="chooseService(s)">
+        <div class="service-info-wrapper">
+          <span class="type">Haircut</span>
+
+          <div class="space"></div>
+
+          <div>
+            <span class="duration">1 hour</span>
+            <span class="price"> 50$ </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngSwitchCase="'three'" [@fadeOut]>
+        <app-barber-calendar (navigation)="chooseDateTime($event)" [inputBarber]="barber"> </app-barber-calendar>
+    </div>
+
+    <div *ngSwitchCase="'four'" [@fadeOut]>
+
+      <div class="final-info-container">
+        <div class="info-row">
+          <span> <b> Date: </b> </span> <span> {{this.datetime.date}} </span>
+        </div>
+        <div class="info-row">
+          <span> <b> Hour: </b> </span> <span> {{this.datetime.hour}} </span>
+        </div>
+        <div class="info-row">
+          <span> <b> Barber: </b> </span> <span> Steve Stevens </span>
+        </div>
+        <div class="info-row">
+          <span> <b> Service: </b> </span> <span> Haircut </span>
+        </div>
+        <div class="info-row">
+          <span> <b> Price: </b> </span> <span> 50$ </span>
+        </div>
+
+        <button class="confirm-button" (click)="bookWithFacebook()">
+          Confirm with Facebook
+        </button>
+      </div>
+    </div>
+
+  </ng-container>
+</section>

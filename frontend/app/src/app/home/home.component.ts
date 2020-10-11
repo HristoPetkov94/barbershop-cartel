@@ -23,7 +23,6 @@ import {TranslateService} from '@ngx-translate/core';
 
 export class HomeComponent implements OnInit {
   public tab = 'main';
-  public hideBurger = false;
 
   constructor(public translate: TranslateService) {
   }

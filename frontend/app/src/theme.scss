@@ -20,12 +20,13 @@
 //}
 
 // CARTEL  $base-palette, $default: 500, $lighter: 100, $darker: 700, $text: $default
-$cartel-primary: mat-palette($mat-gray, 300, 300, 300, 50);
+$cartel-primary: mat-palette($mat-gray, 700, 700, 700, 700);
 $cartel-warn: mat-palette($mat-gray, 50, 50, 50, 50);
 
-$cartel-theme: mat-dark-theme($cartel-primary, $cartel-primary, $cartel-warn);
+$cartel-theme: mat-dark-theme($cartel-primary, $cartel-primary, $cartel-primary);
 
 .cartel-theme {
+
   @include angular-material-theme($cartel-theme);
 
   .mat-form-field-infix {

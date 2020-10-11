@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
 import {MAT_DIALOG_DATA, MatDatepickerInputEvent, MatDialog, MatDialogRef} from '@angular/material';
-import {AuthService, FacebookLoginProvider} from 'angularx-social-login';
 import {ServicesService} from '../services/services.service';
 import {BarberService} from '../services/barber.service';
 import {Service} from '../interfaces/service';
@@ -119,7 +118,7 @@ export class DialogOverviewExampleDialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<DialogOverviewExampleDialogComponent>,
-    private fbAuth: AuthService,
+    // private fbAuth: AuthService,
     private scheduleService: ScheduleService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
   }
@@ -128,27 +127,27 @@ export class DialogOverviewExampleDialogComponent {
     this.dialogRef.close();
   }
 
-  approveWithFb() {
-    let fbUser = null;
-
-    this.fbAuth.signIn(FacebookLoginProvider.PROVIDER_ID).then(
-      v => {
-        this.fbAuth.authState.subscribe(u => fbUser = u);
-
-        const bookingRequest: BookRequest = {
-          barberId: 1,
-          serviceId: 1,
-          hour: this.data.time.hour.hour,
-          date: this.data.time.date,
-          clientUsername: fbUser.name,
-          clientEmail: fbUser.email,
-        };
-
-        // console.log(fbUser);
-        this.scheduleService.bookNow(bookingRequest).subscribe(d => console.log('saved.'));
-      }
-    );
-
-    this.onNoClick();
-  }
+  // approveWithFb() {
+  //   let fbUser = null;
+  //
+  //   this.fbAuth.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+  //     v => {
+  //       this.fbAuth.authState.subscribe(u => fbUser = u);
+  //
+  //       const appointment: AppointmentRequest = {
+  //         barberId: 1,
+  //         serviceId: 1,
+  //         hour: this.data.time.hour.hour,
+  //         date: this.data.time.date,
+  //         clientUsername: fbUser.name,
+  //         clientEmail: fbUser.email,
+  //       };
+  //
+  //       // console.log(fbUser);
+  //       this.scheduleService.bookNow(appointment).subscribe(d => console.log('saved.'));
+  //     }
+  //   );
+  //
+  //   this.onNoClick();
+  // }
 }

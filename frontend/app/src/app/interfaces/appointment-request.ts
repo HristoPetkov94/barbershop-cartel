@@ -1,4 +1,4 @@
-interface BookRequest {
+interface AppointmentRequest {
   barberId: number;
   serviceId: number;
   hour: string;

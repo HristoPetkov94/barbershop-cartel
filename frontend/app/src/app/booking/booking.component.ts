@@ -45,17 +45,6 @@ export class BookingComponent implements OnInit {
   generateDataForBarber(event) {
     if (event.selectedIndex === 2) {
       this.configService.getBarberConfigs(this.selectedBarber.id).subscribe(c => this.configs = c);
-
-      this.scheduleService.getWeek(this.selectedBarber).subscribe(week => {
-        this.week = week;
-        this.hours = this.week.days[0].hours;
-      }, err => {
-        console.log(err);
-      }, () => {
-
-        console.log(this.week.days[0]);
-        this.firstDayOfWeek = this.week.days[0].date;
-      });
     }
   }
 

@@ -1,0 +1,45 @@
+<div class="date-picker-wrapper">
+  <!--      this will hold the months-->
+  <div class="first-row">
+    <div>
+      <button mat-icon-button>
+        <mat-icon (click)="prev()">keyboard_arrow_left</mat-icon>
+      </button>
+    </div>
+
+    <div class="months">
+      <span> {{firstDayOfWeek | date }} </span>
+
+      <mat-form-field style="width: 0; height: 0">
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+        <mat-datepicker #picker touchUi></mat-datepicker>
+      </mat-form-field>
+
+      <button mat-icon-button (click)="picker.open()">
+        <mat-icon> calendar_today</mat-icon>
+      </button>
+    </div>
+
+    <div>
+      <button mat-icon-button (click)="next()">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!--      this will hold the days-->
+  <div class="second-row">
+    <button (click)="getHoursForDay(d)" *ngFor="let d of week?.days; let i = index">
+      <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
+      <span>{{'  '}}</span>
+      <span class="margin-zero">{{d.date | date : 'dd'}}</span>
+    </button>
+  </div>
+
+  <!--      this will hold the hours-->
+  <div class="third-row">
+    <button *ngFor="let hour of hours" (click)="chooseDateTime(hour.hour.substring(0, 5))">
+      {{hour.hour.substring(0, 5)}}
+    </button>
+  </div>
+</div>
