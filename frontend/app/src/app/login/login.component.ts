@@ -21,16 +21,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 export class LoginComponent implements OnInit {
 
 
-  private hide = true;
-  private matcher = new MyErrorStateMatcher();
-  private invalidLogin = false;
+  public hide = true;
+  public matcher = new MyErrorStateMatcher();
+  public invalidLogin = false;
 
-  private emailFormControl = new FormControl('', [
+  public emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);
 
-  private passwordFormControl = new FormControl('', [
+  public passwordFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
   ]);

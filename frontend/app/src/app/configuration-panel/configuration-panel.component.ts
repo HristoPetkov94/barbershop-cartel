@@ -10,8 +10,8 @@ import {Barber} from '../models/barber';
   styleUrls: ['./configuration-panel.component.css']
 })
 export class ConfigurationPanelComponent implements OnInit {
-  private barbers: Barber[];
-  private services: Service[];
+  public barbers: Barber[];
+  public services: Service[];
 
   constructor(private servicesService: ServicesService, private barberService: BarberService) {}
 

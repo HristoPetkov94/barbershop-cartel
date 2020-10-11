@@ -11,7 +11,7 @@ import {ServicesService} from '../../services/services.service';
 })
 export class ServiceStackComponent implements OnInit {
 
-  private services: Service[];
+  public services: Service[];
 
   constructor(private serviceServices: ServicesService) {
   }

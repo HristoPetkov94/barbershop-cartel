@@ -21,21 +21,21 @@ interface ServicePictureUpdateRequest {
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
-  @ViewChild('sidenav', {static: false}) sidenav: MatSidenav;
-  @ViewChild('chooseFile', {static: false}) chooseFile: ElementRef;
-  @ViewChild('profileWrapper', {static: false}) profileWrapper: ElementRef;
+  @ViewChild('sidenav') public sidenav: MatSidenav;
+  @ViewChild('chooseFile') public chooseFile: ElementRef;
+  @ViewChild('profileWrapper') public profileWrapper: ElementRef;
 
-  private barberId;
-  private barber = new Barber();
+  public barberId;
+  public barber = new Barber();
 
-  private services: Service[];
+  public services: Service[];
 
-  private selectedFile: File = null;
-  private isFileSelected = false;
-  private isEditable = false;
-  private servicesToBeUpdated: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
+  public selectedFile: File = null;
+  public isFileSelected = false;
+  public isEditable = false;
+  public servicesToBeUpdated: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
 
-  private theme = 'light-theme';
+  public theme = 'light-theme';
 
   constructor(private route: ActivatedRoute,
               private router: Router,
@@ -159,13 +159,13 @@ export class ProfileComponent implements OnInit {
   styleUrls: ['./profile.component.css'],
 })
 export class ChangePasswordDialogComponent {
-  private hideOldPassword = true;
-  private hideNewPassword = true;
-  private hideConfirmPassword = true;
+  public hideOldPassword = true;
+  public hideNewPassword = true;
+  public hideConfirmPassword = true;
 
-  private oldPassword = '';
-  private newPassword = '';
-  private confirmPassword = '';
+  public oldPassword = '';
+  public newPassword = '';
+  public confirmPassword = '';
 
   constructor(
     public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
@@ -215,7 +215,7 @@ export class ServiceDialogComponent {
   @ViewChild('something', {static: false}) something: ElementRef;
   @ViewChildren('element') viewChildren !: QueryList<ElementRef>;
 
-  private servicesToBeUploaded: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
+  public servicesToBeUploaded: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
 
   constructor(
     public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,

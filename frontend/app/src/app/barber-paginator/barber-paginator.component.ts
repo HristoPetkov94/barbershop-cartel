@@ -24,14 +24,14 @@ export class BarberPaginatorComponent implements OnInit {
 
   @ViewChild('paginator', {static: true}) paginator: ElementRef;
 
-  private page = 0;
-  private pages: Page[] = [];
+  public page = 0;
+  public pages: Page[] = [];
 
   @Input()
-  private data;
+  public data;
 
   @Input()
-  private numberOfPages;
+  public numberOfPages;
 
   constructor() {
   }

@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Subscribable} from 'rxjs';
+import {Week} from '../models/week';
+import {AppointmentRequest} from '../interfaces/appointment-request';
 
 @Injectable({
   providedIn: 'root'

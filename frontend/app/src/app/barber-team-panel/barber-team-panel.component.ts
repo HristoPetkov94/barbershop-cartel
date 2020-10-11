@@ -7,7 +7,7 @@ import {Component, OnInit} from '@angular/core';
 })
 export class BarberTeamPanelComponent implements OnInit {
 
-  private data = [1, 2, 3, 4, 5, 6, 7];
+  public data = [1, 2, 3, 4, 5, 6, 7];
 
   constructor() {
   }

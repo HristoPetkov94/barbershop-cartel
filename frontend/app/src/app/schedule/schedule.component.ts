@@ -5,6 +5,7 @@ import {ServicesService} from '../services/services.service';
 import {BarberService} from '../services/barber.service';
 import {Service} from '../interfaces/service';
 import {Barber} from '../models/barber';
+import {Week} from "../models/week";
 
 // TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
 
@@ -20,14 +21,14 @@ interface SelectedTime {
 
 })
 export class ScheduleComponent implements OnInit {
-  private services: Service[];
-  private barbers: Barber[] = new Array<Barber>();
-  private date;
+  public services: Service[];
+  public barbers: Barber[] = new Array<Barber>();
+  public date;
 
-  private week: Week = {days: []};
-  private selectedTime: SelectedTime;
-  private selectedBarber;
-  private selectedService;
+  public week: Week = {days: []};
+  public selectedTime: SelectedTime;
+  public selectedBarber;
+  public selectedService;
 
   constructor(public dialog: MatDialog,
               private scheduleService: ScheduleService,

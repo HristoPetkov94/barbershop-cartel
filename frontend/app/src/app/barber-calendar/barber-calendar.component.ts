@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
+import {Week} from "../models/week";
 
 @Component({
   selector: 'app-barber-calendar',
@@ -8,9 +9,9 @@ import {ScheduleService} from '../services/schedule.service';
 })
 export class BarberCalendarComponent implements OnInit {
 
-  private hours = [];
-  private week: Week;
-  private firstDayOfWeek: Date;
+  public hours = [];
+  public week: Week;
+  public firstDayOfWeek: Date;
 
   @Input()
   private inputBarber;

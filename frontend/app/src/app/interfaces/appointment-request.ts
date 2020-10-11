@@ -1,4 +1,4 @@
-interface AppointmentRequest {
+export interface AppointmentRequest {
   barberId: number;
   serviceId: number;
   hour: string;

@@ -11,7 +11,7 @@ import {Barber} from '../../models/barber';
 })
 export class TeamStackComponent implements OnInit {
 
-  private barbers: Barber[];
+  public barbers: Barber[];
 
   constructor(private barberService: BarberService) {
   }

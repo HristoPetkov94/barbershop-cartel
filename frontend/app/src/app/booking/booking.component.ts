@@ -8,6 +8,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {ScheduleConfigService} from '../services/schedule-config.service';
 import {ScheduleConfig} from '../interfaces/schedule-config';
+import {Week} from "../models/week";
 
 @Component({
   selector: 'app-booking',
@@ -16,9 +17,9 @@ import {ScheduleConfig} from '../interfaces/schedule-config';
 })
 export class BookingComponent implements OnInit {
 
-  private hours = [];
-  private week: Week;
-  private firstDayOfWeek: Date;
+  public hours = [];
+  public week: Week;
+  public firstDayOfWeek: Date;
 
   @Input()
   barbers: Barber[];
@@ -26,10 +27,10 @@ export class BookingComponent implements OnInit {
   @Input()
   editable: boolean;
 
-  private configs: ScheduleConfig[] = new Array<ScheduleConfig>();
+  public configs: ScheduleConfig[] = new Array<ScheduleConfig>();
 
-  private selectedBarber: Barber;
-  private selectedService: Service;
+  public selectedBarber: Barber;
+  public selectedService: Service;
 
   constructor(private scheduleService: ScheduleService,
               private servicesService: ServicesService,
@@ -110,7 +111,7 @@ export class BookingComponent implements OnInit {
 })
 export class BookingDialogComponent {
 
-  private times = [];
+  public times = [];
 
   date = new FormControl(new Date());
 

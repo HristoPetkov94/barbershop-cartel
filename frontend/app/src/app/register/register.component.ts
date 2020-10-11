@@ -11,12 +11,12 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
 
-  private email;
-  private firstname;
-  private lastname;
-  private password;
+  public email;
+  public firstname;
+  public lastname;
+  public password;
 
-  private hide = true;
+  public hide = true;
 
   constructor(private auth: AuthenticationService, private router: Router) {
   }

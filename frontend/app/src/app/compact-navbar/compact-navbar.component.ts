@@ -8,9 +8,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 export class CompactNavbarComponent implements OnInit {
 
   @Output()
-  private navigation = new EventEmitter<string>();
+  public navigation = new EventEmitter<string>();
 
-  private hideBurger = false;
+  public hideBurger = false;
 
   constructor() {
   }

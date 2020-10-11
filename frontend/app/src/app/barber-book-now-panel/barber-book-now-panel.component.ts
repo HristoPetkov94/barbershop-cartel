@@ -3,6 +3,7 @@ import {animate, style, transition, trigger} from '@angular/animations';
 import {ScheduleService} from '../services/schedule.service';
 import {FacebookLoginProvider, SocialAuthService} from "angularx-social-login";
 import {SocialUser} from "angularx-social-login";
+import {AppointmentRequest} from "../interfaces/appointment-request";
 
 @Component({
   selector: 'app-barber-book-now-panel',
@@ -21,15 +22,15 @@ import {SocialUser} from "angularx-social-login";
 export class BarberBookNowPanelComponent implements OnInit {
   @ViewChild('parent', {static: true}) parent: ElementRef;
 
-  private step = 'one';
-  private barbers = [1, 2, 3, 4];
-  private services = [1, 2, 3, 4];
+  public step = 'one';
+  public barbers = [1, 2, 3, 4];
+  public services = [1, 2, 3, 4];
 
-  private barber;
-  private service;
-  private datetime;
+  public barber;
+  public service;
+  public datetime;
 
-  private personalInfo;
+  public client: SocialUser;
 
   constructor(private scheduleService: ScheduleService, private facebook: SocialAuthService) {
   }
@@ -97,18 +98,26 @@ export class BarberBookNowPanelComponent implements OnInit {
   bookWithFacebook() {
     let fbUser = null;
 
-    this.facebook.authState.subscribe(u => console.log(u));
+    this.facebook.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      v => {
+        this.facebook.authState.subscribe(u => fbUser = u);
 
-    const appointment: AppointmentRequest = {
-      barberId: 1,
-      serviceId: 1,
-      hour: this.datetime.hour,
-      date: this.datetime.date,
-      clientUsername: fbUser.name,
-      clientEmail: fbUser.email,
-    };
+        const appointment: AppointmentRequest = {
+          barberId: 1,
+          serviceId: 1,
+          hour: this.datetime.hour,
+          date: this.datetime.date,
+          clientUsername: fbUser.name,
+          clientEmail: fbUser.email,
+        };
 
-    // console.log(fbUser);
-    this.scheduleService.bookNow(appointment).subscribe(d => console.log('saved.'));
+        console.log(fbUser);
+        this.scheduleService.bookNow(appointment).subscribe(d => console.log('saved.'));
+      }
+    );
+  }
+
+  alo() {
+    console.log('alo');
   }
 }
