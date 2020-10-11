@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -73,8 +74,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // dont authenticate this particular request
                 .authorizeRequests()
                 .antMatchers("/authenticate", "/register").permitAll()
-                .antMatchers(HttpMethod.POST, "/save-appointment", "/appointment-current-week/*").permitAll() // have to permit em since they are public url's
-                .antMatchers(HttpMethod.GET, "/barbers", "/appointment-current-week/*", "/services").permitAll()
+                .antMatchers(HttpMethod.POST, "/save-appointment", "/schedule/appointment-current-week/**").permitAll() // have to permit em since they are public url's
+                .antMatchers(HttpMethod.GET, "/barbers", "/schedule/appointment-current-week/**", "/services").permitAll()
                 // all other requests need to be authenticated
                         .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to

@@ -1,8 +1,8 @@
 package com.barbershop.cartel.schedule.entity;
 
 import com.barbershop.cartel.clients.entity.ClientEntity;
+import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.services.entity.ServiceEntity;
-import com.barbershop.cartel.users.entity.UserDetailsEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +31,7 @@ public class ScheduleEntity {
     private LocalTime hour;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserDetailsEntity barber;
+    private UserEntity barber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ServiceEntity service;

@@ -7,6 +7,8 @@ import com.barbershop.cartel.schedule.interfaces.ScheduleConfigInterface;
 import com.barbershop.cartel.schedule.interfaces.ScheduleInterface;
 import com.barbershop.cartel.schedule.models.*;
 import com.barbershop.cartel.schedule.repository.ScheduleRepository;
+import com.barbershop.cartel.security.entity.UserEntity;
+import com.barbershop.cartel.security.repository.UserRepository;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import com.barbershop.cartel.services.models.ServiceModel;
@@ -33,7 +35,7 @@ public class ScheduleService implements ScheduleInterface {
     private ClientInterface clientInterface;
 
     @Autowired
-    private UserDetailsInterface userDetailsInterface;
+    private UserRepository userRepository;
 
     @Autowired
     private ScheduleRepository scheduleRepository;
@@ -63,7 +65,7 @@ public class ScheduleService implements ScheduleInterface {
 
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
-        Optional<UserDetailsEntity> barber = userDetailsInterface.getBarberById(barberId);
+        Optional<UserEntity> barber = userRepository.findById(barberId);
         List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarber(day, barber.get());
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
 
@@ -132,7 +134,7 @@ public class ScheduleService implements ScheduleInterface {
         return client.orElse(null);
     }
 
-    private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel requestModel, UserDetailsEntity barber, ServiceEntity service) {
+    private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel requestModel, UserEntity barber, ServiceEntity service) {
 
         Optional<ClientEntity> client = clientInterface.findByEmail(requestModel.getClientEmail());
 
@@ -221,7 +223,7 @@ public class ScheduleService implements ScheduleInterface {
 
         serviceInterface.save(servm);
 
-        Optional<UserDetailsEntity> barber = userDetailsInterface.getBarberById(requestModel.getBarberId());
+        Optional<UserEntity> barber = userRepository.findById(requestModel.getBarberId());
         Optional<ServiceEntity> service = serviceInterface.getServiceById(requestModel.getServiceId());
 
         if (barber.isPresent() && service.isPresent()) {
@@ -235,7 +237,7 @@ public class ScheduleService implements ScheduleInterface {
 
                 createAppointment(date, hour, requestModel, barber.get(), service.get());
 
-                hour = hour.plusMinutes(30);
+                hour = hour.plusMinutes(MIN_SERVICE_DURATION);
             }
         }
     }

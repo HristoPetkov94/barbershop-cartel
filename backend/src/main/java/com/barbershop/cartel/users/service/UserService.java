@@ -8,6 +8,7 @@ import com.barbershop.cartel.users.models.UserDetailsModel;
 import com.barbershop.cartel.users.repository.UserDetailsRepository;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,22 +54,27 @@ public class UserService implements UserDetailsInterface {
     @Override
     public UserDetailsModel getBarberByEmail(String email) {
 
-        UserDetailsModel userDetailsModel = null;
-        UserDetailsEntity userDetails = userRepository.findByEmail(email).getUserDetails();
+        Optional<UserEntity> userOptional = userRepository.findByEmail(email);
 
-        if (userDetails != null) {
-
-            userDetailsModel = UserDetailsModel.builder()
-                    .id(userDetails.getId())
-                    .email(email)
-                    .firstName(userDetails.getFirstName())
-                    .lastName(userDetails.getLastName())
-                    .description(userDetails.getDescription())
-                    .picture(userDetails.getPicture())
-                    .build();
+        if (userOptional.isEmpty()) {
+            throw new UsernameNotFoundException("User with email: " + email + " does not exist");
         }
 
-        return userDetailsModel;
+        UserEntity user = userOptional.get();
+        UserDetailsEntity details = user.getUserDetails();
+
+        if (details == null) {
+            throw new UsernameNotFoundException("No user details were found for user: " + user.getEmail());
+        }
+
+        return UserDetailsModel.builder()
+                .id(details.getId())
+                .email(email)
+                .firstName(details.getFirstName())
+                .lastName(details.getLastName())
+                .description(details.getDescription())
+                .picture(details.getPicture())
+                .build();
     }
 
     @Override
@@ -76,12 +82,16 @@ public class UserService implements UserDetailsInterface {
 
         String picture = Base64.encodeBase64String(image);
 
-        Optional<UserDetailsEntity> optionalBarber = userDetailsRepository.findById(barberId);
+        Optional<UserDetailsEntity> detailsOptional = userDetailsRepository.findById(barberId);
 
-        UserDetailsEntity barber = optionalBarber.get();
-        barber.setPicture(("data:image/png;base64," + picture));
+        if (detailsOptional.isEmpty()) {
+            throw new UsernameNotFoundException("No user details were found for user with id: " + barberId);
+        }
 
-        userDetailsRepository.save(barber);
+        UserDetailsEntity details = detailsOptional.get();
+        details.setPicture(("data:image/png;base64," + picture));
+
+        userDetailsRepository.save(details);
     }
 
     @Override
