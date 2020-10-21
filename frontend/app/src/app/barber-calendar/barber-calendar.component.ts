@@ -31,6 +31,7 @@ export class BarberCalendarComponent implements OnInit {
     }, err => {
       console.log(err);
     }, () => {
+      console.log(this.week);
       this.firstDayOfWeek = this.week.days[0].date;
     });
   }

@@ -43,7 +43,7 @@
   align-items: center;
 }
 
-.second-row > button {
+.day {
   background: transparent;
   border: none;
 
@@ -57,7 +57,17 @@
   font: normal normal normal 18px/20px Roboto;
 }
 
-.third-row > button {
+.day:focus {
+  border: none;
+  outline: none;
+
+  background-color: #EEEEEE;
+  color: #212121;
+
+  transition: 0.2s;
+}
+
+.hour {
   background: transparent;
 
   justify-self: center;
@@ -80,12 +90,10 @@
   color: #212121;
 }
 
-.second-row > button:focus {
-  border: none;
-  outline: none;
-
-  background-color: #EEEEEE;
-  color: #212121;
-
-  transition: 0.2s;
+.booked {
+  /* make text inside transparent*/
+  color: #EEEEEE;
+  background-color: #212121;
 }
+
+

@@ -10,7 +10,7 @@
         <li id="clicked" (click)="chooseStep($event)" class="one"> Barber</li>
         <li (click)="chooseStep($event)" class="two"> Service</li>
         <li (click)="chooseStep($event)" class="three"> Date and Time</li>
-        <li (click)="chooseStep($event)" class="four"> Finish</li>
+        <li (click)="chooseStep($event)" class="four"> Finish </li>
       </ul>
     </nav>
 
@@ -50,26 +50,38 @@
     <div *ngSwitchCase="'four'" [@fadeOut]>
 
       <div class="final-info-container">
-        <div class="info-row">
-          <span> <b> Date: </b> </span> <span> {{this.datetime.date}} </span>
-        </div>
-        <div class="info-row">
-          <span> <b> Hour: </b> </span> <span> {{this.datetime.hour}} </span>
-        </div>
-        <div class="info-row">
-          <span> <b> Barber: </b> </span> <span> Steve Stevens </span>
-        </div>
-        <div class="info-row">
-          <span> <b> Service: </b> </span> <span> Haircut </span>
-        </div>
-        <div class="info-row">
-          <span> <b> Price: </b> </span> <span> 50$ </span>
+
+        <div *ngIf="done" class="done">
+          <mat-icon> done </mat-icon> <br/>
+
+          <p> Thank you for choosing us !</p>
+          <p> You have a booked hour for {{this.datetime.date}} / {{this.datetime.hour}} h. </p>
+
         </div>
 
-        <button class="confirm-button" (click)="bookWithFacebook()">
-          Confirm with Facebook
-        </button>
+        <ng-container *ngIf="!done">
+          <div class="info-row">
+            <span> <b> Date: </b> </span> <span> {{this.datetime.date}} </span>
+          </div>
+          <div class="info-row">
+            <span> <b> Hour: </b> </span> <span> {{this.datetime.hour}} </span>
+          </div>
+          <div class="info-row">
+            <span> <b> Barber: </b> </span> <span> Steve Stevens </span>
+          </div>
+          <div class="info-row">
+            <span> <b> Service: </b> </span> <span> Haircut </span>
+          </div>
+          <div class="info-row">
+            <span> <b> Price: </b> </span> <span> 50$ </span>
+          </div>
+
+          <button class="confirm-button" (click)="bookWithFacebook()">
+            Confirm with Facebook
+          </button>
+        </ng-container>
       </div>
+
     </div>
 
   </ng-container>

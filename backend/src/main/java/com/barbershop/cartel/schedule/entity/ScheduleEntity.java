@@ -27,7 +27,7 @@ public class ScheduleEntity {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "hour", unique = true)
+    @Column(name = "hour")
     private LocalTime hour;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -32,6 +32,8 @@ export class BarberBookNowPanelComponent implements OnInit {
 
   public client: SocialUser;
 
+  public done;
+
   constructor(private scheduleService: ScheduleService, private facebook: SocialAuthService) {
   }
 
@@ -103,7 +105,7 @@ export class BarberBookNowPanelComponent implements OnInit {
         this.facebook.authState.subscribe(u => fbUser = u);
 
         const appointment: AppointmentRequest = {
-          barberId: 1,
+          barberId: 2,
           serviceId: 1,
           hour: this.datetime.hour,
           date: this.datetime.date,
@@ -112,12 +114,12 @@ export class BarberBookNowPanelComponent implements OnInit {
         };
 
         console.log(fbUser);
-        this.scheduleService.bookNow(appointment).subscribe(d => console.log('saved.'));
+        this.scheduleService.bookNow(appointment).subscribe(() => {}, () => {}, () => {
+          this.done = true;
+        });
       }
     );
-  }
 
-  alo() {
-    console.log('alo');
+
   }
 }

@@ -74,27 +74,27 @@ public class ScheduleService implements ScheduleInterface {
 
         /* In this case we have no option if configuration is not set*/
 
-            if (configuration.isWorkingDay()) {
+        if (configuration.isWorkingDay()) {
 
-                while (currentAppointment.isBefore(lastAppointment) || currentAppointment.equals(lastAppointment)) {
+            while (currentAppointment.isBefore(lastAppointment) || currentAppointment.equals(lastAppointment)) {
 
-                    AppointmentHoursModel newHour = new AppointmentHoursModel();
-                    newHour.setHour(currentAppointment);
+                AppointmentHoursModel newHour = new AppointmentHoursModel();
+                newHour.setHour(currentAppointment);
 
-                    for (ScheduleEntity hour : bookedHours) {
+                for (ScheduleEntity hour : bookedHours) {
 
-                        LocalTime bookedHour = hour.getHour();
+                    LocalTime bookedHour = hour.getHour();
 
-                        if (currentAppointment.equals(bookedHour) && hour.getDate().equals(day)) {
-                            newHour.setBooked(true);
-                            break;
-                        }
+                    if (currentAppointment.equals(bookedHour) && hour.getDate().equals(day)) {
+                        newHour.setBooked(true);
+                        break;
                     }
-
-                    hours.add(newHour);
-                    currentAppointment = currentAppointment.plusMinutes(30);
                 }
+
+                hours.add(newHour);
+                currentAppointment = currentAppointment.plusMinutes(30);
             }
+        }
 
         return hours;
     }
@@ -137,6 +137,14 @@ public class ScheduleService implements ScheduleInterface {
     private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel requestModel, UserEntity barber, ServiceEntity service) {
 
         Optional<ClientEntity> client = clientInterface.findByEmail(requestModel.getClientEmail());
+
+        Optional<ScheduleEntity> optionalSchedule = scheduleRepository.findByHourAndDateAndBarber(hour, date, barber);
+
+        if (optionalSchedule.isPresent()) {
+
+            // ** this should be a place to throw an error that the schedule already exists.
+            return;
+        }
 
         ScheduleEntity schedule = new ScheduleEntity();
 
@@ -205,7 +213,7 @@ public class ScheduleService implements ScheduleInterface {
         AppointmentWeekModel week = new AppointmentWeekModel();
         week.setDays(days);
 
-         return week;
+        return week;
     }
 
     @Override

@@ -29,17 +29,43 @@
 
   <!--      this will hold the days-->
   <div class="second-row">
-    <button (click)="getHoursForDay(d)" *ngFor="let d of week?.days; let i = index">
-      <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
-      <span>{{'  '}}</span>
-      <span class="margin-zero">{{d.date | date : 'dd'}}</span>
-    </button>
+    <ng-container  *ngFor="let d of week?.days; let i = index">
+
+      <ng-container *ngIf="i == 0; else rest">
+        <button class="day" (click)="getHoursForDay(d)" autofocus>
+          <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
+          <span>{{'  '}}</span>
+          <span class="margin-zero">{{d.date | date : 'dd'}}</span>
+        </button>
+      </ng-container>
+
+      <ng-template #rest>
+        <button class="day" (click)="getHoursForDay(d)">
+          <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
+          <span>{{'  '}}</span>
+          <span class="margin-zero">{{d.date | date : 'dd'}}</span>
+        </button>
+      </ng-template>
+    </ng-container>
   </div>
 
   <!--      this will hold the hours-->
   <div class="third-row">
-    <button *ngFor="let hour of hours" (click)="chooseDateTime(hour.hour.substring(0, 5))">
-      {{hour.hour.substring(0, 5)}}
-    </button>
+
+
+    <div *ngFor="let hour of hours">
+      <ng-container *ngIf="hour.booked; else not">
+        <button class="hour booked" (click)="chooseDateTime(hour.hour.substring(0, 5))" disabled>
+          x
+        </button>
+      </ng-container>
+
+      <ng-template #not>
+        <button class="hour" (click)="chooseDateTime(hour.hour.substring(0, 5))">
+          {{hour.hour.substring(0, 5)}}
+
+        </button>
+      </ng-template>
+    </div>
   </div>
 </div>

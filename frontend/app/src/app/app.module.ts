@@ -54,6 +54,7 @@ import { BarberFooterInfoComponent } from './barber-footer-info/barber-footer-in
 import { I18nModule } from './i18n/i18n.module';
 import { BarberBookNowPanelComponent } from './barber-book-now-panel/barber-book-now-panel.component';
 import { BarberCalendarComponent } from './barber-calendar/barber-calendar.component';
+import { BarberDashboardComponent } from './barber-dashboard/barber-dashboard.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { BarberCalendarComponent } from './barber-calendar/barber-calendar.compo
     BarberPaginatorComponent,
     BarberFooterInfoComponent,
     BarberBookNowPanelComponent,
-    BarberCalendarComponent
+    BarberCalendarComponent,
+    BarberDashboardComponent
   ],
   imports: [
     BrowserModule,
