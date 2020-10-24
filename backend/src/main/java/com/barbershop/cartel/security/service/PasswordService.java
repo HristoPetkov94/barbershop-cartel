@@ -4,7 +4,6 @@ import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.repository.UserRepository;
-import liquibase.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,24 +25,6 @@ public class PasswordService {
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
-    /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/
-    public void forgotPassword(String email) {
-
-        Optional<UserEntity> userOptional = userRepository.findByEmail(email);
-
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException("User with email: " + email + " does not exist");
-        }
-
-        UserEntity user = userOptional.get();
-        String password = StringUtils.randomIdentifer(15);
-
-        changePassword(user, password);
-
-        EmailDetailsModel details = emailDetails(password);
-        emailInterface.sendMailMessage(details);
-    }
-
     private EmailDetailsModel emailDetails(String password) {
 
         EmailDetailsModel emailDetailsModel = new EmailDetailsModel();
@@ -56,10 +37,50 @@ public class PasswordService {
         return emailDetailsModel;
     }
 
+    private String generateTemporaryPassword() {
+
+        int passwordLength = 15;
+
+        // chose a Character random from this String
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+
+        StringBuilder password = new StringBuilder(passwordLength);
+
+        for (int i = 0; i < passwordLength; i++) {
+
+            // generate a random number between
+            // 0 to AlphaNumericString variable length
+            int index = (int) (AlphaNumericString.length() * Math.random());
+
+            // add Character one by one in end of password
+            password.append(AlphaNumericString.charAt(index));
+        }
+
+        return password.toString();
+    }
+
     private void changePassword(UserEntity user, String password) {
 
         user.setPassword(bcryptEncoder.encode(password));
         userRepository.save(user);
         log.info("New password for user:" + user.getEmail() + " has been applied.");
+    }
+
+    /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/
+    public void forgotPassword(String email) {
+
+        Optional<UserEntity> userOptional = userRepository.findByEmail(email);
+
+        if (userOptional.isEmpty()) {
+            throw new UsernameNotFoundException("User with email: " + email + " does not exist");
+        }
+
+        UserEntity user = userOptional.get();
+        String password = generateTemporaryPassword();
+
+        changePassword(user, password);
+
+        EmailDetailsModel details = emailDetails(password);
+        emailInterface.sendMailMessage(details);
     }
 }
