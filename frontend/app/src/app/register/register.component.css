@@ -5,6 +5,10 @@
   align-items: center;
 }
 
+mat-form-field.mat-form-field {
+  color: white;
+}
+
 .form-wrapper{
   display: flex;
   flex-direction: column;

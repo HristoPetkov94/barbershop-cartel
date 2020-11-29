@@ -8,6 +8,7 @@ import {AuthGuardService} from './authentication/auth-guard.service';
 import {BarberBookNowPanelComponent} from './barber-book-now-panel/barber-book-now-panel.component';
 import {ScheduleComponent} from './schedule/schedule.component';
 import {BarberDashboardComponent} from './barber-dashboard/barber-dashboard.component';
+import {RegisterComponent} from './register/register.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'schedule', component: ScheduleComponent },
   { path: 'book-now', component: BarberBookNowPanelComponent },
   { path: 'login', component: LoginComponent},
-  // { path: 'register', component: RegisterComponent},
+  { path: 'register', component: RegisterComponent},
   { path: 'configuration', component: ConfigurationPanelComponent, canActivate: [AuthGuardService]},
   { path: 'profile/:id', component: ProfileComponent, canActivate: [AuthGuardService]},
   { path: 'dashboard', component: BarberDashboardComponent, canActivate: [AuthGuardService]}
