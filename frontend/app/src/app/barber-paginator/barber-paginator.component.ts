@@ -1,6 +1,8 @@
-import {Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {Page} from './page';
-import {animate, style, transition, trigger} from "@angular/animations";
+import {animate, style, transition, trigger} from '@angular/animations';
+import {BarberService} from '../services/barber.service';
+import {Barber} from '../models/barber';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class BarberPaginatorComponent implements OnInit {
 
   public page = 0;
   public pages: Page[] = [];
+  public barbers: Barber[];
 
   @Input()
   public data;
@@ -33,11 +36,15 @@ export class BarberPaginatorComponent implements OnInit {
   @Input()
   public numberOfPages;
 
-  constructor() {
+  constructor(private barberService: BarberService) {
   }
 
   ngOnInit() {
     this.spreadDataIntoPages();
+
+    this.barberService.getBarbers().subscribe(b => {
+      this.barbers = b;
+    });
   }
 
   switchPage(index) {

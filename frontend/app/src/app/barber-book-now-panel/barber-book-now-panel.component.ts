@@ -1,9 +1,15 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {ScheduleService} from '../services/schedule.service';
-import {FacebookLoginProvider, SocialAuthService} from "angularx-social-login";
-import {SocialUser} from "angularx-social-login";
-import {AppointmentRequest} from "../interfaces/appointment-request";
+import {FacebookLoginProvider, SocialAuthService} from 'angularx-social-login';
+import {SocialUser} from 'angularx-social-login';
+import {AppointmentRequest} from '../interfaces/appointment-request';
+import {BarberService} from '../services/barber.service';
+import {ServicesService} from '../services/services.service';
+import {Barber} from '../models/barber';
+import {Service} from '../interfaces/service';
+import {EmailNotificationModel} from '../models/EmailNotificationModel';
+import {NotificationService} from '../services/notification.service';
 
 @Component({
   selector: 'app-barber-book-now-panel',
@@ -23,21 +29,32 @@ export class BarberBookNowPanelComponent implements OnInit {
   @ViewChild('parent', {static: true}) parent: ElementRef;
 
   public step = 'one';
-  public barbers = [1, 2, 3, 4];
-  public services = [1, 2, 3, 4];
+  public barbers: Barber[];
+  public services: Service[];
 
-  public barber;
-  public service;
+  public barber = new Barber();
+  public service = new Service();
   public datetime;
 
   public client: SocialUser;
 
   public done;
 
-  constructor(private scheduleService: ScheduleService, private facebook: SocialAuthService) {
+  constructor(private scheduleService: ScheduleService,
+              private facebook: SocialAuthService,
+              private barberService: BarberService,
+              private servicesService: ServicesService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
+    this.servicesService.getAllServices().subscribe(s => {
+      this.services = s;
+    });
+
+    this.barberService.getBarbers().subscribe(b => {
+      this.barbers = b;
+    });
   }
 
   chooseStep(event) {
@@ -96,6 +113,17 @@ export class BarberBookNowPanelComponent implements OnInit {
     }
   }
 
+  sendEmail() {
+    // customer oriented email
+    const emailNotification = new EmailNotificationModel();
+    emailNotification.to = 'petkovhristo94@gmail.com';
+    emailNotification.from = 'testov.email.2020@gmail.com';
+    emailNotification.subject = 'Cartel Резервация';
+    emailNotification.text = 'Здравейте, \n\nУспешно направихте своята резервация!\n\n' + '<b>Бръснар:</b> ' + this.barber.firstName + ' ' + this.barber.lastName + '\n <b>Вид:</b> ' + this.service.serviceType + '\n <b>Цена:</b> ' + this.service.priceBGN + ' лв.' + '\n <b>Продължителност:</b> ' + this.service.duration + ' мин.' + '\n\nПоздрави,\nCartel';
+
+    this.notificationService.sendEmail(emailNotification).subscribe();
+  }
+
   // facebook
   bookWithFacebook() {
     let fbUser = null;
@@ -105,8 +133,8 @@ export class BarberBookNowPanelComponent implements OnInit {
         this.facebook.authState.subscribe(u => fbUser = u);
 
         const appointment: AppointmentRequest = {
-          barberId: 2,
-          serviceId: 1,
+          barberId: this.barber.id,
+          serviceId: this.service.id,
           hour: this.datetime.hour,
           date: this.datetime.date,
           clientUsername: fbUser.name,
@@ -114,12 +142,12 @@ export class BarberBookNowPanelComponent implements OnInit {
         };
 
         console.log(fbUser);
-        this.scheduleService.bookNow(appointment).subscribe(() => {}, () => {}, () => {
+        this.scheduleService.bookNow(appointment).subscribe(() => {
+        }, () => {
+        }, () => {
           this.done = true;
         });
       }
     );
-
-
   }
 }

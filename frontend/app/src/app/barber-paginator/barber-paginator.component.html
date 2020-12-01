@@ -2,20 +2,21 @@
 
   <div class="team-card-wrapper" *ngSwitchCase="page" >
 
-    <div class="flip-card" *ngFor="let barber of pages[page].content" [@slideInOut]>
+    <div class="flip-card" *ngFor="let barber of barbers" [@slideInOut]>
 
       <div class="flip-card-inner">
 
         <div class="flip-card-front">
-          <div class="barber-image"></div>
+          <img class="barber-image" src="{{barber?.picture}}" alt="Image">
 
           <div class="barber-info">
             <div class="name">
-              STEVEN
+              {{barber.firstName}} {{barber.lastName}}
             </div>
 
             <div class="social-info">
               <img src="../../assets/images/instagram-icon.png"/>
+
 
               <p> Steven.stevens </p>
             </div>

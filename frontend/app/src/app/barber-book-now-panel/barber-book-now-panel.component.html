@@ -17,11 +17,10 @@
     <div *ngSwitchCase="'one'" [@fadeOut]>
 
       <div class="barbers-container">
-        <div class="barber" *ngFor="let b of barbers" (click)="chooseBarber(b)">
-          <div class="barber-image"></div>
-
+        <div class="barber" *ngFor="let barber of barbers" (click)="chooseBarber(barber)">
+          <img class="barber-image" src="{{barber?.picture}}" alt="Image">
           <div class="button-wrapper">
-            <a><span>Steve Stevens</span></a>
+            <a><span>{{barber.firstName}} {{barber.lastName}}</span></a>
           </div>
         </div>
       </div>
@@ -29,15 +28,15 @@
 
     <div *ngSwitchCase="'two'" [@fadeOut]>
 
-      <div class="service" *ngFor="let s of services" (click)="chooseService(s)">
+      <div class="service" *ngFor="let service of services" (click)="chooseService(service)">
         <div class="service-info-wrapper">
-          <span class="type">Haircut</span>
+          <span class="type">{{service.serviceType}}</span>
 
           <div class="space"></div>
 
           <div>
-            <span class="duration">1 hour</span>
-            <span class="price"> 50$ </span>
+            <span class="duration">{{service.duration}} мин.</span>
+            <span class="price">{{service.priceBGN}} лв.</span>
           </div>
         </div>
       </div>
@@ -67,16 +66,19 @@
             <span> <b> Hour: </b> </span> <span> {{this.datetime.hour}} </span>
           </div>
           <div class="info-row">
-            <span> <b> Barber: </b> </span> <span> Steve Stevens </span>
+            <span> <b> Barber: </b> </span> <span> {{this.barber.firstName}} {{this.barber.lastName}}</span>
           </div>
           <div class="info-row">
-            <span> <b> Service: </b> </span> <span> Haircut </span>
+            <span> <b> Service: </b> </span> <span> {{this.service.serviceType}} </span>
           </div>
           <div class="info-row">
-            <span> <b> Price: </b> </span> <span> 50$ </span>
+            <span> <b> Price: </b> </span> <span> {{this.service.priceBGN}} лв.</span>
+          </div>
+          <div class="info-row">
+            <span> <b> Duration: </b> </span> <span> {{this.service.duration}} мин.</span>
           </div>
 
-          <button class="confirm-button" (click)="bookWithFacebook()">
+          <button class="confirm-button" (click)="sendEmail()">
             Confirm with Facebook
           </button>
         </ng-container>
