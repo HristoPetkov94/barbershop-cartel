@@ -4,8 +4,8 @@ import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
 import com.barbershop.cartel.schedule.interfaces.ScheduleConfigInterface;
 import com.barbershop.cartel.schedule.models.ScheduleConfigModel;
 import com.barbershop.cartel.schedule.repository.ScheduleConfigRepository;
-import com.barbershop.cartel.users.entity.UserDetailsEntity;
-import com.barbershop.cartel.users.interfaces.UserDetailsInterface;
+import com.barbershop.cartel.barbers.entity.BarberEntity;
+import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +18,14 @@ import java.util.Optional;
 public class ScheduleConfigService implements ScheduleConfigInterface {
 
     @Autowired
-    private UserDetailsInterface userDetailsInterface;
+    private BarberInterface barberInterface;
 
     @Autowired
     private ScheduleConfigRepository scheduleConfigRepository;
 
-    private Optional<UserDetailsEntity> getBarberById(long barberId) {
-        return userDetailsInterface.getBarberById(barberId);
-    }
-
     private void saveConfiguration(ScheduleConfigModel configuration) {
 
-        Optional<UserDetailsEntity> barber = getBarberById(configuration.getBarberId());
+        Optional<BarberEntity> barber = barberInterface.getBarberById(configuration.getBarberId());
 
         if (barber.isPresent()) {
 
@@ -62,7 +58,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
     @Override
     public List<ScheduleConfigModel> getConfigurationsByBarberId(long barberId) {
 
-        Optional<UserDetailsEntity> barber = getBarberById(barberId);
+        Optional<BarberEntity> barber = barberInterface.getBarberById(barberId);
 
         List<ScheduleConfigModel> configurations = new ArrayList<>();
 
@@ -89,7 +85,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
     @Override
     public ScheduleConfigModel getConfigurationByBarberIdAndDate(long barberId, LocalDate date) {
 
-        Optional<UserDetailsEntity> barber = getBarberById(barberId);
+        Optional<BarberEntity> barber = barberInterface.getBarberById(barberId);
 
         ScheduleConfigModel configuration = new ScheduleConfigModel();
 

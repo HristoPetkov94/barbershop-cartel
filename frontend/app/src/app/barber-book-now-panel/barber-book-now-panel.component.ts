@@ -114,6 +114,30 @@ export class BarberBookNowPanelComponent implements OnInit {
   }
 
   sendEmail() {
+
+    const appointment = new AppointmentRequest();
+
+    appointment.barberId = this.barber.id;
+    appointment.serviceId = this.service.id;
+    appointment.hour = this.datetime.hour;
+    appointment.date = this.datetime.date;
+
+    let fbUser = null;
+
+    this.facebook.signIn(FacebookLoginProvider.PROVIDER_ID).then(f => {
+      this.facebook.authState.subscribe(u => fbUser = u);
+      appointment.clientEmail = fbUser.email;
+      appointment.clientUsername = fbUser.name;
+    });
+
+    this.scheduleService.bookNow(appointment).subscribe(() => {
+    }, () => {
+    }, () => {
+      this.done = true;
+    });
+
+    console.log(fbUser);
+
     // customer oriented email
     const emailNotification = new EmailNotificationModel();
     emailNotification.to = 'petkovhristo94@gmail.com';

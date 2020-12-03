@@ -1,6 +1,6 @@
 package com.barbershop.cartel.schedule.entity;
 
-import com.barbershop.cartel.users.entity.UserDetailsEntity;
+import com.barbershop.cartel.barbers.entity.BarberEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,7 +21,7 @@ public class ScheduleConfigEntity {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private UserDetailsEntity barber;
+    private BarberEntity barber;
 
     @Column(name = "first_appointment")
     private LocalTime firstAppointment;

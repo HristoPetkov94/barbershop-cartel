@@ -1,7 +1,7 @@
 package com.barbershop.cartel.schedule.repository;
 
 import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
-import com.barbershop.cartel.users.entity.UserDetailsEntity;
+import com.barbershop.cartel.barbers.entity.BarberEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface ScheduleConfigRepository extends CrudRepository<ScheduleConfigEntity, Long> {
 
-    List<ScheduleConfigEntity> findAllByBarber(UserDetailsEntity barber);
+    List<ScheduleConfigEntity> findAllByBarber(BarberEntity barber);
 
-    ScheduleConfigEntity findByBarberAndDate(UserDetailsEntity barber, LocalDate date);
+    ScheduleConfigEntity findByBarberAndDate(BarberEntity barber, LocalDate date);
 }

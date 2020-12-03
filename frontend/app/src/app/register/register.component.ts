@@ -12,8 +12,6 @@ import {Router} from '@angular/router';
 export class RegisterComponent implements OnInit {
 
   public email;
-  public firstname;
-  public lastname;
   public password;
 
   public hide = true;
@@ -25,7 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const user = new User(this.email, this.password, this.firstname, this.lastname);
+    const user = new User(this.email, this.password);
     console.log(user);
     this.auth.register(user).subscribe(() => {
       console.log('User registered successfully.');

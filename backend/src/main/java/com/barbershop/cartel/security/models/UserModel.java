@@ -8,6 +8,4 @@ import lombok.Setter;
 public class UserModel {
     private String email;
     private String password;
-    private String firstName;
-    private String lastName;
 }

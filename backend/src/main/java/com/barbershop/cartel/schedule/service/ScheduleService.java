@@ -7,13 +7,10 @@ import com.barbershop.cartel.schedule.interfaces.ScheduleConfigInterface;
 import com.barbershop.cartel.schedule.interfaces.ScheduleInterface;
 import com.barbershop.cartel.schedule.models.*;
 import com.barbershop.cartel.schedule.repository.ScheduleRepository;
-import com.barbershop.cartel.security.entity.UserEntity;
-import com.barbershop.cartel.security.repository.UserRepository;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
-import com.barbershop.cartel.services.models.ServiceModel;
-import com.barbershop.cartel.users.entity.UserDetailsEntity;
-import com.barbershop.cartel.users.interfaces.UserDetailsInterface;
+import com.barbershop.cartel.barbers.entity.BarberEntity;
+import com.barbershop.cartel.barbers.repository.BarberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +32,7 @@ public class ScheduleService implements ScheduleInterface {
     private ClientInterface clientInterface;
 
     @Autowired
-    private UserRepository userRepository;
+    private BarberRepository barberRepository;
 
     @Autowired
     private ScheduleRepository scheduleRepository;
@@ -65,7 +62,7 @@ public class ScheduleService implements ScheduleInterface {
 
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
-        Optional<UserEntity> barber = userRepository.findById(barberId);
+        Optional<BarberEntity> barber = barberRepository.findById(barberId);
         List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarber(day, barber.get());
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
 
@@ -134,7 +131,7 @@ public class ScheduleService implements ScheduleInterface {
         return client.orElse(null);
     }
 
-    private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel requestModel, UserEntity barber, ServiceEntity service) {
+    private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel requestModel, BarberEntity barber, ServiceEntity service) {
 
         Optional<ClientEntity> client = clientInterface.findByEmail(requestModel.getClientEmail());
 
@@ -218,20 +215,8 @@ public class ScheduleService implements ScheduleInterface {
 
     @Override
     public void save(AppointmentRequestModel requestModel) {
-        /*
-         * Creating services only for test purposes.
-         * TODO:When GUI is done this should be deleted.
-         * */
-        ServiceModel servm = new ServiceModel();
 
-        servm.setServiceType("kosta");
-        servm.setPriceBGN(20);
-        servm.setDuration(60);
-        servm.setDescription("service.getDescription()");
-
-        serviceInterface.save(servm);
-
-        Optional<UserEntity> barber = userRepository.findById(requestModel.getBarberId());
+        Optional<BarberEntity> barber = barberRepository.findById(requestModel.getBarberId());
         Optional<ServiceEntity> service = serviceInterface.getServiceById(requestModel.getServiceId());
 
         if (barber.isPresent() && service.isPresent()) {

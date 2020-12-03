@@ -1,4 +1,4 @@
-export interface AppointmentRequest {
+export class AppointmentRequest {
   barberId: number;
   serviceId: number;
   hour: string;

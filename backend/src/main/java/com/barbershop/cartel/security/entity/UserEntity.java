@@ -1,6 +1,5 @@
 package com.barbershop.cartel.security.entity;
 
-import com.barbershop.cartel.users.entity.UserDetailsEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +25,4 @@ public class UserEntity implements Serializable {
     @Column(name = "password")
     @JsonIgnore
     private String password;
-
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonIgnore
-    private UserDetailsEntity userDetails;
 }

@@ -1,7 +1,6 @@
-package com.barbershop.cartel.users.entity;
+package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
-import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.schedule.entity.ScheduleEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,10 +11,10 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = UserDetailsEntity.TABLE_NAME)
-public class UserDetailsEntity {
+@Table(name = BarberEntity.TABLE_NAME)
+public class BarberEntity {
 
-    public static final String TABLE_NAME = "user_details";
+    public static final String TABLE_NAME = "barbers";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +25,6 @@ public class UserDetailsEntity {
 
     @Column(name = "last_name")
     private String lastName;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private UserEntity user;
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduleEntity> schedule;

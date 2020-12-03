@@ -5,14 +5,6 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Firstname" [(ngModel)]="firstname"/>
-    </mat-form-field>
-
-    <mat-form-field>
-      <input matInput placeholder="Lastname" [(ngModel)]="lastname"/>
-    </mat-form-field>
-
-    <mat-form-field>
       <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" [(ngModel)]="password">
       <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
