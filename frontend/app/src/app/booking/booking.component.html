@@ -62,7 +62,7 @@
 
         <!--      this will hold the days-->
         <div class="second-row">
-          <button (click)="getHoursForDay(d)" mat-button class="day" *ngFor="let d of week?.days; let i = index">
+          <button (click)="getHoursForDay(d)" mat-button class="day" *ngFor="let d of week?.week; let i = index">
             <span>
               <p class="margin-zero">{{d.date | date : 'EEE'}}</p>
               <p class="margin-zero">{{d.date | date : 'dd'}}</p>

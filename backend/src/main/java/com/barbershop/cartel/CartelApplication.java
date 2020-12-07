@@ -34,12 +34,14 @@ public class CartelApplication {
             barber1.setFirstName("Пламен");
             barber1.setLastName("Маринов");
             barber1.setDescription("Инженер-Архитектът под чиито надзор се изпълнява този проект.");
+            barber1.setPicture("images/defual-profile-picture.png");
 
             BarberEntity barber2 = new BarberEntity();
 
             barber2.setFirstName("Христо");
             barber2.setLastName("Петков");
             barber2.setDescription("Инженер-Предприемач, който ще доведе до край този проект.");
+            barber2.setPicture("images/defual-profile-picture.png");
 
             barberRepository.save(barber1);
             barberRepository.save(barber2);

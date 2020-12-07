@@ -5,7 +5,7 @@ import {ServicesService} from '../services/services.service';
 import {BarberService} from '../services/barber.service';
 import {Service} from '../interfaces/service';
 import {Barber} from '../models/barber';
-import {Week} from "../models/week";
+import {Week} from '../models/week';
 
 // TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
 
@@ -25,7 +25,7 @@ export class ScheduleComponent implements OnInit {
   public barbers: Barber[] = new Array<Barber>();
   public date;
 
-  public week: Week = {days: []};
+  public week: Week = {week: []};
   public selectedTime: SelectedTime;
   public selectedBarber;
   public selectedService;
@@ -68,7 +68,7 @@ export class ScheduleComponent implements OnInit {
   setSelectedHour(hour, date) {
     const pickedTime = {hour, date};
 
-    for (const d of this.week.days) {
+    for (const d of this.week.week) {
       if (d.date === date) {
         for (const h of d.hours) {
           h.available = h === hour;
@@ -84,11 +84,11 @@ export class ScheduleComponent implements OnInit {
   }
 
   nextWeek() {
-    this.scheduleService.nextWeek(this.week, this.selectedBarber).subscribe(week => this.week = week);
+    this.scheduleService.getNextWeek(null, this.selectedBarber).subscribe(week => this.week = week);
   }
 
   prevWeek() {
-    this.scheduleService.prevWeek(this.week, this.selectedBarber).subscribe(week => this.week = week);
+    this.scheduleService.getPreviousWeek(null, this.selectedBarber).subscribe(week => this.week = week);
   }
 
   changeWeek(event: MatDatepickerInputEvent<Date>) {
@@ -98,7 +98,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   getWeekForBarber(barber) {
-    this.scheduleService.getWeek(barber).subscribe(week => {
+    this.scheduleService.getCurrentWeek(barber).subscribe(week => {
       this.week = week;
     });
   }

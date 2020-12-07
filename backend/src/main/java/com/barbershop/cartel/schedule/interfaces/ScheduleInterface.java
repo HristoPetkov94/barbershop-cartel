@@ -6,11 +6,12 @@ import com.barbershop.cartel.schedule.models.AppointmentWeekModel;
 import java.time.LocalDate;
 
 public interface ScheduleInterface {
-    AppointmentWeekModel getAppointmentCurrentWeek(long barberId);
 
-    AppointmentWeekModel getAppointmentNextWeek(AppointmentWeekModel currentWeek, long barberId);
+    AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId);
 
-    AppointmentWeekModel getAppointmentPreviousWeek(AppointmentWeekModel currentWeek, long barberId);
+    AppointmentWeekModel getAppointmentsCurrentWeek(long barberId);
+
+    AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long barberId);
 
     void save(AppointmentRequestModel appointment);
 

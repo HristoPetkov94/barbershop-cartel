@@ -1,5 +1,6 @@
 package com.barbershop.cartel.services.entity;
 
+import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.schedule.entity.ScheduleEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,9 @@ public class ServiceEntity {
 
     @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduleEntity> schedule;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BarberEntity barber;
 
     @Column(name = "duration")
     private int duration;

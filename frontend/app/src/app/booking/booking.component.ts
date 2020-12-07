@@ -8,7 +8,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {FormControl} from '@angular/forms';
 import {ScheduleConfigService} from '../services/schedule-config.service';
 import {ScheduleConfig} from '../interfaces/schedule-config';
-import {Week} from "../models/week";
+import {Week} from '../models/week';
 
 @Component({
   selector: 'app-booking',
@@ -50,25 +50,25 @@ export class BookingComponent implements OnInit {
   }
 
   next() {
-    this.scheduleService.nextWeek(this.week, this.selectedBarber).subscribe(week => {
+    this.scheduleService.getNextWeek(null, this.selectedBarber).subscribe(week => {
         this.week = week;
       },
       err => {
         console.log(err);
       }, () => {
-        this.firstDayOfWeek = this.week.days[0].date;
+        this.firstDayOfWeek = this.week.week[0].date;
       }
     )
     ;
   }
 
   prev() {
-    this.scheduleService.prevWeek(this.week, this.selectedBarber).subscribe(week => {
+    this.scheduleService.getPreviousWeek(null, this.selectedBarber).subscribe(week => {
       this.week = week;
     }, err => {
       console.log(err);
     }, () => {
-      this.firstDayOfWeek = this.week.days[0].date;
+      this.firstDayOfWeek = this.week.week[0].date;
     });
   }
 

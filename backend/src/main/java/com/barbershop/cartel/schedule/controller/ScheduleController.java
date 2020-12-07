@@ -17,19 +17,19 @@ public class ScheduleController {
     @Autowired
     private ScheduleInterface scheduleInterface;
 
+    @PostMapping(value = "/appointment-previous-week/{barberId}")
+    public AppointmentWeekModel getAppointmentsPreviousWeek(@RequestBody int numberOfWeeks, @PathVariable long barberId) {
+        return scheduleInterface.getAppointmentsPreviousWeek(numberOfWeeks, barberId);
+    }
+
     @GetMapping(value = "/appointment-current-week/{barberId}")
-    public AppointmentWeekModel getAppointmentsForCurrentWeek(@PathVariable long barberId) {
-        return scheduleInterface.getAppointmentCurrentWeek(barberId);
+    public AppointmentWeekModel getAppointmentsCurrentWeek(@PathVariable long barberId) {
+        return scheduleInterface.getAppointmentsCurrentWeek(barberId);
     }
 
     @PostMapping(value = "/appointment-next-week/{barberId}")
-    public AppointmentWeekModel getAppointmentsForNextWeek(@RequestBody AppointmentWeekModel week, @PathVariable long barberId) {
-        return scheduleInterface.getAppointmentNextWeek(week, barberId);
-    }
-
-    @PostMapping(value = "/appointment-previous-week/{barberId}")
-    public AppointmentWeekModel getAppointmentsForPreviousWeek(@RequestBody AppointmentWeekModel week, @PathVariable long barberId) {
-        return scheduleInterface.getAppointmentPreviousWeek(week, barberId);
+    public AppointmentWeekModel getAppointmentsNextWeek(@RequestBody int numberOfWeeks, @PathVariable long barberId) {
+        return scheduleInterface.getAppointmentsNextWeek(numberOfWeeks, barberId);
     }
 
     @PostMapping(value = "/save-appointment")

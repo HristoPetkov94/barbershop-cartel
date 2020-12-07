@@ -13,16 +13,16 @@ export class ScheduleService {
 
   constructor(private http: HttpClient) {}
 
-  getWeek(barber): Subscribable<Week> {
+  getPreviousWeek(numberOfWeeks, barber) {
+    return this.http.post<Week>(this.url + '/schedule/appointment-previous-week/' + barber.id, numberOfWeeks);
+  }
+
+  getCurrentWeek(barber): Subscribable<Week> {
     return this.http.get<Week>(this.url + '/schedule/appointment-current-week/' + barber.id);
   }
 
-  nextWeek(currentWeek, barber) {
-    return this.http.post<Week>(this.url + '/schedule/appointment-next-week/' + barber.id, currentWeek);
-  }
-
-  prevWeek(currentWeek, barber) {
-    return this.http.post<Week>(this.url + '/schedule/appointment-previous-week/' + barber.id, currentWeek);
+  getNextWeek(numberOfWeeks, barber) {
+    return this.http.post<Week>(this.url + '/schedule/appointment-next-week/' + barber.id, numberOfWeeks);
   }
 
   getWeekByDate(date) {

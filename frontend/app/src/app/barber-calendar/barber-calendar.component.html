@@ -3,7 +3,7 @@
   <div class="first-row">
     <div>
       <button mat-icon-button>
-        <mat-icon (click)="prev()">keyboard_arrow_left</mat-icon>
+        <mat-icon (click)="previousWeek()">keyboard_arrow_left</mat-icon>
       </button>
     </div>
 
@@ -16,12 +16,12 @@
       </mat-form-field>
 
       <button mat-icon-button (click)="picker.open()">
-        <mat-icon> calendar_today</mat-icon>
+        <mat-icon>calendar_today</mat-icon>
       </button>
     </div>
 
     <div>
-      <button mat-icon-button (click)="next()">
+      <button mat-icon-button (click)="nextWeek()">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
     </div>
@@ -29,10 +29,10 @@
 
   <!--      this will hold the days-->
   <div class="second-row">
-    <ng-container  *ngFor="let d of week?.days; let i = index">
+    <ng-container  *ngFor="let d of week?.week; let i = index">
 
-      <ng-container *ngIf="i == 0; else rest">
-        <button class="day" (click)="getHoursForDay(d)" autofocus>
+      <ng-container *ngIf="d.date == firstDayOfWeek ; else rest">
+        <button class="day_focused" (click)="getHoursForDay(d)" >
           <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
           <span>{{'  '}}</span>
           <span class="margin-zero">{{d.date | date : 'dd'}}</span>
@@ -49,23 +49,14 @@
     </ng-container>
   </div>
 
-  <!--      this will hold the hours-->
+  <!--this will hold the hours-->
   <div class="third-row">
-
-
     <div *ngFor="let hour of hours">
-      <ng-container *ngIf="hour.booked; else not">
-        <button class="hour booked" (click)="chooseDateTime(hour.hour.substring(0, 5))" disabled>
-          x
-        </button>
-      </ng-container>
-
-      <ng-template #not>
+      <ng-container *ngIf="!hour.booked">
         <button class="hour" (click)="chooseDateTime(hour.hour.substring(0, 5))">
           {{hour.hour.substring(0, 5)}}
-
         </button>
-      </ng-template>
+      </ng-container>
     </div>
   </div>
 </div>

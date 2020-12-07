@@ -67,6 +67,22 @@
   transition: 0.2s;
 }
 
+.day_focused {
+  border: none;
+  outline: none;
+  padding: 10px 0;
+
+  width: 100%;
+
+  cursor: pointer;
+
+  font: normal normal normal 18px/20px Roboto;
+  background-color: #EEEEEE;
+  color: #212121;
+
+  transition: 0.2s;
+}
+
 .hour {
   background: transparent;
 
