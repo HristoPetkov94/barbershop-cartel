@@ -7,10 +7,10 @@
 
     <nav class="navigation">
       <ul class="steps-parent" #parent>
-        <li id="clicked" (click)="chooseStep($event)" class="one"> Barber</li>
-        <li (click)="chooseStep($event)" class="two"> Service</li>
-        <li (click)="chooseStep($event)" class="three"> Date and Time</li>
-        <li (click)="chooseStep($event)" class="four"> Finish </li>
+        <li id="clicked" (click)="chooseStep($event,'one')" class="one">{{ barber.firstName == null ? 'Barber': barber.firstName }}</li>
+        <li (click)="chooseStep($event,'two')" class="two"> {{ service.serviceType == null ? 'Service': service.serviceType }}</li>
+        <li (click)="chooseStep($event,'three')" class="three"> Date and Time</li>
+        <li (click)="chooseStep($event,'four')" class="four"> Finish </li>
       </ul>
     </nav>
 

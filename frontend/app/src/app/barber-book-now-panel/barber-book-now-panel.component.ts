@@ -57,7 +57,7 @@ export class BarberBookNowPanelComponent implements OnInit {
     });
   }
 
-  chooseStep(event) {
+  chooseStep(event, step: string) {
     const element = event.target || event.srcElement || event.currentTarget;
 
     const elements = this.parent.nativeElement.getElementsByTagName('li');
@@ -65,7 +65,7 @@ export class BarberBookNowPanelComponent implements OnInit {
       e.id = '';
     }
 
-    this.step = element.className;
+    this.step = step;
     element.id = 'clicked';
   }
 
@@ -107,7 +107,8 @@ export class BarberBookNowPanelComponent implements OnInit {
   private setClicked(step: string) {
     const elements = this.parent.nativeElement.getElementsByTagName('li');
     for (const e of elements) {
-      if (step === e.className) {
+
+      if (e.className.includes(step)) {
         e.id = 'clicked';
       }
     }
