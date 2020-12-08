@@ -2,13 +2,14 @@
   <!--      this will hold the months-->
   <div class="first-row">
     <div>
-      <button mat-icon-button>
-        <mat-icon (click)="previousWeek()">keyboard_arrow_left</mat-icon>
+      <button mat-icon-button (click)="previousWeek()" [disabled]="disablePreviousWeekButton()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
     </div>
 
     <div class="months">
-      <span> {{firstDayOfWeek | date }} </span>
+
+      <span> {{today | date }} </span>
 
       <mat-form-field style="width: 0; height: 0">
         <input matInput [matDatepicker]="picker" placeholder="Choose a date">
@@ -21,17 +22,17 @@
     </div>
 
     <div>
-      <button mat-icon-button (click)="nextWeek()">
+      <button mat-icon-button (click)="nextWeek()" [disabled]="disableNextWeekButton()">
         <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
     </div>
   </div>
 
+
   <!--      this will hold the days-->
   <div class="second-row">
     <ng-container  *ngFor="let d of week?.week; let i = index">
-
-      <ng-container *ngIf="d.date == firstDayOfWeek ; else rest">
+      <ng-container *ngIf="d.date.toString() == getToday() ; else rest">
         <button class="day_focused" (click)="getHoursForDay(d)" >
           <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
           <span>{{'  '}}</span>

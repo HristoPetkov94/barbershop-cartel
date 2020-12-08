@@ -15,6 +15,7 @@ export class BarberCalendarComponent implements OnInit {
   public hours = [];
   public week: Week;
   public firstDayOfWeek: Date;
+  public today = new Date();
 
   private numberOfWeeks = 0;
 
@@ -44,7 +45,25 @@ export class BarberCalendarComponent implements OnInit {
     });
   }
 
+  private getToday() {
+    let dd;
+    dd = String(this.today.getDate()).padStart(2, '0');
+
+    let mm;
+    mm = String(this.today.getMonth() + 1).padStart(2, '0');
+
+    let yyyy;
+    yyyy = this.today.getFullYear();
+
+    return yyyy + '-' + mm + '-' + dd;
+  }
+
   previousWeek() {
+
+    if (this.disablePreviousWeekButton()) {
+      return;
+    }
+
     this.numberOfWeeks--;
     const changedToPositiveNumber = this.numberOfWeeks * -1;
 
@@ -58,6 +77,11 @@ export class BarberCalendarComponent implements OnInit {
   }
 
   nextWeek() {
+
+    if (this.disableNextWeekButton()) {
+      return;
+    }
+
     this.numberOfWeeks++;
 
     this.scheduleService.getNextWeek(this.numberOfWeeks, this.barber).subscribe(week => {
@@ -69,6 +93,16 @@ export class BarberCalendarComponent implements OnInit {
         this.firstDayOfWeek = this.week.week[0].date;
       }
     );
+  }
+
+  disablePreviousWeekButton() {
+    // limitation you cannot get back more than 1 week
+    return this.numberOfWeeks <= -1;
+  }
+
+  disableNextWeekButton() {
+    // limitation you cannot get to see more than 3 weeks
+    return this.numberOfWeeks >= 3;
   }
 
   getHoursForDay(day) {
