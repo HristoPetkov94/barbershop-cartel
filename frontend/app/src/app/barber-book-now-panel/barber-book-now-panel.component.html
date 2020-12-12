@@ -7,10 +7,10 @@
 
     <nav class="navigation">
       <ul class="steps-parent" #parent>
-        <li id="clicked" (click)="chooseStep($event,'one')" class="one">{{ barber.firstName == null ? 'Barber': barber.firstName }}</li>
-        <li (click)="chooseStep($event,'two')" class="two"> {{ service.serviceType == null ? 'Service': service.serviceType }}</li>
-        <li (click)="chooseStep($event,'three')" class="three"> Date and Time</li>
-        <li (click)="chooseStep($event,'four')" class="four"> Finish </li>
+        <button id="clicked" (click)="chooseStep($event,'one')" class="one">{{ barber.firstName == null ? 'Barber': barber.firstName + ' ' + barber.lastName }}</button>
+        <button (click)="chooseStep($event,'two')" class="two" [disabled]="barber.firstName == null">{{ service.serviceType == null ? 'Service': service.serviceType }}</button>
+        <button (click)="chooseStep($event,'three')" class="three" [disabled]="service.serviceType == null">{{ datetime == null ? 'Date and Time': datetime.hour }}</button>
+        <button (click)="chooseStep($event,'four')" class="four" [disabled]="datetime == null"> Finish </button>
       </ul>
     </nav>
 
@@ -43,7 +43,7 @@
     </div>
 
     <div *ngSwitchCase="'three'" [@fadeOut]>
-        <app-barber-calendar (navigation)="chooseDateTime($event)" [inputBarber]="barber"> </app-barber-calendar>
+        <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber"> </app-barber-calendar>
     </div>
 
     <div *ngSwitchCase="'four'" [@fadeOut]>

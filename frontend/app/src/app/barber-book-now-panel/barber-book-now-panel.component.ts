@@ -123,21 +123,21 @@ export class BarberBookNowPanelComponent implements OnInit {
     appointment.hour = this.datetime.hour;
     appointment.date = this.datetime.date;
 
-    let fbUser = null;
-
-    this.facebook.signIn(FacebookLoginProvider.PROVIDER_ID).then(f => {
-      this.facebook.authState.subscribe(u => fbUser = u);
-      appointment.clientEmail = fbUser.email;
-      appointment.clientUsername = fbUser.name;
-    });
-
+    // let fbUser = null;
+    //
+    // this.facebook.signIn(FacebookLoginProvider.PROVIDER_ID).then(f => {
+    //   this.facebook.authState.subscribe(u => fbUser = u);
+    //   appointment.clientEmail = fbUser.email;
+    //   appointment.clientUsername = fbUser.name;
+    // });
+    //
     this.scheduleService.bookNow(appointment).subscribe(() => {
     }, () => {
     }, () => {
       this.done = true;
     });
 
-    console.log(fbUser);
+    // console.log(fbUser);
 
     // customer oriented email
     const emailNotification = new EmailNotificationModel();

@@ -32,7 +32,7 @@
   <!--      this will hold the days-->
   <div class="second-row">
     <ng-container  *ngFor="let d of week?.week; let i = index">
-      <ng-container *ngIf="d.date.toString() == getToday() ; else rest">
+      <ng-container *ngIf="d.date.toString() == getToday(); else rest">
         <button class="day_focused" (click)="getHoursForDay(d)" >
           <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
           <span>{{'  '}}</span>

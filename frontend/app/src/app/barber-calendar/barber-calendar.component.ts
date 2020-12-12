@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
 import {Week} from '../models/week';
-import {BarberBookNowPanelComponent} from '../barber-book-now-panel/barber-book-now-panel.component';
 import {Barber} from '../models/barber';
 
 @Component({
@@ -11,41 +10,44 @@ import {Barber} from '../models/barber';
 })
 export class BarberCalendarComponent implements OnInit {
 
-  public barber = new Barber();
   public hours = [];
   public week: Week;
-  public firstDayOfWeek: Date;
+  public currentDay: Date;
   public today = new Date();
 
   private numberOfWeeks = 0;
 
   @Input()
-  private inputBarber;
+  private barber: Barber;
 
   @Output()
   private navigation = new EventEmitter<any>();
 
-  constructor(private scheduleService: ScheduleService,
-              private barberBookNowPanelComponent: BarberBookNowPanelComponent) {
+  constructor(private scheduleService: ScheduleService) {
   }
 
   ngOnInit() {
 
-    // get selected barber
-    this.barber = this.barberBookNowPanelComponent.barber;
-
     this.scheduleService.getCurrentWeek(this.barber).subscribe(week => {
       this.week = week;
-      this.hours = this.week.week[0].hours;
+
+      // this is how we show the hours for current day in the calendar
+      for (let i = 0; i < this.week.week.length; i++) {
+
+        const currentDay = this.week.week[i];
+
+        if (currentDay.date.toString() === this.getToday()) {
+          this.hours = this.week.week[i].hours;
+          this.currentDay = currentDay.date;
+        }
+      }
+
     }, err => {
       console.log(err);
-    }, () => {
-      console.log(this.week);
-      this.firstDayOfWeek = this.week.week[0].date;
     });
   }
 
-  private getToday() {
+  public getToday() {
     let dd;
     dd = String(this.today.getDate()).padStart(2, '0');
 
@@ -71,8 +73,6 @@ export class BarberCalendarComponent implements OnInit {
       this.week = week;
     }, err => {
       console.log(err);
-    }, () => {
-      this.firstDayOfWeek = this.week.week[0].date;
     });
   }
 
@@ -89,15 +89,13 @@ export class BarberCalendarComponent implements OnInit {
       },
       err => {
         console.log(err);
-      }, () => {
-        this.firstDayOfWeek = this.week.week[0].date;
       }
     );
   }
 
   disablePreviousWeekButton() {
-    // limitation you cannot get back more than 1 week
-    return this.numberOfWeeks <= -1;
+    // limitation you cannot get past weeks
+    return this.numberOfWeeks <= 0;
   }
 
   disableNextWeekButton() {
@@ -106,16 +104,14 @@ export class BarberCalendarComponent implements OnInit {
   }
 
   getHoursForDay(day) {
-    this.firstDayOfWeek = day.date;
+    this.currentDay = day.date;
     this.hours = day.hours;
   }
 
   chooseDateTime(hour) {
 
-    console.log(hour);
-
     const datetime = {
-      date: this.firstDayOfWeek,
+      date: this.currentDay,
       hour
     };
 
