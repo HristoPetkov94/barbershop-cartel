@@ -98,7 +98,7 @@ export class ScheduleComponent implements OnInit {
   }
 
   getWeekForBarber(barber) {
-    this.scheduleService.getCurrentWeek(barber).subscribe(week => {
+    this.scheduleService.getCurrentWeek(barber,null).subscribe(week => {
       this.week = week;
     });
   }

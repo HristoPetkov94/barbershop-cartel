@@ -7,11 +7,11 @@ import java.time.LocalDate;
 
 public interface ScheduleInterface {
 
-    AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId);
+    AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId, long serviceId);
 
-    AppointmentWeekModel getAppointmentsCurrentWeek(long barberId);
+    AppointmentWeekModel getAppointmentsCurrentWeek(long barberId, long serviceId);
 
-    AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long barberId);
+    AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long barberId, long serviceId);
 
     void save(AppointmentRequestModel appointment);
 

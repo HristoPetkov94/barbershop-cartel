@@ -11,14 +11,15 @@ import {AppointmentRequest} from '../interfaces/appointment-request';
 export class ScheduleService {
   private url = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getPreviousWeek(numberOfWeeks, barber) {
     return this.http.post<Week>(this.url + '/schedule/appointment-previous-week/' + barber.id, numberOfWeeks);
   }
 
-  getCurrentWeek(barber): Subscribable<Week> {
-    return this.http.get<Week>(this.url + '/schedule/appointment-current-week/' + barber.id);
+  getCurrentWeek(barber, service): Subscribable<Week> {
+    return this.http.get<Week>(this.url + '/schedule/appointment-current-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id);
   }
 
   getNextWeek(numberOfWeeks, barber) {

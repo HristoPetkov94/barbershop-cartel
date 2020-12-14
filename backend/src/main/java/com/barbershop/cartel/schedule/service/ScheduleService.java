@@ -9,7 +9,6 @@ import com.barbershop.cartel.schedule.interfaces.ScheduleInterface;
 import com.barbershop.cartel.schedule.models.*;
 import com.barbershop.cartel.schedule.repository.ScheduleRepository;
 import com.barbershop.cartel.services.entity.ServiceEntity;
-import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,9 +28,6 @@ public class ScheduleService implements ScheduleInterface {
     private static final int MIN_SERVICE_DURATION = 30;
 
     @Autowired
-    private ServiceInterface serviceInterface;
-
-    @Autowired
     private ClientInterface clientInterface;
 
     @Autowired
@@ -45,7 +41,7 @@ public class ScheduleService implements ScheduleInterface {
 
     private LocalTime firstAppointment(ScheduleConfigModel configuration) {
 
-        if (configuration != null) {
+        if (configuration.getFirstAppointment() != null) {
             return configuration.getFirstAppointment();
         } else {
             return LocalTime.of(10, 0);
@@ -54,49 +50,83 @@ public class ScheduleService implements ScheduleInterface {
 
     private LocalTime lastAppointment(ScheduleConfigModel configuration) {
 
-        if (configuration != null) {
+        if (configuration.getLastAppointment() != null) {
             return configuration.getLastAppointment();
         } else {
             return LocalTime.of(19, 0);
         }
     }
 
-    private List<AppointmentHoursModel> getScheduleHours(long barberId, LocalDate day) {
+    private List<AppointmentHoursModel> getScheduleHours(LocalDate day, long barberId, long serviceId) {
 
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
         Optional<BarberEntity> barber = barberInterface.getBarberById(barberId);
+
+        if (barber.isEmpty()) {
+            throw new NullPointerException("Barber is not existing.");
+        }
+
+        ServiceEntity service = getService(barber.get(), serviceId);
         List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarber(day, barber.get());
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
 
         LocalTime currentAppointment = firstAppointment(configuration);
         LocalTime lastAppointment = lastAppointment(configuration);
 
-        /* In this case we have no option if configuration is not set*/
+        while (currentAppointment.isBefore(lastAppointment)) {
 
-        if (configuration.isWorkingDay()) {
+            AppointmentHoursModel newHour = new AppointmentHoursModel();
+            newHour.setHour(currentAppointment);
 
-            while (currentAppointment.isBefore(lastAppointment) || currentAppointment.equals(lastAppointment)) {
+            for (ScheduleEntity hour : bookedHours) {
 
-                AppointmentHoursModel newHour = new AppointmentHoursModel();
-                newHour.setHour(currentAppointment);
+                LocalTime bookedHour = hour.getHour();
 
-                for (ScheduleEntity hour : bookedHours) {
+                if (currentAppointment.equals(bookedHour) && hour.getDate().equals(day)) {
+                    newHour.setBooked(true);
+                    break;
+                }
+            }
 
-                    LocalTime bookedHour = hour.getHour();
+            hours.add(newHour);
+            currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
+        }
 
-                    if (currentAppointment.equals(bookedHour) && hour.getDate().equals(day)) {
-                        newHour.setBooked(true);
-                        break;
-                    }
+        return availableHoursBasedOnService(hours, service);
+    }
+
+    private List<AppointmentHoursModel> availableHoursBasedOnService(List<AppointmentHoursModel> hours, ServiceEntity service) {
+
+        List<AppointmentHoursModel> availableHours = new ArrayList<>();
+
+        int hoursInAdvance = service.getDuration() / MIN_SERVICE_DURATION;
+
+        hoursLoop:
+        for (int i = 0; i < hours.size(); i++) {
+
+            boolean booked = false;
+
+            // this loop is checking the hours in advance if are available
+            for (int j = i; j < hoursInAdvance + i; j++) {
+
+                if (j == hours.size()) {
+                    break hoursLoop;
                 }
 
-                hours.add(newHour);
-                currentAppointment = currentAppointment.plusMinutes(30);
+                booked = hours.get(j).isBooked();
+
+                if (booked) {
+                    break;
+                }
+            }
+
+            if (!booked) {
+                availableHours.add(hours.get(i));
             }
         }
 
-        return hours;
+        return availableHours;
     }
 
     private List<AppointmentDayModel> getAppointmentDayModels(LocalDate from, LocalDate to, long barberId) {
@@ -108,7 +138,7 @@ public class ScheduleService implements ScheduleInterface {
             AppointmentDayModel day = new AppointmentDayModel();
             day.setDate(from);
             day.setDayOfWeek(from.getDayOfWeek());
-            day.setHours(getScheduleHours(barberId, from));
+            day.setHours(getScheduleHours(from, barberId, 0L));
 
             days.add(day);
 
@@ -116,6 +146,18 @@ public class ScheduleService implements ScheduleInterface {
         }
 
         return days;
+    }
+
+    private ServiceEntity getService(BarberEntity barber, long serviceId) {
+        ServiceEntity service = null;
+
+        for (ServiceEntity selectedService : barber.getServices()) {
+            if (selectedService.getId() == serviceId) {
+                service = selectedService;
+            }
+        }
+
+        return service;
     }
 
     private void saveNewClient(String email, String username) {
@@ -132,14 +174,6 @@ public class ScheduleService implements ScheduleInterface {
     private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel requestModel, BarberEntity barber, ServiceEntity service) {
 
         Optional<ClientEntity> client = clientInterface.findByEmail(requestModel.getClientEmail());
-
-        Optional<ScheduleEntity> optionalSchedule = scheduleRepository.findByHourAndDateAndBarber(hour, date, barber);
-
-        if (optionalSchedule.isPresent()) {
-
-            // ** this should be a place to throw an error that the schedule already exists.
-            return;
-        }
 
         ScheduleEntity schedule = new ScheduleEntity();
 
@@ -161,28 +195,28 @@ public class ScheduleService implements ScheduleInterface {
         scheduleRepository.save(schedule);
     }
 
-    private List<AppointmentDayModel> getPreviousWeek(int numberOfWeeks, long barberId) {
+    private List<AppointmentDayModel> getPreviousWeek(int numberOfWeeks, long barberId, long serviceId) {
 
         final LocalDate startOfPreviousWeek = TODAY.minusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
 
-        return createWeek(startOfPreviousWeek, barberId);
+        return createWeek(startOfPreviousWeek, barberId, serviceId);
     }
 
-    private List<AppointmentDayModel> getCurrentWeek(long barberId) {
+    private List<AppointmentDayModel> getCurrentWeek(long barberId, long serviceId) {
 
         final LocalDate startOfCurrentWeek = TODAY.with(DayOfWeek.MONDAY);
 
-        return createWeek(startOfCurrentWeek, barberId);
+        return createWeek(startOfCurrentWeek, barberId, serviceId);
     }
 
-    private List<AppointmentDayModel> getNextWeek(int numberOfWeeks, long barberId) {
+    private List<AppointmentDayModel> getNextWeek(int numberOfWeeks, long barberId, long serviceId) {
 
         final LocalDate startOfNextWeek = TODAY.plusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
 
-        return createWeek(startOfNextWeek, barberId);
+        return createWeek(startOfNextWeek, barberId, serviceId);
     }
 
-    private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, long barberId) {
+    private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, long barberId, long serviceId) {
 
         List<AppointmentDayModel> week = new ArrayList<>();
 
@@ -194,7 +228,7 @@ public class ScheduleService implements ScheduleInterface {
 
             day.setDate(startOfWeek.plusDays(i));
             day.setDayOfWeek(currentDay.getDayOfWeek());
-            day.setHours(getScheduleHours(barberId, currentDay));
+            day.setHours(getScheduleHours(currentDay, barberId, serviceId));
 
             week.add(day);
         }
@@ -203,28 +237,28 @@ public class ScheduleService implements ScheduleInterface {
     }
 
     @Override
-    public AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId) {
+    public AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId, long serviceId) {
 
         AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(getPreviousWeek(numberOfWeeks, barberId));
+        week.setWeek(getPreviousWeek(numberOfWeeks, barberId, serviceId));
 
         return week;
     }
 
     @Override
-    public AppointmentWeekModel getAppointmentsCurrentWeek(long barberId) {
+    public AppointmentWeekModel getAppointmentsCurrentWeek(long barberId, long serviceId) {
 
         AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(getCurrentWeek(barberId));
+        week.setWeek(getCurrentWeek(barberId, serviceId));
 
         return week;
     }
 
     @Override
-    public AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long barberId) {
+    public AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long barberId, long serviceId) {
 
         AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(getNextWeek(numberOfWeeks, barberId));
+        week.setWeek(getNextWeek(numberOfWeeks, barberId, serviceId));
 
         return week;
     }
@@ -244,21 +278,23 @@ public class ScheduleService implements ScheduleInterface {
     public void save(AppointmentRequestModel requestModel) {
 
         Optional<BarberEntity> barber = barberInterface.getBarberById(requestModel.getBarberId());
-        Optional<ServiceEntity> service = serviceInterface.getServiceById(requestModel.getServiceId());
 
-        if (barber.isPresent() && service.isPresent()) {
+        if (barber.isEmpty()) {
+            throw new NullPointerException("Barber is not existing.");
+        }
 
-            int numberHoursToBook = service.get().getDuration() / MIN_SERVICE_DURATION;
+        ServiceEntity service = getService(barber.get(), requestModel.getServiceId());
 
-            LocalDate date = LocalDate.parse(requestModel.getDate());
-            LocalTime hour = LocalTime.parse(requestModel.getHour());
+        int numberHoursToBook = service.getDuration() / MIN_SERVICE_DURATION;
 
-            for (int i = 0; i < numberHoursToBook; i++) {
+        LocalDate date = LocalDate.parse(requestModel.getDate());
+        LocalTime hour = LocalTime.parse(requestModel.getHour());
 
-                createAppointment(date, hour, requestModel, barber.get(), service.get());
+        for (int i = 0; i < numberHoursToBook; i++) {
 
-                hour = hour.plusMinutes(MIN_SERVICE_DURATION);
-            }
+            createAppointment(date, hour, requestModel, barber.get(), service);
+
+            hour = hour.plusMinutes(MIN_SERVICE_DURATION);
         }
     }
 }

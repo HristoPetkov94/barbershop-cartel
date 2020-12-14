@@ -1,7 +1,6 @@
 package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
-import com.barbershop.cartel.schedule.entity.ScheduleEntity;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,18 +26,16 @@ public class BarberEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScheduleEntity> schedule;
-
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScheduleConfigEntity> scheduleConfig;
-
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ServiceEntity> services;
-
     @Column(name = "picture", columnDefinition = "TEXT")
     private String picture;
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScheduleConfigEntity> scheduleConfig;
+
+    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JoinColumn(name = "barber_id")
+    private List<ServiceEntity> services;
 }

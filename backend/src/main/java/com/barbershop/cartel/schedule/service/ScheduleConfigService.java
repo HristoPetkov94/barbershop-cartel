@@ -35,7 +35,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
             scheduleConfig.setFirstAppointment(configuration.getFirstAppointment());
             scheduleConfig.setLastAppointment(configuration.getLastAppointment());
             scheduleConfig.setDate(configuration.getDate());
-            scheduleConfig.setWorkingDay(configuration.isWorkingDay());
+            scheduleConfig.setWorkingDay(configuration.isHoliday());
 
             scheduleConfigRepository.save(scheduleConfig);
         }
@@ -73,7 +73,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                 configuration.setFirstAppointment(config.getFirstAppointment());
                 configuration.setLastAppointment(config.getLastAppointment());
                 configuration.setDate(config.getDate());
-                configuration.setWorkingDay(config.isWorkingDay());
+                configuration.setHoliday(config.isWorkingDay());
 
                 configurations.add(configuration);
             }
@@ -101,7 +101,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                 configuration.setFirstAppointment(config.getFirstAppointment());
                 configuration.setLastAppointment(config.getLastAppointment());
                 configuration.setDate(config.getDate());
-                configuration.setWorkingDay(config.isWorkingDay());
+                configuration.setHoliday(config.isWorkingDay());
             }
         }
 

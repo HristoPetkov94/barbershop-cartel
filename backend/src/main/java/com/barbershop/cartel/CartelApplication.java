@@ -11,6 +11,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 public class CartelApplication {
 
@@ -20,7 +23,7 @@ public class CartelApplication {
 
     @Bean
     CommandLineRunner init(JwtUserDetailsService userService, BarberRepository barberRepository, ServiceRepository serviceRepository) {
-        return  args -> {
+        return args -> {
 
             UserModel user = new UserModel();
 
@@ -29,39 +32,69 @@ public class CartelApplication {
 
             userService.save(user);
 
-            BarberEntity barber1 = new BarberEntity();
-
-            barber1.setFirstName("Пламен");
-            barber1.setLastName("Маринов");
-            barber1.setDescription("Инженер-Архитектът под чиито надзор се изпълнява този проект.");
-            barber1.setPicture("images/defual-profile-picture.png");
-
-            BarberEntity barber2 = new BarberEntity();
-
-            barber2.setFirstName("Христо");
-            barber2.setLastName("Петков");
-            barber2.setDescription("Инженер-Предприемач, който ще доведе до край този проект.");
-            barber2.setPicture("images/defual-profile-picture.png");
-
-            barberRepository.save(barber1);
-            barberRepository.save(barber2);
-
-            ServiceEntity service1 = new ServiceEntity();
-
-            service1.setServiceType("Подстригване / Haircurt");
-            service1.setDescription("Модерна прическа и стил на мъжете от нашите професионални Барбъри / Modern man's haircut and styling from our professional Barbers");
-            service1.setDuration(30);
-            service1.setPrice(15);
-
-            ServiceEntity service2 = new ServiceEntity();
-
-            service2.setServiceType("Комплекс / Complex");
-            service2.setDescription("Подстригване и стайлинг, корекция на брадата Ви. / Haircut and Styling, correction of your beard");
-            service2.setDuration(60);
-            service2.setPrice(23);
+            ServiceEntity service1 = createService1();
+            ServiceEntity service2 = createService2();
 
             serviceRepository.save(service1);
             serviceRepository.save(service2);
+
+            List<ServiceEntity> allServices = serviceRepository.findAll();
+
+            BarberEntity barber1 = createBarber1(allServices);
+            BarberEntity barber2 = createBarber2(allServices);
+
+            barberRepository.save(barber1);
+            barberRepository.save(barber2);
         };
+    }
+
+    public static BarberEntity createBarber1(List<ServiceEntity> services) {
+
+        BarberEntity barber = new BarberEntity();
+
+        barber.setFirstName("Пламен");
+        barber.setLastName("Маринов");
+        barber.setDescription("Инженер-Архитектът под чиито надзор се изпълнява този проект.");
+        barber.setPicture("images/defual-profile-picture.png");
+        barber.setServices(services);
+
+        return barber;
+    }
+
+    public static BarberEntity createBarber2(List<ServiceEntity> services) {
+
+        BarberEntity barber = new BarberEntity();
+
+        barber.setFirstName("Христо");
+        barber.setLastName("Петков");
+        barber.setDescription("Инженер-Предприемач, който ще доведе до край този проект.");
+        barber.setPicture("images/defual-profile-picture.png");
+        barber.setServices(services);
+
+        return barber;
+    }
+
+    public static ServiceEntity createService1() {
+
+        ServiceEntity service = new ServiceEntity();
+
+        service.setServiceType("Подстригване / Haircurt");
+        service.setDescription("Модерна прическа и стил на мъжете от нашите професионални Барбъри / Modern man's haircut and styling from our professional Barbers");
+        service.setDuration(30);
+        service.setPrice(15);
+
+        return service;
+    }
+
+    public static ServiceEntity createService2() {
+
+        ServiceEntity service = new ServiceEntity();
+
+        service.setServiceType("Комплекс / Complex");
+        service.setDescription("Подстригване и стайлинг, корекция на брадата Ви. / Haircut and Styling, correction of your beard");
+        service.setDuration(60);
+        service.setPrice(23);
+
+        return service;
     }
 }

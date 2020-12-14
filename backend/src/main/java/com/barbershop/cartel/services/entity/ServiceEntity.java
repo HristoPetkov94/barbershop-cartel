@@ -1,12 +1,9 @@
 package com.barbershop.cartel.services.entity;
 
-import com.barbershop.cartel.barbers.entity.BarberEntity;
-import com.barbershop.cartel.schedule.entity.ScheduleEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -24,12 +21,6 @@ public class ServiceEntity {
 
     @Column(name = "price_BGN")
     private int price;
-
-    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScheduleEntity> schedule;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BarberEntity barber;
 
     @Column(name = "duration")
     private int duration;

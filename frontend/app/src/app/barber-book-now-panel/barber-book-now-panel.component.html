@@ -43,7 +43,7 @@
     </div>
 
     <div *ngSwitchCase="'three'" [@fadeOut]>
-        <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber"> </app-barber-calendar>
+        <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber" [service]="service"> </app-barber-calendar>
     </div>
 
     <div *ngSwitchCase="'four'" [@fadeOut]>

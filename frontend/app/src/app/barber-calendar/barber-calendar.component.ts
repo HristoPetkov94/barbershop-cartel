@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
 import {Week} from '../models/week';
 import {Barber} from '../models/barber';
+import {Service} from '../interfaces/service';
 
 @Component({
   selector: 'app-barber-calendar',
@@ -20,6 +21,9 @@ export class BarberCalendarComponent implements OnInit {
   @Input()
   private barber: Barber;
 
+  @Input()
+  private service: Service;
+
   @Output()
   private navigation = new EventEmitter<any>();
 
@@ -28,7 +32,7 @@ export class BarberCalendarComponent implements OnInit {
 
   ngOnInit() {
 
-    this.scheduleService.getCurrentWeek(this.barber).subscribe(week => {
+    this.scheduleService.getCurrentWeek(this.barber, this.service).subscribe(week => {
       this.week = week;
 
       // this is how we show the hours for current day in the calendar

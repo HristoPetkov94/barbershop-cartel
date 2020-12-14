@@ -13,13 +13,5 @@ public class ScheduleConfigModel {
     private LocalTime firstAppointment;
     private LocalTime lastAppointment;
     private LocalDate date;
-    private boolean workingDay;
-
-    public ScheduleConfigModel() {
-        // these are defaults
-        workingDay = true;
-
-        firstAppointment = LocalTime.of(10, 0);
-        lastAppointment = LocalTime.of(19, 0);
-    }
+    private boolean isHoliday;
 }
