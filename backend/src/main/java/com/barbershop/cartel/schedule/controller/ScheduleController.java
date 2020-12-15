@@ -17,19 +17,19 @@ public class ScheduleController {
     @Autowired
     private ScheduleInterface scheduleInterface;
 
-    @PostMapping(value = "/appointment-previous-week/{barberId}")
-    public AppointmentWeekModel getAppointmentsPreviousWeek(@RequestBody int numberOfWeeks, @PathVariable long barberId) {
-        return scheduleInterface.getAppointmentsPreviousWeek(numberOfWeeks, barberId,0);
+    @PostMapping(value = "/appointment-previous-week")
+    public AppointmentWeekModel getAppointmentsPreviousWeek(@RequestBody int numberOfWeeks, @RequestParam long barberId, @RequestParam long serviceId) {
+        return scheduleInterface.getAppointmentsPreviousWeek(numberOfWeeks, barberId, serviceId);
     }
 
     @GetMapping(value = "/appointment-current-week")
     public AppointmentWeekModel getAppointmentsCurrentWeek(@RequestParam long barberId, @RequestParam long serviceId) {
-        return scheduleInterface.getAppointmentsCurrentWeek(barberId,serviceId);
+        return scheduleInterface.getAppointmentsCurrentWeek(barberId, serviceId);
     }
 
-    @PostMapping(value = "/appointment-next-week/{barberId}")
-    public AppointmentWeekModel getAppointmentsNextWeek(@RequestBody int numberOfWeeks, @PathVariable long barberId) {
-        return scheduleInterface.getAppointmentsNextWeek(numberOfWeeks, barberId,0);
+    @PostMapping(value = "/appointment-next-week")
+    public AppointmentWeekModel getAppointmentsNextWeek(@RequestBody int numberOfWeeks, @RequestParam long barberId, @RequestParam long serviceId) {
+        return scheduleInterface.getAppointmentsNextWeek(numberOfWeeks, barberId, serviceId);
     }
 
     @PostMapping(value = "/save-appointment")

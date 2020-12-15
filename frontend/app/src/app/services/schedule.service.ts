@@ -14,20 +14,16 @@ export class ScheduleService {
   constructor(private http: HttpClient) {
   }
 
-  getPreviousWeek(numberOfWeeks, barber) {
-    return this.http.post<Week>(this.url + '/schedule/appointment-previous-week/' + barber.id, numberOfWeeks);
+  getPreviousWeek(numberOfWeeks, barber, service) {
+    return this.http.post<Week>(this.url + '/schedule/appointment-previous-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id, numberOfWeeks);
   }
 
   getCurrentWeek(barber, service): Subscribable<Week> {
     return this.http.get<Week>(this.url + '/schedule/appointment-current-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id);
   }
 
-  getNextWeek(numberOfWeeks, barber) {
-    return this.http.post<Week>(this.url + '/schedule/appointment-next-week/' + barber.id, numberOfWeeks);
-  }
-
-  getWeekByDate(date) {
-    return this.http.get<Week>(this.url + '/schedule/getAppointmentWeekByDate?date=' + date);
+  getNextWeek(numberOfWeeks, barber, service) {
+    return this.http.post<Week>(this.url + '/schedule/appointment-next-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id, numberOfWeeks);
   }
 
   bookNow(req: AppointmentRequest) {

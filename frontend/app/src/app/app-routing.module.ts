@@ -6,14 +6,12 @@ import {ConfigurationPanelComponent} from './configuration-panel/configuration-p
 import {ProfileComponent} from './profile/profile.component';
 import {AuthGuardService} from './authentication/auth-guard.service';
 import {BarberBookNowPanelComponent} from './barber-book-now-panel/barber-book-now-panel.component';
-import {ScheduleComponent} from './schedule/schedule.component';
 import {BarberDashboardComponent} from './barber-dashboard/barber-dashboard.component';
 import {RegisterComponent} from './register/register.component';
 
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'schedule', component: ScheduleComponent },
   { path: 'book-now', component: BarberBookNowPanelComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
