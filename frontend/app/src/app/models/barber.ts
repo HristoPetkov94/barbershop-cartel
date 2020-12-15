@@ -1,3 +1,5 @@
+import {Service} from '../interfaces/service';
+
 export class Barber {
 
   id: number;
@@ -5,6 +7,7 @@ export class Barber {
   lastName: string;
   description?: string;
   picture?: string;
+  services?: Service[];
 
   constructor() {
   }

@@ -34,15 +34,16 @@ public class BarberService implements BarberInterface {
 
         for (BarberEntity barber : allBarbers) {
 
-            BarberModel userDetails = BarberModel.builder()
+            BarberModel barberModel = BarberModel.builder()
                     .id(barber.getId())
                     .firstName(barber.getFirstName())
                     .lastName(barber.getLastName())
                     .description(barber.getDescription())
                     .picture(barber.getPicture())
+                    .services(barber.getServices())
                     .build();
 
-            barbers.add(userDetails);
+            barbers.add(barberModel);
         }
 
         return barbers;

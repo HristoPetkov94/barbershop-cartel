@@ -1,13 +1,12 @@
 export class Service {
   id: number;
   serviceType: string;
-  priceBGN: number;
+  price: number;
   duration: number;
   description: string;
   picture: any;
   deleted = false;
 
   constructor() {
-
   }
 }

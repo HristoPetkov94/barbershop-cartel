@@ -28,7 +28,7 @@
 
     <div *ngSwitchCase="'two'" [@fadeOut]>
 
-      <div class="service" *ngFor="let service of services" (click)="chooseService(service)">
+      <div class="service" *ngFor="let service of barber.services" (click)="chooseService(service)">
         <div class="service-info-wrapper">
           <span class="type">{{service.serviceType}}</span>
 
@@ -36,7 +36,7 @@
 
           <div>
             <span class="duration">{{service.duration}} мин.</span>
-            <span class="price">{{service.priceBGN}} лв.</span>
+            <span class="price">{{service.price}} лв.</span>
           </div>
         </div>
       </div>
@@ -72,7 +72,7 @@
             <span> <b> Service: </b> </span> <span> {{this.service.serviceType}} </span>
           </div>
           <div class="info-row">
-            <span> <b> Price: </b> </span> <span> {{this.service.priceBGN}} лв.</span>
+            <span> <b> Price: </b> </span> <span> {{this.service.price}} лв.</span>
           </div>
           <div class="info-row">
             <span> <b> Duration: </b> </span> <span> {{this.service.duration}} мин.</span>

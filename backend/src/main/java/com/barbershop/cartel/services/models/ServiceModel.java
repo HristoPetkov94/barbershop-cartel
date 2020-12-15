@@ -11,7 +11,7 @@ import lombok.Setter;
 public class ServiceModel {
     private Long id;
     private String serviceType;
-    private int priceBGN;
+    private int price;
     private int duration;
     private String picture;
     private String description;
@@ -22,7 +22,7 @@ public class ServiceModel {
     public ServiceModel(ServiceEntity entity) {
         this.id = entity.getId();
         this.serviceType = entity.getServiceType();
-        this.priceBGN = entity.getPrice();
+        this.price = entity.getPrice();
         this.duration = entity.getDuration();
         this.picture = entity.getPicture();
         this.description = entity.getDescription();

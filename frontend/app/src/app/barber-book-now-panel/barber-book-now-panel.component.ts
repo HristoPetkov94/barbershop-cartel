@@ -28,16 +28,12 @@ import {NotificationService} from '../services/notification.service';
 export class BarberBookNowPanelComponent implements OnInit {
   @ViewChild('parent', {static: true}) parent: ElementRef;
 
-  public step = 'one';
   public barbers: Barber[];
-  public services: Service[];
-
   public barber = new Barber();
   public service = new Service();
   public datetime;
-
+  public step = 'one';
   public client: SocialUser;
-
   public done;
 
   constructor(private scheduleService: ScheduleService,
@@ -48,10 +44,6 @@ export class BarberBookNowPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.servicesService.getAllServices().subscribe(s => {
-      this.services = s;
-    });
-
     this.barberService.getBarbers().subscribe(b => {
       this.barbers = b;
     });
@@ -144,7 +136,7 @@ export class BarberBookNowPanelComponent implements OnInit {
     emailNotification.to = 'petkovhristo94@gmail.com';
     emailNotification.from = 'testov.email.2020@gmail.com';
     emailNotification.subject = 'Cartel Резервация';
-    emailNotification.text = 'Здравейте, \n\nУспешно направихте своята резервация!\n\n' + '<b>Бръснар:</b> ' + this.barber.firstName + ' ' + this.barber.lastName + '\n <b>Вид:</b> ' + this.service.serviceType + '\n <b>Цена:</b> ' + this.service.priceBGN + ' лв.' + '\n <b>Продължителност:</b> ' + this.service.duration + ' мин.' + '\n\nПоздрави,\nCartel';
+    emailNotification.text = 'Здравейте, \n\nУспешно направихте своята резервация!\n\n' + '<b>Бръснар:</b> ' + this.barber.firstName + ' ' + this.barber.lastName + '\n <b>Вид:</b> ' + this.service.serviceType + '\n <b>Цена:</b> ' + this.service.price + ' лв.' + '\n <b>Продължителност:</b> ' + this.service.duration + ' мин.' + '\n\nПоздрави,\nCartel';
 
     this.notificationService.sendEmail(emailNotification).subscribe();
   }

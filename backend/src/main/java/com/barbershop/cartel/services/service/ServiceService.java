@@ -30,7 +30,7 @@ public class ServiceService implements ServiceInterface {
         ServiceEntity service = optionalEntity.orElse(new ServiceEntity());
 
         service.setServiceType(serviceModel.getServiceType());
-        service.setPrice(serviceModel.getPriceBGN());
+        service.setPrice(serviceModel.getPrice());
         service.setDuration(serviceModel.getDuration());
         service.setDescription(serviceModel.getDescription());
         service.setPicture(serviceModel.getPicture());
@@ -44,7 +44,7 @@ public class ServiceService implements ServiceInterface {
         ServiceEntity newService = new ServiceEntity();
 
         newService.setServiceType(service.getServiceType());
-        newService.setPrice(service.getPriceBGN());
+        newService.setPrice(service.getPrice());
         newService.setDuration(service.getDuration());
         newService.setDescription(service.getDescription());
 

@@ -1,6 +1,9 @@
 package com.barbershop.cartel.barbers.models;
 
+import com.barbershop.cartel.services.entity.ServiceEntity;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -13,4 +16,5 @@ public class BarberModel {
     private String lastName;
     private String description;
     private String picture;
+    private List<ServiceEntity> services;
 }
