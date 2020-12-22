@@ -28,12 +28,11 @@
     </div>
   </div>
 
-
   <!--      this will hold the days-->
   <div class="second-row">
-    <ng-container  *ngFor="let d of week?.week; let i = index">
-      <ng-container *ngIf="d.date.toString() == getToday(); else rest">
-        <button class="day_focused" (click)="getHoursForDay(d)" >
+    <ng-container *ngFor="let d of week?.week; let i = index">
+      <ng-container *ngIf="d.date.toLocaleString() == getToday(); else rest">
+        <button class="button" (click)="getHoursForDay(d)">
           <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
           <span>{{'  '}}</span>
           <span class="margin-zero">{{d.date | date : 'dd'}}</span>
@@ -51,13 +50,15 @@
   </div>
 
   <!--this will hold the hours-->
+  <div *ngIf="hours.length == 0">
+    <p><b>No available appointments for today.</b></p>
+  </div>
+
   <div class="third-row">
     <div *ngFor="let hour of hours">
-      <ng-container *ngIf="!hour.booked">
-        <button class="hour" (click)="chooseDateTime(hour.hour.substring(0, 5))">
-          {{hour.hour.substring(0, 5)}}
-        </button>
-      </ng-container>
+      <button class="hour" (click)="chooseDateTime(hour.hour.substring(0, 5))">
+        {{hour.hour.substring(0, 5)}}
+      </button>
     </div>
   </div>
 </div>

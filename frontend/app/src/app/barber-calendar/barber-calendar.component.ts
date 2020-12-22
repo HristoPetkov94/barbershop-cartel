@@ -3,6 +3,8 @@ import {ScheduleService} from '../services/schedule.service';
 import {Week} from '../models/week';
 import {Barber} from '../models/barber';
 import {Service} from '../interfaces/service';
+import {formatDate} from '@angular/common';
+import {LOCALE_ID, Inject} from '@angular/core';
 
 @Component({
   selector: 'app-barber-calendar',
@@ -15,7 +17,6 @@ export class BarberCalendarComponent implements OnInit {
   public week: Week;
   public currentDay: Date;
   public today = new Date();
-
   private numberOfWeeks = 0;
 
   @Input()
@@ -27,7 +28,8 @@ export class BarberCalendarComponent implements OnInit {
   @Output()
   private navigation = new EventEmitter<any>();
 
-  constructor(private scheduleService: ScheduleService) {
+  constructor(private scheduleService: ScheduleService,
+              @Inject(LOCALE_ID) public locale: string) {
   }
 
   ngOnInit() {
@@ -45,23 +47,13 @@ export class BarberCalendarComponent implements OnInit {
           this.currentDay = currentDay.date;
         }
       }
-
     }, err => {
       console.log(err);
     });
   }
 
   public getToday() {
-    let dd;
-    dd = String(this.today.getDate()).padStart(2, '0');
-
-    let mm;
-    mm = String(this.today.getMonth() + 1).padStart(2, '0');
-
-    let yyyy;
-    yyyy = this.today.getFullYear();
-
-    return yyyy + '-' + mm + '-' + dd;
+    return formatDate(new Date(), 'yyyy-MM-dd', this.locale);
   }
 
   previousWeek() {

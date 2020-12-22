@@ -9,5 +9,4 @@ import java.time.LocalTime;
 @Setter
 public class AppointmentHoursModel {
     private LocalTime hour;
-    private boolean booked;
 }

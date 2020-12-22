@@ -16,9 +16,7 @@ import org.springframework.stereotype.Service;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ScheduleService implements ScheduleInterface {
@@ -26,6 +24,7 @@ public class ScheduleService implements ScheduleInterface {
     private static final LocalDate TODAY = LocalDate.now();
     private static final int DAYS_OF_WEEK = 7;
     private static final int MIN_SERVICE_DURATION = 30;
+    private static final int MAX_SERVICE_DURATION = 60;
 
     @Autowired
     private ClientInterface clientInterface;
@@ -74,55 +73,51 @@ public class ScheduleService implements ScheduleInterface {
         LocalTime currentAppointment = firstAppointment(configuration);
         LocalTime lastAppointment = lastAppointment(configuration);
 
+        hoursLoop:
         while (currentAppointment.isBefore(lastAppointment)) {
+
+            for (ScheduleEntity bookedHour : bookedHours) {
+
+                if (currentAppointment.equals(bookedHour.getHour())) {
+                    currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
+                    continue hoursLoop;
+                }
+            }
 
             AppointmentHoursModel newHour = new AppointmentHoursModel();
             newHour.setHour(currentAppointment);
 
-            for (ScheduleEntity hour : bookedHours) {
-
-                LocalTime bookedHour = hour.getHour();
-
-                if (currentAppointment.equals(bookedHour) && hour.getDate().equals(day)) {
-                    newHour.setBooked(true);
-                    break;
-                }
-            }
-
             hours.add(newHour);
+
             currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
         }
 
-        return availableHoursBasedOnService(hours, service);
+        if (service.getDuration() == MAX_SERVICE_DURATION) {
+            hours = availableHoursBasedOnService(hours);
+        }
+
+        return hours;
     }
 
-    private List<AppointmentHoursModel> availableHoursBasedOnService(List<AppointmentHoursModel> hours, ServiceEntity service) {
+    private List<AppointmentHoursModel> availableHoursBasedOnService(List<AppointmentHoursModel> hours) {
 
         List<AppointmentHoursModel> availableHours = new ArrayList<>();
 
-        int hoursInAdvance = service.getDuration() / MIN_SERVICE_DURATION;
-
-        hoursLoop:
         for (int i = 0; i < hours.size(); i++) {
 
-            boolean booked = false;
+            int nextHourIndex = i + 1;
 
-            // this loop is checking the hours in advance if are available
-            for (int j = i; j < hoursInAdvance + i; j++) {
+            if (hours.size() > nextHourIndex) {
 
-                if (j == hours.size()) {
-                    break hoursLoop;
+                AppointmentHoursModel currentHour = hours.get(i);
+                AppointmentHoursModel nextHour = hours.get(nextHourIndex);
+
+                // if nextHour is more than 60 min. ahead from the currentHour means those hours in between are booked and the currentHour cannot be booked with duration of 60 min.
+                if (currentHour.getHour().plusMinutes(MAX_SERVICE_DURATION).isBefore(nextHour.getHour())) {
+                    continue;
                 }
 
-                booked = hours.get(j).isBooked();
-
-                if (booked) {
-                    break;
-                }
-            }
-
-            if (!booked) {
-                availableHours.add(hours.get(i));
+                availableHours.add(currentHour);
             }
         }
 
