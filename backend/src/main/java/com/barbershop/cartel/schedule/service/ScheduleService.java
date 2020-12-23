@@ -124,26 +124,49 @@ public class ScheduleService implements ScheduleInterface {
         return availableHours;
     }
 
-    private List<AppointmentDayModel> getAppointmentDayModels(LocalDate from, LocalDate to, long barberId) {
+    private List<AppointmentDayModel> getPreviousWeek(int numberOfWeeks, long barberId, long serviceId) {
 
-        List<AppointmentDayModel> days = new ArrayList<>();
+        final LocalDate startOfPreviousWeek = TODAY.minusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
 
-        while (from.isBefore(to) || from.isEqual(to)) {
+        return createWeek(startOfPreviousWeek, barberId, serviceId);
+    }
+
+    private List<AppointmentDayModel> getCurrentWeek(long barberId, long serviceId) {
+
+        final LocalDate startOfCurrentWeek = TODAY.with(DayOfWeek.MONDAY);
+
+        return createWeek(startOfCurrentWeek, barberId, serviceId);
+    }
+
+    private List<AppointmentDayModel> getNextWeek(int numberOfWeeks, long barberId, long serviceId) {
+
+        final LocalDate startOfNextWeek = TODAY.plusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
+
+        return createWeek(startOfNextWeek, barberId, serviceId);
+    }
+
+    private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, long barberId, long serviceId) {
+
+        List<AppointmentDayModel> week = new ArrayList<>();
+
+        for (int i = 0; i < DAYS_OF_WEEK; i++) {
+
+            LocalDate currentDay = startOfWeek.plusDays(i);
 
             AppointmentDayModel day = new AppointmentDayModel();
-            day.setDate(from);
-            day.setDayOfWeek(from.getDayOfWeek());
-            day.setHours(getScheduleHours(from, barberId, 0L));
 
-            days.add(day);
+            day.setDate(startOfWeek.plusDays(i));
+            day.setDayOfWeek(currentDay.getDayOfWeek());
+            day.setHours(getScheduleHours(currentDay, barberId, serviceId));
 
-            from = from.plusDays(1);
+            week.add(day);
         }
 
-        return days;
+        return week;
     }
 
     private ServiceEntity getService(BarberEntity barber, long serviceId) {
+
         ServiceEntity service = null;
 
         for (ServiceEntity selectedService : barber.getServices()) {
@@ -190,47 +213,6 @@ public class ScheduleService implements ScheduleInterface {
         scheduleRepository.save(schedule);
     }
 
-    private List<AppointmentDayModel> getPreviousWeek(int numberOfWeeks, long barberId, long serviceId) {
-
-        final LocalDate startOfPreviousWeek = TODAY.minusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
-
-        return createWeek(startOfPreviousWeek, barberId, serviceId);
-    }
-
-    private List<AppointmentDayModel> getCurrentWeek(long barberId, long serviceId) {
-
-        final LocalDate startOfCurrentWeek = TODAY.with(DayOfWeek.MONDAY);
-
-        return createWeek(startOfCurrentWeek, barberId, serviceId);
-    }
-
-    private List<AppointmentDayModel> getNextWeek(int numberOfWeeks, long barberId, long serviceId) {
-
-        final LocalDate startOfNextWeek = TODAY.plusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
-
-        return createWeek(startOfNextWeek, barberId, serviceId);
-    }
-
-    private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, long barberId, long serviceId) {
-
-        List<AppointmentDayModel> week = new ArrayList<>();
-
-        for (int i = 0; i < DAYS_OF_WEEK; i++) {
-
-            LocalDate currentDay = startOfWeek.plusDays(i);
-
-            AppointmentDayModel day = new AppointmentDayModel();
-
-            day.setDate(startOfWeek.plusDays(i));
-            day.setDayOfWeek(currentDay.getDayOfWeek());
-            day.setHours(getScheduleHours(currentDay, barberId, serviceId));
-
-            week.add(day);
-        }
-
-        return week;
-    }
-
     @Override
     public AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId, long serviceId) {
 
@@ -254,17 +236,6 @@ public class ScheduleService implements ScheduleInterface {
 
         AppointmentWeekModel week = new AppointmentWeekModel();
         week.setWeek(getNextWeek(numberOfWeeks, barberId, serviceId));
-
-        return week;
-    }
-
-    @Override
-    public AppointmentWeekModel getAppointmentsByBarberAndDates(long barberId, LocalDate from, LocalDate to) {
-
-        List<AppointmentDayModel> days = getAppointmentDayModels(from, to, barberId);
-
-        AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(days);
 
         return week;
     }
