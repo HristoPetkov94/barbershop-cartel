@@ -15,8 +15,9 @@ export class BarberCalendarComponent implements OnInit {
 
   public hours = [];
   public week: Week;
-  public currentDay: Date;
   public today = new Date();
+  public currentDay: Date;
+  public selectedDay = this.today;
   private numberOfWeeks = 0;
 
   @Input()
@@ -65,6 +66,8 @@ export class BarberCalendarComponent implements OnInit {
     this.numberOfWeeks--;
     const changedToPositiveNumber = this.numberOfWeeks * -1;
 
+    this.today.setDate(this.today.getDate() - 7);
+
     this.scheduleService.getPreviousWeek(changedToPositiveNumber, this.barber, this.service).subscribe(week => {
       this.week = week;
     }, err => {
@@ -79,6 +82,8 @@ export class BarberCalendarComponent implements OnInit {
     }
 
     this.numberOfWeeks++;
+
+    this.today.setDate(this.today.getDate() + 7);
 
     this.scheduleService.getNextWeek(this.numberOfWeeks, this.barber, this.service).subscribe(week => {
         this.week = week;
@@ -101,6 +106,7 @@ export class BarberCalendarComponent implements OnInit {
 
   getHoursForDay(day) {
     this.currentDay = day.date;
+    this.selectedDay = day.date;
     this.hours = day.hours;
   }
 
