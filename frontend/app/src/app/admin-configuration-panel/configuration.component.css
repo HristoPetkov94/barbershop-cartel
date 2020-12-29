@@ -1,0 +1,59 @@
+.toolbar {
+  background-color: #2e2e2e;
+  font-weight: 400;
+
+  font-size: 18px;
+  color: white;
+}
+
+.sticky-drawer {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  background-color: #fafafa;
+}
+
+#box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.box .row {
+  border: 1px dotted grey;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+  /* The above is shorthand for:
+  flex-grow: 0,
+  flex-shrink: 1,
+  flex-basis: auto
+  */
+}
+
+.box .row.content {
+  flex: 1 1 auto;
+
+}
+
+.box .row.footer {
+  flex: 0 1 40px;
+}
+
+.footer-fixer {
+  height: 100px;
+}

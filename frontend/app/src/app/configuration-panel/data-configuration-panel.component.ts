@@ -6,10 +6,10 @@ import {Barber} from '../models/barber';
 
 @Component({
   selector: 'app-configuration-panel',
-  templateUrl: './configuration-panel.component.html',
-  styleUrls: ['./configuration-panel.component.css']
+  templateUrl: './data-configuration-panel.component.html',
+  styleUrls: ['./data-configuration-panel.component.css']
 })
-export class ConfigurationPanelComponent implements OnInit {
+export class DataConfigurationPanelComponent implements OnInit {
   public barbers: Barber[];
   public services: Service[];
 

@@ -17,10 +17,13 @@ interface ServicePictureUpdateRequest {
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './configuration.component.html',
+  styleUrls: ['./configuration.component.css', './shared-styles/shared.css']
 })
-export class ProfileComponent implements OnInit {
+export class ConfigurationComponent implements OnInit {
+
+  public tab = 'general';
+
   @ViewChild('sidenav') public sidenav: MatSidenav;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
   @ViewChild('profileWrapper') public profileWrapper: ElementRef;
@@ -32,7 +35,7 @@ export class ProfileComponent implements OnInit {
 
   public selectedFile: File = null;
   public isFileSelected = false;
-  public isEditable = false;
+  public isEditable = true;
   public servicesToBeUpdated: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
 
   public theme = 'light-theme';
@@ -83,7 +86,7 @@ export class ProfileComponent implements OnInit {
   update() {
     if (!this.isEditable) {
       this.barberService.updateBarber(this.barber).subscribe(response => {
-        // sessionStorage.setItem('username', this.barber.id);
+        sessionStorage.setItem('username', this.barber.email);
       });
 
       console.log('services: ', this.services);
@@ -135,28 +138,38 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  openServiceDialog(services, theme): void {
+  isFocused($event: any) {
+    const element = $event.target || $event.srcElement || $event.currentTarget;
+    return element.nativeElement.id === this.tab;
+  }
 
-    const dialogRef = this.dialog.open(ServiceDialogComponent, {
-      width: '800px',
-      data: {
-        services
+  setTab(tab: string) {
+    this.tab = tab;
 
-      },
-      panelClass: theme
-    });
+    this.clearSelected();
+    this.setSelected(tab);
+  }
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('services to be updated: ', result);
-      this.servicesToBeUpdated = result;
-    });
+  private clearSelected() {
+
+    const allLiElements = document.getElementsByTagName('li');
+    for (let i = 0; i < allLiElements.length; i++) {
+      const element = allLiElements[i];
+
+      element.classList.remove('selected');
+    }
+  }
+
+  private setSelected(tab: string) {
+    const element = document.getElementById(tab);
+    element.classList.add('selected');
   }
 }
 
 @Component({
   selector: 'change-password-dialog',
   templateUrl: 'change-password-dialog.html',
-  styleUrls: ['./profile.component.css'],
+  styleUrls: ['./configuration.component.css'],
 })
 export class ChangePasswordDialogComponent {
   public hideOldPassword = true;
@@ -200,91 +213,4 @@ export class ChangePasswordDialogComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
-}
-
-
-@Component({
-  selector: 'service-dialog',
-  templateUrl: 'service-dialog.html',
-  styleUrls: ['./profile.component.css'],
-})
-export class ServiceDialogComponent {
-
-  private reader;
-
-  @ViewChild('something', {static: false}) something: ElementRef;
-  @ViewChildren('element') viewChildren !: QueryList<ElementRef>;
-
-  public servicesToBeUploaded: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
-
-  constructor(
-    public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-
-    this.reader = new FileReader();
-
-    // this.servicesToBeUploaded = this.data.services.map(s => ({s}));
-  }
-
-  addService() {
-
-    const last = this.data.services.length;
-
-    const newService = new Service();
-    newService.serviceType = '';
-    newService.price = 0;
-    newService.duration = 0;
-
-    if (last > 0) {
-      const service = this.data.services[last - 1];
-      newService.id = service.id + 1;
-
-    } else {
-      newService.id = 1; // this is 1 one because it represent the first id in a db.
-    }
-
-    this.data.services.push(newService);
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  deleteService(service: any) {
-    service.deleted = true;
-  }
-
-
-  onFileChangedService(event, service) {
-    console.log(event);
-    const id = event.target.id;
-
-    console.log(id);
-    const file = event && event.target.files[0];
-    // this.onchange(file);
-    const reader = new FileReader();
-    reader.readAsDataURL(file); // toBase64
-    reader.onload = () => {
-      service.picture = reader.result as string;
-    };
-  }
-
-  // @HostListener('change', ['$event'])
-  // emitFiles( event ) {
-  //
-  //
-  // }
-
-  onUploadService(service) {
-
-    this.viewChildren.forEach(element => {
-
-      // + '' is like that because nativeElement.id is a string.
-      if (element.nativeElement.id === service.id + '') {
-        element.nativeElement.click();
-        return;
-      }
-    });
-  }
-
 }
