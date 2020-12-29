@@ -1,0 +1,152 @@
+<hr>
+
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="100px">
+  <!--        column 1-->
+  <mat-grid-tile [colspan]="2" [rowspan]="1">
+    <div class="col padding-20 max-height">
+
+      <h1 class="margin-bottom-10"> Administrator email </h1>
+      <p> This is the administrators email. You can change it to anything you like at any time. </p>
+
+    </div>
+  </mat-grid-tile>
+  <!--        column 2-->
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <div class="col padding-20 max-height max-width">
+      <h2 class="margin-bottom-10"> Email </h2>
+      <div class="row">
+        <input label="" value="" type="text" class="text-input max-width"/>
+        <div class="sized-box-width-100"></div>
+      </div>
+
+      <div class="sized-box-height"></div>
+
+      <h2 class="margin-bottom-10"> Password </h2>
+      <div class="row">
+        <input label="" value="" type="password" class="text-input max-width"/>
+        <div class="sized-box-width-100"></div>
+      </div>
+
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<hr>
+
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+
+    <div class="col padding-20 max-height">
+
+      <h1 class="margin-bottom-10"> Front-page message </h1>
+      <p> This is the message on the home page that people see. It's above the book-now button. You can change it
+        anytime here.</p>
+
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <div class="col padding-20 max-height max-width">
+      <h2 class="margin-bottom-10"> Message </h2>
+
+      <div class="row">
+              <textarea class="front-page-message-input max-width" rows="15" cols="50"
+                        name="comment"></textarea>
+        <div class="sized-box-width-100"></div>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<hr>
+
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+
+    <div class="col padding-20 max-height">
+
+      <h1 class="margin-bottom-10"> Social media</h1>
+      <p> Set up the links that lead up to the barbershop's social media pages.</p>
+
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <div class="col padding-20 max-height max-width">
+      <h2 class="margin-bottom-10"> Facebook </h2>
+
+      <div class="row justify-content-center">
+        <input label="" value="" type="text" class="text-input max-width"/>
+        <div class="sized-box-width-100">
+          <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
+        </div>
+      </div>
+
+      <div class="sized-box-height"></div>
+
+      <h2 class="margin-bottom-10"> Instagram </h2>
+
+      <div class="row justify-content-center">
+        <input label="" value="" type="text" class="text-input max-width"/>
+        <div class="sized-box-width-100">
+          <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
+        </div>
+      </div>
+    </div>
+
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<hr>
+
+<mat-grid-list class="margin-top-20" cols="4">
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+
+    <div class="col padding-20 max-height">
+
+      <h1 class="margin-bottom-10"> Contact info</h1>
+      <p> All info like city, address, phone can be set up here to be publicaly exposed</p>
+
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <div class="col padding-20 max-width max-height">
+
+      <h2 class="margin-bottom-10"> City </h2>
+      <div class="row justify-content-center">
+        <input label="" value="" type="text" class="text-input max-width"/>
+        <div class="sized-box-width-100"></div>
+      </div>
+      <div class="sized-box-height"></div>
+
+      <h2 class="margin-bottom-10"> Address </h2>
+      <div class="row justify-content-center">
+        <input label="" value="" type="text" class="text-input max-width"/>
+        <div class="sized-box-width-100"></div>
+      </div>
+      <div class="sized-box-height"></div>
+
+      <h2 class="margin-bottom-10"> Phone number </h2>
+      <div class="row justify-content-center">
+        <input label="" value="" type="text" class="text-input max-width"/>
+        <div class="sized-box-width-100"></div>
+      </div>
+      <div class="sized-box-height"></div>
+
+      <div class="row justify-content-start">
+        <button mat-raised-button color="accent"> Update profile </button>
+        <div class="sized-box-height"></div>
+      </div>
+    </div>
+  </mat-grid-tile>
+
+</mat-grid-list>
