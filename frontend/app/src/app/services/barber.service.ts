@@ -13,7 +13,7 @@ export class BarberService {
   constructor(private http: HttpClient) {
   }
 
-  getBarbers(): Observable<Barber[]> {
+  getBarbers(): Subscribable<Barber[]> {
     return this.http.get<Barber[]>(this.url + '/barbers');
   }
 
