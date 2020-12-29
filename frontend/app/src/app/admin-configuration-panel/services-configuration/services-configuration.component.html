@@ -1,0 +1,46 @@
+<hr>
+
+<div class="row max-width justify-content-end">
+  <!--        <button mat-icon-button (click)="openServiceDialog(services, theme)">-->
+
+  <button mat-icon-button (click)="openServiceDialog(services)">
+    <mat-icon>open_in_new</mat-icon>
+  </button>
+</div>
+
+<div class="row max-height max-width">
+  <!--        column 1-->
+  <div class="col flex-1">
+    <div class="col max-height max-width">
+      <div class="row max-width">
+        <div class="col max-width">
+
+          <h1 class="margin-bottom-10"> Choose barber </h1>
+
+          <select class="dropdown margin-bottom-10" name="barbers" id="barbers">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+          </select>
+
+          <p> Pick a barber to see his services. Services are displayed on the right side.</p>
+        </div>
+
+        <div class="sized-box-width-100"></div>
+      </div>
+    </div>
+  </div>
+
+  <!--  column 2-->
+  <div class="col flex-2">
+
+    <div class="col max-width" *ngFor="let service of services">
+
+      <app-service-details [service]="service"></app-service-details>
+
+      <hr/>
+    </div>
+
+
+  </div>
+</div>

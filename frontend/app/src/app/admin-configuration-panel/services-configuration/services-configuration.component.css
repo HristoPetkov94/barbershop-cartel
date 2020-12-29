@@ -1,0 +1,11 @@
+.dropdown {
+  padding: 15px;
+  border: 1px solid grey;
+  border-radius: 4px;
+
+  background: transparent;
+}
+
+.white {
+  background-color: white;
+}
