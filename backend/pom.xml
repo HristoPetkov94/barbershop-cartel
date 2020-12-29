@@ -18,6 +18,25 @@
         <java.version>13</java.version>
     </properties>
 
+    <!--    https://stackabuse.com/spring-boot-profiles-for-dev-and-prod-environments/-->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <activatedProperties>dev</activatedProperties>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+                <activatedProperties>prod</activatedProperties>
+            </properties>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,7 +95,6 @@
             <version>0.9.1</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
