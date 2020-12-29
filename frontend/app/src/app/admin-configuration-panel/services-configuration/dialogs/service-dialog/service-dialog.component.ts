@@ -35,7 +35,7 @@ export class ServiceDialogComponent implements OnInit {
 
     const newService = new Service();
     newService.serviceType = '';
-    newService.priceBGN = 0;
+    newService.price = 0;
     newService.duration = 0;
 
     if (last > 0) {

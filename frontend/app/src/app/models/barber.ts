@@ -12,8 +12,6 @@ export class Barber {
 
   constructor() {
     this.id = undefined;
-    this.email = '';
-    this.password = '';
     this.firstName = '';
     this.lastName = '';
     this.description = '';

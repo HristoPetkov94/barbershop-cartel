@@ -86,7 +86,7 @@ export class ConfigurationComponent implements OnInit {
   update() {
     if (!this.isEditable) {
       this.barberService.updateBarber(this.barber).subscribe(response => {
-        sessionStorage.setItem('username', this.barber.email);
+        // sessionStorage.setItem('username', this.barber.email);
       });
 
       console.log('services: ', this.services);

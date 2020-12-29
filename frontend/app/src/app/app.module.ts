@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
-import {DialogOverviewExampleDialogComponent, ScheduleComponent} from './schedule/schedule.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
@@ -45,7 +44,6 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
 import {ChangePasswordDialogComponent, ConfigurationComponent} from './admin-configuration-panel/configuration.component';
 import { BookedUsersTableComponent } from './booked-users-table/booked-users-table.component';
-import {BookingComponent, BookingDialogComponent} from './booking/booking.component';
 import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
 import { BarberServicesPanelComponent } from './barber-services-panel/barber-services-panel.component';
 import { BarberTeamPanelComponent } from './barber-team-panel/barber-team-panel.component';
