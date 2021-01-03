@@ -13,7 +13,9 @@ public interface BarberInterface {
 
     //UserDetailsModel getBarberByEmail(String email);
 
-    void uploadPicture(long barberId, byte[] image);
+//    String uploadPicture(long barberId, byte[] image);
 
-    void updateBarber(BarberModel barber);
+    void update(BarberModel barber);
+
+    void updateAll(List<BarberModel> barbers);
 }

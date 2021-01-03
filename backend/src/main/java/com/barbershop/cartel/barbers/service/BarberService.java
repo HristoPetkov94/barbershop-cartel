@@ -4,7 +4,10 @@ import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
 import com.barbershop.cartel.barbers.repository.BarberRepository;
+import com.barbershop.cartel.services.entity.ServiceEntity;
+import com.barbershop.cartel.services.models.ServiceModel;
 import com.barbershop.cartel.utils.Base64Util;
+import com.barbershop.cartel.utils.PictureUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +23,6 @@ import java.util.Optional;
 @Slf4j
 @Service
 public class BarberService implements BarberInterface {
-
-    private final static String DEFAULT_PICTURE_PATH = "images/defual-profile-picture.png";
 
     @Autowired
     private BarberRepository barberRepository;
@@ -74,54 +75,50 @@ public class BarberService implements BarberInterface {
                 .build();
     }*/
 
-    @Override
-    public void uploadPicture(long barberId, byte[] image) {
-
-        String picture = Base64.encodeBase64String(image);
-
-        Optional<BarberEntity> detailsOptional = barberRepository.findById(barberId);
-
-        if (detailsOptional.isEmpty()) {
-            throw new UsernameNotFoundException("No barber were found with id: " + barberId);
-        }
-
-        BarberEntity details = detailsOptional.get();
-        details.setPicture(("data:image/png;base64," + picture));
-
-        barberRepository.save(details);
-    }
 
     @Override
-    public void updateBarber(BarberModel barberModel) {
-
+    public void update(BarberModel barberModel) {
         Optional<BarberEntity> barberOptional = barberRepository.findById(barberModel.getId());
 
         if (barberOptional.isEmpty()) {
-            throw new UsernameNotFoundException("Barber with id: " + barberModel.getId() + " is not existing.");
+            throw new UsernameNotFoundException("Barber with id: " + barberModel.getId() + " does not exist");
         }
 
         BarberEntity barber = barberOptional.get();
 
+        barber.setPicture(barberModel.getPicture());
         barber.setFirstName(barberModel.getFirstName());
         barber.setLastName(barberModel.getLastName());
         barber.setDescription(barberModel.getDescription());
-        barber.setPicture(barber.getPicture());
 
         barberRepository.save(barber);
+
     }
 
-    private String getDefaultPicture() {
+    @Override
+    public void updateAll(List<BarberModel> barbers) {
+        for (BarberModel barber : barbers) {
 
-        String picture = "";
+            if (barber.isDeleted()) {
+                barberRepository.deleteById(barber.getId());
+                continue;
+            }
 
-        try {
-            File f = new ClassPathResource(DEFAULT_PICTURE_PATH).getFile();
-            picture = Base64Util.encodeFileToBase64Binary(f);
-        } catch (Exception e) {
-            log.error("Default picture is missing");
-            e.printStackTrace();
+            updateBarber(barber);
         }
+    }
 
-        return picture;
+    private void updateBarber(BarberModel barberModel) {
+
+        Optional<BarberEntity> optionalEntity = barberRepository.findById(barberModel.getId());
+
+        BarberEntity barber = optionalEntity.orElse(new BarberEntity());
+
+        barber.setPicture(barberModel.getPicture());
+        barber.setFirstName(barberModel.getFirstName());
+        barber.setLastName(barberModel.getLastName());
+        barber.setDescription(barberModel.getDescription());
+
+        barberRepository.save(barber);
     }
 }

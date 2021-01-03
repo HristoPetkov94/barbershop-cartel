@@ -13,24 +13,15 @@ export class BarberService {
   constructor(private http: HttpClient) {
   }
 
-  getBarbers(): Subscribable<Barber[]> {
+  getAll(): Subscribable<Barber[]> {
     return this.http.get<Barber[]>(this.url + '/barbers');
   }
 
-  getBarberByUsername(email: string): Subscribable<Barber> {
-    return this.http.get<Barber>(this.url + '/barbers/barber-by-email?email=' + email);
-  }
-
-  updateBarberPicture(barberId, image) {
-    console.log('barber: ' + barberId + ' image:', image);
-    return this.http.post<Barber>(this.url + '/barbers/' + barberId + '/picture/', image);
-  }
-
-  updateBarber(barber: Barber) {
+  update(barber: Barber) {
     return this.http.post<Barber>(this.url + '/barbers', barber);
   }
 
-  updateBarberPassword(barberId, newPassword: string) {
-    return this.http.post(this.url + '/barbers/' + barberId, newPassword);
+  updateAll(barbers: Barber[]) {
+    return this.http.patch(this.url + '/barbers', barbers);
   }
 }

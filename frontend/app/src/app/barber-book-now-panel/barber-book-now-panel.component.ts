@@ -44,7 +44,7 @@ export class BarberBookNowPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.barberService.getBarbers().subscribe(b => {
+    this.barberService.getAll().subscribe(b => {
       this.barbers = b;
     });
   }

@@ -16,5 +16,6 @@ public class BarberModel {
     private String lastName;
     private String description;
     private String picture;
+    private boolean deleted;
     private List<ServiceEntity> services;
 }

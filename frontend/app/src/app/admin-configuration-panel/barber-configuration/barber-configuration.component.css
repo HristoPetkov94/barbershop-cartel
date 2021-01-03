@@ -4,6 +4,10 @@
   border: 1px solid #e4e4e4;
   overflow: hidden;
   border-radius: 100%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .remove-picture-btn {

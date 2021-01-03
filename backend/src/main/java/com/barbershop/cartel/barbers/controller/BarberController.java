@@ -15,22 +15,18 @@ public class BarberController {
     private BarberInterface barberInterface;
 
     @GetMapping
-    public List<BarberModel> getAllUsers() {
+    public List<BarberModel> getAll() {
         return barberInterface.getAllBarbers();
     }
 
     @PostMapping
-    public void updateBarber(@RequestBody BarberModel barber) {
-        barberInterface.updateBarber(barber);
+    public void update(@RequestBody BarberModel barber) {
+        barberInterface.update(barber);
     }
 
-    @PostMapping("{barberId}/picture")
-    public void uploadPicture(@PathVariable long barberId, @RequestBody byte[] image) {
-        barberInterface.uploadPicture(barberId, image);
+    @PatchMapping
+    public void updateAll(@RequestBody List<BarberModel> barbers) {
+        barberInterface.updateAll(barbers);
     }
 
-//    @GetMapping("/barber-by-email")
-//    public BarberModel getBarberByEmail(@RequestParam String email) {
-//        return barberInterface.getBarberByEmail(email);
-//    }
 }

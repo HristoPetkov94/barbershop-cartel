@@ -1,6 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {BarberService} from '../../services/barber.service';
 import {Barber} from '../../models/barber';
+import {NotificationComponent} from '../../notification/notification.component';
 
 @Component({
   selector: 'app-barber-configuration',
@@ -10,57 +11,71 @@ import {Barber} from '../../models/barber';
 export class BarberConfigurationComponent implements OnInit {
 
   public barbers: Barber[];
-  public selectedFile: File = null;
-  public isFileSelected = false;
+  public loading = true;
 
+  @ViewChild(NotificationComponent) notification: NotificationComponent;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
+  @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
   constructor(private barberService: BarberService) {
   }
 
   ngOnInit(): void {
 
-    this.barberService.getBarbers().subscribe(data => {
+    this.barberService.getAll().subscribe(data => {
       this.barbers = data;
+      console.log(data);
+    }, error => {
+    }, () => {
+      this.barbers.sort((a, b) => a.id - b.id);
+      this.loading = false;
     });
   }
 
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-    this.isFileSelected = true;
+  changed(event, barber) {
+    const file = event.target.files[0];
+    this.getBase64(file, barber);
   }
 
-  onUpload(barber: any) {
-    if (!this.isFileSelected) {
-      this.chooseFile.nativeElement.click();
-    } else {
-
-      this.barberService.updateBarberPicture(barber.id, this.selectedFile).subscribe(d => console.log('upload is comeplete'),
-        err => console.log(err),
-        () => {
-          this.isFileSelected = false;
-          this.ngOnInit();
-        });
-    }
+  upload(barber: Barber) {
+    const input = this.inputs.find((current) => barber.id + '' === current.nativeElement.id);
+    input.nativeElement.click();
   }
 
   add() {
     const barber = new Barber();
+    const index = this.barbers.length - 1;
 
-    barber.id = this.barbers.length + 1;
-    console.log('add: ', barber);
+    barber.id = this.barbers[index].id + 1;
     this.barbers.push(barber);
   }
 
-  remove(id: number) {
-    console.log('remove: ', id);
-    this.barbers = this.barbers.filter(barber => barber.id !== id);
+  remove(barber: Barber) {
+    barber.deleted = true;
   }
 
   save() {
-    for (const barber of this.barbers) {
-      console.log('updating: ', barber);
-      this.barberService.updateBarber(barber);
-    }
+    this.barberService.updateAll(this.barbers).subscribe(
+      data => {
+
+      }, () => {
+        this.notification.showMessage('update unsuccessful', 'warn');
+      },
+      () => {
+        this.notification.showMessage('update successful', 'success');
+      }
+    );
   }
+
+  getBase64(file, barber) {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      barber.picture = reader.result;
+    };
+    reader.onerror = (error) => {
+      console.log('Error: ', error);
+    };
+  }
+
 }
