@@ -1,4 +1,5 @@
 import {Component, ElementRef, Input, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Service} from '../../../interfaces/service';
 
 @Component({
   selector: 'app-service-details',
@@ -11,9 +12,12 @@ export class ServiceDetailsComponent implements OnInit {
   @ViewChildren('duration') durations!: QueryList<ElementRef>;
 
   @Input()
-  public service;
+  public service: Service;
 
-  constructor() { }
+  public currency = 'лв.';
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }

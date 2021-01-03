@@ -26,12 +26,12 @@ public class ServiceController {
 
     @PutMapping
     public void update(@RequestBody ServiceModel service) {
-        serviceInterface.update(service);
+        serviceInterface.updateAll(service);
     }
 
     @PatchMapping
     public void update(@RequestBody List<ServiceModel> services) {
-        serviceInterface.update(services);
+        serviceInterface.updateAll(services);
     }
 
     @DeleteMapping("/{serviceId}")

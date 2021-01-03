@@ -49,10 +49,6 @@ export class ServiceDialogComponent implements OnInit {
     this.data.services.push(newService);
   }
 
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
   onFileChangedService(event, service) {
     console.log(event);
     const id = event.target.id;
@@ -66,12 +62,6 @@ export class ServiceDialogComponent implements OnInit {
       service.picture = reader.result as string;
     };
   }
-
-  // @HostListener('change', ['$event'])
-  // emitFiles( event ) {
-  //
-  //
-  // }
 
   onUploadService(service) {
     this.viewChildren.forEach(element => {

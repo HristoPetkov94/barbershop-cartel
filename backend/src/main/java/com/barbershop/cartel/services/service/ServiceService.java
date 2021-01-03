@@ -76,12 +76,12 @@ public class ServiceService implements ServiceInterface {
     }
 
     @Override
-    public void update(ServiceModel service) {
+    public void updateAll(ServiceModel service) {
         updateService(service);
     }
 
     @Override
-    public void update(List<ServiceModel> services) {
+    public void updateAll(List<ServiceModel> services) {
 
         for (ServiceModel service : services) {
 

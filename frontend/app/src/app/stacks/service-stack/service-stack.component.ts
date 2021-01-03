@@ -18,6 +18,6 @@ export class ServiceStackComponent implements OnInit {
 
   ngOnInit() {
 
-    this.serviceServices.getAllServices().subscribe(s => this.services = s);
+    this.serviceServices.getAll().subscribe(s => this.services = s);
   }
 }

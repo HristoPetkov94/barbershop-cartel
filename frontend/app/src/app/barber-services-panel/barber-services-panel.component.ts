@@ -15,7 +15,7 @@ export class BarberServicesPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.servicesService.getAllServices().subscribe(s => {
+    this.servicesService.getAll().subscribe(s => {
       this.services = s;
     });
   }

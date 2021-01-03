@@ -99,6 +99,10 @@ li:hover {
   width: 100%;
 }
 
+.sized-box-width-10 {
+  width: 10px;
+}
+
 .sized-box-width-20 {
   width: 20px;
 }
@@ -246,7 +250,6 @@ select:focus {
   display: none;
 }
 
-
 .upload-btn {
   padding: 0 8px;
   color: black;
@@ -257,4 +260,8 @@ select:focus {
 .file-chosen-label {
   padding: 6px 10px;
   font: 400 13.3333px Arial;
+}
+
+.vh-80 {
+  height: 80vh;
 }

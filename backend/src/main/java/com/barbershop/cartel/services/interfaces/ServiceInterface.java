@@ -13,9 +13,9 @@ public interface ServiceInterface {
 
     List<ServiceModel> getServices();
 
-    void update(ServiceModel service);
+    void updateAll(ServiceModel service);
 
-    void update(List<ServiceModel> services);
+    void updateAll(List<ServiceModel> services);
 
     void delete(long serviceId);
 }
