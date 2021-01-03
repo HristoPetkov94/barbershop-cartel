@@ -1,0 +1,39 @@
+.message-wrapper {
+  position: fixed;
+  top: 10%;
+  right: 2%;
+
+  color: white;
+
+  padding: 20px 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  -webkit-box-shadow: 5px 4px 10px -7px rgba(0,0,0,0.98);
+  box-shadow: 5px 4px 10px -7px rgba(0,0,0,0.98);
+
+  border-radius: 5px;
+}
+
+.message {
+  font-size: 20px;
+}
+
+#warn {
+  background-color: red;
+}
+
+#success {
+  background-color: #388e3c;
+}
+
+#info {
+  background-color: #ffff2e;
+  color:black;
+}
+
+#default {
+  background-color: slategrey;
+}

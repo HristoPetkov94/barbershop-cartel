@@ -28,15 +28,12 @@ export class ConfigurationComponent implements OnInit {
   @ViewChild('chooseFile') public chooseFile: ElementRef;
   @ViewChild('profileWrapper') public profileWrapper: ElementRef;
 
-  public barberId;
   public barber = new Barber();
 
   public services: Service[];
+  public barbers: Barber[];
 
   public selectedFile: File = null;
-  public isFileSelected = false;
-  public isEditable = true;
-  public servicesToBeUpdated: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
 
   public theme = 'light-theme';
 
@@ -50,55 +47,6 @@ export class ConfigurationComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(data => this.barberId = data.get('id'));
-
-    this.barberService.getBarberByUsername(sessionStorage.getItem('username')).subscribe(b => {
-      this.barber = b;
-      console.log(this.barber);
-    });
-
-    this.servicesService.getAllServices().subscribe(s => {
-      this.services = s;
-    });
-
-
-  }
-
-  onFileChanged(event) {
-    this.selectedFile = event.target.files[0];
-    this.isFileSelected = true;
-  }
-
-  onUpload() {
-    if (!this.isFileSelected) {
-      this.chooseFile.nativeElement.click();
-    } else {
-
-      this.barberService.updateBarberPicture(this.barber.id, this.selectedFile).subscribe(d => console.log('upload is comeplete'),
-        err => console.log(err),
-        () => {
-          this.isFileSelected = false;
-          this.ngOnInit();
-        });
-    }
-  }
-
-  update() {
-    if (!this.isEditable) {
-      this.barberService.updateBarber(this.barber).subscribe(response => {
-        // sessionStorage.setItem('username', this.barber.email);
-      });
-
-      console.log('services: ', this.services);
-      console.log('servicesToBeUpdated: ', this.servicesToBeUpdated);
-
-      this.servicesService.updateServices(this.services).subscribe();
-    }
-  }
-
-  edit() {
-    this.isEditable = !this.isEditable;
-    this.update();
   }
 
   close() {
@@ -191,14 +139,14 @@ export class ChangePasswordDialogComponent {
 
     if (newPasswordCase && confirmPasswordCase) {
 
-      this.barberService.updateBarberPassword(this.data.barberId, this.newPassword).subscribe(d => {
-        if (d === false) {
-          alert('old password doesn\'t match');
-        }
-      }, err => {
-      }, () => {
-      });
-      this.onNoClick();
+      // this.barberService.updateBarberPassword(this.data.barberId, this.newPassword).subscribe(d => {
+      //   if (d === false) {
+      //     alert('old password doesn\'t match');
+      //   }
+      // }, err => {
+      // }, () => {
+      // });
+      // this.onNoClick();
     } else {
       if (!newPasswordCase) {
         alert('new password is empty');

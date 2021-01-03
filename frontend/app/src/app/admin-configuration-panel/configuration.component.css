@@ -4,6 +4,44 @@
 
   font-size: 18px;
   color: white;
+
+  justify-content: space-between;
+}
+
+.go-home {
+  display:flex;
+  align-items: center;
+  cursor: pointer;
+  height: 60px;
+  width: 100%;
+  background-color: #fafafa;
+
+  padding-left: 5px;
+  color: #2e2e2e;
+}
+
+.go-home:active, .go-home:focus {
+  outline: none;
+}
+
+.go-home:hover{
+  background-color: #f0f0f0;
+}
+
+.go-logout {
+  cursor: pointer;
+  transition: 0.5s;
+  width: 25px;
+  overflow: hidden;
+}
+
+.margin-left-10 {
+  margin-left: 10px
+}
+
+.go-logout:hover {
+  width: 100px;
+  transition: 0.5s;
 }
 
 .sticky-drawer {

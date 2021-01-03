@@ -60,6 +60,7 @@ import { ServicesConfigurationComponent } from './admin-configuration-panel/serv
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ServiceDialogComponent} from './admin-configuration-panel/services-configuration/dialogs/service-dialog/service-dialog.component';
 import { ServiceDetailsComponent } from './admin-configuration-panel/services-configuration/service-details/service-details.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { ServiceDetailsComponent } from './admin-configuration-panel/services-co
     BarberConfigurationComponent,
     ServicesConfigurationComponent,
     ServiceDetailsComponent,
+    NotificationComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,13 @@
+<div [@openClose]="isOpen ? 'open' : 'closed'" class="message-wrapper" id="{{type}}">
+  <span [ngSwitch]="type">
+    <mat-icon *ngSwitchCase="'success'"> done </mat-icon>
+    <mat-icon *ngSwitchCase="'warn'"> warning </mat-icon>
+    <mat-icon *ngSwitchCase="'info'"> error_outline </mat-icon>
+  </span>
+
+  <div style="width: 20px"></div>
+
+  <span class="message">
+  {{ message }}
+  </span>
+</div>

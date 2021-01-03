@@ -1,252 +1,5 @@
-<!--<div class="{{theme}}" #profileWrapper>-->
-<!--  <mat-sidenav-container class="example-container" (backdropClick)="close()">-->
-
-<!--    <mat-sidenav #sidenav (keydown.escape)="close()" disableClose>-->
-<!--      <div class="flex-col">-->
-<!--        <button mat-button style="display: flex; justify-content: space-between;">-->
-<!--          <mat-icon> settings</mat-icon>-->
-<!--          Configuration-->
-<!--        </button>-->
-<!--        <button mat-button style="display: flex; justify-content: space-between;">-->
-<!--          <mat-icon> calendar_today</mat-icon>-->
-<!--          Calendar-->
-<!--        </button>-->
-<!--      </div>-->
-<!--    </mat-sidenav>-->
-
-<!--    <mat-sidenav-content>-->
-
-<!--      &lt;!&ndash;    TOOLBAR&ndash;&gt;-->
-<!--      <mat-toolbar class="toolbar">-->
-<!--        <mat-toolbar-row>-->
-<!--          <mat-icon (click)="sidenav.open()"> menu</mat-icon>-->
-<!--          <span class="example-spacer"></span>-->
-
-<!--          <div class="toolbar-profile-info">-->
-<!--            <mat-slide-toggle (toggleChange)="changeTheme()"> dark - mode</mat-slide-toggle>-->
-<!--            <mat-icon (click)="logout()">exit_to_app</mat-icon>-->
-<!--          </div>-->
-
-<!--        </mat-toolbar-row>-->
-<!--      </mat-toolbar>-->
-
-<!--      <div class="flex-grid-column">-->
-
-<!--        <mat-card class="info flex-grid-col">-->
-
-<!--          <div class="info-header">-->
-<!--            <div class="light-theme">-->
-<!--              <button mat-raised-button class="edit-button" (click)="edit()" *ngIf="!isEditable; else save">-->
-<!--                <mat-icon> edit</mat-icon>-->
-<!--              </button>-->
-
-<!--              <ng-template #save>-->
-<!--                <button mat-raised-button (click)="edit()" color="warn">-->
-<!--                  <mat-icon> save </mat-icon>-->
-<!--                </button>-->
-<!--              </ng-template>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--          <div class="info-content">-->
-
-<!--            <div class="content">-->
-
-<!--              <div class="forms">-->
-<!--                <div class="profile-picture">-->
-<!--                  <img class="picture" src="{{barber?.picture}}"/>-->
-
-<!--                  <div class="image-action-buttons light-theme">-->
-
-<!--                    <input type="file" id="file" (change)="onFileChanged($event)" #chooseFile/>-->
-<!--                    <label style="display:none" for="file">choose a file</label>-->
-
-<!--                    <button mat-raised-button class="upload-button" (click)="onUpload()" [disabled]="!isEditable">-->
-<!--                      <mat-icon *ngIf="isFileSelected; else not"> cloud_upload</mat-icon>-->
-
-<!--                      <ng-template #not>-->
-<!--                        <mat-icon>folder_open</mat-icon>-->
-<!--                      </ng-template>-->
-<!--                    </button>-->
-
-<!--                    <button mat-raised-button color="warn" [disabled]="!isEditable">-->
-<!--                      <mat-icon> delete</mat-icon>-->
-<!--                    </button>-->
-<!--                  </div>-->
-<!--                </div>-->
-
-<!--                <div class="form-inputs">-->
-
-<!--                  <div class="form-col">-->
-<!--                    <mat-icon> email</mat-icon>-->
-<!--                    <mat-label>Email</mat-label>-->
-<!--                    <mat-form-field class=" example-full-width">-->
-
-<!--                      <input matInput [disabled]="!isEditable" [(ngModel)]="barber.email">-->
-<!--                    </mat-form-field>-->
-<!--                  </div>-->
-
-<!--                  <div class="form-col">-->
-<!--                    <mat-icon> vpn_key</mat-icon>-->
-<!--                    <mat-label>Password</mat-label>-->
-<!--&lt;!&ndash;                    <mat-form-field class=" example-full-width">&ndash;&gt;-->
-<!--&lt;!&ndash;                      <input matInput [disabled]="!isEditable" [(ngModel)]="barber.password">&ndash;&gt;-->
-<!--                    <div class="align-right">-->
-<!--                      <button mat-button matSuffix mat-icon-button (click)="openChangePassDialog(theme)"-->
-<!--                              aria-label="Clear" [disabled]="!isEditable">-->
-<!--                        <mat-icon>open_in_new</mat-icon>-->
-<!--                      </button>-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                    </mat-form-field>&ndash;&gt;-->
-<!--                  </div>-->
-
-<!--                  <div class="form-col">-->
-<!--                    <mat-label>Firstname</mat-label>-->
-<!--                    <div></div>-->
-<!--                    <mat-form-field class=" example-full-width">-->
-<!--                      <input matInput [disabled]="!isEditable" [(ngModel)]="barber.firstName">-->
-<!--                    </mat-form-field>-->
-<!--                  </div>-->
-
-<!--                  <div class="form-col">-->
-<!--                    <mat-label>Lastname</mat-label>-->
-<!--                    <div></div>-->
-<!--                    <mat-form-field class=" example-full-width">-->
-<!--                      <input matInput [disabled]="!isEditable" [(ngModel)]=" barber.lastName">-->
-<!--                    </mat-form-field>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-
-<!--              <div>-->
-<!--                <mat-form-field class="example-full-width" appearance="outline">-->
-<!--                  <mat-label>Description</mat-label>-->
-<!--                  <textarea class="description" matInput [disabled]="!isEditable"-->
-<!--                            [(ngModel)]="barber.description"></textarea>-->
-<!--                </mat-form-field>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-
-<!--        </mat-card>-->
-
-<!--        <mat-card class="services">-->
-
-<!--          <div class="service-header">-->
-<!--            <button mat-icon-button (click)="openServiceDialog(services, theme)" [disabled]="!isEditable">-->
-<!--              <mat-icon>open_in_new</mat-icon>-->
-<!--            </button>-->
-<!--          </div>-->
-
-<!--          <mat-card-content class="services-container light-theme">-->
-<!--            <div *ngFor="let service of services">-->
-<!--              &lt;!&ndash;            {{service.name}}&ndash;&gt;-->
-
-<!--              <div *ngIf="!service.deleted">-->
-
-<!--                &lt;!&ndash;                <div class="another-col">&ndash;&gt;-->
-<!--                &lt;!&ndash;                  <img class="picture2" src="{{service?.picture}}"/>&ndash;&gt;-->
-
-<!--                &lt;!&ndash;                  <input type="file" id="img" (change)="onFileChangedService($event, service)" #chooseFile2/>&ndash;&gt;-->
-<!--                &lt;!&ndash;                  <label for="img">choose a file</label>&ndash;&gt;-->
-
-<!--                &lt;!&ndash;                  <button mat-raised-button class="edit-button3" (click)="onUploadService(service)"&ndash;&gt;-->
-<!--                &lt;!&ndash;                          [disabled]="!isEditable">&ndash;&gt;-->
-<!--                &lt;!&ndash;                    <mat-icon *ngIf="isFileSelected; else not"> cloud_upload </mat-icon>&ndash;&gt;-->
-
-<!--                &lt;!&ndash;                    <ng-template #not>&ndash;&gt;-->
-<!--                &lt;!&ndash;                      <mat-icon>folder_open</mat-icon>&ndash;&gt;-->
-<!--                &lt;!&ndash;                    </ng-template>&ndash;&gt;-->
-<!--                &lt;!&ndash;                  </button>&ndash;&gt;-->
-<!--                &lt;!&ndash;                </div>&ndash;&gt;-->
-
-<!--                <div class="another-col">-->
-<!--                  <div class="service">-->
-<!--                    <mat-form-field class="service-col" appearance="outline">-->
-<!--                      <mat-label>Service</mat-label>-->
-<!--                      <input matInput type="text" [(ngModel)]="service.serviceType" [disabled]="!isEditable">-->
-<!--                    </mat-form-field>-->
-
-<!--                    <mat-form-field class="service-col duration" appearance="outline">-->
-<!--                      <mat-label>Duration</mat-label>-->
-<!--                      <input matInput type="number" [(ngModel)]="service.duration" [disabled]="!isEditable">-->
-<!--                    </mat-form-field>-->
-
-<!--                    <mat-form-field class="service-col price" appearance="outline">-->
-<!--                      <mat-label>Price</mat-label>-->
-<!--                      <input matInput type="text" [(ngModel)]="service.priceBGN" [disabled]="!isEditable">-->
-<!--                    </mat-form-field>-->
-
-<!--                    <button class="service-col" mat-button matSuffix mat-icon-button aria-label="Clear"-->
-<!--                            (click)="deleteService(service)" [disabled]="!isEditable">-->
-<!--                      <mat-icon>close</mat-icon>-->
-<!--                    </button>-->
-<!--                  </div>-->
-
-<!--                  &lt;!&ndash;                  <mat-form-field class="example-full-width" appearance="outline">&ndash;&gt;-->
-<!--                  &lt;!&ndash;                    <mat-label>Description</mat-label>&ndash;&gt;-->
-<!--                  &lt;!&ndash;                    <textarea class="description" matInput [disabled]="!isEditable"&ndash;&gt;-->
-<!--                  &lt;!&ndash;                              [(ngModel)]="service.description"></textarea>&ndash;&gt;-->
-<!--                  &lt;!&ndash;                  </mat-form-field>&ndash;&gt;-->
-<!--                </div>-->
-
-
-<!--              </div>-->
-
-<!--            </div>-->
-
-<!--          </mat-card-content>-->
-<!--        </mat-card>-->
-<!--      </div>-->
-
-<!--    </mat-sidenav-content>-->
-
-<!--  </mat-sidenav-container>-->
-<!--</div>-->
-
-
 <div class="light-theme">
-  <!--  <mat-toolbar class="toolbar height-50">-->
-  <!--    <h2>Configuration Panel</h2>-->
-  <!--  </mat-toolbar>-->
 
-  <!--  <mat-drawer-container class="drawer-container">-->
-
-  <!--    <mat-drawer class="sticky-drawer" mode="side" opened>-->
-  <!--      <div class="sized-box-height-50"></div>-->
-
-  <!--      <ul id="nav">-->
-  <!--        <li id="general" class="row justify-content-center space-between-5 height-50" (click)="setTab('general')">-->
-  <!--          <mat-icon>settings</mat-icon>-->
-  <!--          <h2>General</h2>-->
-  <!--          <div class="sized-box-width"></div>-->
-  <!--        </li>-->
-
-  <!--        <li id="barbers" class="row justify-content-center space-between-5 height-50" (click)="setTab('barbers')">-->
-  <!--          <mat-icon>groups</mat-icon>-->
-  <!--          <h2>Barbers</h2>-->
-  <!--          <div class="sized-box-width"></div>-->
-  <!--        </li>-->
-
-  <!--        <li id="services" class="row justify-content-center space-between-5 height-50" (click)="setTab('services')">-->
-  <!--          <mat-icon>menu_book</mat-icon>-->
-  <!--          <h2>Services</h2>-->
-  <!--          <div class="sized-box-width"></div>-->
-  <!--        </li>-->
-  <!--      </ul>-->
-
-  <!--    </mat-drawer>-->
-  <!--    <mat-drawer-content class="drawer-content">-->
-
-  <!--      <p style="margin-top: 20px"> configuration > {{tab}} </p>-->
-
-  <!--      <ng-container [ngSwitch]="tab">-->
-  <!--          <app-general-configuration *ngSwitchCase="'general'"></app-general-configuration>-->
-  <!--          <app-barber-configuration *ngSwitchCase="'barbers'"></app-barber-configuration>-->
-  <!--      </ng-container>-->
-
-  <!--    </mat-drawer-content>-->
-  <!--  </mat-drawer-container>-->
   <div class="container-wrapper">
     <div class="container">
       <mat-toolbar class="toolbar height-50">
@@ -256,8 +9,15 @@
       <div class="row content-wrapper">
         <div class="drawer">
 
+          <div class="go-home" [routerLink]="'/'">
+            <mat-icon> home </mat-icon>
+            <div class="sized-box-width-10"></div>
+            <h2> Home </h2>
+          </div>
+
           <ul id="nav">
-            <li id="general" class="row justify-content-center space-between-5 height-50 selected" (click)="setTab('general')">
+            <li id="general" class="row justify-content-center space-between-5 height-50 selected"
+                (click)="setTab('general')">
               <mat-icon>settings</mat-icon>
               <h2>General</h2>
               <div class="sized-box-width-100"></div>
@@ -279,15 +39,16 @@
         </div>
         <div class="content">
           <div class="content-container">
-            <p style="margin-top: 20px; color: #707070; "> Configuration > <span style="color:#2e2e2e;"> {{tab}} </span> </p>
+            <p style="margin-top: 20px; color: #707070;"> Configuration > <span style="color:#2e2e2e;"> {{tab}} </span>
+            </p>
 
-                  <ng-container [ngSwitch]="tab">
-                      <app-general-configuration *ngSwitchCase="'general'"></app-general-configuration>
-                      <app-barber-configuration *ngSwitchCase="'barbers'"></app-barber-configuration>
-                      <app-services-configuration *ngSwitchCase="'services'"></app-services-configuration>
-                  </ng-container>
+            <ng-container [ngSwitch]="tab">
+              <app-general-configuration *ngSwitchCase="'general'"></app-general-configuration>
+              <app-barber-configuration *ngSwitchCase="'barbers'"></app-barber-configuration>
+              <app-services-configuration *ngSwitchCase="'services'"></app-services-configuration>
+            </ng-container>
 
-                  <div class="footer-fixer"></div>
+            <div class="footer-fixer"></div>
           </div>
         </div>
       </div>
