@@ -66,8 +66,6 @@ import { NotificationComponent } from './notification/notification.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    ScheduleComponent,
-    DialogOverviewExampleDialogComponent,
     LoginComponent,
     TeamStackComponent,
     ServiceStackComponent,
@@ -81,8 +79,6 @@ import { NotificationComponent } from './notification/notification.component';
     BookedUsersTableComponent,
     ChangePasswordDialogComponent,
     ServiceDialogComponent,
-    BookingComponent,
-    BookingDialogComponent,
     CompactNavbarComponent,
     BarberServicesPanelComponent,
     BarberTeamPanelComponent,
@@ -150,10 +146,8 @@ import { NotificationComponent } from './notification/notification.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    DialogOverviewExampleDialogComponent,
     ChangePasswordDialogComponent,
-    ServiceDialogComponent,
-    BookingDialogComponent
+    ServiceDialogComponent
   ]
 })
 export class AppModule {
