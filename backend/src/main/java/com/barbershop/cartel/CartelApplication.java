@@ -6,13 +6,17 @@ import com.barbershop.cartel.security.models.UserModel;
 import com.barbershop.cartel.security.service.JwtUserDetailsService;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.services.repository.ServiceRepository;
+import com.barbershop.cartel.utils.Base64Util;
+import com.barbershop.cartel.utils.PictureUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.io.ClassPathResource;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -65,27 +69,27 @@ public class CartelApplication {
         };
     }
 
-    public static BarberEntity createBarber1(List<ServiceEntity> services) {
+    public static BarberEntity createBarber1(List<ServiceEntity> services) throws Exception {
 
         BarberEntity barber = new BarberEntity();
 
         barber.setFirstName("Пламен");
         barber.setLastName("Маринов");
         barber.setDescription("Инженер-Архитектът под чиито надзор се изпълнява този проект.");
-        barber.setPicture("images/defual-profile-picture.png");
+        barber.setPicture(PictureUtils.getDefaultPicture());
         barber.setServices(services);
 
         return barber;
     }
 
-    public static BarberEntity createBarber2(List<ServiceEntity> services) {
+    public static BarberEntity createBarber2(List<ServiceEntity> services) throws Exception {
 
         BarberEntity barber = new BarberEntity();
 
         barber.setFirstName("Христо");
         barber.setLastName("Петков");
         barber.setDescription("Инженер-Предприемач, който ще доведе до край този проект.");
-        barber.setPicture("images/defual-profile-picture.png");
+        barber.setPicture(PictureUtils.getDefaultPicture());
         barber.setServices(services);
 
         return barber;
