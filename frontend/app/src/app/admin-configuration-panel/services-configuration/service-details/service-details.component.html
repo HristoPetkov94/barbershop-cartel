@@ -1,56 +1,53 @@
-<div *ngIf="!service.deleted">
+<div class="row max-width align-items-start margin-bottom-10">
 
-  <div class="row max-width align-items-start margin-bottom-10">
+  <div class="col flex-2">
+    <h2 class="margin-bottom-10">Service</h2>
+    <input class="text-input" [(ngModel)]="service.serviceType" type="text"/>
+  </div>
 
-    <div class="col flex-2">
-      <h2 class="margin-bottom-10">Service</h2>
-      <input class="text-input" [(ngModel)]="service.serviceType" type="text"/>
-    </div>
+  <div class="sized-box-width-20"></div>
 
-    <div class="sized-box-width-20"></div>
+  <div class="col">
+    <h2 class="margin-bottom-10"> Duration </h2>
 
-    <div class="col">
-      <h2 class="margin-bottom-10"> Duration </h2>
+    <div class="row">
+      <input id="{{'duration'+service.id}}" [(ngModel)]="service.duration" type="number" class="text-input" step="30"
+             min="0" max="60" #duration/>
 
-      <div class="row">
-        <input id="{{'duration'+service.id}}" [(ngModel)]="service.duration" type="number" class="text-input" step="30"
-               min="0" max="60" #duration/>
-
-        <div class="col">
-          <button class="increment-btn" (click)="increment('duration', service.id)"> +</button>
-          <button class="decrement-btn" (click)="decrement('duration', service.id)"> -</button>
-        </div>
+      <div class="col">
+        <button class="increment-btn" (click)="increment('duration', service.id)"> +</button>
+        <button class="decrement-btn" (click)="decrement('duration', service.id)"> -</button>
       </div>
     </div>
+  </div>
 
-    <div class="sized-box-width-20"></div>
+  <div class="sized-box-width-20"></div>
 
-    <div class="col">
-      <h2 class="margin-bottom-10">Price</h2>
+  <div class="col">
+    <h2 class="margin-bottom-10">Price</h2>
 
-      <div class="row">
-        <div class="row" style="position: relative">
-          <input id="{{'price'+service.id}}" [(ngModel)]="service.price" type="number" class="text-input" step="1"
-                 min="0"
-                 max="300" #price/>
+    <div class="row">
+      <div class="row" style="position: relative">
+        <input id="{{'price'+service.id}}" [(ngModel)]="service.price" type="number" class="text-input" step="1"
+               min="0"
+               max="300" #price/>
 
-          <span class="currency"> {{currency}} </span>
-        </div>
+        <span class="currency"> {{currency}} </span>
+      </div>
 
-        <div class="col">
-          <button class="increment-btn" (click)="increment('price', service.id)"> +</button>
-          <button class="decrement-btn" (click)="decrement('price', service.id)"> -</button>
-        </div>
+      <div class="col">
+        <button class="increment-btn" (click)="increment('price', service.id)"> +</button>
+        <button class="decrement-btn" (click)="decrement('price', service.id)"> -</button>
+      </div>
 
-        <div class="col max-height justify-content-center">
-          <button (click)="delete(service)" class="service-col" mat-button matSuffix mat-icon-button aria-label="Clear"
-                  color="warn">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
+      <div class="col max-height justify-content-center">
+        <button (click)="delete(service)" class="service-col" mat-button matSuffix mat-icon-button aria-label="Clear"
+                color="warn">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
-
   </div>
 
 </div>
+

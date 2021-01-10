@@ -50,8 +50,6 @@ export class ServicesConfigurationComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('services to be updated: ', result);
-      // this.servicesToBeUpdated = result;
     });
   }
 
@@ -66,7 +64,7 @@ export class ServicesConfigurationComponent implements OnInit {
   save() {
     const barber = this.selectedBarber;
 
-    this.servicesService.updateAll(barber.services).subscribe(
+    this.servicesService.saveAll(barber.id, barber.services).subscribe(
       data => {
 
       }, () => {
@@ -77,6 +75,5 @@ export class ServicesConfigurationComponent implements OnInit {
       }
     );
   }
-
 }
 

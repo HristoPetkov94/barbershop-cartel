@@ -4,6 +4,5 @@ export class Service {
   price: number;
   duration: number;
   description: string;
-  picture: any;
-  deleted: boolean;
+  picture: string;
 }

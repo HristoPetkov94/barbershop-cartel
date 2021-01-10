@@ -17,11 +17,7 @@ export class BarberService {
     return this.http.get<Barber[]>(this.url + '/barbers');
   }
 
-  update(barber: Barber) {
-    return this.http.post<Barber>(this.url + '/barbers', barber);
-  }
-
-  updateAll(barbers: Barber[]) {
-    return this.http.patch(this.url + '/barbers', barbers);
+  saveAll(barbers: Barber[]) {
+    return this.http.post(this.url + '/barbers', barbers);
   }
 }

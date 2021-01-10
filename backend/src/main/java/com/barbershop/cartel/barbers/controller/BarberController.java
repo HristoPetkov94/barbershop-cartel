@@ -16,17 +16,11 @@ public class BarberController {
 
     @GetMapping
     public List<BarberModel> getAll() {
-        return barberInterface.getAllBarbers();
+        return barberInterface.getBarbers();
     }
 
     @PostMapping
-    public void update(@RequestBody BarberModel barber) {
-        barberInterface.update(barber);
+    public void saveAll(@RequestBody List<BarberModel> barbers) {
+        barberInterface.createBarbers(barbers);
     }
-
-    @PatchMapping
-    public void updateAll(@RequestBody List<BarberModel> barbers) {
-        barberInterface.updateAll(barbers);
-    }
-
 }

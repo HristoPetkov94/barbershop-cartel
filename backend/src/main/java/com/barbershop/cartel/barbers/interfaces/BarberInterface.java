@@ -7,15 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface BarberInterface {
-    List<BarberModel> getAllBarbers();
+    List<BarberModel> getBarbers();
 
     Optional<BarberEntity> getBarberById(long barberId);
 
-    //UserDetailsModel getBarberByEmail(String email);
-
-//    String uploadPicture(long barberId, byte[] image);
-
-    void update(BarberModel barber);
-
-    void updateAll(List<BarberModel> barbers);
+    void createBarbers(List<BarberModel> barbers);
 }

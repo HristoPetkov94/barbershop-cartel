@@ -6,6 +6,7 @@ export class Barber {
   lastName: string;
   description: string;
   picture: string;
+  facebook: string;
+  instagram: string;
   services: Service[];
-  deleted: boolean;
 }

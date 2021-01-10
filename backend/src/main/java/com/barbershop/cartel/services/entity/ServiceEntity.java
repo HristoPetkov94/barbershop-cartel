@@ -30,4 +30,7 @@ public class ServiceEntity {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "barber_id")
+    private long barberId;
 }

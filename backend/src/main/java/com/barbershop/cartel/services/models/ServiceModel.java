@@ -16,9 +16,6 @@ public class ServiceModel {
     private String picture;
     private String description;
 
-    // for deleting while update
-    private boolean deleted;
-
     public ServiceModel(ServiceEntity entity) {
         this.id = entity.getId();
         this.serviceType = entity.getServiceType();

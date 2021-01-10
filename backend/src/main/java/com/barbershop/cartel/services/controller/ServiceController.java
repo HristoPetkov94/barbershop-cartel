@@ -14,28 +14,13 @@ public class ServiceController {
     @Autowired
     private ServiceInterface serviceInterface;
 
-    @PostMapping
-    public void saveService(@RequestBody ServiceModel service) {
-        serviceInterface.save(service);
-    }
-
     @GetMapping
-    public List<ServiceModel> getServices() {
+    public List<ServiceModel> getAll() {
         return serviceInterface.getServices();
     }
 
-    @PutMapping
-    public void update(@RequestBody ServiceModel service) {
-        serviceInterface.updateAll(service);
-    }
-
-    @PatchMapping
-    public void update(@RequestBody List<ServiceModel> services) {
-        serviceInterface.updateAll(services);
-    }
-
-    @DeleteMapping("/{serviceId}")
-    public void delete(@PathVariable long serviceId) {
-        serviceInterface.delete(serviceId);
+    @PostMapping
+    public void saveAll(@RequestParam long barberId, @RequestBody List<ServiceModel> services) {
+        serviceInterface.createServices(barberId, services);
     }
 }

@@ -19,8 +19,7 @@ export class ServicesService {
 
   // Cool article to show how the broswer handles different image resolutions
   // https://medium.com/front-end-weekly/loading-images-on-the-web-fad536493bac
-  updateAll(services: Service[]) {
-    console.log(services);
-    return this.http.patch(this.url + '/services', services);
+  saveAll(barberId, services: Service[]) {
+    return this.http.post(this.url + '/services' + '?' + 'barberId=' + barberId, services);
   }
 }

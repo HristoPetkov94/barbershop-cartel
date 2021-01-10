@@ -37,7 +37,7 @@ public class CartelApplication {
 
             userService.save(user);
 
-            ServiceEntity service1 = createService1();
+            /*ServiceEntity service1 = createService1();
             ServiceEntity service2 = createService2();
             ServiceEntity service3 = createService3();
             ServiceEntity service4 = createService4();
@@ -65,7 +65,7 @@ public class CartelApplication {
             BarberEntity barber2 = createBarber2(servicesBarber2);
 
             barberRepository.save(barber1);
-            barberRepository.save(barber2);
+            barberRepository.save(barber2);*/
         };
     }
 

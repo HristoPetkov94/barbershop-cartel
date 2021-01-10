@@ -32,6 +32,12 @@ public class BarberEntity {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "facebook")
+    private String facebook;
+
+    @Column(name = "instagram")
+    private String instagram;
+
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduleConfigEntity> scheduleConfig;
 

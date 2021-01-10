@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {BarberService} from '../../services/barber.service';
 import {Barber} from '../../models/barber';
 import {NotificationComponent} from '../../notification/notification.component';
@@ -24,10 +24,9 @@ export class BarberConfigurationComponent implements OnInit {
 
     this.barberService.getAll().subscribe(data => {
       this.barbers = data;
-      console.log(data);
-    }, error => {
     }, () => {
-      this.barbers.sort((a, b) => a.id - b.id);
+    }, () => {
+      this.barbers.sort((a, b) => a.firstName.localeCompare(b.firstName));
       this.loading = false;
     });
   }
@@ -43,22 +42,22 @@ export class BarberConfigurationComponent implements OnInit {
   }
 
   add() {
-    const barber = new Barber();
-    const index = this.barbers.length - 1;
-
-    barber.id = this.barbers[index].id + 1;
-    this.barbers.push(barber);
+    this.barbers.push(new Barber());
   }
 
   remove(barber: Barber) {
-    barber.deleted = true;
+
+    const index = this.barbers.indexOf(barber, 0);
+
+    if (index > -1) {
+      this.barbers.splice(index, 1);
+    }
   }
 
   save() {
-    this.barberService.updateAll(this.barbers).subscribe(
-      data => {
-
-      }, () => {
+    this.barberService.saveAll(this.barbers).subscribe(data => {
+      },
+      () => {
         this.notification.showMessage('update unsuccessful', 'warn');
       },
       () => {
@@ -78,4 +77,7 @@ export class BarberConfigurationComponent implements OnInit {
     };
   }
 
+  isBarbersEmpty() {
+    return this.barbers.length === 0;
+  }
 }
