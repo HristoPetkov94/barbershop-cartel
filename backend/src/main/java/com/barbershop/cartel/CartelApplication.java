@@ -5,17 +5,12 @@ import com.barbershop.cartel.barbers.repository.BarberRepository;
 import com.barbershop.cartel.security.models.UserModel;
 import com.barbershop.cartel.security.service.JwtUserDetailsService;
 import com.barbershop.cartel.services.entity.ServiceEntity;
-import com.barbershop.cartel.services.repository.ServiceRepository;
-import com.barbershop.cartel.utils.Base64Util;
 import com.barbershop.cartel.utils.PictureUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.io.ClassPathResource;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
