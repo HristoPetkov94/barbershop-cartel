@@ -6,6 +6,4 @@ import java.util.List;
 
 public interface ServiceInterface {
     List<ServiceModel> getServices();
-
-    void createServices(long barberId, List<ServiceModel> services);
 }

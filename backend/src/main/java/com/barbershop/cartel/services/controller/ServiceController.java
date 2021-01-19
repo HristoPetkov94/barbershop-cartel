@@ -18,9 +18,4 @@ public class ServiceController {
     public List<ServiceModel> getAll() {
         return serviceInterface.getServices();
     }
-
-    @PostMapping
-    public void saveAll(@RequestParam long barberId, @RequestBody List<ServiceModel> services) {
-        serviceInterface.createServices(barberId, services);
-    }
 }

@@ -41,7 +41,7 @@ public class BarberEntity {
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduleConfigEntity> scheduleConfig;
 
-    @OneToMany(cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "barber_id")
     private List<ServiceEntity> services;
 }

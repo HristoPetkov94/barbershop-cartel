@@ -10,6 +10,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = ServiceEntity.TABLE_NAME)
 public class ServiceEntity {
+
     public static final String TABLE_NAME = "services";
 
     @Id
@@ -30,7 +31,4 @@ public class ServiceEntity {
 
     @Column(name = "description")
     private String description;
-
-    @Column(name = "barber_id")
-    private long barberId;
 }

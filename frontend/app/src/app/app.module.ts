@@ -59,7 +59,6 @@ import { BarberConfigurationComponent } from './admin-configuration-panel/barber
 import { ServicesConfigurationComponent } from './admin-configuration-panel/services-configuration/services-configuration.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ServiceDialogComponent} from './admin-configuration-panel/services-configuration/dialogs/service-dialog/service-dialog.component';
-import { ServiceDetailsComponent } from './admin-configuration-panel/services-configuration/service-details/service-details.component';
 import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
@@ -90,7 +89,6 @@ import { NotificationComponent } from './notification/notification.component';
     GeneralConfigurationComponent,
     BarberConfigurationComponent,
     ServicesConfigurationComponent,
-    ServiceDetailsComponent,
     NotificationComponent,
   ],
     imports: [

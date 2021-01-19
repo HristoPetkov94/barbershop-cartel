@@ -27,7 +27,7 @@ public class CartelApplication {
     }
 
     @Bean
-    CommandLineRunner init(JwtUserDetailsService userService, BarberRepository barberRepository, ServiceRepository serviceRepository) {
+    CommandLineRunner init(JwtUserDetailsService userService, BarberRepository barberRepository) {
         return args -> {
 
             UserModel user = new UserModel();
@@ -42,22 +42,10 @@ public class CartelApplication {
 
             barberRepository.save(barber1);
             barberRepository.save(barber2);
-
-            ServiceEntity service1 = createService1(barber1.getId());
-            ServiceEntity service2 = createService2(barber1.getId());
-            ServiceEntity service3 = createService3(barber2.getId());
-            ServiceEntity service4 = createService4(barber2.getId());
-            ServiceEntity service5 = createService5(barber2.getId());
-
-            serviceRepository.save(service1);
-            serviceRepository.save(service2);
-            serviceRepository.save(service3);
-            serviceRepository.save(service4);
-            serviceRepository.save(service5);
         };
     }
 
-    public static BarberEntity createBarber1() throws Exception {
+    public static BarberEntity createBarber1() {
 
         BarberEntity barber = new BarberEntity();
 
@@ -65,12 +53,19 @@ public class CartelApplication {
         barber.setLastName("Маринов");
         barber.setDescription("Инженер-Архитектът под чиито надзор се изпълнява този проект.");
         barber.setPicture(PictureUtils.getDefaultPicture());
-        //barber.setServices(services);
+
+        List<ServiceEntity> services = new ArrayList<>();
+
+        services.add(createService1());
+        services.add(createService2());
+        services.add(createService3());
+
+        barber.setServices(services);
 
         return barber;
     }
 
-    public static BarberEntity createBarber2() throws Exception {
+    public static BarberEntity createBarber2() {
 
         BarberEntity barber = new BarberEntity();
 
@@ -78,12 +73,18 @@ public class CartelApplication {
         barber.setLastName("Петков");
         barber.setDescription("Инженер-Предприемач, който ще доведе до край този проект.");
         barber.setPicture(PictureUtils.getDefaultPicture());
-        //barber.setServices(services);
+
+        List<ServiceEntity> services = new ArrayList<>();
+
+        services.add(createService4());
+        services.add(createService5());
+
+        barber.setServices(services);
 
         return barber;
     }
 
-    public static ServiceEntity createService1(long barberId) {
+    public static ServiceEntity createService1() {
 
         ServiceEntity service = new ServiceEntity();
 
@@ -91,12 +92,11 @@ public class CartelApplication {
         service.setDescription("Модерна прическа и стил на мъжете от нашите професионални Барбъри / Modern man's haircut and styling from our professional Barbers");
         service.setDuration(30);
         service.setPrice(15);
-        service.setBarberId(barberId);
 
         return service;
     }
 
-    public static ServiceEntity createService2(long barberId) {
+    public static ServiceEntity createService2() {
 
         ServiceEntity service = new ServiceEntity();
 
@@ -104,11 +104,11 @@ public class CartelApplication {
         service.setDescription("Подстригване и стайлинг, корекция на брадата Ви. / Haircut and Styling, correction of your beard");
         service.setDuration(60);
         service.setPrice(23);
-        service.setBarberId(barberId);
+
         return service;
     }
 
-    public static ServiceEntity createService3(long barberId) {
+    public static ServiceEntity createService3() {
 
         ServiceEntity service = new ServiceEntity();
 
@@ -116,11 +116,11 @@ public class CartelApplication {
         service.setDescription("Професионална прическа за деца до 5год. / Professional hairstyle for children up to 5 years\n");
         service.setDuration(30);
         service.setPrice(10);
-        service.setBarberId(barberId);
+
         return service;
     }
 
-    public static ServiceEntity createService4(long barberId) {
+    public static ServiceEntity createService4() {
 
         ServiceEntity service = new ServiceEntity();
 
@@ -128,11 +128,11 @@ public class CartelApplication {
         service.setDescription("Професионален дизайн на брада или бръснене. / Professional beard design or a nice shave.");
         service.setDuration(30);
         service.setPrice(15);
-        service.setBarberId(barberId);
+
         return service;
     }
 
-    public static ServiceEntity createService5(long barberId) {
+    public static ServiceEntity createService5() {
 
         ServiceEntity service = new ServiceEntity();
 
@@ -140,7 +140,7 @@ public class CartelApplication {
         service.setDescription("Подстригване и стайлинг, корекция на брадата Ви. / Haircut and Styling, correction of your beard");
         service.setDuration(60);
         service.setPrice(23);
-        service.setBarberId(barberId);
+
         return service;
     }
 }

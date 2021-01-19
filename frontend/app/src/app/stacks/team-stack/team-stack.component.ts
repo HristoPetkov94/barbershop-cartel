@@ -17,7 +17,7 @@ export class TeamStackComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.barberService.getAll().subscribe(b => this.barbers = b);
+    this.barberService.getBarbers().subscribe(b => this.barbers = b);
   }
 
 }

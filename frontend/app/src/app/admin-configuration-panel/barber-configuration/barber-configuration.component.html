@@ -1,9 +1,6 @@
 <hr/>
 
 <div class="row max-width justify-content-end">
-  <button (click)="save()" style="padding: 5px 20px;" mat-raised-button color="accent">
-    <span> Save </span>
-  </button>
 
   <div class="sized-box-width-20"></div>
 
@@ -22,7 +19,14 @@
   <div class="sized-box-height"></div>
 
   <div class="row max-width justify-content-end">
-    <button (click)="remove(barber)" mat-icon-button color="warn">
+    <button (click)="save(barber)" mat-button color="accent">
+      <mat-icon #tooltip="matTooltip"
+                matTooltip="Save"
+                [matTooltipPosition]="'left'"> save
+      </mat-icon>
+    </button>
+
+    <button (click)="delete(barber)" mat-icon-button color="warn">
       <mat-icon #tooltip="matTooltip"
                 matTooltip="Delete"
                 [matTooltipPosition]="'left'"> delete

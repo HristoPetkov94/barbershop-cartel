@@ -21,8 +21,11 @@ export class BarberConfigurationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.fetchData();
+  }
 
-    this.barberService.getAll().subscribe(data => {
+  private fetchData() {
+    this.barberService.getBarbers().subscribe(data => {
       this.barbers = data;
     }, () => {
     }, () => {
@@ -45,8 +48,30 @@ export class BarberConfigurationComponent implements OnInit {
     this.barbers.push(new Barber());
   }
 
-  remove(barber: Barber) {
+  delete(barber: Barber) {
 
+    if (barber.id === undefined) {
+      confirm('Are you sure you want to delete the empty barber form?');
+      this.spliceFromBarbersList(barber);
+      return;
+    }
+
+    if (confirm('Are you sure you want to delete ' + barber.firstName + '' + barber.lastName + '?')) {
+
+      this.barberService.deleteBarber(barber.id).subscribe(data => {
+          this.fetchData();
+        },
+        () => {
+          this.notification.showMessage('update unsuccessful', 'warn');
+        },
+        () => {
+          this.notification.showMessage('update successful', 'success');
+        }
+      );
+    }
+  }
+
+  spliceFromBarbersList(barber: Barber) {
     const index = this.barbers.indexOf(barber, 0);
 
     if (index > -1) {
@@ -54,16 +79,31 @@ export class BarberConfigurationComponent implements OnInit {
     }
   }
 
-  save() {
-    this.barberService.saveAll(this.barbers).subscribe(data => {
-      },
-      () => {
-        this.notification.showMessage('update unsuccessful', 'warn');
-      },
-      () => {
-        this.notification.showMessage('update successful', 'success');
-      }
-    );
+  save(barber: Barber) {
+
+    if (barber.id === undefined) {
+      this.barberService.createBarber(barber).subscribe(data => {
+          this.fetchData();
+        },
+        () => {
+          this.notification.showMessage('update unsuccessful', 'warn');
+        },
+        () => {
+          this.notification.showMessage('update successful', 'success');
+        }
+      );
+    } else {
+      this.barberService.updateBarber(barber).subscribe(data => {
+          this.fetchData();
+        },
+        () => {
+          this.notification.showMessage('update unsuccessful', 'warn');
+        },
+        () => {
+          this.notification.showMessage('update successful', 'success');
+        }
+      );
+    }
   }
 
   getBase64(file, barber) {
@@ -75,9 +115,5 @@ export class BarberConfigurationComponent implements OnInit {
     reader.onerror = (error) => {
       console.log('Error: ', error);
     };
-  }
-
-  isBarbersEmpty() {
-    return this.barbers.length === 0;
   }
 }

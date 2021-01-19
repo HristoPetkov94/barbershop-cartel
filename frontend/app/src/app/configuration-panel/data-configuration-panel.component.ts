@@ -16,7 +16,7 @@ export class DataConfigurationPanelComponent implements OnInit {
   constructor(private servicesService: ServicesService, private barberService: BarberService) {}
 
   ngOnInit() {
-    this.barberService.getAll().subscribe(b => this.barbers = b);
+    this.barberService.getBarbers().subscribe(b => this.barbers = b);
     // this.services = this.servicesService.getAll();
   }
 

@@ -42,7 +42,7 @@ export class BarberPaginatorComponent implements OnInit {
   ngOnInit() {
     this.spreadDataIntoPages();
 
-    this.barberService.getAll().subscribe(b => {
+    this.barberService.getBarbers().subscribe(b => {
       this.barbers = b;
     });
   }

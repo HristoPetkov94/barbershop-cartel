@@ -30,7 +30,6 @@
         </div>
 
         <div class="col">
-          <app-service-details [service]="service"></app-service-details>
 
           <div class="col max-width">
             <h2>Description</h2>
@@ -50,7 +49,7 @@
   <div class="sized-box-height-40"> </div>
 
   <div class="row max-width justify-content-end">
-    <button mat-fab color="warn" (click)="addService()">
+    <button mat-fab color="warn" (click)="add()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
