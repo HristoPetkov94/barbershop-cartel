@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 export class BasicAuthHttpInterceptorService implements HttpInterceptor {
 
   private static readonly UNAUTHORIZED_STATUS = 401;
-  private static readonly UNAUTHORIZED_TEXT = 'Unauthorized';
+  private static readonly UNAUTHORIZED_MSG = 'token-expired';
 
   constructor(private router: Router) {
   }
@@ -29,12 +29,12 @@ export class BasicAuthHttpInterceptorService implements HttpInterceptor {
       .pipe(
         tap(() => {
           },
-          (err: any) => {
-            if (err instanceof HttpErrorResponse) {
+          (response: any) => {
+            if (response instanceof HttpErrorResponse) {
               // event equals a response
               // 401 means unauthorized
-              if (err.status === BasicAuthHttpInterceptorService.UNAUTHORIZED_STATUS
-                && err.statusText === BasicAuthHttpInterceptorService.UNAUTHORIZED_TEXT) {
+              if (response.status === BasicAuthHttpInterceptorService.UNAUTHORIZED_STATUS
+                && response.error.message === BasicAuthHttpInterceptorService.UNAUTHORIZED_MSG) {
 
                 sessionStorage.clear();
                 this.router.navigate(['login']);

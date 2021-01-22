@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -52,13 +53,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        String[] postMappings = new String[] {
+                "/schedule/save-appointment",
+                "/schedule/appointment-current-week/**"
+        };
+
+        String[] getMappings = new String[] {
+                "/barbers",
+                "/schedule/appointment-current-week/**",
+                "/services"
+        };
+
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
                 // dont authenticate this particular request
                 .authorizeRequests()
-                .antMatchers("/authenticate", "/register").permitAll()
-                .antMatchers(HttpMethod.POST, "/schedule/save-appointment", "/schedule/appointment-current-week/**").permitAll() // have to permit em since they are public url's
-                .antMatchers(HttpMethod.GET, "/barbers", "/schedule/appointment-current-week/**", "/services").permitAll()
+                .antMatchers(HttpMethod.POST, postMappings).permitAll() // have to permit em since they are public url's
+                .antMatchers(HttpMethod.GET, getMappings).permitAll()
                 // all other requests need to be authenticated
                         .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to
@@ -68,5 +79,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         // Add a filter to validate the tokens with every request
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers("/authenticate", "/register");
     }
 }
