@@ -6,7 +6,7 @@ import {ScheduleService} from '../services/schedule.service';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef, MatSidenav} from '@angular/material';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {Service} from '../interfaces/service';
-import {Barber} from '../models/barber';
+import {Barber} from '../models/barber.model';
 
 // TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
 

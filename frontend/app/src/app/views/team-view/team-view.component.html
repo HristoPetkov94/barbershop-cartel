@@ -1,0 +1,19 @@
+<section class="col">
+
+  <nav class="row flex-space-between align-items-center compact-navigation">
+    <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+
+    <app-navigation></app-navigation>
+  </nav>
+
+  <div class="col justify-content-center">
+    <div class="sized-box-height-20"></div>
+    <p class="header"> {{'team.title' | translate}} </p>
+    <div class="sized-box-height-20"></div>
+  </div>
+
+  <app-barber-paginator class="flex-1" [data]="barbers" [barbersPerPage]="3"></app-barber-paginator>
+
+  <app-footer></app-footer>
+</section>
+

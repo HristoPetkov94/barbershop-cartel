@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HomeComponent} from './home/home.component';
+import {HomeViewComponent} from './views/home-view/home-view.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
@@ -32,9 +32,6 @@ import {
 } from '@angular/material';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
-import {TeamStackComponent} from './stacks/team-stack/team-stack.component';
-import {ServiceStackComponent} from './stacks/service-stack/service-stack.component';
-import {ContactsStackComponent} from './stacks/contacts-stack/contacts-stack.component';
 import {BasicAuthHttpInterceptorService} from './interceptors/basic-auth-http.interceptor.service';
 import { RegisterComponent } from './register/register.component';
 import { LogoutComponent } from './logout/logout.component';
@@ -45,10 +42,10 @@ import { NumberCardChartComponent } from './charts/number-card-chart/number-card
 import {ChangePasswordDialogComponent, ConfigurationComponent} from './admin-configuration-panel/configuration.component';
 import { BookedUsersTableComponent } from './booked-users-table/booked-users-table.component';
 import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
-import { BarberServicesPanelComponent } from './barber-services-panel/barber-services-panel.component';
-import { BarberTeamPanelComponent } from './barber-team-panel/barber-team-panel.component';
+import { ServiceViewComponent } from './views/service-view/service-view.component';
+import { TeamViewComponent } from './views/team-view/team-view.component';
 import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.component';
-import { BarberFooterInfoComponent } from './barber-footer-info/barber-footer-info.component';
+import { FooterComponent } from './views/components/footer/footer.component';
 import { I18nModule } from './i18n/i18n.module';
 import { BarberBookNowPanelComponent } from './barber-book-now-panel/barber-book-now-panel.component';
 import { BarberCalendarComponent } from './barber-calendar/barber-calendar.component';
@@ -61,15 +58,14 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {ServiceDialogComponent} from './admin-configuration-panel/services-configuration/dialogs/service-dialog/service-dialog.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ChangePasswordComponent } from './admin-configuration-panel/general-configuration/change-password/change.password.component';
+import { NavigationComponent } from './views/components/navigation/navigation.component';
+import { ContactViewComponent } from './views/contact-view/contact-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    HomeViewComponent,
     LoginComponent,
-    TeamStackComponent,
-    ServiceStackComponent,
-    ContactsStackComponent,
     RegisterComponent,
     LogoutComponent,
     DataConfigurationPanelComponent,
@@ -80,10 +76,10 @@ import { ChangePasswordComponent } from './admin-configuration-panel/general-con
     ChangePasswordDialogComponent,
     ServiceDialogComponent,
     CompactNavbarComponent,
-    BarberServicesPanelComponent,
-    BarberTeamPanelComponent,
+    ServiceViewComponent,
+    TeamViewComponent,
     BarberPaginatorComponent,
-    BarberFooterInfoComponent,
+    FooterComponent,
     BarberBookNowPanelComponent,
     BarberCalendarComponent,
     BarberDashboardComponent,
@@ -91,6 +87,8 @@ import { ChangePasswordComponent } from './admin-configuration-panel/general-con
     BarberConfigurationComponent,
     ServicesConfigurationComponent,
     NotificationComponent,
+    NavigationComponent,
+    ContactViewComponent,
     ChangePasswordComponent,
   ],
     imports: [

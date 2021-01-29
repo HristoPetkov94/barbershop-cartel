@@ -1,0 +1,65 @@
+<section class="col">
+
+  <nav class="row flex-space-between align-items-center compact-navigation">
+    <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+
+    <app-navigation></app-navigation>
+  </nav>
+
+  <div class="col justify-content-center">
+
+    <div class="sized-box-height-20"></div>
+
+    <p class="header"> {{'services.title' | translate}} </p>
+
+    <div class="sized-box-height-20"></div>
+
+    <p class="sub-header"> {{'services.subTitle' | translate}} </p>
+
+    <div class="sized-box-height-20"></div>
+  </div>
+
+  <div class="row card-wrapper flex-1">
+    <div class="card col flex-space-between" *ngFor="let service of services">
+
+      <div class="col">
+
+        <div class="picture" [style.backgroundImage]="'url(' + service?.picture + ')'"></div>
+
+        <div class="sized-box-height-20"></div>
+
+        <div class="row title justify-content-center">
+          <span> {{service.price}} лв.</span>
+          <span class="separator"> | </span>
+          <span> {{service.duration}} мин.</span>
+        </div>
+
+        <div class="col padding-20">
+          <div class="type">
+            {{service.serviceType}}
+          </div>
+
+          <div class="sized-box-height-20"></div>
+
+          <div class="description">
+            {{service.description}}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="padding-20 row justify-content-center">
+        <button class="book-button">{{'bookingMessage' | translate}}</button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="sized-box-height-20"></div>
+
+  <app-footer></app-footer>
+</section>
+
+

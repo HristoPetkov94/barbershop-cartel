@@ -1,10 +1,8 @@
 .team-card-wrapper {
+  width: 60%;
   display: flex;
   justify-content: center;
-
-  margin: auto;
-  width: 60%;
-  height: 60%;
+  align-items: center;
 }
 
 .card-barber-wrapper {
@@ -16,7 +14,6 @@
   /*height: 400px;*/
   width: 100%;
 
-  background: url('../../assets/images/barber.png');
   background-size: cover;
 
   background-repeat: no-repeat;
@@ -150,7 +147,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto;
 }
 
 .navigation-button_true {
@@ -233,4 +229,15 @@
   .team-card-wrapper {
     width: 75%;
   }
+}
+
+.picture {
+  height: 100%;
+
+  border: 1px solid #e4e4e4;
+  overflow: hidden;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
-import {EmailNotificationModel} from '../models/EmailNotificationModel';
+import {EmailNotification} from '../models/email.notification.model';
 
 
 @Injectable({
@@ -14,7 +14,7 @@ export class NotificationService {
   constructor(private http: HttpClient) {
   }
 
-  sendEmail(emailNotificationModel: EmailNotificationModel) {
-    return this.http.post<EmailNotificationModel>(this.url + '/send-email-message', emailNotificationModel);
+  sendEmail(emailNotificationModel: EmailNotification) {
+    return this.http.post<EmailNotification>(this.url + '/send-email-message', emailNotificationModel);
   }
 }

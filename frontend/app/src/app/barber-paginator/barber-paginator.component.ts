@@ -1,9 +1,7 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {BarberService} from '../services/barber.service';
-import {Barber} from '../models/barber';
-
+import {Barber} from '../models/barber.model';
 
 @Component({
   selector: 'app-barber-paginator',
@@ -22,29 +20,32 @@ import {Barber} from '../models/barber';
       ]),
     ],
 })
-export class BarberPaginatorComponent implements OnInit {
+export class BarberPaginatorComponent implements OnChanges {
 
   @ViewChild('paginator', {static: true}) paginator: ElementRef;
 
   public page = 0;
   public pages: Page[] = [];
-  public barbers: Barber[];
 
   @Input()
-  public data;
-
-  @Input()
-  public numberOfPages;
-
-  constructor(private barberService: BarberService) {
+  get data(): Barber[] {
+    return this.barbers;
   }
 
-  ngOnInit() {
-    this.spreadDataIntoPages();
+  set data(barbers: Barber[]) {
+    this.barbers = barbers;
+  }
 
-    this.barberService.getBarbers().subscribe(b => {
-      this.barbers = b;
-    });
+  public barbers: Barber[] = [];
+
+  @Input()
+  public barbersPerPage;
+
+  constructor() {
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.spreadDataIntoPages();
   }
 
   switchPage(index) {
@@ -58,25 +59,28 @@ export class BarberPaginatorComponent implements OnInit {
   }
 
   private spreadDataIntoPages() {
+    if (this.barbers.length === 0) {
+      return;
+    }
+
     let page: Page = {content: [], active: false};
 
-    for (let i = 1; i <= this.data.length; i++) {
+    for (let i = 1; i <= this.barbers.length; i++) {
 
-      if (page.content.length === this.numberOfPages) {
+      if (page.content.length === this.barbersPerPage) {
         this.pages.push(page);
         page = {content: [], active: false};
       }
 
-      page.content.push(this.data[i - 1]);
+      const barber = this.barbers[i - 1];
+      page.content.push(barber);
 
       // this means that we are at the end.
-      if (i === this.data.length) {
+      if (i === this.barbers.length) {
         this.pages.push(page);
       }
     }
 
     this.pages[this.page].active = true;
-
-    console.log(this.pages);
   }
 }

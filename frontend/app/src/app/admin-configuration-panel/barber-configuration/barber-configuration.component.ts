@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {BarberService} from '../../services/barber.service';
-import {Barber} from '../../models/barber';
+import {Barber} from '../../models/barber.model';
 import {NotificationComponent} from '../../notification/notification.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class BarberConfigurationComponent implements OnInit {
       this.barbers = data;
     }, () => {
     }, () => {
-      this.barbers.sort((a, b) => a.firstName.localeCompare(b.firstName));
+      this.barbers.sort((a, b) => a.id - b.id);
       this.loading = false;
     });
   }

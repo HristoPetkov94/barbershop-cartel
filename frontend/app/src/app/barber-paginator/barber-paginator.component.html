@@ -1,13 +1,13 @@
-<div [ngSwitch]="page">
+<div [ngSwitch]="page" class="col max-height justify-content-center align-items-center">
 
-  <div class="team-card-wrapper" *ngSwitchCase="page" >
+  <div class="team-card-wrapper" *ngSwitchCase="page">
 
-    <div class="flip-card" *ngFor="let barber of barbers" [@slideInOut]>
+    <div class="flip-card" *ngFor="let barber of pages[page]?.content" [@slideInOut]>
 
       <div class="flip-card-inner">
 
         <div class="flip-card-front">
-          <img class="barber-image" src="{{barber?.picture}}" alt="Image">
+          <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"> </div>
 
           <div class="barber-info">
             <div class="name">
@@ -24,9 +24,7 @@
         </div>
 
         <div class="flip-card-back">
-          <p class="back-card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-            incididunt ut labore et
-            dolore magna wirl aliqua. Up exlaborum incididunt quis nostrud exercitatn.</p>
+          <p class="back-card-text"> {{barber.description}} </p>
 
           <button class="back-card-button"> {{'bookingMessage' | translate}} </button>
         </div>

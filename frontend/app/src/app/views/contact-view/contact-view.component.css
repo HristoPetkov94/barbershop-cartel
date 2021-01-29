@@ -1,0 +1,119 @@
+/*.contacts-wrapper {*/
+/*}*/
+
+/*.google-maps-wrapper {*/
+/*  padding: 20px;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.google-maps-wrapper > iframe {*/
+/*  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);*/
+/*}*/
+
+/*.contacts-logo {*/
+/*  border: 1px solid whitesmoke;*/
+/*  border-radius: 100px;*/
+/*  width: 175px;*/
+/*  height: 175px;*/
+/*  padding: 10px;*/
+/*  margin: auto;*/
+/*  text-align: center;*/
+/*}*/
+
+/*.contact-box {*/
+/*  padding: 20px;*/
+/*  height: 70%;*/
+/*  background-color: #2f2f2f;*/
+/*}*/
+
+/*.contacts-logo > img {*/
+/*  width: 150px;*/
+/*  height: 150px;*/
+/*}*/
+
+/*.contact-info {*/
+/*  color: whitesmoke;*/
+/*  margin-top: 20px;*/
+/*}*/
+
+/*.info-row {*/
+/*  display: flex;*/
+/*  padding: 10px;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*}*/
+/*.info-row > * {*/
+/*  margin:0 10px;*/
+/*}*/
+
+/*iframe {*/
+/*  height: 70%;*/
+/*  width: 70%;*/
+/*}*/
+
+/*@media (orientation: portrait) {*/
+/*  .wrapper {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    flex-direction: column-reverse;*/
+/*  }*/
+/*}*/
+section {
+  background: #EEEEEE 0 0 no-repeat padding-box;
+  min-height: 100%;
+}
+
+.contact-box {
+  padding: 20px;
+  height: 70%;
+  background-color: #2f2f2f;
+}
+
+.contacts-logo {
+  border: 1px solid whitesmoke;
+  width: 175px;
+  height: 175px;
+  padding: 10px;
+  text-align: center;
+
+  background-size: contain;
+}
+
+.logo {
+  height: 100%;
+}
+
+.contact-info {
+  width: 60%;
+}
+
+.map {
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.iframe {
+  width: 100%;
+  height: 500px;
+
+  border: 1px solid #212121;
+}
+
+.contact-text {
+  width: 100%;
+  background-color: #212121;
+}
+
+.text {
+  color: white;
+}
+
+.location-icon {
+  height: auto!important;
+  width: auto!important;
+  font-size: 100px;
+  color: white;
+}
+
+

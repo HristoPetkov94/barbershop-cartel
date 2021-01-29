@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {ServiceDialogComponent} from './dialogs/service-dialog/service-dialog.component';
 import {BarberService} from '../../services/barber.service';
 import {Service} from '../../interfaces/service';
-import {Barber} from '../../models/barber';
+import {Barber} from '../../models/barber.model';
 import {NotificationComponent} from '../../notification/notification.component';
 
 @Component({

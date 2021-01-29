@@ -6,9 +6,9 @@ import {SocialUser} from 'angularx-social-login';
 import {AppointmentRequest} from '../interfaces/appointment-request';
 import {BarberService} from '../services/barber.service';
 import {ServicesService} from '../services/services.service';
-import {Barber} from '../models/barber';
+import {Barber} from '../models/barber.model';
 import {Service} from '../interfaces/service';
-import {EmailNotificationModel} from '../models/EmailNotificationModel';
+import {EmailNotification} from '../models/email.notification.model';
 import {NotificationService} from '../services/notification.service';
 
 @Component({
@@ -132,7 +132,7 @@ export class BarberBookNowPanelComponent implements OnInit {
     // console.log(fbUser);
 
     // customer oriented email
-    const emailNotification = new EmailNotificationModel();
+    const emailNotification = new EmailNotification();
     emailNotification.to = 'petkovhristo94@gmail.com';
     emailNotification.from = 'testov.email.2020@gmail.com';
     emailNotification.subject = 'Cartel Резервация';

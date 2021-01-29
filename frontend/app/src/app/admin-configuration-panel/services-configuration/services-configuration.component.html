@@ -22,8 +22,10 @@
 
           <select class="dropdown margin-bottom-10" name="barbers" id="barbers" (change)="loadServices(select.value)"
                   #select>
+
             <option *ngFor="let barber of barbers"
                     value="{{barber.id}}"> {{barber.firstName + ' ' + barber.lastName}} </option>
+
           </select>
 
           <p> Pick a barber to see his services. Services are displayed on the right side.</p>

@@ -1,4 +1,4 @@
-export class EmailNotificationModel {
+export class EmailNotification {
   from: string;
   to: string;
   subject: string;

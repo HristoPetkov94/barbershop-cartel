@@ -7,7 +7,7 @@
 
     <nav class="navigation">
       <ul class="steps-parent" #parent>
-        <button id="clicked" (click)="chooseStep($event,'one')" class="one">{{ barber.firstName == null ? 'Barber': barber.firstName + ' ' + barber.lastName }}</button>
+        <button id="clicked" (click)="chooseStep($event,'one')" class="one">{{ barber.firstName == null ? 'BarberModel': barber.firstName + ' ' + barber.lastName }}</button>
         <button (click)="chooseStep($event,'two')" class="two" [disabled]="barber.firstName == null">{{ service.serviceType == null ? 'Service': service.serviceType }}</button>
         <button (click)="chooseStep($event,'three')" class="three" [disabled]="service.serviceType == null">{{ datetime == null ? 'Date and Time': datetime.hour }}</button>
         <button (click)="chooseStep($event,'four')" class="four" [disabled]="datetime == null"> Finish </button>
@@ -66,7 +66,7 @@
             <span> <b> Hour: </b> </span> <span> {{this.datetime.hour}} </span>
           </div>
           <div class="info-row">
-            <span> <b> Barber: </b> </span> <span> {{this.barber.firstName}} {{this.barber.lastName}}</span>
+            <span> <b> BarberModel: </b> </span> <span> {{this.barber.firstName}} {{this.barber.lastName}}</span>
           </div>
           <div class="info-row">
             <span> <b> Service: </b> </span> <span> {{this.service.serviceType}} </span>

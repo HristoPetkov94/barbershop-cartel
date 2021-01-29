@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ServicesService} from '../services/services.service';
 import {BarberService} from '../services/barber.service';
 import {Service} from '../interfaces/service';
-import {Barber} from '../models/barber';
+import {Barber} from '../models/barber.model';
 
 @Component({
   selector: 'app-configuration-panel',

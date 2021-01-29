@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
-import {Week} from '../models/week';
-import {Barber} from '../models/barber';
+import {Week} from '../models/week.model';
+import {Barber} from '../models/barber.model';
 import {Service} from '../interfaces/service';
 import {formatDate} from '@angular/common';
 import {LOCALE_ID, Inject} from '@angular/core';
