@@ -14,7 +14,9 @@
           <li><a (click)="tab = 'contact'">{{ 'home.navigation.contacts' | translate}}</a></li>
           <li><a (click)="changeLang()">{{translate.currentLang}}</a></li>
 
-          <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'configuration'"> <mat-icon> settings </mat-icon></li>
+          <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'configuration'">
+            <mat-icon> settings</mat-icon>
+          </li>
         </ul>
       </nav>
 
@@ -22,7 +24,7 @@
 
         <section class="content-wrapper">
           <span class="content">
-           {{ 'home.title'  | translate}}
+            {{frontPageMessage}}
           </span>
 
           <div class="booking-button-wrapper">

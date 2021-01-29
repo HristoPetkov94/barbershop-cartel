@@ -3,6 +3,7 @@ package com.barbershop.cartel.security.service;
 import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.security.entity.UserEntity;
+import com.barbershop.cartel.security.models.UserModel;
 import com.barbershop.cartel.security.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,7 +64,19 @@ public class PasswordService {
 
         user.setPassword(bcryptEncoder.encode(password));
         userRepository.save(user);
+
         log.info("New password for user:" + user.getEmail() + " has been applied.");
+    }
+
+    public void changePassword(UserModel userModel) {
+
+        Optional<UserEntity> user = userRepository.findByEmail(userModel.getEmail());
+
+        if (user.isEmpty()) {
+            throw new UsernameNotFoundException("User with email: " + userModel.getEmail() + " is not existing.");
+        }
+
+        changePassword(user.get(), userModel.getPassword());
     }
 
     /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/

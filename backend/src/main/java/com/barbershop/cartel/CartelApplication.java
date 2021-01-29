@@ -37,6 +37,8 @@ public class CartelApplication {
 
             barberRepository.save(barber1);
             barberRepository.save(barber2);
+
+
         };
     }
 

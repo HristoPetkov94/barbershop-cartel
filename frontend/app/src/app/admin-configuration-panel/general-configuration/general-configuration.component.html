@@ -2,7 +2,7 @@
 
 <mat-grid-list class="margin-top-20" cols="4" rowHeight="100px">
   <!--        column 1-->
-  <mat-grid-tile [colspan]="2" [rowspan]="1">
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
     <div class="col padding-20 max-height">
 
       <h1 class="margin-bottom-10"> Administrator email </h1>
@@ -11,21 +11,18 @@
     </div>
   </mat-grid-tile>
   <!--        column 2-->
-  <mat-grid-tile [colspan]="2" [rowspan]="2">
+  <mat-grid-tile [colspan]="2" [rowspan]="3">
     <div class="col padding-20 max-height max-width">
+
       <h2 class="margin-bottom-10"> Email </h2>
+
       <div class="row">
-        <input label="" value="" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="email" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100"></div>
       </div>
 
       <div class="sized-box-height"></div>
-
-      <h2 class="margin-bottom-10"> Password </h2>
-      <div class="row">
-        <input label="" value="" type="password" class="text-input max-width"/>
-        <div class="sized-box-width-100"></div>
-      </div>
+      <app-password></app-password>
 
     </div>
   </mat-grid-tile>
@@ -47,16 +44,54 @@
 
   </mat-grid-tile>
 
-  <mat-grid-tile [colspan]="2" [rowspan]="2">
+  <mat-grid-tile [colspan]="2" [rowspan]="3">
     <div class="col padding-20 max-height max-width">
       <h2 class="margin-bottom-10"> Message </h2>
 
       <div class="row">
-              <textarea class="front-page-message-input max-width" rows="15" cols="50"
+        <textarea class="front-page-message-input max-width" [(ngModel)]="frontPageMessage" rows="15" cols="50"
+                  name="comment"></textarea>
+        <div class="sized-box-width-100"></div>
+      </div>
+    </div>
+
+    <button (click)="saveFrontPageMessage()">
+      <mat-icon>check</mat-icon>
+    </button>
+
+  </mat-grid-tile>
+</mat-grid-list>
+
+<hr>
+
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
+
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+
+    <div class="col padding-20 max-height">
+
+      <h1 class="margin-bottom-10"> Appointment success message </h1>
+      <p> This is the at the last step of booking process. It's about completing the appointment. You can change it
+        anytime here.</p>
+
+    </div>
+
+  </mat-grid-tile>
+
+  <mat-grid-tile [colspan]="2" [rowspan]="3">
+    <div class="col padding-20 max-height max-width">
+      <h2 class="margin-bottom-10"> Message </h2>
+
+      <div class="row">
+              <textarea class="front-page-message-input max-width" [(ngModel)]="appointmentMessage" rows="15" cols="50"
                         name="comment"></textarea>
         <div class="sized-box-width-100"></div>
       </div>
     </div>
+
+    <button (click)="saveAppointmentMessage()">
+      <mat-icon>check</mat-icon>
+    </button>
   </mat-grid-tile>
 
 </mat-grid-list>
@@ -81,7 +116,7 @@
       <h2 class="margin-bottom-10"> Facebook </h2>
 
       <div class="row justify-content-center">
-        <input label="" value="" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="socialMedia.facebook" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100">
           <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
         </div>
@@ -92,12 +127,16 @@
       <h2 class="margin-bottom-10"> Instagram </h2>
 
       <div class="row justify-content-center">
-        <input label="" value="" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="socialMedia.instagram" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100">
           <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
         </div>
       </div>
     </div>
+
+    <button (click)="saveSocialMedia()">
+      <mat-icon>check</mat-icon>
+    </button>
 
   </mat-grid-tile>
 
@@ -123,30 +162,31 @@
 
       <h2 class="margin-bottom-10"> City </h2>
       <div class="row justify-content-center">
-        <input label="" value="" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="contactInfo.city" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100"></div>
       </div>
       <div class="sized-box-height"></div>
 
       <h2 class="margin-bottom-10"> Address </h2>
       <div class="row justify-content-center">
-        <input label="" value="" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="contactInfo.address" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100"></div>
       </div>
       <div class="sized-box-height"></div>
 
       <h2 class="margin-bottom-10"> Phone number </h2>
       <div class="row justify-content-center">
-        <input label="" value="" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="contactInfo.phoneNumber" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100"></div>
       </div>
       <div class="sized-box-height"></div>
-
-      <div class="row justify-content-start">
-        <button mat-raised-button color="accent"> Update profile </button>
-        <div class="sized-box-height"></div>
-      </div>
     </div>
+
+    <button (click)="saveContactInfo()">
+      <mat-icon>check</mat-icon>
+    </button>
   </mat-grid-tile>
 
 </mat-grid-list>
+
+<app-notification></app-notification>

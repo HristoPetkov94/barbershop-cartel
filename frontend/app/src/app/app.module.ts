@@ -60,6 +60,7 @@ import { ServicesConfigurationComponent } from './admin-configuration-panel/serv
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {ServiceDialogComponent} from './admin-configuration-panel/services-configuration/dialogs/service-dialog/service-dialog.component';
 import { NotificationComponent } from './notification/notification.component';
+import { ChangePasswordComponent } from './admin-configuration-panel/general-configuration/change-password/change.password.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +91,7 @@ import { NotificationComponent } from './notification/notification.component';
     BarberConfigurationComponent,
     ServicesConfigurationComponent,
     NotificationComponent,
+    ChangePasswordComponent,
   ],
     imports: [
         BrowserModule,

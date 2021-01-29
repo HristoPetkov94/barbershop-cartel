@@ -25,6 +25,9 @@ public class ClientEntity {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ScheduleEntity> schedule;
 }
