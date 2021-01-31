@@ -7,10 +7,13 @@
 
     <nav class="navigation">
       <ul class="steps-parent" #parent>
-        <button id="clicked" (click)="chooseStep($event,'one')" class="one">{{ barber.firstName == null ? 'BarberModel': barber.firstName + ' ' + barber.lastName }}</button>
-        <button (click)="chooseStep($event,'two')" class="two" [disabled]="barber.firstName == null">{{ service.serviceType == null ? 'Service': service.serviceType }}</button>
-        <button (click)="chooseStep($event,'three')" class="three" [disabled]="service.serviceType == null">{{ datetime == null ? 'Date and Time': datetime.hour }}</button>
-        <button (click)="chooseStep($event,'four')" class="four" [disabled]="datetime == null"> Finish </button>
+        <button id="clicked" (click)="chooseStep($event,'one')"
+                class="one">{{ barber.firstName == null ? 'BarberModel' : barber.firstName + ' ' + barber.lastName }}</button>
+        <button (click)="chooseStep($event,'two')" class="two"
+                [disabled]="barber.firstName == null">{{ service.serviceType == null ? 'Service' : service.serviceType }}</button>
+        <button (click)="chooseStep($event,'three')" class="three"
+                [disabled]="service.serviceType == null">{{ datetime == null ? 'Date and Time' : datetime.hour }}</button>
+        <button (click)="chooseStep($event,'four')" class="four" [disabled]="datetime == null"> Finish</button>
       </ul>
     </nav>
 
@@ -43,7 +46,8 @@
     </div>
 
     <div *ngSwitchCase="'three'" [@fadeOut]>
-        <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber" [service]="service"> </app-barber-calendar>
+      <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber"
+                           [service]="service"></app-barber-calendar>
     </div>
 
     <div *ngSwitchCase="'four'" [@fadeOut]>
@@ -51,9 +55,10 @@
       <div class="final-info-container">
 
         <div *ngIf="done" class="done">
-          <mat-icon> done </mat-icon> <br/>
+          <mat-icon> done</mat-icon>
+          <br/>
 
-          <p> Thank you for choosing us !</p>
+          <p> {{appointmentMessage}}</p>
           <p> You have a booked hour for {{this.datetime.date}} / {{this.datetime.hour}} h. </p>
 
         </div>

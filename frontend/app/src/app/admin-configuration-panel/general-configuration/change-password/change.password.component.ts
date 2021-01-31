@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {User} from '../../../models/user.model';
 import {NotificationComponent} from '../../../notification/notification.component';
-import {GeneralConfigurationService} from '../../../services/general-configuration.service';
+import {GeneralConfigurationService} from '../../../services/general.configuration.service';
 
 @Component({
   selector: 'app-password',

@@ -10,6 +10,7 @@ import {Barber} from '../models/barber.model';
 import {Service} from '../interfaces/service';
 import {EmailNotification} from '../models/email.notification.model';
 import {NotificationService} from '../services/notification.service';
+import {GeneralConfigurationService} from '../services/general.configuration.service';
 
 @Component({
   selector: 'app-barber-book-now-panel',
@@ -35,17 +36,23 @@ export class BarberBookNowPanelComponent implements OnInit {
   public step = 'one';
   public client: SocialUser;
   public done;
+  public appointmentMessage: string;
 
   constructor(private scheduleService: ScheduleService,
               private facebook: SocialAuthService,
               private barberService: BarberService,
               private servicesService: ServicesService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private generalConfigurationService: GeneralConfigurationService) {
   }
 
   ngOnInit() {
     this.barberService.getBarbers().subscribe(b => {
       this.barbers = b;
+    });
+
+    this.generalConfigurationService.getAppointmentMessage().subscribe(data => {
+      this.appointmentMessage = data;
     });
   }
 

@@ -113,7 +113,7 @@
     </nav>
 
     <div class="col justify-content-center title-wrapper flex-1">
-      <span class="title"> {{ 'home.title'  | translate}} </span>
+      <span class="title"> {{frontPageMessage}} </span>
 
       <div class="sized-box-height-50"></div>
 
@@ -126,11 +126,17 @@
       <div class="sized-box-width-40"></div>
 
       <div class="col">
-        <img class="social-icons" src="../../../assets/images/facebook-icon.png"/>
-        <div class="sized-box-height-20"></div>
 
-        <img class="social-icons" src="../../../assets/images/instagram-icon.png"/>
-        <div class="sized-box-height-20"></div>
+        <a href="{{socialMedia.facebook}}">
+          <img class="social-icons" src="../../../assets/images/facebook-icon.png"/>
+          <div class="sized-box-height-20"></div>
+        </a>
+
+        <a href="{{socialMedia.instagram}}">
+          <img class="social-icons" src="../../../assets/images/instagram-icon.png"/>
+          <div class="sized-box-height-20"></div>
+        </a>
+
       </div>
     </div>
 

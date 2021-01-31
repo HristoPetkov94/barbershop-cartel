@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {GeneralConfigurationService} from '../../services/general-configuration.service';
+import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {NotificationComponent} from '../../notification/notification.component';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../../models/general.configuration/contact.info.model';

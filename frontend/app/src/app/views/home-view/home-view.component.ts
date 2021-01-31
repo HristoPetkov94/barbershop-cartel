@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {GeneralConfigurationService} from '../../services/general.configuration.service';
+import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 
-// TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
 
-// @ts-ignore
 @Component({
   selector: 'app-home',
   templateUrl: './home-view.component.html',
@@ -21,9 +21,19 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 
 export class HomeViewComponent implements OnInit {
 
-  constructor() {
+  public frontPageMessage: string;
+  public socialMedia = new SocialMediaModel();
+
+  constructor(private generalConfigurationService: GeneralConfigurationService) {
   }
 
   ngOnInit() {
+    this.generalConfigurationService.getFrontPageMessage().subscribe(data => {
+      this.frontPageMessage = data;
+    });
+
+    this.generalConfigurationService.getSocialMedia().subscribe(data => {
+      this.socialMedia = data;
+    });
   }
 }
