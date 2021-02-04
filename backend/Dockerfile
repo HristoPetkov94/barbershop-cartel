@@ -10,4 +10,4 @@ RUN mvn -f pom.xml -DskipTests clean package
 FROM openjdk:13-alpine
 COPY --from=build /workspace/target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","app.jar"]
