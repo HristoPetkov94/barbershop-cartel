@@ -1,5 +1,5 @@
 ### STAGE 1: Build ###
-FROM maven:3-openjdk-11-slim AS build
+FROM maven:3.6.0-jdk-13-alpine AS build
 RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY pom.xml /workspace
