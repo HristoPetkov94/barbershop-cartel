@@ -20,7 +20,7 @@ public class ServiceEntity {
     @Column(name = "service_type")
     private String serviceType;
 
-    @Column(name = "price_BGN")
+    @Column(name = "price")
     private int price;
 
     @Column(name = "duration")

@@ -34,6 +34,12 @@
               <h2>Services</h2>
               <div class="sized-box-width-100"></div>
             </li>
+
+            <li id="store" class="row justify-content-center space-between-5 height-50" (click)="setTab('store')">
+              <mat-icon>shopping_cart</mat-icon>
+              <h2>Store</h2>
+              <div class="sized-box-width-100"></div>
+            </li>
           </ul>
 
         </div>
@@ -46,6 +52,7 @@
               <app-general-configuration *ngSwitchCase="'general'"></app-general-configuration>
               <app-barber-configuration *ngSwitchCase="'barbers'"></app-barber-configuration>
               <app-services-configuration *ngSwitchCase="'services'"></app-services-configuration>
+              <app-store-configuration *ngSwitchCase="'store'"></app-store-configuration>
             </ng-container>
 
             <div class="footer-fixer"></div>

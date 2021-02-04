@@ -60,6 +60,8 @@ import { NotificationComponent } from './notification/notification.component';
 import { ChangePasswordComponent } from './admin-configuration-panel/general-configuration/change-password/change.password.component';
 import { NavigationComponent } from './views/components/navigation/navigation.component';
 import { ContactViewComponent } from './views/contact-view/contact-view.component';
+import { StoreComponent } from './views/store-view/store.component';
+import { StoreConfigurationComponent } from './admin-configuration-panel/store-configuration/store-configuration.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { ContactViewComponent } from './views/contact-view/contact-view.componen
     NavigationComponent,
     ContactViewComponent,
     ChangePasswordComponent,
+    StoreComponent,
+    StoreConfigurationComponent,
   ],
     imports: [
         BrowserModule,
