@@ -1,4 +1,4 @@
-import {Barber} from '../models/barber.model';
+import {Barber} from '../../../models/barber.model';
 
 export class Page {
 

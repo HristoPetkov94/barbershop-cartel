@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {fade} from '../animations/fade';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 
@@ -7,16 +7,9 @@ import {SocialMediaModel} from '../../models/general.configuration/social.media.
 @Component({
   selector: 'app-home',
   templateUrl: './home-view.component.html',
-  styleUrls: ['./home-view.component.css'],
-  animations:
-    [
-      trigger('slideInOut', [
-        transition(':enter', [
-          style({opacity: '0'}),
-          animate('0.5s ease-in', style({opacity: '1'}))
-        ]),
-      ]),
-    ],
+  styleUrls: ['./home-view.component.css'], animations: [
+    fade
+  ]
 })
 
 export class HomeViewComponent implements OnInit {

@@ -1,21 +1,28 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {ScheduleService} from '../services/schedule.service';
+import {ScheduleService} from '../../services/schedule.service';
 import {FacebookLoginProvider, SocialAuthService} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
-import {AppointmentRequest} from '../interfaces/appointment-request';
-import {BarberService} from '../services/barber.service';
-import {ServicesService} from '../services/services.service';
-import {Barber} from '../models/barber.model';
-import {Service} from '../interfaces/service';
-import {EmailNotification} from '../models/email.notification.model';
-import {NotificationService} from '../services/notification.service';
+import {AppointmentRequest} from '../../interfaces/appointment-request';
+import {BarberService} from '../../services/barber.service';
+import {ServicesService} from '../../services/services.service';
+import {Barber} from '../../models/barber.model';
+import {Service} from '../../interfaces/service';
+import {EmailNotification} from '../../models/email.notification.model';
+import {NotificationService} from '../../services/notification.service';
 import {GeneralConfigurationService} from '../services/general.configuration.service';
+
+interface Step {
+  type: string;
+  title: string;
+  disabled: boolean;
+  active: string;
+}
 
 @Component({
   selector: 'app-barber-book-now-panel',
-  templateUrl: './barber-book-now-panel.component.html',
-  styleUrls: ['./barber-book-now-panel.component.css'],
+  templateUrl: './booking-view.component.html',
+  styleUrls: ['./booking-view.component.css'],
   animations:
     [
       trigger('fadeOut', [
@@ -26,17 +33,49 @@ import {GeneralConfigurationService} from '../services/general.configuration.ser
       ]),
     ],
 })
-export class BarberBookNowPanelComponent implements OnInit {
+export class BookingViewComponent implements OnInit {
   @ViewChild('parent', {static: true}) parent: ElementRef;
 
   public barbers: Barber[];
   public barber = new Barber();
   public service = new Service();
   public datetime;
+
   public step = 'one';
+  public stepIndex = 0;
+
   public client: SocialUser;
   public done;
   public appointmentMessage: string;
+
+  public steps: Step[] = [
+    {
+      type: 'one',
+      title: 'Barber',
+      disabled: false,
+      active: 'active',
+    },
+    {
+      type: 'two',
+      title: 'Service',
+      disabled: true,
+      active: 'inactive',
+    },
+    {
+      type: 'three',
+      title: 'Date and Time',
+      disabled: true,
+      active: 'inactive',
+    },
+    {
+      type: 'four',
+      title: 'Finish',
+      disabled: true,
+      active: 'inactive',
+    }
+  ];
+
+  public defaults = ['Barber', 'Service', 'Date and Time', 'Finish'];
 
   constructor(private scheduleService: ScheduleService,
               private facebook: SocialAuthService,
@@ -56,16 +95,32 @@ export class BarberBookNowPanelComponent implements OnInit {
     });
   }
 
-  chooseStep(event, step: string) {
-    const element = event.target || event.srcElement || event.currentTarget;
+  makeActive(index, step: string) {
 
-    const elements = this.parent.nativeElement.getElementsByTagName('li');
-    for (const e of elements) {
-      e.id = '';
+    // clear rest
+    if (index < this.stepIndex) {
+      this.clearPrevious(index);
     }
 
     this.step = step;
-    element.id = 'clicked';
+
+    for (const s of this.steps) {
+      s.active = 'inactive';
+    }
+
+    this.steps[index].active = 'active';
+    this.stepIndex = index;
+  }
+
+  next(step: string, title: string) {
+    this.steps[this.stepIndex].title = title;
+
+    this.stepIndex++;
+
+    this.step = step;
+    this.steps[this.stepIndex].disabled = false;
+
+    this.makeActive(this.stepIndex, this.step);
   }
 
   chooseBarber(barber) {
@@ -73,9 +128,8 @@ export class BarberBookNowPanelComponent implements OnInit {
     this.barber = barber;
     this.step = 'two';
 
-    // clear
-    this.clearClicked();
-    this.setClicked(this.step);
+    const title = barber.firstName.concat(' ').concat(barber.lastName);
+    this.next(this.step, title);
   }
 
   chooseService(service) {
@@ -83,8 +137,8 @@ export class BarberBookNowPanelComponent implements OnInit {
     this.service = service;
     this.step = 'three';
 
-    this.clearClicked();
-    this.setClicked(this.step);
+    const title = service.serviceType;
+    this.next(this.step, title);
   }
 
   chooseDateTime($event: any) {
@@ -92,25 +146,8 @@ export class BarberBookNowPanelComponent implements OnInit {
 
     this.step = 'four';
 
-    this.clearClicked();
-    this.setClicked(this.step);
-  }
-
-  private clearClicked() {
-    const elements = this.parent.nativeElement.getElementsByTagName('li');
-    for (const e of elements) {
-      e.id = '';
-    }
-  }
-
-  private setClicked(step: string) {
-    const elements = this.parent.nativeElement.getElementsByTagName('li');
-    for (const e of elements) {
-
-      if (e.className.includes(step)) {
-        e.id = 'clicked';
-      }
-    }
+    const title = this.datetime.hour.toString();
+    this.next(this.step, title);
   }
 
   sendEmail() {
@@ -173,5 +210,12 @@ export class BarberBookNowPanelComponent implements OnInit {
         });
       }
     );
+  }
+
+  private clearPrevious(index) {
+    for (let i = index + 1; i < this.steps.length; i++) {
+      this.steps[i].title = this.defaults[i];
+      this.steps[i].disabled = true;
+    }
   }
 }

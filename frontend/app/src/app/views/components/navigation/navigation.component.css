@@ -1,20 +1,14 @@
 .nav {
-  display: -webkit-box;
-  justify-content: center;
-  align-items: center;
-
   list-style-type: none;
   padding: 0;
 }
 
 .nav > li {
-  display: inline;
   padding: 20px;
   font: Bold 18px/20px Roboto;
   letter-spacing: 0;
   color: #FFFFFFB3;
   text-transform: uppercase;
-  height: 37px;
 }
 
 .nav > li:hover {

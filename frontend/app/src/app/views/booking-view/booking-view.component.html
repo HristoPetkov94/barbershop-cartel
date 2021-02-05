@@ -1,0 +1,118 @@
+<section class="col">
+
+  <nav class="row flex-space-between align-items-center compact-navigation">
+    <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+
+    <app-navigation></app-navigation>
+  </nav>
+
+  <div class="sized-box-height-20"></div>
+
+  <ng-container [ngSwitch]="step">
+
+    <nav class="navigation row  justify-content-center">
+
+      <div class="row breadcrumb">
+
+        <div *ngFor="let step of steps; let i = index">
+
+          <div class="row justify-content-center align-items-center">
+
+            <button class="breadcrumb-links" id="{{step.active}}" (click)="makeActive(i, step.type)"
+                    [disabled]="step.disabled"> {{step.title}} </button>
+
+            <div class="sized-box-width-20"></div>
+
+            <div *ngIf="i !== steps.length - 1">
+              <div class="separator"> ></div>
+              <div class="sized-box-width-20"></div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="col flex-1 align-items-center" *ngSwitchCase="'one'" [@fadeOut]>
+
+      <div class="row barber-wrapper">
+        <div class="col barber" *ngFor="let barber of barbers" (click)="chooseBarber(barber)">
+
+          <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"> </div>
+
+          <div class="row name padding-20 justify-content-center">
+            <span>{{barber.firstName}} {{barber.lastName}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col flex-1 align-items-center" *ngSwitchCase="'two'" [@fadeOut]>
+
+      <div class="hover-me"  *ngFor="let service of barber.services" (click)="chooseService(service)">
+        <div class="service">
+          <div class="row flex-space-between align-items-center">
+            <span class="type">{{service.serviceType}}</span>
+
+            <div class="row align-items-center">
+
+              <mat-icon> access_time </mat-icon>
+              <span class="duration">{{service.duration}} мин.</span>
+
+              <mat-icon> attach_money </mat-icon>
+              <span class="price">{{service.price}} лв.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col flex-1" *ngSwitchCase="'three'" [@fadeOut]>
+      <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber"
+                           [service]="service"></app-barber-calendar>
+    </div>
+
+    <div *ngSwitchCase="'four'" [@fadeOut]>
+
+      <div class="final-info-container">
+
+        <div *ngIf="done" class="done">
+          <mat-icon> done</mat-icon>
+          <br/>
+
+          <p> Thank you for choosing us !</p>
+          <p> You have a booked hour for {{this.datetime.date}} / {{this.datetime.hour}} h. </p>
+
+        </div>
+
+        <ng-container *ngIf="!done">
+          <div class="info-row">
+            <span> <b> Date: </b> </span> <span> {{this.datetime.date}} </span>
+          </div>
+          <div class="info-row">
+            <span> <b> Hour: </b> </span> <span> {{this.datetime.hour}} </span>
+          </div>
+          <div class="info-row">
+            <span> <b> BarberModel: </b> </span> <span> {{this.barber.firstName}} {{this.barber.lastName}}</span>
+          </div>
+          <div class="info-row">
+            <span> <b> Service: </b> </span> <span> {{this.service.serviceType}} </span>
+          </div>
+          <div class="info-row">
+            <span> <b> Price: </b> </span> <span> {{this.service.price}} лв.</span>
+          </div>
+          <div class="info-row">
+            <span> <b> Duration: </b> </span> <span> {{this.service.duration}} мин.</span>
+          </div>
+
+          <button class="confirm-button" (click)="sendEmail()">
+            Confirm with Facebook
+          </button>
+        </ng-container>
+      </div>
+
+    </div>
+
+  </ng-container>
+</section>

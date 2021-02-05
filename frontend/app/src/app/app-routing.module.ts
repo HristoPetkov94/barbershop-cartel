@@ -4,7 +4,7 @@ import {HomeViewComponent} from './views/home-view/home-view.component';
 import {LoginComponent} from './login/login.component';
 import {ConfigurationComponent} from './admin-configuration-panel/configuration.component';
 import {AuthGuardService} from './authentication/auth-guard.service';
-import {BarberBookNowPanelComponent} from './barber-book-now-panel/barber-book-now-panel.component';
+import {BookingViewComponent} from './views/booking-view/booking-view.component';
 import {BarberDashboardComponent} from './barber-dashboard/barber-dashboard.component';
 import {RegisterComponent} from './register/register.component';
 import {TeamViewComponent} from './views/team-view/team-view.component';
@@ -15,15 +15,14 @@ import {StoreComponent} from './views/store-view/store.component';
 
 const routes: Routes = [
   { path: '', component: HomeViewComponent },
-  { path: 'team', component: TeamViewComponent, data: {animation: 'HomePage'} },
-  { path: 'services', component: ServiceViewComponent, data: {animation: 'HomePage'} },
-  { path: 'contacts', component: ContactViewComponent, data: {animation: 'HomePage'} },
-  { path: 'store', component: StoreComponent, data: {animation: 'HomePage'} },
-  { path: 'book-now', component: BarberBookNowPanelComponent },
+
+  { path: 'team', component: TeamViewComponent },
+  { path: 'services', component: ServiceViewComponent },
+  { path: 'contacts', component: ContactViewComponent },
+  { path: 'store', component: StoreComponent },
+  { path: 'book-now', component: BookingViewComponent },
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
-  // TODO: rename and change path to more appropriate one.
-  // { path: 'configuration', component: DataConfigurationPanelComponent, canActivate: [AuthGuardService]},
   { path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuardService]},
   { path: 'dashboard', component: BarberDashboardComponent, canActivate: [AuthGuardService]},
 

@@ -1,7 +1,7 @@
 import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
 import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {Barber} from '../models/barber.model';
+import {Barber} from '../../../models/barber.model';
 
 @Component({
   selector: 'app-barber-paginator',

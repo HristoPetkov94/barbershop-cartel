@@ -1,17 +1,15 @@
-* {
-  padding: 0;
-  margin: 0;
-}
-
 section {
   background: #EEEEEE 0 0 no-repeat padding-box;
-  position: relative;
+  min-height: 100%;
+}
 
-  height: 90vh;
+.logo {
+  height: 100%;
 }
 
 .navigation {
   padding: 20px;
+  height: 50px;
 }
 
 .steps-parent {
@@ -19,7 +17,7 @@ section {
 }
 
 .steps-parent {
-  display:flex;
+  display: flex;
   margin: auto;
   width: 400px;
 
@@ -52,19 +50,28 @@ section {
   text-decoration: none;
 }
 
-.barbers-container {
-  display: flex;
-  justify-content: space-evenly;
-}
-
 .barber {
-  display: grid;
-  grid-template-columns: 300px;
-  grid-template-rows: 400px 100px;
+  font: normal normal normal 18px/20px Roboto;
+
+  height: 300px;
+  width: 29%;
+  /*margin: 10px 20px;*/
+  padding: 10px;
+  background: transparent;
 
   cursor: pointer;
 
-  font: normal normal normal 18px/20px Roboto;
+  border: 1px solid transparent;
+}
+
+.shadow {
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(33,33,33,0.16);
+  box-shadow: 5px 5px 5px 0px rgba(33,33,33,0.16);
+}
+
+.barber:hover {
+  border: 1px solid #212121;
+  transition: 0.2s;
 }
 
 .barber-image {
@@ -86,62 +93,16 @@ section {
   border: 2px solid #212121;
 }
 
-.button-wrapper{
-  width: 100%;
-  justify-self: center;
-  align-self: center;
-}
-
-.service-info-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  font: normal normal normal 18px/20px Roboto;
-}
-
 .service {
-  width: 30%;
   justify-self: center;
   align-self: center;
-  margin: 20px auto;
 
-  border: 1px solid #2121215e;
-  border-radius: 10px;
+  padding: 50px;
 
-  padding: 20px;
-
-  -webkit-box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
+  background-color: #212121;
+  color: whitesmoke;
 
   cursor: pointer;
-
-  position: relative;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.service:after {
-  position: absolute;
-  content: "";
-  bottom: 0;
-  left: 0;
-  height: 0;
-  width: 100%;
-  background: #212121;
-  transition: all .35s;
-  z-index: -1;
-}
-
-.service:hover:after {
-  content: '';
-  background-color: #212121;
-  height: 100%;
-}
-
-.service:hover {
-  color: #EEEEEE;
 }
 
 .duration {
@@ -165,18 +126,14 @@ a {
   text-align: center;
   position: relative;
   transition: all .35s;
-
-  -webkit-box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
 }
 
-a span{
+a span {
   position: relative;
   z-index: 2;
 }
 
-a:after{
+a:after {
   position: absolute;
   content: "";
   top: 0;
@@ -187,11 +144,11 @@ a:after{
   transition: all .35s;
 }
 
-a:hover{
+a:hover {
   color: #EEEEEE;
 }
 
-a:hover:after{
+a:hover:after {
   width: 100%;
 }
 
@@ -206,10 +163,6 @@ a:hover:after{
   height: 400px;
   border-radius: 5px;
   padding: 20px;
-
-  -webkit-box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
-  box-shadow: 10px 10px 33px -17px rgba(0,0,0,0.75);
 }
 
 .info-row {
@@ -246,4 +199,83 @@ a:hover:after{
   border-radius: 100px;
 
   font-size: 100px;
+}
+
+#active {
+  transition: 0.5s;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+.underline {
+  border-bottom: 1px solid black;
+  width: 100%;
+}
+
+.separator {
+  color: grey;
+}
+
+.breadcrumb {
+  justify-content: center;
+  align-items: center;
+}
+
+.breadcrumb-links {
+  background: transparent;
+  border: none;
+
+  border-bottom: 1px solid transparent;
+
+  cursor: pointer;
+}
+
+.breadcrumb-links:focus {
+  outline: none;
+}
+
+.breadcrumb-links, .separator {
+  font: normal normal bold 15px/15px Roboto;
+  letter-spacing: 1px;
+  padding:10px;
+}
+
+.picture {
+  height: 100%;
+
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+
+  overflow: hidden;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.barber-wrapper {
+  width: 60%;
+  flex-wrap: wrap;
+}
+
+.name {
+  background: #212121;
+  color: whitesmoke;
+
+  padding: 20px 0;
+
+  font: normal normal bold 15px/15px Roboto;
+}
+
+.hover-me {
+  width: 33%;
+  padding: 10px;
+
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.hover-me:hover {
+  border:1px solid #212121;
 }

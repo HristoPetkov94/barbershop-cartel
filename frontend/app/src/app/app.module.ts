@@ -44,10 +44,10 @@ import { BookedUsersTableComponent } from './booked-users-table/booked-users-tab
 import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
 import { ServiceViewComponent } from './views/service-view/service-view.component';
 import { TeamViewComponent } from './views/team-view/team-view.component';
-import { BarberPaginatorComponent } from './barber-paginator/barber-paginator.component';
+import { BarberPaginatorComponent } from './views/components/barber-paginator/barber-paginator.component';
 import { FooterComponent } from './views/components/footer/footer.component';
 import { I18nModule } from './i18n/i18n.module';
-import { BarberBookNowPanelComponent } from './barber-book-now-panel/barber-book-now-panel.component';
+import {BookingViewComponent} from './views/booking-view/booking-view.component';
 import { BarberCalendarComponent } from './barber-calendar/barber-calendar.component';
 import { BarberDashboardComponent } from './barber-dashboard/barber-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -82,7 +82,7 @@ import { StoreConfigurationComponent } from './admin-configuration-panel/store-c
     TeamViewComponent,
     BarberPaginatorComponent,
     FooterComponent,
-    BarberBookNowPanelComponent,
+    BookingViewComponent,
     BarberCalendarComponent,
     BarberDashboardComponent,
     GeneralConfigurationComponent,

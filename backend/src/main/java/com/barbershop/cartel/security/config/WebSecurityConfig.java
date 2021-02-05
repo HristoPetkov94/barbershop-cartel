@@ -1,5 +1,6 @@
 package com.barbershop.cartel.security.config;
 
+import com.barbershop.cartel.security.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,10 +28,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     @Autowired
-    private UserDetailsService jwtUserDetailsService;
+    private JwtUserDetailsService jwtUserDetailsService;
 
     @Autowired
-    private JwtRequestFilter jwtRequestFilter;
+    private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
@@ -53,23 +54,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        String[] postMappings = new String[] {
-                "/schedule/save-appointment",
-                "/schedule/appointment-current-week/**"
-        };
 
         String[] getMappings = new String[] {
-                "/barbers",
-                "/schedule/appointment-current-week/**",
-                "/services"
+                "/user","/general-configuration/**"
+        };
+
+        String[] postMappings = new String[] {
+                "/barbers", "/services"
         };
 
         // We don't need CSRF for this example
         httpSecurity.csrf().disable()
                 // dont authenticate this particular request
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, postMappings).permitAll() // have to permit em since they are public url's
                 .antMatchers(HttpMethod.GET, getMappings).permitAll()
+                .antMatchers(HttpMethod.POST, postMappings).permitAll()
                 // all other requests need to be authenticated
                         .anyRequest().authenticated().and()
                 // make sure we use stateless session; session won't be used to
@@ -78,11 +77,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         // Add a filter to validate the tokens with every request
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(new JwtRequestFilter(jwtUserDetailsService, jwtTokenUtil), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers("/authenticate", "/register");
+        web.ignoring()
+                .antMatchers("/authenticate", "/register")
+                .antMatchers(HttpMethod.GET, "/barbers", "/services", "/schedule/appointment-current-week**")
+                .antMatchers(HttpMethod.POST, "/schedule/save-appointment", "/send-email-message");
     }
 }
