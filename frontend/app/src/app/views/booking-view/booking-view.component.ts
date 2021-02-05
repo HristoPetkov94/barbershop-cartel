@@ -10,7 +10,7 @@ import {Barber} from '../../models/barber.model';
 import {Service} from '../../interfaces/service';
 import {EmailNotification} from '../../models/email.notification.model';
 import {NotificationService} from '../../services/notification.service';
-import {GeneralConfigurationService} from '../services/general.configuration.service';
+import {GeneralConfigurationService} from '../../services/general.configuration.service';
 
 interface Step {
   type: string;
