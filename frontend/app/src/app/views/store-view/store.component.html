@@ -1,2 +1,19 @@
-<p>store-view works!</p>
-<app-notification></app-notification>
+<section class="col" [@Fade]>
+
+  <nav class="row flex-space-between align-items-center compact-navigation">
+    <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+
+    <app-navigation></app-navigation>
+  </nav>
+
+  <app-notification></app-notification>
+  <div class="col justify-content-center">
+    <div style="padding-top: 20px;">
+      <img src="https://sccandles.com/wp-content/uploads/2019/08/under-construction.jpg" alt="under construction"/>
+    </div>
+  </div>
+  <div class="sized-box-height-20"></div>
+
+  <app-footer></app-footer>
+</section>
+
