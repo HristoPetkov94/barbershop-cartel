@@ -4,6 +4,8 @@ RUN mkdir -p /workspace
 WORKDIR /workspace
 COPY pom.xml /workspace
 COPY src /workspace/src
+COPY .git /workspace/.git
+
 RUN mvn -f pom.xml -DskipTests clean package
 
 ### STAGE 2: Run ###
