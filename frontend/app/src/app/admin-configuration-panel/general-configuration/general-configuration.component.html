@@ -7,7 +7,6 @@
 
       <h1 class="margin-bottom-10"> Administrator email </h1>
       <p> This is the administrators email. You can change it to anything you like at any time. </p>
-
     </div>
   </mat-grid-tile>
   <!--        column 2-->
@@ -185,7 +184,14 @@
 
 
   </mat-grid-tile>
-
+  <mat-grid-tile [colspan]="4" [rowspan]="2">
+    <h1>Git info</h1>
+    <div *ngIf="gitInfo$ | async as gitInfo">
+      <p>Branch : {{ gitInfo.gitBranch }}</p>
+      <p>BuildTime : {{ gitInfo.gitBuildTime }}</p>
+      <p>GitCommitId : {{ gitInfo.gitCommitId }}</p>
+    </div>
+  </mat-grid-tile>
 </mat-grid-list>
 
 <app-notification></app-notification>

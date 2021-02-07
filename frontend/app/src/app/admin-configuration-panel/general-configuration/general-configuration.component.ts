@@ -4,6 +4,8 @@ import {NotificationComponent} from '../../notification/notification.component';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../../models/general.configuration/contact.info.model';
 import {User} from '../../models/user.model';
+import {Observable} from "rxjs";
+import {GitVersion} from "../../models/git-version.mode";
 
 @Component({
   selector: 'app-general-configuration',
@@ -22,6 +24,8 @@ export class GeneralConfigurationComponent implements OnInit {
 
   public socialMedia = new SocialMediaModel();
   public contactInfo = new ContactInfoModel();
+
+  public gitInfo$: Observable<GitVersion>;
 
   constructor(private generalConfigurationService: GeneralConfigurationService) {
   }
@@ -49,6 +53,7 @@ export class GeneralConfigurationComponent implements OnInit {
       this.contactInfo = data;
     });
 
+    this.gitInfo$ = this.generalConfigurationService.getGitInfo();
   }
 
   saveFrontPageMessage() {

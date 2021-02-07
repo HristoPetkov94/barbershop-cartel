@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Subscribable} from 'rxjs';
+import {Observable, Subscribable} from 'rxjs';
 import {User} from '../models/user.model';
 import {SocialMediaModel} from '../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
+import {GitVersion} from "../models/git-version.mode";
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,10 @@ export class GeneralConfigurationService {
 
   getContactInfo(): Subscribable<ContactInfoModel> {
     return this.http.get<ContactInfoModel>(this.apiUrl + this.configUrl + '/contact-info');
+  }
+
+
+  getGitInfo(): Observable<GitVersion> {
+    return this.http.get<GitVersion>(this.apiUrl + '/git-info');
   }
 }
