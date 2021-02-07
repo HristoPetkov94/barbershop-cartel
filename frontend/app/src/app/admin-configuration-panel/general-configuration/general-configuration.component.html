@@ -18,7 +18,6 @@
 
       <div class="row">
         <input [(ngModel)]="email" type="text" class="text-input max-width"/>
-        <div class="sized-box-width-100"></div>
       </div>
 
       <div class="sized-box-height-20"></div>
@@ -48,16 +47,16 @@
     <div class="col padding-20 max-height max-width">
       <h2 class="margin-bottom-10"> Message </h2>
 
-      <div class="row">
+      <div class="row margin-bottom-10">
         <textarea class="front-page-message-input max-width" [(ngModel)]="frontPageMessage" rows="15" cols="50"
                   name="comment"></textarea>
-        <div class="sized-box-width-100"></div>
       </div>
-    </div>
 
-    <button (click)="saveFrontPageMessage()">
-      <mat-icon>check</mat-icon>
-    </button>
+      <button class="row" mat-stroked-button color="accent" (click)="saveFrontPageMessage()">
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
+    </div>
 
   </mat-grid-tile>
 </mat-grid-list>
@@ -82,16 +81,16 @@
     <div class="col padding-20 max-height max-width">
       <h2 class="margin-bottom-10"> Message </h2>
 
-      <div class="row">
+      <div class="row margin-bottom-10">
               <textarea class="front-page-message-input max-width" [(ngModel)]="appointmentMessage" rows="15" cols="50"
                         name="comment"></textarea>
-        <div class="sized-box-width-100"></div>
+<!--        <div class="sized-box-width-100"></div>-->
       </div>
+        <button mat-stroked-button color="accent" (click)="saveAppointmentMessage()">
+          <mat-icon>save</mat-icon>
+          Save
+        </button>
     </div>
-
-    <button (click)="saveAppointmentMessage()">
-      <mat-icon>check</mat-icon>
-    </button>
   </mat-grid-tile>
 
 </mat-grid-list>
@@ -116,27 +115,28 @@
       <h2 class="margin-bottom-10"> Facebook </h2>
 
       <div class="row justify-content-center">
-        <input [(ngModel)]="socialMedia.facebook" type="text" class="text-input max-width"/>
         <div class="sized-box-width-100">
           <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
         </div>
+        <input [(ngModel)]="socialMedia.facebook" type="text" class="text-input max-width"/>
       </div>
 
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> Instagram </h2>
 
-      <div class="row justify-content-center">
-        <input [(ngModel)]="socialMedia.instagram" type="text" class="text-input max-width"/>
+      <div class="row justify-content-center margin-bottom-10">
         <div class="sized-box-width-100">
           <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
         </div>
+        <input [(ngModel)]="socialMedia.instagram" type="text" class="text-input max-width"/>
       </div>
+      <button mat-stroked-button color="accent" (click)="saveSocialMedia()">
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
     </div>
 
-    <button (click)="saveSocialMedia()">
-      <mat-icon>check</mat-icon>
-    </button>
 
   </mat-grid-tile>
 
@@ -163,28 +163,27 @@
       <h2 class="margin-bottom-10"> City </h2>
       <div class="row justify-content-center">
         <input [(ngModel)]="contactInfo.city" type="text" class="text-input max-width"/>
-        <div class="sized-box-width-100"></div>
       </div>
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> Address </h2>
       <div class="row justify-content-center">
         <input [(ngModel)]="contactInfo.address" type="text" class="text-input max-width"/>
-        <div class="sized-box-width-100"></div>
       </div>
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> Phone number </h2>
       <div class="row justify-content-center">
         <input [(ngModel)]="contactInfo.phoneNumber" type="text" class="text-input max-width"/>
-        <div class="sized-box-width-100"></div>
       </div>
       <div class="sized-box-height-20"></div>
+      <button mat-stroked-button color="accent" (click)="saveContactInfo()">
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
     </div>
 
-    <button (click)="saveContactInfo()">
-      <mat-icon>check</mat-icon>
-    </button>
+
   </mat-grid-tile>
 
 </mat-grid-list>
