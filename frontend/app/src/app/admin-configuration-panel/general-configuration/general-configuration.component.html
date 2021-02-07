@@ -184,8 +184,7 @@
 
 
   </mat-grid-tile>
-  <mat-grid-tile [colspan]="4" [rowspan]="2">
-    <h1>Git info</h1>
+  <mat-grid-tile [colspan]="4" [rowspan]="1">
     <div *ngIf="gitInfo$ | async as gitInfo">
       <p>Branch : {{ gitInfo.gitBranch }}</p>
       <p>BuildTime : {{ gitInfo.gitBuildTime }}</p>
