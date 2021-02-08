@@ -40,7 +40,6 @@ import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
 import {ChangePasswordDialogComponent, ConfigurationComponent} from './admin-configuration-panel/configuration.component';
-import { BookedUsersTableComponent } from './booked-users-table/booked-users-table.component';
 import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
 import { ServiceViewComponent } from './views/service-view/service-view.component';
 import { TeamViewComponent } from './views/team-view/team-view.component';
@@ -49,7 +48,6 @@ import { FooterComponent } from './views/components/footer/footer.component';
 import { I18nModule } from './i18n/i18n.module';
 import {BookingViewComponent} from './views/booking-view/booking-view.component';
 import { BarberCalendarComponent } from './barber-calendar/barber-calendar.component';
-import { BarberDashboardComponent } from './barber-dashboard/barber-dashboard.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { GeneralConfigurationComponent } from './admin-configuration-panel/general-configuration/general-configuration.component';
 import { BarberConfigurationComponent } from './admin-configuration-panel/barber-configuration/barber-configuration.component';
@@ -74,7 +72,6 @@ import { StoreConfigurationComponent } from './admin-configuration-panel/store-c
     PieChartComponent,
     NumberCardChartComponent,
     ConfigurationComponent,
-    BookedUsersTableComponent,
     ChangePasswordDialogComponent,
     ServiceDialogComponent,
     CompactNavbarComponent,
@@ -84,7 +81,6 @@ import { StoreConfigurationComponent } from './admin-configuration-panel/store-c
     FooterComponent,
     BookingViewComponent,
     BarberCalendarComponent,
-    BarberDashboardComponent,
     GeneralConfigurationComponent,
     BarberConfigurationComponent,
     ServicesConfigurationComponent,

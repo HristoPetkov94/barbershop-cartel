@@ -49,7 +49,7 @@
 
     <div class="col flex-1 align-items-center" *ngSwitchCase="'two'" [@fadeOut]>
 
-      <div class="hover-me"  *ngFor="let service of barber.services" (click)="chooseService(service)">
+      <div class="hover-me" *ngFor="let service of barber.services" (click)="chooseService(service)">
         <div class="service">
           <div class="row flex-space-between align-items-center">
             <span class="type">{{service.serviceType}}</span>

@@ -1,59 +1,55 @@
-<div class="date-picker-wrapper">
+<div class="calendar">
   <!--      this will hold the months-->
-  <div class="first-row">
-    <div>
-      <button mat-icon-button (click)="previousWeek()" [disabled]="disablePreviousWeekButton()">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-      </button>
-    </div>
+  <div class="col calendar-navigation">
 
-    <div class="months">
-
-      <span> {{ today.toLocaleString('default', {month: 'long'}) }} {{ today.getFullYear() }}</span>
-
-      <mat-form-field style="width: 0; height: 0">
-        <input matInput [matDatepicker]="picker" placeholder="Choose a date">
-        <mat-datepicker #picker touchUi></mat-datepicker>
-      </mat-form-field>
-
-      <button mat-icon-button (click)="picker.open()">
-        <mat-icon>calendar_today</mat-icon>
-      </button>
-    </div>
-
-    <div>
-      <button mat-icon-button (click)="nextWeek()" [disabled]="disableNextWeekButton()">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-      </button>
-    </div>
-  </div>
-
-  <!--      this will hold the days-->
-  <div class="second-row">
-    <ng-container *ngFor="let d of week?.week; let i = index">
-      <ng-container *ngIf="d.date.toLocaleString() == getToday(); else rest">
-        <button class="button" (click)="getHoursForDay(d)">
-          <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
-          <span>{{'  '}}</span>
-          <span class="margin-zero">{{d.date | date : 'dd'}}</span>
-          <br>
-          <span>{{' &bull; '}}</span>
+    <div class="row flex-space-between">
+      <div>
+        <button mat-icon-button (click)="previousWeek()" [disabled]="disablePreviousWeekButton()">
+          <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
+      </div>
+
+      <div class="row justify-content-center">
+        <span> {{today | date: 'MMMM yyyy'}} </span>
+      </div>
+
+      <div>
+        <button mat-icon-button (click)="nextWeek()" [disabled]="disableNextWeekButton()">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="row">
+      <ng-container *ngFor="let day of week?.days; let i = index">
+
+        <div class="col flex-1">
+          <div class="col align-items-center">
+            <span >{{day.date | date : 'EEE'}}</span>
+          </div>
+
+          <hr class="hr"/>
+
+          <button id="{{day.active}}" class="day flex-1 col justify-content-center"
+                  (click)="getHoursForDay(day)">
+
+            <span class="col justify-content-center">
+              <span>{{day.date | date : 'd'}}</span>
+            </span>
+
+            <span class="today-indicator" *ngIf="day.today">{{' &bull; '}}</span>
+          </button>
+
+
+        </div>
+
       </ng-container>
+    </div>
 
-      <ng-template #rest>
-        <button class="day" (click)="getHoursForDay(d)">
-          <span class="margin-zero">{{d.date | date : 'EEE'}}</span>
-          <span>{{'  '}}</span>
-          <br>
-          <span class="margin-zero">{{d.date | date : 'dd'}}</span>
-        </button>
-      </ng-template>
-    </ng-container>
   </div>
 
-  <div>
-    {{selectedDay | date}}
+  <div class="selected-day">
+    {{today | date}}
   </div>
 
   <!--this will hold the hours-->
@@ -61,10 +57,10 @@
     <p><b>No available appointments for today.</b></p>
   </div>
 
-  <div class="third-row">
-    <div *ngFor="let hour of hours">
-      <button class="hour" (click)="chooseDateTime(hour.hour.substring(0, 5))">
-        {{hour.hour.substring(0, 5)}}
+  <div class="row hours" >
+    <div *ngFor="let hour of hours" class="hour">
+      <button class="time" (click)="chooseDateTime(hour.time.substring(0, 5))">
+        {{hour.time.substring(0, 5)}}
       </button>
     </div>
   </div>

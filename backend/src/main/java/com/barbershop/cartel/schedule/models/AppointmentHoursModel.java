@@ -8,5 +8,5 @@ import java.time.LocalTime;
 @Getter
 @Setter
 public class AppointmentHoursModel {
-    private LocalTime hour;
+    private LocalTime time;
 }

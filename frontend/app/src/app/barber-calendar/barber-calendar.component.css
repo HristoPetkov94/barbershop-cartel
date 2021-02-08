@@ -1,11 +1,17 @@
 /*// calendar*/
-.date-picker-wrapper {
-  width: 40%;
+.calendar {
+  min-width: 500px;
+  max-width: 26%;
   margin: auto;
 
-  -webkit-box-shadow: 10px 10px 33px -17px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 33px -17px rgba(0, 0, 0, 0.75);
-  box-shadow: 10px 10px 33px -17px rgba(0, 0, 0, 0.75);
+  padding: 20px;
+
+  background-color: #fafafa;
+  border-radius: 5px;
+
+  -webkit-box-shadow: 7px 9px 12px -14px rgba(33,33,33,1);
+  -moz-box-shadow: 7px 9px 12px -14px rgba(33,33,33,1);
+  box-shadow: 7px 9px 12px -14px rgba(33,33,33,1);
 }
 
 .first-row, .second-row {
@@ -47,63 +53,38 @@
   background: transparent;
   border: none;
 
-  padding: 10px 0;
+  height: 100%;
+  border-radius: 5px;
 
-  width: 100%;
-
-  color: #EEEEEE;
+  color: #212121;
   cursor: pointer;
 
+  padding: 10px 0;
+
   font: normal normal normal 18px/20px Roboto;
+
+  position: relative;
 }
 
-.day:focus {
+#selected {
   border: none;
   outline: none;
 
-  background-color: #EEEEEE;
-  color: #212121;
-
-  transition: 0.2s;
-}
-
-.button:focus {
-  border: none;
-  outline: none;
-  padding: 10px 0;
-
-  width: 100%;
-
-  cursor: pointer;
-
-  font: normal normal normal 18px/20px Roboto;
-  background-color: #EEEEEE;
-  color: #212121;
+  background-color: #212121;
+  color: whitesmoke;
 
   transition: 0.2s;
 }
 
 .hour {
-  background: transparent;
+  height: 40px;
+  width: 25%;
 
-  justify-self: center;
-  align-self: center;
-
-  padding: 10px 0;
-  border: 1px solid #212121;
-  border-radius: 5px;
-
-  width: 100%;
-
-  color: #212121;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  font: normal normal normal 18px/20px Roboto;
-}
-
-::ng-deep .mat-calendar-body-selected {
-  background-color: rgba(255, 255, 255, 0.64) !important;
-  color: #212121;
 }
 
 .booked {
@@ -112,4 +93,50 @@
   background-color: #212121;
 }
 
+.calendar-navigation {
+  border: 1px solid #212121;
+  border-radius: 4px;
+  margin: 0 0.5%;
 
+  padding: 5px 15px 10px 15px;
+}
+
+.hours {
+  width: 500px;
+  flex-wrap: wrap;
+}
+
+.time {
+  border: 1px solid #212121;
+  border-radius: 4px;
+  font: normal normal normal 18px/20px Roboto;
+
+  width: 95%;
+  height: 90%;
+
+  cursor: pointer;
+  background-color: #fafafa;
+}
+
+.time:hover{
+
+  background-color: #212121;
+  color: whitesmoke;
+  transition: 0.3s;
+}
+
+.hr {
+  border: 1px solid black;
+  margin: 2px 0;
+}
+
+.today-indicator {
+  position: absolute;
+  bottom: -4px;
+  left: 46%;
+}
+
+.selected-day {
+  padding:20px 0 1px 3px;
+  font: normal normal normal 18px/20px Roboto;
+}

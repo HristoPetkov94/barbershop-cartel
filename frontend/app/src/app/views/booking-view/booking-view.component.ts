@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {ScheduleService} from '../../services/schedule.service';
 import {FacebookLoginProvider, SocialAuthService} from 'angularx-social-login';

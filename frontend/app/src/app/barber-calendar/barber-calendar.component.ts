@@ -1,23 +1,31 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {ScheduleService} from '../services/schedule.service';
 import {Week} from '../models/week.model';
 import {Barber} from '../models/barber.model';
 import {Service} from '../interfaces/service';
-import {formatDate} from '@angular/common';
 import {LOCALE_ID, Inject} from '@angular/core';
+import {fade} from '../views/animations/fade';
 
 @Component({
   selector: 'app-barber-calendar',
   templateUrl: './barber-calendar.component.html',
-  styleUrls: ['./barber-calendar.component.css']
+  styleUrls: ['./barber-calendar.component.css'], animations: [
+    fade
+  ]
 })
 export class BarberCalendarComponent implements OnInit {
 
   public hours = [];
   public week: Week;
+
   public today = new Date();
-  public currentDay: Date;
-  public selectedDay = this.today;
+
   private numberOfWeeks = 0;
 
   @Input()
@@ -34,31 +42,22 @@ export class BarberCalendarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.today = new Date();
 
     this.scheduleService.getCurrentWeek(this.barber, this.service).subscribe(week => {
       this.week = week;
 
-      // this is how we show the hours for current day in the calendar
-      for (let i = 0; i < this.week.week.length; i++) {
+      const today = week.days.find(d => d.today === true);
 
-        const currentDay = this.week.week[i];
+      today.active = 'selected';
+      this.hours = today.hours;
 
-        if (currentDay.date.toString() === this.getToday()) {
-          this.hours = this.week.week[i].hours;
-          this.currentDay = currentDay.date;
-        }
-      }
     }, err => {
       console.log(err);
     });
   }
 
-  public getToday() {
-    return formatDate(new Date(), 'yyyy-MM-dd', this.locale);
-  }
-
   previousWeek() {
-
     if (this.disablePreviousWeekButton()) {
       return;
     }
@@ -66,27 +65,28 @@ export class BarberCalendarComponent implements OnInit {
     this.numberOfWeeks--;
     const changedToPositiveNumber = this.numberOfWeeks * -1;
 
-    this.today.setDate(this.today.getDate() - 7);
-
     this.scheduleService.getPreviousWeek(changedToPositiveNumber, this.barber, this.service).subscribe(week => {
       this.week = week;
+
+      const today = week.days.find(d => d.date === this.today);
+      today.active = 'selected';
     }, err => {
       console.log(err);
     });
   }
 
   nextWeek() {
-
     if (this.disableNextWeekButton()) {
       return;
     }
 
     this.numberOfWeeks++;
 
-    this.today.setDate(this.today.getDate() + 7);
-
     this.scheduleService.getNextWeek(this.numberOfWeeks, this.barber, this.service).subscribe(week => {
         this.week = week;
+
+        const today = week.days.find(d => d.date === this.today);
+        today.active = 'selected';
       },
       err => {
         console.log(err);
@@ -105,15 +105,24 @@ export class BarberCalendarComponent implements OnInit {
   }
 
   getHoursForDay(day) {
-    this.currentDay = day.date;
-    this.selectedDay = day.date;
+    this.today = day.date;
     this.hours = day.hours;
+
+    this.selectDay(day);
+  }
+
+  selectDay(day) {
+    for (const d of this.week.days) {
+      d.active = '';
+    }
+
+    day.active = 'selected';
   }
 
   chooseDateTime(hour) {
 
     const datetime = {
-      date: this.currentDay,
+      date: this.today,
       hour
     };
 

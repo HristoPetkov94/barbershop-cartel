@@ -5,7 +5,6 @@ import {LoginComponent} from './login/login.component';
 import {ConfigurationComponent} from './admin-configuration-panel/configuration.component';
 import {AuthGuardService} from './authentication/auth-guard.service';
 import {BookingViewComponent} from './views/booking-view/booking-view.component';
-import {BarberDashboardComponent} from './barber-dashboard/barber-dashboard.component';
 import {RegisterComponent} from './register/register.component';
 import {TeamViewComponent} from './views/team-view/team-view.component';
 import {ServiceViewComponent} from './views/service-view/service-view.component';
@@ -24,7 +23,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'register', component: RegisterComponent},
   { path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuardService]},
-  { path: 'dashboard', component: BarberDashboardComponent, canActivate: [AuthGuardService]},
 
   { path: '**', redirectTo: '/'},
 ];

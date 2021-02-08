@@ -8,5 +8,5 @@ import java.util.List;
 @Getter
 @Setter
 public class AppointmentWeekModel {
-    private List<AppointmentDayModel> week;
+    private List<AppointmentDayModel> days;
 }

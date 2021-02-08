@@ -13,4 +13,5 @@ public class AppointmentDayModel {
     private LocalDate date;
     private DayOfWeek dayOfWeek;
     private List<AppointmentHoursModel> hours;
+    private boolean today;
 }

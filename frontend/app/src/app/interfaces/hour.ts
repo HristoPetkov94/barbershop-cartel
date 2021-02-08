@@ -1,3 +1,3 @@
 export interface Hour {
-  hour: string;
+  time: string;
 }

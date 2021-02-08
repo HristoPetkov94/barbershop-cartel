@@ -94,7 +94,7 @@ public class ScheduleService implements ScheduleInterface {
             }
 
             AppointmentHoursModel newHour = new AppointmentHoursModel();
-            newHour.setHour(currentAppointment);
+            newHour.setTime(currentAppointment);
 
             hours.add(newHour);
 
@@ -122,7 +122,7 @@ public class ScheduleService implements ScheduleInterface {
                 AppointmentHoursModel nextHour = hours.get(nextHourIndex);
 
                 // if nextHour is more than 60 min. ahead from the currentHour means those hours in between are booked and the currentHour cannot be booked with duration of 60 min.
-                if (currentHour.getHour().plusMinutes(MAX_SERVICE_DURATION).isBefore(nextHour.getHour())) {
+                if (currentHour.getTime().plusMinutes(MAX_SERVICE_DURATION).isBefore(nextHour.getTime())) {
                     continue;
                 }
 
@@ -171,6 +171,11 @@ public class ScheduleService implements ScheduleInterface {
             day.setDate(startOfWeek.plusDays(i));
             day.setDayOfWeek(currentDay.getDayOfWeek());
             day.setHours(scheduleHours);
+
+            boolean today = LocalDate.now().equals(currentDay);
+            day.setToday(today);
+
+            day.setHours(getScheduleHours(currentDay, barberId, serviceId));
 
             week.add(day);
         }
@@ -232,7 +237,7 @@ public class ScheduleService implements ScheduleInterface {
         List<AppointmentDayModel> previousWeek = getPreviousWeek(numberOfWeeks, barberId, serviceId);
 
         AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(previousWeek);
+        week.setDays(previousWeek);
 
         return week;
     }
@@ -243,7 +248,7 @@ public class ScheduleService implements ScheduleInterface {
         List<AppointmentDayModel> currentWeek = getCurrentWeek(barberId, serviceId);
 
         AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(currentWeek);
+        week.setDays(currentWeek);
 
         return week;
     }
@@ -254,7 +259,7 @@ public class ScheduleService implements ScheduleInterface {
         List<AppointmentDayModel> nextWeek = getNextWeek(numberOfWeeks, barberId, serviceId);
 
         AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setWeek(nextWeek);
+        week.setDays(nextWeek);
 
         return week;
     }
