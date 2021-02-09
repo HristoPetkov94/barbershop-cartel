@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../authentication/authentication.service';
 import {getCookie, setCookie} from '../../../utils/cookie.utils';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navigation',
@@ -11,7 +12,7 @@ import {getCookie, setCookie} from '../../../utils/cookie.utils';
 export class NavigationComponent implements OnInit {
   public isAdmin = false;
 
-  constructor(public translate: TranslateService, private auth: AuthenticationService) {
+  constructor(public translate: TranslateService, private auth: AuthenticationService, private route: Router) {
   }
 
   ngOnInit(): void {

@@ -19,3 +19,7 @@
 .nav > li:focus {
   outline: none;
 }
+
+.logo {
+  height: 100%;
+}

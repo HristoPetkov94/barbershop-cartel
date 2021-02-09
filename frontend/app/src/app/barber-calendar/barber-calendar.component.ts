@@ -24,7 +24,7 @@ export class BarberCalendarComponent implements OnInit {
   public hours = [];
   public week: Week;
 
-  public today = new Date();
+  public today;
 
   private numberOfWeeks = 0;
 
@@ -42,14 +42,14 @@ export class BarberCalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.today = new Date();
-
     this.scheduleService.getCurrentWeek(this.barber, this.service).subscribe(week => {
       this.week = week;
 
       const today = week.days.find(d => d.today === true);
 
       today.active = 'selected';
+
+      this.today = today.date;
       this.hours = today.hours;
 
     }, err => {

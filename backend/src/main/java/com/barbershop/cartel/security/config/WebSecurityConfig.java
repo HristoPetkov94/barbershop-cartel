@@ -84,7 +84,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/authenticate", "/register")
-                .antMatchers(HttpMethod.GET, "/barbers", "/services", "/schedule/appointment-current-week**")
-                .antMatchers(HttpMethod.POST, "/schedule/save-appointment", "/send-email-message", "/schedule/appointment-next-week**", "/schedule/appointment-previous-week**");
+                .antMatchers(HttpMethod.GET,
+                        "/general-configuration/front-page-message",
+                        "/general-configuration/social-media",
+                        "/barbers",
+                        "/services",
+                        "/schedule/appointment-current-week**")
+                .antMatchers(HttpMethod.POST,
+                        "/schedule/save-appointment",
+                        "/send-email-message",
+                        "/schedule/appointment-next-week**",
+                        "/schedule/appointment-previous-week**");
     }
 }
