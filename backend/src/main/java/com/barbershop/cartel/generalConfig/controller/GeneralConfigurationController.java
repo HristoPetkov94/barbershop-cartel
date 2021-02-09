@@ -13,19 +13,10 @@ public class GeneralConfigurationController {
     @Autowired
     private GeneralConfigurationInterface generalConfigurationInterface;
 
-    @PostMapping("/front-page-message")
-    public void saveFrontPageMessage(@RequestParam String frontPageMessage) {
-        generalConfigurationInterface.saveFrontPageMessage(frontPageMessage);
-    }
-
+    /** GET **/
     @GetMapping("/front-page-message")
     public String getFrontPageMessage() {
         return generalConfigurationInterface.getFrontPageMessage();
-    }
-
-    @PostMapping("/appointment-message")
-    public void saveAppointmentMessage(@RequestParam String appointmentMessage) {
-        generalConfigurationInterface.saveAppointmentMessage(appointmentMessage);
     }
 
     @GetMapping("/appointment-message")
@@ -33,23 +24,34 @@ public class GeneralConfigurationController {
         return generalConfigurationInterface.getAppointmentMessage();
     }
 
-    @PostMapping("/social-media")
-    public void saveSocialMedia(@RequestBody SocialMediaModel socialMedia) {
-        generalConfigurationInterface.saveSocialMedia(socialMedia);
-    }
-
     @GetMapping("/social-media")
     public SocialMediaModel getSocialMedia() {
         return generalConfigurationInterface.getSocialMedia();
     }
 
-    @PostMapping("/contact-info")
-    public void saveContactInfo(@RequestBody ContactInfoModel contactInfo) {
-        generalConfigurationInterface.saveContactInfo(contactInfo);
-    }
-
     @GetMapping("/contact-info")
     public ContactInfoModel getContactInfo() {
         return generalConfigurationInterface.getContactInfo();
+    }
+
+    /** POST **/
+    @PostMapping("/front-page-message")
+    public void saveFrontPageMessage(@RequestParam String frontPageMessage) {
+        generalConfigurationInterface.saveFrontPageMessage(frontPageMessage);
+    }
+
+    @PostMapping("/appointment-message")
+    public void saveAppointmentMessage(@RequestParam String appointmentMessage) {
+        generalConfigurationInterface.saveAppointmentMessage(appointmentMessage);
+    }
+
+    @PostMapping("/social-media")
+    public void saveSocialMedia(@RequestBody SocialMediaModel socialMedia) {
+        generalConfigurationInterface.saveSocialMedia(socialMedia);
+    }
+
+    @PostMapping("/contact-info")
+    public void saveContactInfo(@RequestBody ContactInfoModel contactInfo) {
+        generalConfigurationInterface.saveContactInfo(contactInfo);
     }
 }

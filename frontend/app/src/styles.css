@@ -1,5 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-
+@font-face {
+  font-family: limited;
+  src: url('assets/fonts/Limited Edition.otf') format("opentype");
+}
 
 * {
   margin: 0;
@@ -188,6 +191,10 @@ h2 {
   letter-spacing: 0.3px;
   color: #000000B3;
   opacity: 1;
+}
+
+.preserve-whitespace {
+  white-space: pre-line;
 }
 
 

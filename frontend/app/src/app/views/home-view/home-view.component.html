@@ -2,17 +2,17 @@
   <div class="col max-height padding-sides">
     <div class="sized-box-height-20"></div>
     <nav class="row flex-space-between align-items-center">
-      <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+      <img class="logo-home" [routerLink]="''" src="../../../assets/images/logo.png"/>
 
       <app-navigation></app-navigation>
     </nav>
 
     <div class="col justify-content-center title-wrapper flex-1">
-      <span class="title"> {{frontPageMessage}} </span>
+      <div class="preserve-whitespace title" [innerHTML]="this.frontPageMessage"> </div>
 
       <div class="sized-box-height-50"></div>
 
-      <button mat-raised-button class="booking-button" routerLink="/book-now">
+      <button class="booking-button" routerLink="/book-now">
         <span>{{'bookingMessage' | translate}}</span>
       </button>
     </div>

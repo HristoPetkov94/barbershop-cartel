@@ -4,8 +4,8 @@ import {NotificationComponent} from '../../notification/notification.component';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../../models/general.configuration/contact.info.model';
 import {User} from '../../models/user.model';
-import {Observable} from "rxjs";
-import {GitVersion} from "../../models/git-version.mode";
+import {Observable} from 'rxjs';
+import {GitVersion} from '../../models/git-version.mode';
 
 @Component({
   selector: 'app-general-configuration',
@@ -57,7 +57,9 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   saveFrontPageMessage() {
-    this.generalConfigurationService.saveFrontPageMessage(this.frontPageMessage).subscribe(data => {
+    const message = encodeURIComponent(this.frontPageMessage);
+
+    this.generalConfigurationService.saveFrontPageMessage(message).subscribe(() => {
 
         this.generalConfigurationService.getFrontPageMessage().subscribe(frontPageMessage => {
           this.frontPageMessage = frontPageMessage;
@@ -73,7 +75,7 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   saveAppointmentMessage() {
-    this.generalConfigurationService.saveAppointmentMessage(this.appointmentMessage).subscribe(data => {
+    this.generalConfigurationService.saveAppointmentMessage(this.appointmentMessage).subscribe(() => {
 
         this.generalConfigurationService.getAppointmentMessage().subscribe(appointmentMessage => {
           this.appointmentMessage = appointmentMessage;
@@ -89,7 +91,7 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   saveSocialMedia() {
-    this.generalConfigurationService.saveSocialMedia(this.socialMedia).subscribe(data => {
+    this.generalConfigurationService.saveSocialMedia(this.socialMedia).subscribe(() => {
 
         this.generalConfigurationService.getSocialMedia().subscribe(socialMedia => {
           this.socialMedia = socialMedia;
@@ -105,7 +107,7 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   saveContactInfo() {
-    this.generalConfigurationService.saveContactInfo(this.contactInfo).subscribe(data => {
+    this.generalConfigurationService.saveContactInfo(this.contactInfo).subscribe(() => {
 
         this.generalConfigurationService.getContactInfo().subscribe(contactInfo => {
           this.contactInfo = contactInfo;
