@@ -81,6 +81,7 @@ public class BarberService implements BarberInterface {
         barber.get().setDescription(barberModel.getDescription());
         barber.get().setPicture(barberModel.getPicture());
         barber.get().setFacebook(barberModel.getFacebook());
+        barber.get().setInstagram(barberModel.getInstagram());
 
         barberRepository.save(barber.get());
     }
