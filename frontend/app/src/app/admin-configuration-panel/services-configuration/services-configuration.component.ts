@@ -23,6 +23,7 @@ export class ServicesConfigurationComponent implements OnInit {
   selectedBarber: Barber;
 
   public currency = 'лв.';
+  private minServiceDuration = 30;
 
   constructor(private dialog: MatDialog, private barberService: BarberService) {
   }
@@ -67,33 +68,35 @@ export class ServicesConfigurationComponent implements OnInit {
     this.services = barber.services;
   }
 
+  incrementDuration(service: Service) {
 
-  increment(inputType: string, id: number) {
-    const identifier = inputType + id;
-
-    let element;
-
-    if (inputType === 'duration') {
-      element = this.durations.find((elem) => identifier === elem.nativeElement.id);
-    } else {
-      element = this.prices.find((elem) => identifier === elem.nativeElement.id);
+    if (service.duration === 60) {
+      return;
     }
 
-    element.nativeElement.stepUp();
+    service.duration += this.minServiceDuration;
   }
 
-  decrement(inputType: string, id: number) {
-    const identifier = inputType + id;
+  decrementDuration(service: Service) {
 
-    let element;
-
-    if (inputType === 'duration') {
-      element = this.durations.find((elem) => identifier === elem.nativeElement.id);
-    } else {
-      element = this.prices.find((elem) => identifier === elem.nativeElement.id);
+    if (service.duration === 0) {
+      return;
     }
 
-    element.nativeElement.stepDown();
+    service.duration -= this.minServiceDuration;
+  }
+
+  incrementPrice(service: Service) {
+    service.price++;
+  }
+
+  decrementPrice(service: Service) {
+
+    if (service.price === 0) {
+      return;
+    }
+
+    service.price--;
   }
 
   save(service: Service): void {

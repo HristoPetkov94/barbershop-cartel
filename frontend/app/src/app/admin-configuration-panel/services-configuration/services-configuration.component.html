@@ -58,8 +58,8 @@
                    min="0" max="60" #duration/>
 
             <div class="col">
-              <button class="increment-btn" (click)="increment('duration', service.id)"> +</button>
-              <button class="decrement-btn" (click)="decrement('duration', service.id)"> -</button>
+              <button class="increment-btn" (click)="incrementDuration(service)"> +</button>
+              <button class="decrement-btn" (click)="decrementDuration(service)"> -</button>
             </div>
           </div>
         </div>
@@ -79,8 +79,8 @@
             </div>
 
             <div class="col">
-              <button class="increment-btn" (click)="increment('price', service.id)"> +</button>
-              <button class="decrement-btn" (click)="decrement('price', service.id)"> -</button>
+              <button class="increment-btn" (click)="incrementPrice(service)"> +</button>
+              <button class="decrement-btn" (click)="decrementPrice(service)"> -</button>
             </div>
 
             <div class="col max-height justify-content-center">
