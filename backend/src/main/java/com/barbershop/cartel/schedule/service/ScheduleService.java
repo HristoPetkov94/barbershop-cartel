@@ -160,22 +160,26 @@ public class ScheduleService implements ScheduleInterface {
     private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, long barberId, long serviceId) {
 
         List<AppointmentDayModel> week = new ArrayList<>();
+        LocalDate today = LocalDate.now();
 
         for (int i = 0; i < DAYS_OF_WEEK; i++) {
 
             LocalDate currentDay = startOfWeek.plusDays(i);
-            List<AppointmentHoursModel> scheduleHours = getScheduleHours(currentDay, barberId, serviceId);
+
+            List<AppointmentHoursModel> scheduleHours = new ArrayList<>();
+
+            if (currentDay.isEqual(today) || currentDay.isAfter(today)) {
+                scheduleHours = getScheduleHours(currentDay, barberId, serviceId);
+            }
+
+            boolean isToday = today.equals(currentDay);
 
             AppointmentDayModel day = new AppointmentDayModel();
 
             day.setDate(startOfWeek.plusDays(i));
             day.setDayOfWeek(currentDay.getDayOfWeek());
             day.setHours(scheduleHours);
-
-            boolean today = LocalDate.now().equals(currentDay);
-            day.setToday(today);
-
-            day.setHours(getScheduleHours(currentDay, barberId, serviceId));
+            day.setToday(isToday);
 
             week.add(day);
         }
