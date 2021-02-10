@@ -3,9 +3,21 @@ package com.barbershop.cartel.barbers.controller;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
 import com.barbershop.cartel.services.models.ServiceModel;
+import com.barbershop.cartel.utils.PictureUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.util.List;
 
 @RestController

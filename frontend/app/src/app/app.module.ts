@@ -60,6 +60,8 @@ import { NavigationComponent } from './views/components/navigation/navigation.co
 import { ContactViewComponent } from './views/contact-view/contact-view.component';
 import { StoreComponent } from './views/store-view/store.component';
 import { StoreConfigurationComponent } from './admin-configuration-panel/store-configuration/store-configuration.component';
+import { BarberViewComponent } from './admin-configuration-panel/barber-configuration/barber-view/barber-view.component';
+import { BarberEditComponent } from './admin-configuration-panel/barber-configuration/barber-edit/barber-edit.component';
 
 @NgModule({
   declarations: [
@@ -90,6 +92,8 @@ import { StoreConfigurationComponent } from './admin-configuration-panel/store-c
     ChangePasswordComponent,
     StoreComponent,
     StoreConfigurationComponent,
+    BarberViewComponent,
+    BarberEditComponent,
   ],
     imports: [
         BrowserModule,
@@ -145,7 +149,8 @@ import { StoreConfigurationComponent } from './admin-configuration-panel/store-c
   bootstrap: [AppComponent],
   entryComponents: [
     ChangePasswordDialogComponent,
-    ServiceDialogComponent
+    ServiceDialogComponent,
+    BarberEditComponent
   ]
 })
 export class AppModule {

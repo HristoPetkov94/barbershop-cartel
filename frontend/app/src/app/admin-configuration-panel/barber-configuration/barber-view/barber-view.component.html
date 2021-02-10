@@ -1,0 +1,96 @@
+<div *ngIf="!deleted">
+  <div class="sized-box-height"></div>
+  <div class="row max-width justify-content-end">
+    <button (click)="edit()" mat-icon-button color="primary">
+      <mat-icon #tooltip="matTooltip"
+                matTooltip="Edit"
+                [matTooltipPosition]="'left'"> edit
+      </mat-icon>
+    </button>
+    <!--  <button (click)="save()" mat-button color="accent">-->
+    <!--    <mat-icon #tooltip="matTooltip"-->
+    <!--              matTooltip="Save"-->
+    <!--              [matTooltipPosition]="'left'"> save-->
+    <!--    </mat-icon>-->
+    <!--  </button>-->
+
+    <button (click)="delete()" mat-icon-button color="warn">
+      <mat-icon #tooltip="matTooltip"
+                matTooltip="Delete"
+                [matTooltipPosition]="'left'"> delete
+      </mat-icon>
+    </button>
+  </div>
+
+  <mat-grid-list cols="4" rowHeight="230px">
+    <!--        column 1-->
+    <mat-grid-tile [colspan]="4" [rowspan]="2">
+
+      <div class="col">
+        <div class="row max-height max-width">
+
+          <div class="sized-box-width-100"></div>
+
+          <div class="col max-width">
+
+            <div class="row">
+              <div class="col">
+                <div class="profile-picture" [style.backgroundImage]="'url(' + barber.picture + ')'">
+                </div>
+              </div>
+            </div>
+
+            <div class="col max-height justify-content-end">
+              <div class="row justify-content-center">
+                <div class="sized-box-width-100">
+                  <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
+                </div>
+                <span label="" class="text-input max-width"> {{barber.facebook}}</span>
+                <div class="sized-box-width-100"></div>
+              </div>
+
+              <div class="row justify-content-center">
+                <div class="sized-box-width-100">
+                  <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
+                </div>
+                <span label="" class="text-input max-width">{{barber.instagram}}</span>
+                <div class="sized-box-width-100"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col max-width">
+
+            <h2 class="margin-bottom-10"> Firstname </h2>
+
+            <div class="row">
+              <span label="" class="text-input max-width">{{barber.firstName}}</span>
+            </div>
+
+            <div class="sized-box-height"></div>
+
+            <h2 class="margin-bottom-10"> Lastname </h2>
+
+            <div class="row">
+              <span label="" class="text-input max-width">{{barber.lastName}}</span>
+            </div>
+
+            <div class="sized-box-height"></div>
+
+            <h2 class="margin-bottom-10"> Description </h2>
+
+            <div class="row">
+              <span class="front-page-message-input max-width"> {{barber.description}}</span>
+            </div>
+          </div>
+          <div class="sized-box-width-100"></div>
+        </div>
+
+      </div>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+
+  <hr/>
+  <app-notification></app-notification>
+</div>
