@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {ScheduleService} from '../../services/schedule.service';
 import {FacebookLoginProvider, SocialAuthService} from 'angularx-social-login';
@@ -11,13 +11,7 @@ import {Service} from '../../interfaces/service';
 import {EmailNotification} from '../../models/email.notification.model';
 import {NotificationService} from '../../services/notification.service';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
-
-interface Step {
-  type: string;
-  title: string;
-  disabled: boolean;
-  active: string;
-}
+import {Step} from '../../models/booking.view/step.model';
 
 @Component({
   selector: 'app-barber-book-now-panel',
@@ -36,46 +30,20 @@ interface Step {
 export class BookingViewComponent implements OnInit {
   @ViewChild('parent', {static: true}) parent: ElementRef;
 
+  public client: SocialUser;
+
   public barbers: Barber[];
   public barber = new Barber();
   public service = new Service();
   public datetime;
 
-  public step = 'one';
-  public stepIndex = 0;
-
-  public client: SocialUser;
   public done;
+
   public appointmentMessage: string;
 
-  public steps: Step[] = [
-    {
-      type: 'one',
-      title: 'Barber',
-      disabled: false,
-      active: 'active',
-    },
-    {
-      type: 'two',
-      title: 'Service',
-      disabled: true,
-      active: 'inactive',
-    },
-    {
-      type: 'three',
-      title: 'Date and Time',
-      disabled: true,
-      active: 'inactive',
-    },
-    {
-      type: 'four',
-      title: 'Finish',
-      disabled: true,
-      active: 'inactive',
-    }
-  ];
-
-  public defaults = ['Barber', 'Service', 'Date and Time', 'Finish'];
+  public step = 'one';
+  public steps: Step[] = [];
+  public currentStep: Step;
 
   constructor(private scheduleService: ScheduleService,
               private facebook: SocialAuthService,
@@ -86,6 +54,23 @@ export class BookingViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    // create the steps
+    const step1 = new Step('one', 'Barber', false, 'active');
+    const step2 = new Step('two', 'Service', true, 'inactive');
+    const step3 = new Step('three', 'Date and Time', true, 'inactive');
+    const step4 = new Step('four', 'Finish', true, 'inactive');
+
+    // assign which step is after the other
+    step1.next = step2;
+    step2.next = step3;
+    step3.next = step4;
+
+    // create a list of steps
+    this.steps.push(step1, step2, step3, step4);
+
+    // set current
+    this.currentStep = step1;
+
     this.barberService.getBarbers().subscribe(b => {
       this.barbers = b;
     });
@@ -95,59 +80,64 @@ export class BookingViewComponent implements OnInit {
     });
   }
 
-  makeActive(index, step: string) {
+  makeActive(step: Step) {
 
-    // clear rest
-    if (index < this.stepIndex) {
-      this.clearPrevious(index);
+    // if step is not last and his next step is active
+    // then disable all from the current step to the last one.
+    if (!step.isLast() && step.isNextDisabled()) {
+      this.disableSteps(step);
     }
-
-    this.step = step;
 
     for (const s of this.steps) {
       s.active = 'inactive';
     }
 
-    this.steps[index].active = 'active';
-    this.stepIndex = index;
+    // set the step type aka [ 'one', 'two' ...]
+    this.step = step.type;
+
+    step.active = 'active';
+    step.disabled = false;
+
+    // set the current step
+    this.currentStep = step;
   }
 
-  next(step: string, title: string) {
-    this.steps[this.stepIndex].title = title;
+  next(title: string) {
+    // set title
+    this.currentStep.title = title;
 
-    this.stepIndex++;
+    // switch to next step
+    let next = this.currentStep;
 
-    this.step = step;
-    this.steps[this.stepIndex].disabled = false;
+    if (!this.currentStep.isLast()) {
+      next = this.currentStep.next;
+    }
 
-    this.makeActive(this.stepIndex, this.step);
+    this.step = next.type;
+    this.currentStep = next;
+
+    this.makeActive(next);
   }
 
   chooseBarber(barber) {
-
     this.barber = barber;
-    this.step = 'two';
 
     const title = barber.firstName.concat(' ').concat(barber.lastName);
-    this.next(this.step, title);
+    this.next(title);
   }
 
   chooseService(service) {
-
     this.service = service;
-    this.step = 'three';
 
     const title = service.serviceType;
-    this.next(this.step, title);
+    this.next(title);
   }
 
-  chooseDateTime($event: any) {
-    this.datetime = $event;
-
-    this.step = 'four';
+  chooseDateTime(date) {
+    this.datetime = date;
 
     const title = this.datetime.hour.toString();
-    this.next(this.step, title);
+    this.next(title);
   }
 
   sendEmail() {
@@ -212,10 +202,15 @@ export class BookingViewComponent implements OnInit {
     );
   }
 
-  private clearPrevious(index) {
-    for (let i = index + 1; i < this.steps.length; i++) {
-      this.steps[i].title = this.defaults[i];
-      this.steps[i].disabled = true;
+  private disableSteps(step: Step) {
+    const next = step.next;
+
+    next.disabled = true;
+    next.title = next.default;
+    this.done = false;
+
+    if (next.hasNext()) {
+      this.disableSteps(next);
     }
   }
 }
