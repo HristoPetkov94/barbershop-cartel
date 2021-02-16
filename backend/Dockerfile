@@ -12,6 +12,8 @@ RUN mvn -f pom.xml -DskipTests clean package
 ### STAGE 2: Run ###
 FROM openjdk:13-alpine
 ENV TZ Europe/Sofia
+RUN apk update && \
+    apk add --no-cache tzdata
 COPY --from=build /workspace/target/*.jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","app.jar"]
