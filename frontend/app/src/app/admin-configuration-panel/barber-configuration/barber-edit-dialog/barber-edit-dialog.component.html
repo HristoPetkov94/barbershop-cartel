@@ -1,49 +1,53 @@
 <h1 mat-dialog-title>Edit</h1>
 <div mat-dialog-content>
 
-  <input hidden matInput [(ngModel)]="data.id" placeholder="" value="">
+  <form [formGroup]="myForm">
+    <input hidden matInput formControlName="id" placeholder="">
 
-  <mat-form-field class="example-full-width">
-    <mat-label>First name</mat-label>
-    <input matInput [(ngModel)]="data.firstName" placeholder="" value="">
-  </mat-form-field>
+    <mat-form-field>
+      <mat-label>First name</mat-label>
+      <input matInput formControlName="firstName" placeholder="">
+    </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Last name</mat-label>
-    <input matInput [(ngModel)]="data.lastName" placeholder="" value="">
-  </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Last name</mat-label>
+      <input matInput formControlName="lastName" placeholder="">
+    </mat-form-field>
 
-  <div class="col padding-20">
-    <div class="sized-box-height"></div>
+    <div class="col padding-20">
+      <div class="sized-box-height"></div>
 
-    <div class="row">
-      <div class="col">
-        <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'">
+      <div class="row">
+        <div class="col">
+          <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'">
+          </div>
         </div>
       </div>
-    </div>
 
-    <input type="file" (change)="changed($event)"/>
+      <input type="file" (change)="changed($event)"/>
 
-    <div class="row">
-      <button (click)="removeImage()" class="remove-picture-btn" mat-stroked-button color="warn"> Remove picture</button>
+      <div class="row">
+        <button (click)="removeImage()" class="remove-picture-btn" mat-stroked-button color="warn"> Remove picture
+        </button>
+      </div>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment</mat-label>
+        <input matInput formControlName="instagram" placeholder="description"/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment</mat-label>
+        <input matInput formControlName="facebook" placeholder="description"/>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Leave a comment</mat-label>
+        <textarea matInput formControlName="description" placeholder="description"></textarea>
+      </mat-form-field>
     </div>
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <input matInput [(ngModel)]="data.instagram" placeholder="description"/>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <input matInput [(ngModel)]="data.facebook" placeholder="description"/>
-    </mat-form-field>
-    <mat-form-field class="example-full-width">
-      <mat-label>Leave a comment</mat-label>
-      <textarea matInput [(ngModel)]="data.description" placeholder="description"></textarea>
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
-  </div>
+    <div mat-dialog-actions>
+      <button mat-button (click)="onNoClick()">Cancel</button>
+      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    </div>
+  </form>
 </div>
 

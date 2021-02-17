@@ -38,7 +38,7 @@ export class BarberConfigurationComponent implements OnInit {
     const newBarber = new Barber();
     newBarber.picture = this.imageService.getDefaultBarberImage();
     const dialogRef = this.dialog.open(BarberEditDialogComponent, {
-      width: '450px',
+      width: '560px',
       data: newBarber
     });
 
