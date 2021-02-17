@@ -21,8 +21,13 @@ public class BarberController {
     }
 
     @PostMapping
-    public void createBarber(@RequestBody BarberModel barber) {
-        barberInterface.createBarber(barber);
+    public BarberModel createBarber(@RequestBody BarberModel barber) {
+
+        long id = barberInterface.createBarber(barber);
+
+        barber.setId(id);
+
+        return barber;
     }
 
     @PutMapping

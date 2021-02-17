@@ -1,6 +1,10 @@
-import {Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BarberService} from '../../services/barber.service';
 import {Barber} from '../../models/barber.model';
+import {MatDialog} from '@angular/material/dialog';
+import {NotificationComponent} from '../../notification/notification.component';
+import {BarberEditDialogComponent} from './barber-edit-dialog/barber-edit-dialog.component';
+import {ImageService} from '../../services/image.service';
 
 @Component({
   selector: 'app-barber-configuration',
@@ -12,7 +16,9 @@ export class BarberConfigurationComponent implements OnInit {
   public barbers: Barber[];
   public loading = true;
 
-  constructor(private barberService: BarberService) {
+  @ViewChild(NotificationComponent) notification: NotificationComponent;
+
+  constructor(private barberService: BarberService, private dialog: MatDialog, private imageService: ImageService) {
   }
 
   ngOnInit(): void {
@@ -24,12 +30,37 @@ export class BarberConfigurationComponent implements OnInit {
       this.barbers = data;
     }, () => {
     }, () => {
-      this.barbers.sort((a, b) => a.id - b.id);
       this.loading = false;
     });
   }
 
   add() {
-    this.barbers.unshift(new Barber());
+    const newBarber = new Barber();
+    newBarber.picture = this.imageService.getDefaultBarberImage();
+    const dialogRef = this.dialog.open(BarberEditDialogComponent, {
+      width: '450px',
+      data: newBarber
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.save(result);
+      }
+    });
+  }
+
+  save(barber: Barber) {
+
+    this.barberService.createBarber(barber).subscribe((data: Barber) => {
+        this.barbers.unshift(data);
+      },
+      () => {
+        this.notification.showMessage('create unsuccessful', 'warn');
+      },
+      () => {
+
+        this.notification.showMessage('create successful', 'success');
+      }
+    );
   }
 }

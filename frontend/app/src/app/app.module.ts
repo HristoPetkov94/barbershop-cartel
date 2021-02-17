@@ -61,7 +61,7 @@ import { ContactViewComponent } from './views/contact-view/contact-view.componen
 import { StoreComponent } from './views/store-view/store.component';
 import { StoreConfigurationComponent } from './admin-configuration-panel/store-configuration/store-configuration.component';
 import { BarberViewComponent } from './admin-configuration-panel/barber-configuration/barber-view/barber-view.component';
-import { BarberEditComponent } from './admin-configuration-panel/barber-configuration/barber-edit/barber-edit.component';
+import { BarberEditDialogComponent } from './admin-configuration-panel/barber-configuration/barber-edit-dialog/barber-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -93,7 +93,7 @@ import { BarberEditComponent } from './admin-configuration-panel/barber-configur
     StoreComponent,
     StoreConfigurationComponent,
     BarberViewComponent,
-    BarberEditComponent,
+    BarberEditDialogComponent,
   ],
     imports: [
         BrowserModule,
@@ -150,7 +150,7 @@ import { BarberEditComponent } from './admin-configuration-panel/barber-configur
   entryComponents: [
     ChangePasswordDialogComponent,
     ServiceDialogComponent,
-    BarberEditComponent
+    BarberEditDialogComponent
   ]
 })
 export class AppModule {

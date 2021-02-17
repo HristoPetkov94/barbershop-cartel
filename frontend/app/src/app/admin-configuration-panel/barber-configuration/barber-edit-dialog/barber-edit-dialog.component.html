@@ -1,14 +1,16 @@
 <h1 mat-dialog-title>Edit</h1>
 <div mat-dialog-content>
 
+  <input hidden matInput [(ngModel)]="data.id" placeholder="" value="">
+
   <mat-form-field class="example-full-width">
     <mat-label>First name</mat-label>
-    <input matInput [(ngModel)]="data.firstName" placeholder="" value="Sushi">
+    <input matInput [(ngModel)]="data.firstName" placeholder="" value="">
   </mat-form-field>
 
   <mat-form-field class="example-full-width">
     <mat-label>Last name</mat-label>
-    <input matInput [(ngModel)]="data.lastName" placeholder="" value="Sushi">
+    <input matInput [(ngModel)]="data.lastName" placeholder="" value="">
   </mat-form-field>
 
   <div class="col padding-20">
@@ -33,6 +35,10 @@
     <mat-form-field class="example-full-width">
       <mat-label>Leave a comment</mat-label>
       <input matInput [(ngModel)]="data.facebook" placeholder="description"/>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Leave a comment</mat-label>
+      <textarea matInput [(ngModel)]="data.description" placeholder="description"></textarea>
     </mat-form-field>
   </div>
   <div mat-dialog-actions>

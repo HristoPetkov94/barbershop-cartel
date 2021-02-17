@@ -19,7 +19,7 @@ export class BarberService {
   }
 
   createBarber(barber: Barber) {
-    return this.http.post(this.url + '/barbers', barber);
+    return this.http.post<Barber>(this.url + '/barbers', barber);
   }
 
   updateBarber(barber: Barber) {
