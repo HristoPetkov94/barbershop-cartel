@@ -14,7 +14,7 @@
           <button type="button" (click)="changeImage()" class="remove-picture-btn" mat-raised-button color="primary"> Edit picture
           </button>
           <input hidden type="file" (change)="changed($event)" #chooseFile/>
-          <button type="button" (click)="removeImage()" class="remove-picture-btn" mat-raised-button color="warn"> Remove picture
+          <button type="button" (click)="removeImage()" class="remove-picture-btn margin-left-10" mat-raised-button color="warn"> Remove picture
           </button>
         </div>
       </div>
@@ -22,12 +22,12 @@
       <div class="col max-width margin-left-20">
         <mat-form-field>
           <mat-label>First name</mat-label>
-          <input matInput formControlName="firstName" placeholder="qweqewweqwqewqe">
+          <input matInput formControlName="firstName" placeholder="First name">
         </mat-form-field>
 
         <mat-form-field>
           <mat-label>Last name</mat-label>
-          <input matInput formControlName="lastName" placeholder="qwwqweqqweqweqwe">
+          <input matInput formControlName="lastName" placeholder="Second name">
         </mat-form-field>
       </div>
     </div>
