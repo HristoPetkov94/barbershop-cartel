@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, ElementRef, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Barber} from '../../../models/barber.model';
 import {ImageService} from '../../../services/image.service';
@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class BarberEditDialogComponent implements OnInit {
 
   myForm: FormGroup;
+  @ViewChild('chooseFile') public chooseFile: ElementRef;
 
   constructor(
     public dialogRef: MatDialogRef<BarberEditDialogComponent>,
@@ -61,5 +62,9 @@ export class BarberEditDialogComponent implements OnInit {
 
   removeImage() {
     this.data.picture = this.imageService.getDefaultBarberImage();
+  }
+
+  changeImage() {
+    this.chooseFile.nativeElement.click();
   }
 }

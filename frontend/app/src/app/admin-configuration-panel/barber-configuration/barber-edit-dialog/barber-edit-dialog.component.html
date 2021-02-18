@@ -1,53 +1,53 @@
-<h1 mat-dialog-title>Edit</h1>
-<div mat-dialog-content>
+<h1 mat-dialog-title>Edit/Create</h1>
 
-  <form [formGroup]="myForm">
+
+<form [formGroup]="myForm">
+  <div mat-dialog-content>
+
     <input hidden matInput formControlName="id" placeholder="">
 
-    <mat-form-field>
-      <mat-label>First name</mat-label>
-      <input matInput formControlName="firstName" placeholder="">
-    </mat-form-field>
+    <div class="row">
+      <div class="col justify-content-center">
+        <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'"></div>
 
-    <mat-form-field class="example-full-width">
-      <mat-label>Last name</mat-label>
-      <input matInput formControlName="lastName" placeholder="">
-    </mat-form-field>
-
-    <div class="col padding-20">
-      <div class="sized-box-height"></div>
-
-      <div class="row">
-        <div class="col">
-          <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'">
-          </div>
+        <div class="row">
+          <button type="button" (click)="changeImage()" class="remove-picture-btn" mat-raised-button color="primary"> Edit picture
+          </button>
+          <input hidden type="file" (change)="changed($event)" #chooseFile/>
+          <button type="button" (click)="removeImage()" class="remove-picture-btn" mat-raised-button color="warn"> Remove picture
+          </button>
         </div>
       </div>
 
-      <input type="file" (change)="changed($event)"/>
+      <div class="col max-width margin-left-20">
+        <mat-form-field>
+          <mat-label>First name</mat-label>
+          <input matInput formControlName="firstName" placeholder="qweqewweqwqewqe">
+        </mat-form-field>
 
-      <div class="row">
-        <button (click)="removeImage()" class="remove-picture-btn" mat-stroked-button color="warn"> Remove picture
-        </button>
+        <mat-form-field>
+          <mat-label>Last name</mat-label>
+          <input matInput formControlName="lastName" placeholder="qwwqweqqweqweqwe">
+        </mat-form-field>
       </div>
-
-      <mat-form-field class="example-full-width">
-        <mat-label>Leave a comment</mat-label>
-        <input matInput formControlName="instagram" placeholder="description"/>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Leave a comment</mat-label>
-        <input matInput formControlName="facebook" placeholder="description"/>
-      </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Leave a comment</mat-label>
-        <textarea matInput formControlName="description" placeholder="description"></textarea>
-      </mat-form-field>
     </div>
-    <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">Cancel</button>
-      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
-    </div>
-  </form>
-</div>
 
+    <mat-form-field class="example-full-width">
+      <mat-label>Instagram link</mat-label>
+      <input matInput formControlName="instagram" placeholder=""/>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Facebook link</mat-label>
+      <input matInput formControlName="facebook" placeholder=""/>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Description</mat-label>
+      <textarea matTextareaAutosize matInput formControlName="description" placeholder="description"></textarea>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+  </div>
+</form>
