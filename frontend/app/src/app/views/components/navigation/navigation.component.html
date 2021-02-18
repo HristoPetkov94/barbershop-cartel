@@ -5,7 +5,7 @@
   <li [routerLink]="'../contacts'"> {{ 'home.navigation.contacts' | translate}} </li>
   <li (click)="changeLang()">{{translate.currentLang}}</li>
 
-  <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'../configuration'">
+  <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'../configuration/general'">
     <mat-icon> settings </mat-icon>
   </li>
 </ul>
