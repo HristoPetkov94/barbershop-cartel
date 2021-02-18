@@ -14,7 +14,7 @@ import {SocialMediaModel} from '../../models/general.configuration/social.media.
   styleUrls: ['./home-view.component.css'], animations: [
     fade
   ],
-  // encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class HomeViewComponent implements OnInit {
