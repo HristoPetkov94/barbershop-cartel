@@ -55,4 +55,40 @@ section {
   color: white;
 }
 
+@media (max-width: 1024px) {
+  .location-icon {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 992px) {
+  .col-responsive {
+    font-size: 11px;
+    flex-direction: column;
+  }
+
+  .compact-navigation {
+    height: 70px;
+  }
+
+  .cartel-logo-responsive {
+    margin: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .col-responsive {
+    font-size: 11px;
+    flex-direction: column;
+  }
+
+  .compact-navigation {
+    height: 70px;
+  }
+
+  .cartel-logo-responsive {
+    margin: auto;
+  }
+}
+
 

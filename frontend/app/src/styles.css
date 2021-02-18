@@ -191,6 +191,8 @@ h2 {
   color: #000000;
   text-transform: uppercase;
   opacity: 1;
+
+  text-align: center;
 }
 
 .sub-header {

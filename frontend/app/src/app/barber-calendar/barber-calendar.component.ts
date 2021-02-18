@@ -69,7 +69,12 @@ export class BarberCalendarComponent implements OnInit {
       this.week = week;
 
       const today = week.days.find(d => d.date === this.today);
-      today.active = 'selected';
+
+      if (today !== undefined) {
+        today.active = 'selected';
+      }
+
+      // this.today = today.date;
     }, err => {
       console.log(err);
     });
@@ -86,7 +91,12 @@ export class BarberCalendarComponent implements OnInit {
         this.week = week;
 
         const today = week.days.find(d => d.date === this.today);
-        today.active = 'selected';
+
+        if (today !== undefined) {
+          today.active = 'selected';
+        }
+
+        // this.today = today.date;
       },
       err => {
         console.log(err);

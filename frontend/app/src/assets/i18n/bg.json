@@ -2,6 +2,7 @@
   "home": {
     "title": "Перфектния избор на джентълмена lorem ipsum dolor sit amet",
     "navigation": {
+      "home": "Начало",
       "team": "Екип",
       "services": "Услуги",
       "contacts": "Контакти",

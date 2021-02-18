@@ -4,8 +4,13 @@
     <nav class="row flex-space-between align-items-center">
       <img class="logo-home" [routerLink]="''" src="../../../assets/images/logo.png"/>
 
+      <app-compact-navbar></app-compact-navbar>
+
       <app-navigation></app-navigation>
+
     </nav>
+
+
 
     <div class="col justify-content-center title-wrapper flex-1">
       <div class="preserve-whitespace title" [innerHTML]="this.frontPageMessage"> </div>
@@ -13,14 +18,14 @@
       <div class="sized-box-height-50"></div>
 
       <button class="booking-button" routerLink="/book-now">
-        <span>{{'bookingMessage' | translate}}</span>
+        {{'bookingMessage' | translate}}
       </button>
     </div>
 
     <div class="row justify-content-start">
       <div class="sized-box-width-40"></div>
 
-      <div class="col">
+      <div class="col col-responsive">
 
         <a href="{{socialMedia.facebook}}">
           <img class="social-icons" src="../../../assets/images/facebook-icon.png"/>

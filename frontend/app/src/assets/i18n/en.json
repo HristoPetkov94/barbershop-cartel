@@ -2,6 +2,7 @@
   "home": {
     "title": "Perfect gentlemn's choice lorem ipsum dolor sit amet",
     "navigation": {
+      "home": "home",
       "team": "team",
       "services": "services",
       "contacts": "contacts",

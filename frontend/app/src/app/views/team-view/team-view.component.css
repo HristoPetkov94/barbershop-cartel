@@ -38,3 +38,14 @@ section {
   height: 100%;
 }
 
+@media (max-width: 992px) {
+  .compact-navigation {
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .compact-navigation {
+    height: 70px;
+  }
+}

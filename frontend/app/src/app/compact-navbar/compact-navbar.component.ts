@@ -1,4 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {getCookie, setCookie} from '../utils/cookie.utils';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-compact-navbar',
@@ -6,19 +8,24 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./compact-navbar.component.css']
 })
 export class CompactNavbarComponent implements OnInit {
-
-  @Output()
-  public navigation = new EventEmitter<string>();
-
   public hideBurger = false;
 
-  constructor() {
+  constructor(public translate: TranslateService) {
   }
 
   ngOnInit() {
+    const cookie = getCookie('lang');
+    const preferredLang = cookie === undefined ? 'bg' : cookie;
+
+    this.translate.use(preferredLang);
   }
 
-  navigate(destination: string) {
-    this.navigation.emit(destination);
+  changeLang() {
+    const currentLang = this.translate.currentLang;
+    const lang = currentLang === 'en' ? 'bg' : 'en';
+
+    setCookie('lang', lang);
+
+    this.translate.use(lang);
   }
 }

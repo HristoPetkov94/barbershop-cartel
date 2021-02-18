@@ -279,3 +279,32 @@ a:hover:after {
 .hover-me:hover {
   border:1px solid #212121;
 }
+
+@media (max-width: 992px) {
+  .barber {
+    width: 90%;
+  }
+
+  .sized-box-width-20 {
+    width: auto!important;
+  }
+
+  .compact-navigation {
+    height: 70px;
+  }
+}
+
+@media (max-width: 768px) {
+  .barber {
+    width: 90%;
+  }
+
+  .sized-box-width-20 {
+    width: auto!important;
+  }
+
+  .compact-navigation {
+    height: 70px;
+  }
+}
+
