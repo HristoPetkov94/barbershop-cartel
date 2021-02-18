@@ -5,16 +5,17 @@
   <div mat-dialog-content>
 
     <input hidden matInput formControlName="id" placeholder="">
+    <input hidden type="file" (change)="changed($event)" #chooseFile/>
 
     <div class="row">
       <div class="col justify-content-center">
         <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'"></div>
-
         <div class="row">
-          <button type="button" (click)="changeImage()" class="remove-picture-btn" mat-raised-button color="primary"> Edit picture
+          <button type="button" (click)="changeImage()" class="remove-picture-btn edit-button" mat-raised-button color="primary">
+            Edit picture
           </button>
-          <input hidden type="file" (change)="changed($event)" #chooseFile/>
-          <button type="button" (click)="removeImage()" class="remove-picture-btn margin-left-10" mat-raised-button color="warn"> Remove picture
+          <button type="button" (click)="removeImage()" class="remove-picture-btn" mat-raised-button color="warn">
+            Remove picture
           </button>
         </div>
       </div>
