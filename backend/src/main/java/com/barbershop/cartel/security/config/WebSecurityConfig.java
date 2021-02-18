@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         String[] getMappings = new String[] {
-                "/user","/general-configuration/**", "/git-info"
+                "/user","/general-configuration/**", "/images/**"
         };
 
         String[] postMappings = new String[] {

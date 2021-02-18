@@ -12,7 +12,7 @@ public interface BarberInterface {
 
     Optional<BarberEntity> getBarberById(long barberId);
 
-    void createBarber(BarberModel barbers);
+    long createBarber(BarberModel barbers);
 
     void updateBarber(BarberModel barberModel) throws Exception;
 

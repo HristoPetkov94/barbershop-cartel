@@ -1,7 +1,10 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BarberService} from '../../services/barber.service';
 import {Barber} from '../../models/barber.model';
+import {MatDialog} from '@angular/material/dialog';
 import {NotificationComponent} from '../../notification/notification.component';
+import {BarberEditDialogComponent} from './barber-edit-dialog/barber-edit-dialog.component';
+import {ImageService} from '../../services/image.service';
 
 @Component({
   selector: 'app-barber-configuration',
@@ -14,10 +17,8 @@ export class BarberConfigurationComponent implements OnInit {
   public loading = true;
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
-  @ViewChild('chooseFile') public chooseFile: ElementRef;
-  @ViewChildren('input') inputs!: QueryList<ElementRef>;
 
-  constructor(private barberService: BarberService) {
+  constructor(private barberService: BarberService, private dialog: MatDialog, private imageService: ImageService) {
   }
 
   ngOnInit(): void {
@@ -29,91 +30,37 @@ export class BarberConfigurationComponent implements OnInit {
       this.barbers = data;
     }, () => {
     }, () => {
-      this.barbers.sort((a, b) => a.id - b.id);
       this.loading = false;
     });
   }
 
-  changed(event, barber) {
-    const file = event.target.files[0];
-    this.getBase64(file, barber);
-  }
-
-  upload(barber: Barber) {
-    const input = this.inputs.find((current) => barber.id + '' === current.nativeElement.id);
-    input.nativeElement.click();
-  }
-
   add() {
-    this.barbers.push(new Barber());
-  }
+    const newBarber = new Barber();
+    newBarber.picture = this.imageService.getDefaultBarberImage();
+    const dialogRef = this.dialog.open(BarberEditDialogComponent, {
+      width: '560px',
+      data: newBarber
+    });
 
-  delete(barber: Barber) {
-
-    if (barber.id === undefined) {
-      confirm('Are you sure you want to delete the empty barber form?');
-      this.spliceFromBarbersList(barber);
-      return;
-    }
-
-    if (confirm('Are you sure you want to delete ' + barber.firstName + '' + barber.lastName + '?')) {
-
-      this.barberService.deleteBarber(barber.id).subscribe(data => {
-          this.fetchData();
-        },
-        () => {
-          this.notification.showMessage('update unsuccessful', 'warn');
-        },
-        () => {
-          this.notification.showMessage('update successful', 'success');
-        }
-      );
-    }
-  }
-
-  spliceFromBarbersList(barber: Barber) {
-    const index = this.barbers.indexOf(barber, 0);
-
-    if (index > -1) {
-      this.barbers.splice(index, 1);
-    }
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.save(result);
+      }
+    });
   }
 
   save(barber: Barber) {
 
-    if (barber.id === undefined) {
-      this.barberService.createBarber(barber).subscribe(data => {
-          this.fetchData();
-        },
-        () => {
-          this.notification.showMessage('update unsuccessful', 'warn');
-        },
-        () => {
-          this.notification.showMessage('update successful', 'success');
-        }
-      );
-    } else {
-      this.barberService.updateBarber(barber).subscribe(data => {
-          this.fetchData();
-        },
-        () => {
-          this.notification.showMessage('update unsuccessful', 'warn');
-        },
-        () => {
-          this.notification.showMessage('update successful', 'success');
-        }
-      );
-    }
-  }
+    this.barberService.createBarber(barber).subscribe((data: Barber) => {
+        this.barbers.unshift(data);
+      },
+      () => {
+        this.notification.showMessage('create unsuccessful', 'warn');
+      },
+      () => {
 
-  getBase64(file, barber) {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      barber.picture = reader.result;
-    };
-    reader.onerror = (error) => {
-      console.log('Error: ', error);
-    };
+        this.notification.showMessage('create successful', 'success');
+      }
+    );
   }
 }

@@ -26,7 +26,7 @@ public class BarberService implements BarberInterface {
     public List<BarberModel> getBarbers() {
 
         List<BarberModel> barbers = new ArrayList<>();
-        Iterable<BarberEntity> allBarbers = barberRepository.findAll();
+        Iterable<BarberEntity> allBarbers = barberRepository.findAllByOrderByIdDesc();
 
         for (BarberEntity barber : allBarbers) {
 
@@ -53,7 +53,7 @@ public class BarberService implements BarberInterface {
     }
 
     @Override
-    public void createBarber(BarberModel barberModel) {
+    public long createBarber(BarberModel barberModel) {
 
         BarberEntity barber = new BarberEntity();
 
@@ -65,6 +65,8 @@ public class BarberService implements BarberInterface {
         barber.setInstagram(barberModel.getInstagram());
 
         barberRepository.save(barber);
+
+        return barber.getId();
     }
 
     @Override

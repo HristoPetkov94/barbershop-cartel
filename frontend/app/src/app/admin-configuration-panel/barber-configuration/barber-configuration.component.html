@@ -1,12 +1,12 @@
 <hr/>
 
-<div class="row max-width justify-content-end">
+<div class="row max-width justify-content-start">
 
   <div class="sized-box-width-20"></div>
 
   <button (click)="add()" style="padding: 5px 20px;" mat-raised-button color="primary">
     <mat-icon> add</mat-icon>
-    <span>Add New BarberModel</span>
+    <span>Add New Barber</span>
   </button>
 </div>
 
@@ -16,126 +16,7 @@
 
 <div *ngFor="let barber of barbers">
 
-  <div class="sized-box-height"></div>
-
-  <div class="row max-width justify-content-end">
-    <button (click)="save(barber)" mat-button color="accent">
-      <mat-icon #tooltip="matTooltip"
-                matTooltip="Save"
-                [matTooltipPosition]="'left'"> save
-      </mat-icon>
-    </button>
-
-    <button (click)="delete(barber)" mat-icon-button color="warn">
-      <mat-icon #tooltip="matTooltip"
-                matTooltip="Delete"
-                [matTooltipPosition]="'left'"> delete
-      </mat-icon>
-    </button>
-  </div>
-
-  <mat-grid-list cols="4" rowHeight="230px">
-    <!--        column 1-->
-    <mat-grid-tile [colspan]="4" [rowspan]="2">
-
-      <div class="col">
-        <div class="row max-height max-width">
-
-          <div class="sized-box-width-100"></div>
-
-          <div class="col max-width">
-
-            <div class="row">
-              <div class="col">
-                <div class="profile-picture" [style.backgroundImage]="'url(' + barber.picture + ')'">
-
-                </div>
-              </div>
-
-              <div class="col padding-20">
-                <h2> Upload new picture </h2>
-
-                <div class="sized-box-height"></div>
-
-                <input id="{{barber.id}}" class="display-none" type="file" (change)="changed($event, barber)"
-                       #input/>
-
-                <div class="row align-items-center">
-                  <button class="upload-btn"
-                          mat-stroked-button (click)="upload(barber)">
-
-                    <span class="choose-file-label"> Choose file... </span>
-                  </button>
-
-                  <label class="file-chosen-label"> No file chosen </label>
-                </div>
-
-                <hr/>
-
-                <div class="row">
-                  <button class="remove-picture-btn"
-                          mat-stroked-button color="warn"> Remove picture
-                  </button>
-                  <div class="sized-box-width-100"></div>
-                </div>
-              </div>
-
-              <div class="sized-box-width-100"></div>
-            </div>
-
-            <div class="col max-height justify-content-end">
-              <div class="row justify-content-center">
-                <div class="sized-box-width-100">
-                  <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
-                </div>
-                <input label="" [(ngModel)]="barber.facebook" type="text" class="text-input max-width"/>
-                <div class="sized-box-width-100"></div>
-              </div>
-
-              <div class="row justify-content-center">
-                <div class="sized-box-width-100">
-                  <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
-                </div>
-                <input label="" [(ngModel)]="barber.instagram" type="text" class="text-input max-width"/>
-                <div class="sized-box-width-100"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col max-width">
-
-            <h2 class="margin-bottom-10"> Firstname </h2>
-
-            <div class="row">
-              <input label="" [(ngModel)]="barber.firstName" type="text" class="text-input max-width"/>
-            </div>
-
-            <div class="sized-box-height"></div>
-
-            <h2 class="margin-bottom-10"> Lastname </h2>
-
-            <div class="row">
-              <input label="" [(ngModel)]="barber.lastName" type="text" class="text-input max-width"/>
-            </div>
-
-            <div class="sized-box-height"></div>
-
-            <h2 class="margin-bottom-10"> Description </h2>
-
-            <div class="row">
-              <textarea [(ngModel)]="barber.description" class="front-page-message-input max-width" rows="10" cols="50"
-                        name="comment"></textarea>
-            </div>
-          </div>
-          <div class="sized-box-width-100"></div>
-        </div>
-
-      </div>
-    </mat-grid-tile>
-
-  </mat-grid-list>
-
-  <hr/>
+  <app-barber-view [barber]="barber"></app-barber-view>
 </div>
 
 <app-notification></app-notification>
