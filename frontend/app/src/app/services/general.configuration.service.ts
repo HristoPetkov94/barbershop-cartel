@@ -6,6 +6,7 @@ import {User} from '../models/user.model';
 import {SocialMediaModel} from '../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
 import {GitVersion} from "../models/git-version.mode";
+import {ValidatePasswordModel} from '../models/general.configuration/validate.password.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,10 @@ export class GeneralConfigurationService {
 
   getUsers(): Subscribable<User[]> {
     return this.http.get<User[]>(this.apiUrl + '/user');
+  }
+
+  validatePassword(validate: ValidatePasswordModel) {
+    return this.http.post(this.apiUrl + '/user/validate-password', validate);
   }
 
   changePassword(user: User) {

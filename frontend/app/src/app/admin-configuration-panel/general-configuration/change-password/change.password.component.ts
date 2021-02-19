@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {User} from '../../../models/user.model';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {GeneralConfigurationService} from '../../../services/general.configuration.service';
+import {ValidatePasswordModel} from '../../../models/general.configuration/validate.password.model';
+import {User} from '../../../models/user.model';
 
 @Component({
   selector: 'app-password',
@@ -15,32 +16,41 @@ export class ChangePasswordComponent implements OnInit {
   constructor(private generalConfigurationService: GeneralConfigurationService) {
   }
 
-  public email: string;
+  @Input() email: string;
+
   public newPassword = '';
   public confirmPassword = '';
+  public oldPassword = '';
 
   ngOnInit(): void {
   }
 
-  public changePassword() {
+  async changePassword() {
+    const validate = new ValidatePasswordModel(this.email, this.oldPassword, this.newPassword, this.confirmPassword);
 
-    if (this.newPassword.length === 0 || this.confirmPassword.length === 0) {
-      this.notification.showMessage('Password fields cannot be empty', 'warn');
-      return;
+    // sync's the call
+    let valid = true;
+    await this.generalConfigurationService.validatePassword(validate).toPromise()
+      .catch((err) => {
+          this.notification.showMessage(err.error.message, 'warn');
+          valid = false;
+        }
+      );
+
+    if (valid) {
+      this.confirmPasswordChange();
     }
+  }
 
-    if (this.newPassword !== this.confirmPassword) {
-      this.notification.showMessage('Passwords does not match', 'warn');
-      return;
-    }
-
+  public confirmPasswordChange() {
     const user = new User(this.email, this.newPassword);
 
     if (confirm('Are you sure you want to change password?')) {
       this.generalConfigurationService.changePassword(user).subscribe(data => {
 
         },
-        () => {
+        (err) => {
+          console.log(err);
           this.notification.showMessage('Password was not changed', 'warn');
         },
         () => {

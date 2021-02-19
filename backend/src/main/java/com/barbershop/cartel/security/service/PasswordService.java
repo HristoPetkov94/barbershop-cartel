@@ -4,6 +4,7 @@ import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.models.UserModel;
+import com.barbershop.cartel.security.models.ValidatePasswordModel;
 import com.barbershop.cartel.security.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -95,5 +96,29 @@ public class PasswordService {
 
         EmailDetailsModel details = emailDetails(password);
         emailInterface.sendMailMessage(details);
+    }
+
+    public void validatePassword(ValidatePasswordModel validate) throws Exception {
+        String email = validate.getEmail();
+        String oldPassword = validate.getOldPassword();
+        String newPassword = validate.getNewPassword();
+        String confirmPassword = validate.getConfirmPassword();
+
+        if (newPassword.isEmpty() || confirmPassword.isEmpty() || oldPassword.isEmpty()) {
+            throw new Exception("Password fields cannot be empty");
+        }
+
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() ->
+                    new UsernameNotFoundException("User with email: " + email + " is not existing."));
+
+        boolean match = bcryptEncoder.matches(oldPassword, user.getPassword());
+
+        if(!match) {
+            throw new Exception("Old password does not match");
+        }
+
+        if (!newPassword.equals(confirmPassword)) {
+            throw new Exception("New and Confirm passwords do not match");
+        }
     }
 }
