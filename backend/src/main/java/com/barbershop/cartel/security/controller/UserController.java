@@ -1,7 +1,7 @@
 package com.barbershop.cartel.security.controller;
 
 import com.barbershop.cartel.security.models.UserModel;
-import com.barbershop.cartel.security.models.ValidatePasswordModel;
+import com.barbershop.cartel.security.models.PasswordValidationModel;
 import com.barbershop.cartel.security.service.PasswordService;
 import com.barbershop.cartel.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class UserController {
     }
 
     @PostMapping("/validate-password")
-    public void validatePassword(@RequestBody ValidatePasswordModel validate) throws Exception {
+    public void validatePassword(@RequestBody PasswordValidationModel validate) throws Exception {
         passwordService.validatePassword(validate);
     }
 

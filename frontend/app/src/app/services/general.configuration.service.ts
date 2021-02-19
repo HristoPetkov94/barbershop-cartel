@@ -6,7 +6,7 @@ import {User} from '../models/user.model';
 import {SocialMediaModel} from '../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
 import {GitVersion} from "../models/git-version.mode";
-import {ValidatePasswordModel} from '../models/general.configuration/validate.password.model';
+import {ValidatePasswordModel} from '../models/general.configuration/password.validation.model';
 
 @Injectable({
   providedIn: 'root'

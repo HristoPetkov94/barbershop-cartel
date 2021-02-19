@@ -7,7 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ValidatePasswordModel {
+public class PasswordValidationModel {
 
     private String email;
     private String oldPassword;

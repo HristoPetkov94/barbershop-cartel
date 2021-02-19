@@ -1,7 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {GeneralConfigurationService} from '../../../services/general.configuration.service';
-import {ValidatePasswordModel} from '../../../models/general.configuration/validate.password.model';
+import {PasswordValidationModel} from '../../../models/general.configuration/password.validation.model';
 import {User} from '../../../models/user.model';
 
 @Component({
@@ -26,7 +26,7 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   async changePassword() {
-    const validate = new ValidatePasswordModel(this.email, this.oldPassword, this.newPassword, this.confirmPassword);
+    const validate = new PasswordValidationModel(this.email, this.oldPassword, this.newPassword, this.confirmPassword);
 
     // sync's the call
     let valid = true;

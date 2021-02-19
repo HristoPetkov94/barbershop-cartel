@@ -1,4 +1,4 @@
-export class ValidatePasswordModel {
+export class PasswordValidationModel {
 
   public email: string;
   public oldPassword: string;

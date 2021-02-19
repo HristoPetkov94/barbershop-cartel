@@ -4,7 +4,7 @@ import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.models.UserModel;
-import com.barbershop.cartel.security.models.ValidatePasswordModel;
+import com.barbershop.cartel.security.models.PasswordValidationModel;
 import com.barbershop.cartel.security.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,7 +98,7 @@ public class PasswordService {
         emailInterface.sendMailMessage(details);
     }
 
-    public void validatePassword(ValidatePasswordModel validate) throws Exception {
+    public void validatePassword(PasswordValidationModel validate) throws Exception {
         String email = validate.getEmail();
         String oldPassword = validate.getOldPassword();
         String newPassword = validate.getNewPassword();
