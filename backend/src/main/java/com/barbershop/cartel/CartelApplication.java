@@ -6,6 +6,7 @@ import com.barbershop.cartel.security.models.UserModel;
 import com.barbershop.cartel.security.service.JwtUserDetailsService;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.utils.PictureUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -33,6 +34,9 @@ public class CartelApplication implements WebMvcConfigurer {
                 .setCachePeriod(0);
     }
 
+    @Value("${server.servlet.context-path}/images/default-profile-picture.png")
+    private String defaultImageUrl;
+
     @Bean
     CommandLineRunner init(JwtUserDetailsService userService, BarberRepository barberRepository) {
         return args -> {
@@ -54,14 +58,14 @@ public class CartelApplication implements WebMvcConfigurer {
         };
     }
 
-    public static BarberEntity createBarber1() {
+    public BarberEntity createBarber1() {
 
         BarberEntity barber = new BarberEntity();
 
         barber.setFirstName("Пламен");
         barber.setLastName("Маринов");
         barber.setDescription("Инженер-Архитектът под чиито надзор се изпълнява този проект.");
-        barber.setPicture(PictureUtils.getDefaultPicture());
+        barber.setPicture(defaultImageUrl);
 
         List<ServiceEntity> services = new ArrayList<>();
 
@@ -74,14 +78,14 @@ public class CartelApplication implements WebMvcConfigurer {
         return barber;
     }
 
-    public static BarberEntity createBarber2() {
+    public BarberEntity createBarber2() {
 
         BarberEntity barber = new BarberEntity();
 
         barber.setFirstName("Христо");
         barber.setLastName("Петков");
         barber.setDescription("Инженер-Предприемач, който ще доведе до край този проект.");
-        barber.setPicture(PictureUtils.getDefaultPicture());
+        barber.setPicture(defaultImageUrl);
 
         List<ServiceEntity> services = new ArrayList<>();
 

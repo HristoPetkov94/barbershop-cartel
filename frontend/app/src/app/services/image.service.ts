@@ -10,6 +10,6 @@ export class ImageService {
   constructor() { }
 
   getDefaultBarberImage() {
-    return this.url + '/images/default-profile-picture.png';;
+    return this.url + '/images/default-profile-picture.png';
   }
 }
