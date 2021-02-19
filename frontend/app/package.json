@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.js",
-    "build": "ng build --prod --aot --build-optimizer",
+    "build": "ng build --prod --aot --build-optimizer -sm false ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
