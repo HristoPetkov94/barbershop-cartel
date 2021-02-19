@@ -49,8 +49,7 @@ export class ChangePasswordComponent implements OnInit {
       this.generalConfigurationService.changePassword(user).subscribe(data => {
 
         },
-        (err) => {
-          console.log(err);
+        () => {
           this.notification.showMessage('Password was not changed', 'warn');
         },
         () => {
