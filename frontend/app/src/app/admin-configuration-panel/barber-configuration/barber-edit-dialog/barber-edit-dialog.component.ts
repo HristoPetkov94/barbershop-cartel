@@ -14,6 +14,10 @@ export class BarberEditDialogComponent implements OnInit {
   myForm: FormGroup;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
 
+  get description(){
+    return this.myForm.get('description');
+  }
+
   constructor(
     public dialogRef: MatDialogRef<BarberEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Barber,
@@ -28,10 +32,10 @@ export class BarberEditDialogComponent implements OnInit {
         lastName: [this.data.lastName, [Validators.required]],
         instagram: this.data.instagram,
         facebook: this.data.facebook,
-        description: this.data.description
+        description: [this.data.description, [Validators.maxLength(255)]]
       }
     );
-    this.myForm.valueChanges.subscribe(console.log);
+
 
     this.dialogRef.beforeClosed().subscribe(value => {
       value.id = this.myForm.value.id;
