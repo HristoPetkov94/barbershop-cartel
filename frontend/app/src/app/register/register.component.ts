@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../models/user.model';
+import {PasswordChangeRequest} from '../models/user.model';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {Router} from '@angular/router';
 // TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
-    const user = new User(this.email, this.password);
+    const user = new PasswordChangeRequest(this.email, this.password);
     console.log(user);
     this.auth.register(user).subscribe(() => {
       console.log('UserModel registered successfully.');

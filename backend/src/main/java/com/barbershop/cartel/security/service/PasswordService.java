@@ -3,8 +3,6 @@ package com.barbershop.cartel.security.service;
 import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.security.entity.UserEntity;
-import com.barbershop.cartel.security.models.UserModel;
-import com.barbershop.cartel.security.models.PasswordValidationModel;
 import com.barbershop.cartel.security.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,27 +59,35 @@ public class PasswordService {
         return password.toString();
     }
 
-    private void changePassword(UserEntity user, String password) {
+    public void changePassword(String email, String oldPassword, String newPassword) {
 
-        user.setPassword(bcryptEncoder.encode(password));
+        UserEntity user = userRepository.findByEmail(email).orElseThrow(() ->
+                new CartelCustomException("User with email: " + email + " is not existing."));
+
+        if (oldPassword.isEmpty()) {
+            throw new CartelCustomException("Password fields cannot be empty");
+        }
+
+        boolean match = bcryptEncoder.matches(oldPassword, user.getPassword());
+
+        if(!match) {
+            throw new CartelCustomException("Old password doesn't match");
+        }
+
+        changePassword(user, newPassword);
+    }
+
+    public void changePassword(UserEntity user, String newPassword) {
+
+        user.setPassword(bcryptEncoder.encode(newPassword));
+
         userRepository.save(user);
 
         log.info("New password for user:" + user.getEmail() + " has been applied.");
     }
 
-    public void changePassword(UserModel userModel) {
-
-        Optional<UserEntity> user = userRepository.findByEmail(userModel.getEmail());
-
-        if (user.isEmpty()) {
-            throw new UsernameNotFoundException("User with email: " + userModel.getEmail() + " is not existing.");
-        }
-
-        changePassword(user.get(), userModel.getPassword());
-    }
-
     /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/
-    public void forgotPassword(String email) {
+    public void forgotPassword(String email) throws Exception {
 
         Optional<UserEntity> userOptional = userRepository.findByEmail(email);
 
@@ -98,21 +104,4 @@ public class PasswordService {
         emailInterface.sendMailMessage(details);
     }
 
-    public void validatePassword(PasswordValidationModel validate) throws Exception {
-        String email = validate.getEmail();
-        String oldPassword = validate.getOldPassword();
-
-        if (oldPassword.isEmpty()) {
-            throw new Exception("Password fields cannot be empty");
-        }
-
-        UserEntity user = userRepository.findByEmail(email).orElseThrow(() ->
-                    new UsernameNotFoundException("User with email: " + email + " is not existing."));
-
-        boolean match = bcryptEncoder.matches(oldPassword, user.getPassword());
-
-        if(!match) {
-            throw new Exception("Old password does not match");
-        }
-    }
 }

@@ -1,8 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {GeneralConfigurationService} from '../../../services/general.configuration.service';
-import {PasswordValidationModel} from '../../../models/general.configuration/password.validation.model';
-import {User} from '../../../models/user.model';
+import {PasswordChangeRequest} from '../../../models/user.model';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
 
@@ -54,10 +53,6 @@ export class ChangePasswordComponent implements OnInit {
         confirmFrom: this.confirmFrom,
       });
 
-    // {validators: this.checkPasswords}
-    this.passwordForm.valueChanges.subscribe(() => {
-      console.log(this.passwordForm.errors);
-    });
   }
 
   checkPasswords(group: FormGroup) {
@@ -85,31 +80,11 @@ export class ChangePasswordComponent implements OnInit {
     return this.confirmFrom.get('confirmPassword');
   }
 
-  async changePassword() {
-    const oldPassword = this.oldPassword.value;
-    console.log(oldPassword);
-    const validate = new PasswordValidationModel(this.email, oldPassword);
-
-    // sync's the call
-    let valid = true;
-    await this.generalConfigurationService.validatePassword(validate).toPromise()
-      .catch((err) => {
-          this.notification.showMessage(err.error.message, 'warn');
-          valid = false;
-        }
-      );
-
-    if (valid) {
-      this.confirmPasswordChange();
-    }
-  }
-
-  public confirmPasswordChange() {
-    const user = new User(this.email, this.newPassword.value);
+  public changePassword() {
+    const passwordChangeRequest = new PasswordChangeRequest(this.oldPassword.value, this.newPassword.value);
 
     if (confirm('Are you sure you want to change password?')) {
-      console.log(user);
-      this.generalConfigurationService.changePassword(user).subscribe(data => {
+      this.generalConfigurationService.changePassword(passwordChangeRequest).subscribe(data => {
 
         },
         () => {

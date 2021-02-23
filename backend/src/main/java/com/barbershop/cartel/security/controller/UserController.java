@@ -1,10 +1,11 @@
 package com.barbershop.cartel.security.controller;
 
+import com.barbershop.cartel.security.models.PasswordChangeRequest;
 import com.barbershop.cartel.security.models.UserModel;
-import com.barbershop.cartel.security.models.PasswordValidationModel;
 import com.barbershop.cartel.security.service.PasswordService;
 import com.barbershop.cartel.security.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,18 +25,18 @@ public class UserController {
         return userService.getUsers();
     }
 
-    @PostMapping("/validate-password")
-    public void validatePassword(@RequestBody PasswordValidationModel validate) throws Exception {
-        passwordService.validatePassword(validate);
-    }
-
     @PostMapping("/change-password")
-    public void changePassword(@RequestBody UserModel userModel) {
-        passwordService.changePassword(userModel);
+    public void changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest, @Autowired Authentication authentication) throws Exception {
+        String name = authentication.getName();
+
+        String oldPassword = passwordChangeRequest.getOldPassword();
+        String newPassword = passwordChangeRequest.getNewPassword();
+
+        passwordService.changePassword(name, oldPassword, newPassword);
     }
 
     @PostMapping("/forgot-password")
-    public void forgotPassword(@RequestParam String email) {
+    public void forgotPassword(@RequestParam String email) throws Exception {
         passwordService.forgotPassword(email);
     }
 }

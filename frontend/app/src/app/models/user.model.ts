@@ -1,9 +1,9 @@
-export class User {
-  email: string;
-  password: string;
+export class PasswordChangeRequest {
+  oldPassword: string;
+  newPassword: string;
 
-  constructor(email, password) {
-    this.email = email;
-    this.password = password;
+  constructor(oldPassword, newPassword) {
+    this.oldPassword = oldPassword;
+    this.newPassword = newPassword;
   }
 }

@@ -3,7 +3,7 @@ import {GeneralConfigurationService} from '../../services/general.configuration.
 import {NotificationComponent} from '../../notification/notification.component';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../../models/general.configuration/contact.info.model';
-import {User} from '../../models/user.model';
+import {PasswordChangeRequest} from '../../models/user.model';
 import {Observable} from 'rxjs';
 import {GitVersion} from '../../models/git-version.mode';
 
@@ -16,7 +16,7 @@ export class GeneralConfigurationComponent implements OnInit {
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
-  public users: User[];
+  public users: PasswordChangeRequest[];
   public email: string;
 
   public frontPageMessage: string;

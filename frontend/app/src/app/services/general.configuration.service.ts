@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, Subscribable} from 'rxjs';
-import {User} from '../models/user.model';
+import {PasswordChangeRequest} from '../models/user.model';
 import {SocialMediaModel} from '../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
 import {GitVersion} from "../models/git-version.mode";
@@ -18,16 +18,12 @@ export class GeneralConfigurationService {
   constructor(private http: HttpClient) {
   }
 
-  getUsers(): Subscribable<User[]> {
-    return this.http.get<User[]>(this.apiUrl + '/user');
+  getUsers(): Subscribable<PasswordChangeRequest[]> {
+    return this.http.get<PasswordChangeRequest[]>(this.apiUrl + '/user');
   }
 
-  validatePassword(validate: PasswordValidationModel) {
-    return this.http.post(this.apiUrl + '/user/validate-password', validate);
-  }
-
-  changePassword(user: User) {
-    return this.http.post(this.apiUrl + '/user/change-password', user);
+  changePassword(passwordChangeRequest: PasswordChangeRequest) {
+    return this.http.post(this.apiUrl + '/user/change-password', passwordChangeRequest);
   }
 
   forgotPassword(email: string) {
