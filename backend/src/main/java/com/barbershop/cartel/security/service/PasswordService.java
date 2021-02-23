@@ -101,10 +101,8 @@ public class PasswordService {
     public void validatePassword(PasswordValidationModel validate) throws Exception {
         String email = validate.getEmail();
         String oldPassword = validate.getOldPassword();
-        String newPassword = validate.getNewPassword();
-        String confirmPassword = validate.getConfirmPassword();
 
-        if (newPassword.isEmpty() || confirmPassword.isEmpty() || oldPassword.isEmpty()) {
+        if (oldPassword.isEmpty()) {
             throw new Exception("Password fields cannot be empty");
         }
 
@@ -115,10 +113,6 @@ public class PasswordService {
 
         if(!match) {
             throw new Exception("Old password does not match");
-        }
-
-        if (!newPassword.equals(confirmPassword)) {
-            throw new Exception("New and Confirm passwords do not match");
         }
     }
 }

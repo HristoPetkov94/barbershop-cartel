@@ -11,6 +11,4 @@ public class PasswordValidationModel {
 
     private String email;
     private String oldPassword;
-    private String newPassword;
-    private String confirmPassword;
 }
