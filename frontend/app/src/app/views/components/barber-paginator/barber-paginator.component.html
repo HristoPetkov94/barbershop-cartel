@@ -26,7 +26,7 @@
         <div class="flip-card-back">
           <p class="back-card-text"> {{barber.description}} </p>
 
-          <button class="back-card-button"> {{'bookingMessage' | translate}} </button>
+          <button [routerLink]="'/book-now'" class="back-card-button"> {{'bookingMessage' | translate}} </button>
         </div>
       </div>
     </div>
