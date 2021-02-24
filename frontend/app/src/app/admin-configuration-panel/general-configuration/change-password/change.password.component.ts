@@ -1,9 +1,9 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {GeneralConfigurationService} from '../../../services/general.configuration.service';
-import {PasswordChangeRequest} from '../../../models/user.model';
 import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material';
+import {PasswordChangeRequest} from '../../../models/password-change-request.model';
 
 class MyErrorStateMatcher implements ErrorStateMatcher {
 
