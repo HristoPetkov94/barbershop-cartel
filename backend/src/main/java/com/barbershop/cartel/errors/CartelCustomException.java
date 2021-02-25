@@ -1,4 +1,4 @@
-package com.barbershop.cartel.security.service;
+package com.barbershop.cartel.errors;
 
 public class CartelCustomException extends RuntimeException {
 

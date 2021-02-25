@@ -1,5 +1,6 @@
 package com.barbershop.cartel.security.service;
 
+import com.barbershop.cartel.errors.CartelCustomException;
 import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.security.entity.UserEntity;

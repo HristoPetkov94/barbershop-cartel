@@ -1,4 +1,4 @@
-package com.barbershop.cartel.security.service;
+package com.barbershop.cartel.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +15,7 @@ import java.util.Map;
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(CartelCustomException.class)
-    public ResponseEntity<Object> handleCityNotFoundException(
-            CartelCustomException ex, WebRequest request) {
+    public ResponseEntity<Object> handleCartelCustomException(CartelCustomException ex, WebRequest request) {
 
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", LocalDateTime.now());

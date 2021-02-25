@@ -23,8 +23,6 @@ export class ChangePasswordComponent implements OnInit {
 
   @Input() email: string;
 
-  // matcher = new MyErrorStateMatcher();
-
   hideOld = true;
   hideNew = true;
   hideConfirm = true;
