@@ -1,6 +1,6 @@
 <hr>
 
-<mat-grid-list class="margin-top-20" cols="4" rowHeight="100px">
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
   <!--        column 1-->
   <mat-grid-tile [colspan]="2" [rowspan]="2">
     <div class="col padding-20 max-height">
@@ -20,7 +20,10 @@
       </div>
 
       <div class="sized-box-height-20"></div>
-      <app-password></app-password>
+
+      <h2 class="margin-bottom-10"> Change password </h2>
+
+      <app-password [email]="email" ></app-password>
 
     </div>
   </mat-grid-tile>

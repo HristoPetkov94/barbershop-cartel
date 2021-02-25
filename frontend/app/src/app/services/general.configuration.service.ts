@@ -5,7 +5,8 @@ import {Observable, Subscribable} from 'rxjs';
 import {User} from '../models/user.model';
 import {SocialMediaModel} from '../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
-import {GitVersion} from "../models/git-version.mode";
+import {GitVersion} from '../models/git-version.mode';
+import {PasswordChangeRequest} from '../models/password-change-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,8 @@ export class GeneralConfigurationService {
     return this.http.get<User[]>(this.apiUrl + '/user');
   }
 
-  changePassword(user: User) {
-    return this.http.post(this.apiUrl + '/user/change-password', user);
+  changePassword(passwordChangeRequest: PasswordChangeRequest) {
+    return this.http.post(this.apiUrl + '/user/change-password', passwordChangeRequest);
   }
 
   forgotPassword(email: string) {
