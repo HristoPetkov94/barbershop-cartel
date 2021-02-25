@@ -1,19 +1,13 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {GeneralConfigurationService} from '../../../services/general.configuration.service';
-import {FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import {PasswordChangeRequest} from '../../../models/password-change-request.model';
-
-class MyErrorStateMatcher implements ErrorStateMatcher {
-
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const invalidCtrl = !!(control?.invalid && control?.parent?.dirty);
-    const invalidParent = !!(control?.parent?.invalid && control?.parent?.dirty && control?.touched);
-
-    return invalidCtrl || invalidParent;
-  }
-}
+import {PasswordDoNotMatchValidator, PasswordMatchValidator} from './validators/password.validator';
 
 @Component({
   selector: 'app-password',
@@ -29,43 +23,31 @@ export class ChangePasswordComponent implements OnInit {
 
   @Input() email: string;
 
-  matcher = new MyErrorStateMatcher();
+  // matcher = new MyErrorStateMatcher();
 
   hideOld = true;
   hideNew = true;
   hideConfirm = true;
 
   passwordForm: FormGroup;
-  confirmFrom: FormGroup;
 
   ngOnInit(): void {
-
-    this.confirmFrom = this.formBuilder.group(
-      {
-        newPassword: ['', Validators.required],
-        confirmPassword: '',
-      }, {validators: this.checkPasswords}
-    );
-
     this.passwordForm = this.formBuilder.group(
       {
         oldPassword: ['', Validators.required],
-        confirmFrom: this.confirmFrom,
+        newPassword: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+      }, {
+        validators: [
+          PasswordMatchValidator('oldPassword', 'newPassword'),
+          PasswordDoNotMatchValidator('newPassword', 'confirmPassword'),
+        ]
       });
 
-  }
-
-  checkPasswords(group: FormGroup) {
-    const confirmField = group.get('confirmPassword');
-
-    const newPassword = group.get('newPassword').value;
-    const confirmPassword = confirmField.value;
-
-    if (newPassword === confirmPassword) {
-      return null;
-    }
-
-    return {same: true};
+    this.passwordForm.valueChanges.subscribe(() => {
+      console.log(this.passwordForm.errors);
+      console.log(this.passwordForm.hasError('old'));
+    });
   }
 
   get oldPassword() {
@@ -73,11 +55,11 @@ export class ChangePasswordComponent implements OnInit {
   }
 
   get newPassword() {
-    return this.confirmFrom.get('newPassword');
+    return this.passwordForm.get('newPassword');
   }
 
   get confirmPassword() {
-    return this.confirmFrom.get('confirmPassword');
+    return this.passwordForm.get('confirmPassword');
   }
 
   public changePassword() {
