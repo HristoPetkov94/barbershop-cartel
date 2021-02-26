@@ -53,11 +53,6 @@ export class ConfigurationComponent implements OnInit {
     this.sidenav.close();
   }
 
-  logout() {
-    this.auth.logOut();
-    this.router.navigate(['login']);
-  }
-
   // TODO: these can be handled better.
 
   deleteService(service) {

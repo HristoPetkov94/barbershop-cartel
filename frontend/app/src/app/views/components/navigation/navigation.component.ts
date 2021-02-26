@@ -32,4 +32,16 @@ export class NavigationComponent implements OnInit {
 
     this.translate.use(lang);
   }
+
+  reloadComponent() {
+    const currentUrl = this.route.url;
+    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.route.onSameUrlNavigation = 'reload';
+    this.route.navigate([currentUrl]);
+  }
+  logout() {
+    this.auth.logOut();
+
+    this.reloadComponent();
+  }
 }

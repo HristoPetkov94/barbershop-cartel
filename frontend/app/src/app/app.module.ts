@@ -34,7 +34,6 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {LoginComponent} from './login/login.component';
 import {BasicAuthHttpInterceptorService} from './interceptors/basic-auth-http.interceptor.service';
 import { RegisterComponent } from './register/register.component';
-import { LogoutComponent } from './logout/logout.component';
 import { DataConfigurationPanelComponent } from './configuration-panel/data-configuration-panel.component';
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
@@ -70,7 +69,6 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
     HomeViewComponent,
     LoginComponent,
     RegisterComponent,
-    LogoutComponent,
     DataConfigurationPanelComponent,
     PieChartComponent,
     NumberCardChartComponent,

@@ -8,5 +8,8 @@
   <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'/configuration/general'">
     <mat-icon> settings </mat-icon>
   </li>
+  <li *ngIf="isAdmin" style="cursor: pointer;" (click)="logout()">
+    <mat-icon> logout </mat-icon>
+  </li>
 </ul>
 
