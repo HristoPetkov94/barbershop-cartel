@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {environment} from '../../environments/environment';
 import {User} from '../models/user.model';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import {User} from '../models/user.model';
 export class AuthenticationService {
   private url = environment.apiUrl;
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router: Router) {
   }
 
   authenticate(username, password) {
@@ -38,5 +39,7 @@ export class AuthenticationService {
 
   logOut() {
     sessionStorage.removeItem('username');
+    sessionStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }
