@@ -38,7 +38,7 @@ import { DataConfigurationPanelComponent } from './configuration-panel/data-conf
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
-import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
+import { CompactNavbarComponent } from './views/components/compact-navbar/compact-navbar.component';
 import { ServiceViewComponent } from './views/service-view/service-view.component';
 import { TeamViewComponent } from './views/team-view/team-view.component';
 import { BarberPaginatorComponent } from './views/components/barber-paginator/barber-paginator.component';
@@ -108,7 +108,6 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
         MatToolbarModule,
         MatMenuModule,
         HttpClientModule,
-        ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         MatButtonToggleModule,
