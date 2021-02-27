@@ -38,7 +38,6 @@ import { DataConfigurationPanelComponent } from './configuration-panel/data-conf
 import { PieChartComponent } from './charts/pie-chart/pie-chart.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
-import {ChangePasswordDialogComponent, ConfigurationComponent} from './admin-configuration-panel/configuration.component';
 import { CompactNavbarComponent } from './compact-navbar/compact-navbar.component';
 import { ServiceViewComponent } from './views/service-view/service-view.component';
 import { TeamViewComponent } from './views/team-view/team-view.component';
@@ -72,8 +71,6 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
     DataConfigurationPanelComponent,
     PieChartComponent,
     NumberCardChartComponent,
-    ConfigurationComponent,
-    ChangePasswordDialogComponent,
     ServiceDialogComponent,
     CompactNavbarComponent,
     ServiceViewComponent,
@@ -148,7 +145,6 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ChangePasswordDialogComponent,
     ServiceDialogComponent,
     BarberEditDialogComponent
   ]

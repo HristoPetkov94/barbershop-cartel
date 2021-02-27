@@ -1,6 +1,5 @@
 import {Component, ElementRef, Inject, Input, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {Service} from '../../../../interfaces/service';
-import {ChangePasswordDialogComponent} from '../../../configuration.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {ServicePictureUpdateRequest} from './service-picture-update-request';
 
@@ -17,7 +16,6 @@ export class ServiceDialogComponent implements OnInit {
   public servicesToBeUploaded: ServicePictureUpdateRequest[] = new Array<ServicePictureUpdateRequest>();
 
   constructor(
-    public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
     this.reader = new FileReader();
