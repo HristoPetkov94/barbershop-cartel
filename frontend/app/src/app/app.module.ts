@@ -41,7 +41,7 @@ import { NumberCardChartComponent } from './charts/number-card-chart/number-card
 import { CompactNavbarComponent } from './views/components/compact-navbar/compact-navbar.component';
 import { ServiceViewComponent } from './views/service-view/service-view.component';
 import { TeamViewComponent } from './views/team-view/team-view.component';
-import { BarberPaginatorComponent } from './views/components/barber-paginator/barber-paginator.component';
+import { BarberPaginatorComponent } from './views/team-view/barber-paginator/barber-paginator.component';
 import { FooterComponent } from './views/components/footer/footer.component';
 import { I18nModule } from './i18n/i18n.module';
 import {BookingViewComponent} from './views/booking-view/booking-view.component';
