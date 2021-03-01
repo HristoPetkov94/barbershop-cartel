@@ -6,7 +6,9 @@
       "team": "team",
       "services": "services",
       "contacts": "contacts",
-      "store": "store"
+      "store": "store",
+      "configuration": "configuration",
+      "logout": "logout"
     }
   },
 
