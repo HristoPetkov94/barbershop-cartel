@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {HomeViewComponent} from './views/home-view/home-view.component';
 import {LoginComponent} from './login/login.component';
-import {ConfigurationComponent} from './admin-configuration-panel/configuration.component';
 import {AuthGuardService} from './authentication/auth-guard.service';
 import {BookingViewComponent} from './views/booking-view/booking-view.component';
 import {RegisterComponent} from './register/register.component';

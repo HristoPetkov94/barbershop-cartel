@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {getCookie, setCookie} from '../utils/cookie.utils';
+import {getCookie, setCookie} from '../../../utils/cookie.utils';
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
