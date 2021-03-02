@@ -30,11 +30,11 @@ export class BarberViewComponent implements OnInit {
       this.barberService.deleteBarber(this.barber.id).subscribe(data => {
         },
         () => {
-          this.notification.showMessage('delete unsuccessful', 'warn');
+          this.notification.showMessage('Barber has not been deleted successfully.', 'warn');
         },
         () => {
           this.deleted = true;
-          this.notification.showMessage('delete successful', 'success');
+          this.notification.showMessage('Barber has been deleted successfully.', 'success');
         }
       );
     }
@@ -44,11 +44,11 @@ export class BarberViewComponent implements OnInit {
     this.barberService.updateBarber(barber).subscribe(data => {
       },
       () => {
-        this.notification.showMessage('update unsuccessful', 'warn');
+        this.notification.showMessage('Barber has not been updated successfully.', 'warn');
       },
       () => {
         this.barber = barber;
-        this.notification.showMessage('update successful', 'success');
+        this.notification.showMessage('Barber has been updated successfully.', 'success');
       }
     );
   }

@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Barber} from '../../../models/barber.model';
 import {ImageService} from '../../../services/image.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-edit',
@@ -11,11 +13,23 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class BarberEditDialogComponent implements OnInit {
 
+  reg = '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?';
+
   myForm: FormGroup;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
 
+  get facebook(){
+    return this.myForm.get('facebook');
+  }
   get description(){
     return this.myForm.get('description');
+  }
+  get instagram(){
+    return this.myForm.get('instagram');
+  }
+
+  get isCreatingBarber(){
+    return this.myForm.get('id').value === null;
   }
 
   constructor(
@@ -30,8 +44,8 @@ export class BarberEditDialogComponent implements OnInit {
         id: this.data.id,
         firstName: [this.data.firstName, [Validators.required]],
         lastName: [this.data.lastName, [Validators.required]],
-        instagram: this.data.instagram,
-        facebook: this.data.facebook,
+        instagram: [this.data.instagram, [Validators.pattern(this.reg)]],
+        facebook: [this.data.facebook, [Validators.pattern(this.reg)]],
         description: [this.data.description, [Validators.maxLength(255)]]
       }
     );

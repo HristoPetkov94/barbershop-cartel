@@ -57,11 +57,11 @@ export class BarberConfigurationComponent implements OnInit {
         this.barbers.unshift(data);
       },
       () => {
-        this.notification.showMessage('create unsuccessful', 'warn');
+        this.notification.showMessage('Barber has not been added successfully.', 'warn');
       },
       () => {
 
-        this.notification.showMessage('create successful', 'success');
+        this.notification.showMessage('Barber has been added successfully.', 'success');
       }
     );
   }
