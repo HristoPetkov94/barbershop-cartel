@@ -11,11 +11,13 @@
 
     <ul class="nav-compact-{{!hideBurger}}">
       <li [routerLink]="''"> {{ 'home.navigation.home' | translate}} </li>
-      <li [routerLink]="'../team'">{{ 'home.navigation.team' | translate}}</li>
-      <li [routerLink]="'../services'">{{ 'home.navigation.services' | translate}}</li>
-      <li [routerLink]="'../store'">{{ 'home.navigation.store' | translate}}</li>
-      <li [routerLink]="'../contacts'"> {{ 'home.navigation.contacts' | translate}}</li>
+      <li [routerLink]="'/team'">{{ 'home.navigation.team' | translate}}</li>
+      <li [routerLink]="'/services'">{{ 'home.navigation.services' | translate}}</li>
+      <li [routerLink]="'/store'">{{ 'home.navigation.store' | translate}}</li>
+      <li [routerLink]="'/contacts'"> {{ 'home.navigation.contacts' | translate}}</li>
       <li (click)="changeLang()">{{translate.currentLang}}</li>
+      <li *ngIf="isAdmin" [routerLink]="'/configuration/general'"> {{ 'home.navigation.configuration' | translate}}</li>
+      <li *ngIf="isAdmin" (click)="logout()"> {{ 'home.navigation.logout' | translate}}</li>
     </ul>
   </div>
 </div>

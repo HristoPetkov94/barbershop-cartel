@@ -6,7 +6,9 @@
       "team": "Екип",
       "services": "Услуги",
       "contacts": "Контакти",
-      "store": "Магазин"
+      "store": "Магазин",
+      "configuration": "Конфигурация",
+      "logout": "Изход"
     }
   },
 

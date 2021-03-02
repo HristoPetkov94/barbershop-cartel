@@ -5,11 +5,11 @@
   <li [routerLink]="'/contacts'"> {{ 'home.navigation.contacts' | translate}} </li>
   <li (click)="changeLang()">{{translate.currentLang}}</li>
 
-  <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'/configuration/general'">
-    <mat-icon> settings </mat-icon>
+  <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'/configuration/general'" >
+    <mat-icon matTooltip="Configuration"> settings </mat-icon>
   </li>
   <li *ngIf="isAdmin" style="cursor: pointer;" (click)="logout()">
-    <mat-icon> logout </mat-icon>
+    <mat-icon matTooltip="Log out"> logout </mat-icon>
   </li>
 </ul>
 
