@@ -35,21 +35,26 @@
             </div>
 
             <div class="col max-height justify-content-end">
-              <div class="row justify-content-center">
-                <div class="sized-box-width-100">
-                  <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
+              <a *ngIf="barber.facebook" [href]="barber.facebook">
+                <div class="row justify-content-center">
+                  <div class="sized-box-width-100">
+                    <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
+                  </div>
+                  <span label="" class="text-input max-width"> {{barber.facebook}}</span>
+                  <div class="sized-box-width-100"></div>
                 </div>
-                <span label="" class="text-input max-width"> {{barber.facebook}}</span>
-                <div class="sized-box-width-100"></div>
-              </div>
-
+              </a>
+              <a  *ngIf="barber.facebook"  [href]="barber.instagram">
               <div class="row justify-content-center">
                 <div class="sized-box-width-100">
                   <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
                 </div>
-                <span label="" class="text-input max-width">{{barber.instagram}}</span>
-                <div class="sized-box-width-100"></div>
+
+                  <span label="" class="text-input max-width">{{barber.instagram}}</span>
+                  <div class="sized-box-width-100"></div>
+
               </div>
+              </a>
             </div>
           </div>
 
@@ -74,7 +79,7 @@
             <h2 class="margin-bottom-10"> Description </h2>
 
             <div class="row">
-              <span class="front-page-message-input max-width"> {{barber.description}}</span>
+              <textarea class="text-input max-width" cols="65" [disabled]="true" matTextareaAutosize>{{barber.description}}</textarea>
             </div>
           </div>
           <div class="sized-box-width-100"></div>

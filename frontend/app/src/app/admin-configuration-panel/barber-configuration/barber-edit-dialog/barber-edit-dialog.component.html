@@ -1,5 +1,5 @@
-<h1 mat-dialog-title>Edit/Create</h1>
-
+<h1 *ngIf="isCreatingBarber" mat-dialog-title> Add </h1>
+<h1 *ngIf="!isCreatingBarber" mat-dialog-title> Edit </h1>
 
 <form [formGroup]="myForm">
   <div mat-dialog-content>
@@ -28,7 +28,7 @@
 
         <mat-form-field>
           <mat-label>Last name</mat-label>
-          <input matInput formControlName="lastName" placeholder="Second name">
+          <input matInput formControlName="lastName" placeholder="Last name">
         </mat-form-field>
       </div>
     </div>
@@ -36,14 +36,16 @@
     <mat-form-field class="example-full-width">
       <mat-label>Instagram link</mat-label>
       <input matInput formControlName="instagram" placeholder=""/>
+      <mat-error *ngIf="instagram.invalid" align="end"> Please enter a valid url.</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Facebook link</mat-label>
       <input matInput formControlName="facebook" placeholder=""/>
+      <mat-error *ngIf="facebook.invalid" align="end"> Please enter a valid url.</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Description</mat-label>
-      <textarea matTextareaAutosize matInput formControlName="description" placeholder="description"></textarea>
+      <textarea matTextareaAutosize matInput formControlName="description" placeholder="Description"></textarea>
       <mat-error *ngIf="description.invalid" align="end"> {{ description.value?.length }} / 255</mat-error>
       <mat-hint *ngIf="description.valid" align="end"> {{ description.value?.length }} / 255</mat-hint>
     </mat-form-field>
