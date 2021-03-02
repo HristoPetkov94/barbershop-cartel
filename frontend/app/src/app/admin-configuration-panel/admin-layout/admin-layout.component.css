@@ -108,3 +108,15 @@ div.selected:focus{
   -ms-user-select: none;
   user-select: none;
 }
+
+.remove-focus:focus {
+  outline: none;
+}
+
+.selected, .unselectable {
+  cursor: pointer;
+}
+
+.unselectable:hover {
+  background-color: #f0f0f0;
+}
