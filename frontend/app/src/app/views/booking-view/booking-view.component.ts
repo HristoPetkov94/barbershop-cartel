@@ -81,6 +81,8 @@ export class BookingViewComponent implements OnInit {
   }
 
   makeActive(step: Step) {
+    // set clicked step to it's default value
+    step.title = step.default;
 
     // if step is not last and his next step is active
     // then disable all from the current step to the last one.
