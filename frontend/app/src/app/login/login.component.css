@@ -42,6 +42,9 @@
   /*height: 254px;*/
 }
 
+.cartel-theme .mat-error {
+  color: #f44336;
+}
 
 h1 {
   font-size: 72px;
