@@ -94,7 +94,7 @@ public class BarberService implements BarberInterface {
     }
 
     @Override
-    public void createService(long barberId, ServiceModel serviceModel) throws Exception {
+    public ServiceEntity createService(long barberId, ServiceModel serviceModel) throws Exception {
 
         Optional<BarberEntity> barber = barberRepository.findById(barberId);
 
@@ -115,6 +115,8 @@ public class BarberService implements BarberInterface {
         services.add(service);
 
         barberRepository.save(barber.get());
+
+        return barber.get().getServices().stream().filter(s -> service.getServiceType().equals(s.getServiceType())).findAny().get();
     }
 
     @Override

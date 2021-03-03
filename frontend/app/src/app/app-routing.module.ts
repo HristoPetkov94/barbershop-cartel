@@ -12,7 +12,7 @@ import {StoreComponent} from './views/store-view/store.component';
 import {AdminLayoutComponent} from './admin-configuration-panel/admin-layout/admin-layout.component';
 import {BarberConfigurationComponent} from './admin-configuration-panel/barber-configuration/barber-configuration.component';
 import {GeneralConfigurationComponent} from './admin-configuration-panel/general-configuration/general-configuration.component';
-import {ServicesConfigurationComponent} from './admin-configuration-panel/services-configuration/services-configuration.component';
+import {ServiceConfigurationComponent} from './admin-configuration-panel/service-configuration/service-configuration.component';
 import {StoreConfigurationComponent} from './admin-configuration-panel/store-configuration/store-configuration.component';
 
 
@@ -26,14 +26,13 @@ const routes: Routes = [
   {path: 'book-now', component: BookingViewComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  // {path: 'configuration', component: ConfigurationComponent, canActivate: [AuthGuardService]},
   {
     path: 'configuration',
     component: AdminLayoutComponent,
     children: [
       {path: 'general', component: GeneralConfigurationComponent},
       {path: 'barbers', component: BarberConfigurationComponent},
-      {path: 'services', component: ServicesConfigurationComponent},
+      {path: 'services', component: ServiceConfigurationComponent},
       {path: 'store', component: StoreConfigurationComponent},
     ],
     canActivate: [AuthGuardService]

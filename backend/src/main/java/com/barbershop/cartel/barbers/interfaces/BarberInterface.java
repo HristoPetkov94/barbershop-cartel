@@ -2,6 +2,7 @@ package com.barbershop.cartel.barbers.interfaces;
 
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.barbers.models.BarberModel;
+import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.services.models.ServiceModel;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public interface BarberInterface {
 
     void updateBarber(BarberModel barberModel) throws Exception;
 
-    void createService(long barberId, ServiceModel serviceModel) throws Exception;
+    ServiceEntity createService(long barberId, ServiceModel serviceModel) throws Exception;
 
     void updateService(long barberId, ServiceModel serviceModel) throws Exception;
 

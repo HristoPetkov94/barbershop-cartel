@@ -3,8 +3,6 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Barber} from '../../../models/barber.model';
 import {ImageService} from '../../../services/image.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TranslateService} from '@ngx-translate/core';
-import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-edit',
@@ -18,17 +16,19 @@ export class BarberEditDialogComponent implements OnInit {
   myForm: FormGroup;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
 
-  get facebook(){
+  get facebook() {
     return this.myForm.get('facebook');
   }
-  get description(){
+
+  get description() {
     return this.myForm.get('description');
   }
-  get instagram(){
+
+  get instagram() {
     return this.myForm.get('instagram');
   }
 
-  get isCreatingBarber(){
+  get isCreatingBarber() {
     return this.myForm.get('id').value === null;
   }
 
@@ -67,7 +67,6 @@ export class BarberEditDialogComponent implements OnInit {
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.data.picture = reader.result.toString();
-      console.log('picture: ', this.data.picture);
     };
     reader.onerror = (error) => {
       console.log('Error: ', error);

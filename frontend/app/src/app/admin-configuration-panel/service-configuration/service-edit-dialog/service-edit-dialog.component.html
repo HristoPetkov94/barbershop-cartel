@@ -1,0 +1,66 @@
+<div class="light-theme">
+
+  <h1 style="color: black">Edit/Create</h1>
+
+  <form [formGroup]="myForm">
+    <mat-dialog-content>
+
+      <input hidden matInput>
+      <input hidden type="file" (change)="changed($event)" #chooseFile/>
+
+      <div class="row">
+
+        <div class="col justify-content-center">
+          <div class="profile-picture" [style.backgroundImage]="'url(' + service.picture + ')'"></div>
+          <div class="row">
+            <button type="button" (click)="changeImage()" class="remove-picture-btn edit-button" mat-raised-button
+                    color="primary">
+              Edit picture
+            </button>
+            <button type="button" (click)="removeImage()" class="remove-picture-btn" mat-raised-button color="warn">
+              Remove picture
+            </button>
+          </div>
+        </div>
+
+        <div class="col margin-left-10">
+
+          <div class="row max-width">
+            <input formControlName="serviceType" placeholder="Service Type" type="text"
+                   class="text-input max-width flex-4"/>
+
+            <div class="row flex-1 margin-left-10">
+              <input readonly formControlName="duration" placeholder="min." type="number"
+                     class="text-input max-width">
+
+              <div class="col">
+                <button class="increment-btn" (click)="incrementDuration()">+</button>
+                <button class="decrement-btn" (click)="decrementDuration()">-</button>
+              </div>
+            </div>
+
+            <div class="row flex-1 margin-left-10">
+              <input formControlName="price" placeholder=".лв" type="number"
+                     class="text-input max-width" oninput="this.value = Math.abs(this.value)"/>
+
+              <div class="col">
+                <button class="increment-btn" (click)="incrementPrice()"> +</button>
+                <button class="decrement-btn" (click)="decrementPrice()"> -</button>
+              </div>
+            </div>
+
+          </div>
+
+          <textarea style="width: 90.8%;" formControlName="description" placeholder="Description"
+                    class="preserve-whitespace front-page-message-input max-height"></textarea>
+
+        </div>
+      </div>
+
+    </mat-dialog-content>
+    <div mat-dialog-actions align="end">
+      <button mat-button [mat-dialog-close]="service" (click)="onNoClick()">Cancel</button>
+      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="service" cdkFocusInitial>Save</button>
+    </div>
+  </form>
+</div>

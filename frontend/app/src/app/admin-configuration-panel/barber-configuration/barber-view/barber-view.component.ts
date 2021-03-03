@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild } from '@angular/core';
 import {Barber} from '../../../models/barber.model';
 import {BarberService} from '../../../services/barber.service';
 import {NotificationComponent} from '../../../notification/notification.component';
@@ -16,7 +16,6 @@ export class BarberViewComponent implements OnInit {
   @Input() barber: Barber;
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
-  @ViewChild('chooseFile') public chooseFile: ElementRef;
 
   ngOnInit(): void {
   }

@@ -49,9 +49,8 @@ import { BarberCalendarComponent } from './barber-calendar/barber-calendar.compo
 import {MatGridListModule} from '@angular/material/grid-list';
 import { GeneralConfigurationComponent } from './admin-configuration-panel/general-configuration/general-configuration.component';
 import { BarberConfigurationComponent } from './admin-configuration-panel/barber-configuration/barber-configuration.component';
-import { ServicesConfigurationComponent } from './admin-configuration-panel/services-configuration/services-configuration.component';
+import { ServiceConfigurationComponent } from './admin-configuration-panel/service-configuration/service-configuration.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {ServiceDialogComponent} from './admin-configuration-panel/services-configuration/dialogs/service-dialog/service-dialog.component';
 import { NotificationComponent } from './notification/notification.component';
 import { ChangePasswordComponent } from './admin-configuration-panel/general-configuration/change-password/change.password.component';
 import { NavigationComponent } from './views/components/navigation/navigation.component';
@@ -61,6 +60,8 @@ import { StoreConfigurationComponent } from './admin-configuration-panel/store-c
 import { BarberViewComponent } from './admin-configuration-panel/barber-configuration/barber-view/barber-view.component';
 import { BarberEditDialogComponent } from './admin-configuration-panel/barber-configuration/barber-edit-dialog/barber-edit-dialog.component';
 import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/admin-layout.component';
+import { ServiceConfigurationViewComponent } from './admin-configuration-panel/service-configuration/service-configuration-view/service-configuration-view.component';
+import { ServiceEditDialogComponent } from './admin-configuration-panel/service-configuration/service-edit-dialog/service-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,7 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
     DataConfigurationPanelComponent,
     PieChartComponent,
     NumberCardChartComponent,
-    ServiceDialogComponent,
+    ServiceEditDialogComponent,
     CompactNavbarComponent,
     ServiceViewComponent,
     TeamViewComponent,
@@ -81,7 +82,7 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
     BarberCalendarComponent,
     GeneralConfigurationComponent,
     BarberConfigurationComponent,
-    ServicesConfigurationComponent,
+    ServiceConfigurationComponent,
     NotificationComponent,
     NavigationComponent,
     ContactViewComponent,
@@ -91,6 +92,8 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
     BarberViewComponent,
     BarberEditDialogComponent,
     AdminLayoutComponent,
+    ServiceConfigurationViewComponent,
+    ServiceEditDialogComponent,
   ],
     imports: [
         BrowserModule,
@@ -144,7 +147,7 @@ import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/a
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    ServiceDialogComponent,
+    ServiceEditDialogComponent,
     BarberEditDialogComponent
   ]
 })

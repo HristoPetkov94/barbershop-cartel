@@ -1,0 +1,12 @@
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #e4e4e4;
+  overflow: hidden;
+  border-radius: 100%;
+
+  margin-bottom: 10px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

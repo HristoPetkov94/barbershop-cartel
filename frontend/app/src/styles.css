@@ -164,6 +164,10 @@ h2 {
   flex: 2;
 }
 
+.flex-4 {
+  flex: 4;
+}
+
 .display-none {
   display: none;
 }
@@ -207,4 +211,7 @@ h2 {
   white-space: pre-line;
 }
 
+.mat-dialog-container {
+  background-color: whitesmoke!important;
+}
 

@@ -2,6 +2,7 @@ package com.barbershop.cartel.barbers.controller;
 
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
+import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.services.models.ServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -41,8 +42,12 @@ public class BarberController {
     }
 
     @PostMapping("/create-service")
-    public void createService(@RequestParam long barberId, @RequestBody ServiceModel serviceModel) throws Exception {
-        barberInterface.createService(barberId, serviceModel);
+    public ServiceModel createService(@RequestParam long barberId, @RequestBody ServiceModel serviceModel) throws Exception {
+
+        ServiceEntity service = barberInterface.createService(barberId, serviceModel);
+        serviceModel.setId(service.getId());
+
+        return serviceModel;
     }
 
     @PutMapping("/update-service")
