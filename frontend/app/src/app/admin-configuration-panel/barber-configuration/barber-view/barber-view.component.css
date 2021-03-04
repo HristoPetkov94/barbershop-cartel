@@ -24,3 +24,7 @@
 .choose-file-label:hover{
   background-color: transparent;
 }
+
+div .row {
+  padding-bottom: 20px;
+}
