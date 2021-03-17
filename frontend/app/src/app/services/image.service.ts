@@ -11,11 +11,11 @@ export class ImageService {
   constructor() {
   }
 
-  getDefaultBarberImage() {
+  public getDefaultBarberImage() {
     return this.url + '/images/default-profile-image.png';
   }
 
-  getDefaultServiceImage() {
+  public getDefaultServiceImage() {
     return this.url + '/images/default-service-image.png';
   }
 }

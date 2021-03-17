@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../authentication/authentication.service';
 import {getCookie, setCookie} from '../../../utils/cookie.utils';
-import {Router} from '@angular/router';
+import {RoutingExtService} from '../../../services/routing-ext.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,7 +12,9 @@ import {Router} from '@angular/router';
 export class NavigationComponent implements OnInit {
   public isAdmin = false;
 
-  constructor(public translate: TranslateService, private auth: AuthenticationService, private route: Router) {
+  constructor(public translate: TranslateService,
+              private auth: AuthenticationService,
+              private routeExt: RoutingExtService) {
   }
 
   ngOnInit(): void {
@@ -33,15 +35,9 @@ export class NavigationComponent implements OnInit {
     this.translate.use(lang);
   }
 
-  reloadComponent() {
-    const currentUrl = this.route.url;
-    this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.route.onSameUrlNavigation = 'reload';
-    this.route.navigate([currentUrl]);
-  }
   logout() {
     this.auth.logOut();
 
-    this.reloadComponent();
+    this.routeExt.reloadComponent();
   }
 }
