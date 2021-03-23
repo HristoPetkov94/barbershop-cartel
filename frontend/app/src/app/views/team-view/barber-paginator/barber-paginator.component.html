@@ -7,7 +7,7 @@
       <div class="flip-card-inner">
 
         <div class="flip-card-front">
-          <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"> </div>
+          <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
 
           <div class="barber-info">
             <div class="name">
@@ -27,6 +27,15 @@
           <p class="back-card-text"> {{barber.description}} </p>
 
           <button [routerLink]="'/book-now'" class="back-card-button"> {{'bookingMessage' | translate}} </button>
+
+          <div class="row justify-content-center padding-20">
+            <a *ngIf="barber.instagram" class="col" [href]="barber.instagram">
+              <img src="../../../../assets/images/instagram-icon.png"/>
+            </a>
+            <a *ngIf="barber.facebook" class="col" [href]="barber.facebook">
+              <img src="../../../../assets/images/facebook-icon.png"/>
+            </a>
+          </div>
         </div>
       </div>
     </div>
