@@ -1,5 +1,6 @@
 package com.barbershop.cartel.security.service;
 
+import com.barbershop.cartel.errors.CartelCustomException;
 import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.models.UserModel;
 import com.barbershop.cartel.security.repository.UserRepository;
@@ -31,5 +32,15 @@ public class UserService {
         }
 
         return users;
+    }
+
+    public void changeAdminEmail(String oldEmail, String newEmail) {
+
+        var entity = userRepository.findByEmail(oldEmail)
+                .orElseThrow(()->new CartelCustomException("Could not find old user email"));
+
+        entity.setEmail(newEmail);
+
+        userRepository.save(entity);
     }
 }

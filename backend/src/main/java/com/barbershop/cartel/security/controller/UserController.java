@@ -1,5 +1,6 @@
 package com.barbershop.cartel.security.controller;
 
+import com.barbershop.cartel.security.models.EmailChangeRequest;
 import com.barbershop.cartel.security.models.PasswordChangeRequest;
 import com.barbershop.cartel.security.models.UserModel;
 import com.barbershop.cartel.security.service.PasswordService;
@@ -26,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("/change-password")
-    public void changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest, @Autowired Authentication authentication) throws Exception {
+    public void changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest, @Autowired Authentication authentication) {
         String name = authentication.getName();
 
         String oldPassword = passwordChangeRequest.getOldPassword();
@@ -38,5 +39,14 @@ public class UserController {
     @PostMapping("/forgot-password")
     public void forgotPassword(@RequestParam String email) throws Exception {
         passwordService.forgotPassword(email);
+    }
+
+    @PostMapping("/change-email")
+    public void changeEmail(@RequestBody EmailChangeRequest passwordChangeRequest, @Autowired Authentication authentication) {
+
+        String oldEmail = authentication.getName();
+        String newEmail = passwordChangeRequest.getEmail();
+
+        userService.changeAdminEmail(oldEmail, newEmail);
     }
 }

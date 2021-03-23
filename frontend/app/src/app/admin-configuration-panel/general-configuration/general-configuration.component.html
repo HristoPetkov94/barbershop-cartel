@@ -1,29 +1,44 @@
 <hr>
 
-<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="70px">
   <!--        column 1-->
   <mat-grid-tile [colspan]="2" [rowspan]="2">
     <div class="col padding-20 max-height">
 
       <h1 class="margin-bottom-10"> Administrator email </h1>
-      <p> This is the administrators email. You can change it to anything you like at any time. </p>
+      <p> This is the administrators email. Please be aware that changing the email will log you out. </p>
     </div>
   </mat-grid-tile>
   <!--        column 2-->
   <mat-grid-tile [colspan]="2" [rowspan]="3">
     <div class="col padding-20 max-height max-width">
 
-      <h2 class="margin-bottom-10"> Email </h2>
+      <h2 class="margin-bottom-10"> Change email </h2>
 
-      <div class="row">
-        <input [(ngModel)]="email" type="text" class="text-input max-width"/>
-      </div>
+      <app-change-email [email]="email"></app-change-email>
+
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
+  <!--        column 1-->
+  <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <div class="col padding-20 max-height">
+
+      <h1 class="margin-bottom-10"> Administrator password </h1>
+      <p> This is the administrators password. You can change it to anything you like at any time. </p>
+    </div>
+  </mat-grid-tile>
+  <!--        column 2-->
+  <mat-grid-tile [colspan]="2" [rowspan]="3">
+    <div class="col padding-20 max-height max-width">
 
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> Change password </h2>
 
-      <app-password [email]="email" ></app-password>
+      <app-password></app-password>
 
     </div>
   </mat-grid-tile>
@@ -50,7 +65,8 @@
       <h2 class="margin-bottom-10"> Message </h2>
 
       <div class="row margin-bottom-10">
-        <textarea class="preserve-whitespace front-page-message-input max-width" [(ngModel)]="frontPageMessage" rows="15" cols="50"
+        <textarea class="preserve-whitespace front-page-message-input max-width" [(ngModel)]="frontPageMessage"
+                  rows="15" cols="50"
                   name="comment"></textarea>
       </div>
 
@@ -86,12 +102,12 @@
       <div class="row margin-bottom-10">
               <textarea class="front-page-message-input max-width" [(ngModel)]="appointmentMessage" rows="15" cols="50"
                         name="comment"></textarea>
-<!--        <div class="sized-box-width-100"></div>-->
+        <!--        <div class="sized-box-width-100"></div>-->
       </div>
-        <button mat-stroked-button color="accent" (click)="saveAppointmentMessage()">
-          <mat-icon>save</mat-icon>
-          Save
-        </button>
+      <button mat-stroked-button color="accent" (click)="saveAppointmentMessage()">
+        <mat-icon>save</mat-icon>
+        Save
+      </button>
     </div>
   </mat-grid-tile>
 

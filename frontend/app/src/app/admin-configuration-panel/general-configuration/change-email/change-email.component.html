@@ -1,0 +1,18 @@
+<form class="col" [formGroup]="emailForm">
+  <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="emailControl" autocomplete="email" value="{{email}}">
+    <button mat-icon-button matSuffix>
+    </button>
+    <mat-error *ngIf="emailControl.invalid">* Invalid email</mat-error>
+  </mat-form-field>
+
+  <div class="row justify-content-end">
+    <button style="padding: 5px 20px;" mat-raised-button color="warn" (click)="changeEmail()"
+            [disabled]="emailForm.invalid">
+      <span>Change email</span>
+    </button>
+  </div>
+</form>
+
+<app-notification></app-notification>

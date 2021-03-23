@@ -7,6 +7,7 @@ import {SocialMediaModel} from '../models/general.configuration/social.media.mod
 import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
 import {GitVersion} from '../models/git-version.mode';
 import {PasswordChangeRequest} from '../models/password-change-request.model';
+import {EmailChangeRequest} from '../models/email-change-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,10 @@ export class GeneralConfigurationService {
 
   getUsers(): Subscribable<User[]> {
     return this.http.get<User[]>(this.apiUrl + '/user');
+  }
+
+  changeEmail(emailChangeRequest: EmailChangeRequest) {
+    return this.http.post(this.apiUrl + '/user/change-email', emailChangeRequest);
   }
 
   changePassword(passwordChangeRequest: PasswordChangeRequest) {

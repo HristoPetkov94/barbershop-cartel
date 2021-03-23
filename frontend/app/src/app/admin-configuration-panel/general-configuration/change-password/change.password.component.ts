@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {GeneralConfigurationService} from '../../../services/general.configuration.service';
 import {
@@ -20,8 +20,6 @@ export class ChangePasswordComponent implements OnInit {
 
   constructor(private generalConfigurationService: GeneralConfigurationService, private formBuilder: FormBuilder) {
   }
-
-  @Input() email: string;
 
   hideOld = true;
   hideNew = true;
