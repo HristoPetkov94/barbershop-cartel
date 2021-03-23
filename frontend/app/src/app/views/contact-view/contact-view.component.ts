@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {fade} from '../animations/fade';
 
 @Component({
   selector: 'app-contact-view',
   templateUrl: './contact-view.component.html',
-  styleUrls: ['./contact-view.component.css'], animations: [
-    fade
-  ]
+  styleUrls: ['./contact-view.component.css']
 })
 export class ContactViewComponent implements OnInit {
 

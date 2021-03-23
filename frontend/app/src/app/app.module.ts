@@ -62,6 +62,7 @@ import { BarberEditDialogComponent } from './admin-configuration-panel/barber-co
 import { AdminLayoutComponent } from './admin-configuration-panel/admin-layout/admin-layout.component';
 import { ServiceConfigurationViewComponent } from './admin-configuration-panel/service-configuration/service-configuration-view/service-configuration-view.component';
 import { ServiceEditDialogComponent } from './admin-configuration-panel/service-configuration/service-edit-dialog/service-edit-dialog.component';
+import { LayoutComponent } from './views/layout/layout.component';
 import { ChangeEmailComponent } from './admin-configuration-panel/general-configuration/change-email/change-email.component';
 
 @NgModule({
@@ -96,6 +97,7 @@ import { ChangeEmailComponent } from './admin-configuration-panel/general-config
     ServiceConfigurationViewComponent,
     ServiceEditDialogComponent,
     ChangeEmailComponent,
+    LayoutComponent,
   ],
     imports: [
         BrowserModule,

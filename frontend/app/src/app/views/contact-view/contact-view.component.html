@@ -1,66 +1,54 @@
-<section class="col" [@Fade]>
+<div class="col justify-content-center">
+  <div class="sized-box-height-20"></div>
+  <p class="header"> Contacts </p>
+  <div class="sized-box-height-20"></div>
+</div>
 
-  <nav class="row flex-space-between align-items-center compact-navigation">
-    <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+<div class="row justify-content-center flex-1">
+  <div class="col contact-info justify-content-center">
 
-    <app-compact-navbar></app-compact-navbar>
-    <app-navigation></app-navigation>
-  </nav>
-
-  <div class="col justify-content-center">
-    <div class="sized-box-height-20"></div>
-    <p class="header"> Contacts </p>
-    <div class="sized-box-height-20"></div>
-  </div>
-
-  <div class="row justify-content-center flex-1">
-    <div class="col contact-info justify-content-center">
-
-      <div class="row contact-text flex-space-between align-items-center col-responsive">
-        <div class="row col-responsive">
-          <div class="padding-20 cartel-logo-responsive">
-            <div class="contacts-logo" [style.backgroundImage]="'url(' +'../../../assets/images/logo.png'+ ')'"></div>
-          </div>
-
-          <div class="col flex-space-between padding-20">
-
-            <p class="header text"> Information </p>
-            <div class="sized-box-height-20"></div>
-
-            <div class="row align-items-center text">
-              <mat-icon>phone</mat-icon>
-              <div class="sized-box-width-10"></div>
-              088 881 4999
-            </div>
-            <div class="row align-items-center text">
-              <mat-icon>email</mat-icon>
-              <div class="sized-box-width-10"></div>
-              cartelbarbershopbg@gmail.com
-            </div>
-            <div class="row align-items-center text">
-              <mat-icon>home</mat-icon>
-              <div class="sized-box-width-10"></div>
-              Иван Момчилов 14 Veliko Tarnovo, Bulgaria
-            </div>
-          </div>
+    <div class="row contact-text flex-space-between align-items-center col-responsive">
+      <div class="row col-responsive">
+        <div class="padding-20 cartel-logo-responsive">
+          <div class="contacts-logo" [style.backgroundImage]="'url(' +'../../../assets/images/logo.png'+ ')'"></div>
         </div>
 
-        <div class="col max-height max-width justify-content-center align-items-center">
-          <mat-icon class="location-icon"> location_city </mat-icon>
+        <div class="col flex-space-between padding-20">
+
+          <p class="header text"> Information </p>
+          <div class="sized-box-height-20"></div>
+
+          <div class="row align-items-center text">
+            <mat-icon>phone</mat-icon>
+            <div class="sized-box-width-10"></div>
+            088 881 4999
+          </div>
+          <div class="row align-items-center text">
+            <mat-icon>email</mat-icon>
+            <div class="sized-box-width-10"></div>
+            cartelbarbershopbg@gmail.com
+          </div>
+          <div class="row align-items-center text">
+            <mat-icon>home</mat-icon>
+            <div class="sized-box-width-10"></div>
+            Иван Момчилов 14 Veliko Tarnovo, Bulgaria
+          </div>
         </div>
       </div>
 
-      <div class="sized-box-height-20"></div>
-
-      <div class="map">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.934352608158!2d25.621553915847837!3d43.08487547914494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a927765ef32eb1%3A0x4951137eda837927!2sBarbershop%20Cartel%20Club!5e0!3m2!1sen!2sbg!4v1584120117889!5m2!1sen!2sbg"
-          frameborder="0" class="iframe" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+      <div class="col max-height max-width justify-content-center align-items-center">
+        <mat-icon class="location-icon"> location_city</mat-icon>
       </div>
     </div>
+
+    <div class="sized-box-height-20"></div>
+
+    <div class="map">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2913.934352608158!2d25.621553915847837!3d43.08487547914494!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40a927765ef32eb1%3A0x4951137eda837927!2sBarbershop%20Cartel%20Club!5e0!3m2!1sen!2sbg!4v1584120117889!5m2!1sen!2sbg"
+        frameborder="0" class="iframe" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    </div>
   </div>
+</div>
 
-  <div class="sized-box-height-20"></div>
-
-  <app-footer></app-footer>
-</section>
+<div class="sized-box-height-20"></div>

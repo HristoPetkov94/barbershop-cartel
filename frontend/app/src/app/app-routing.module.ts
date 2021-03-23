@@ -14,18 +14,26 @@ import {BarberConfigurationComponent} from './admin-configuration-panel/barber-c
 import {GeneralConfigurationComponent} from './admin-configuration-panel/general-configuration/general-configuration.component';
 import {ServiceConfigurationComponent} from './admin-configuration-panel/service-configuration/service-configuration.component';
 import {StoreConfigurationComponent} from './admin-configuration-panel/store-configuration/store-configuration.component';
+import {LayoutComponent} from './views/layout/layout.component';
 
 
 const routes: Routes = [
+  // user visible
   {path: '', component: HomeViewComponent},
-
-  {path: 'team', component: TeamViewComponent},
-  {path: 'services', component: ServiceViewComponent},
-  {path: 'contacts', component: ContactViewComponent},
-  {path: 'store', component: StoreComponent},
-  {path: 'book-now', component: BookingViewComponent},
+  {
+    path: '',
+    component: LayoutComponent,
+    children: [
+      {path: 'team', component: TeamViewComponent},
+      {path: 'services', component: ServiceViewComponent},
+      {path: 'contacts', component: ContactViewComponent},
+      {path: 'store', component: StoreComponent},
+      {path: 'book-now', component: BookingViewComponent},
+    ],
+  },
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  // admin visible
   {
     path: 'configuration',
     component: AdminLayoutComponent,

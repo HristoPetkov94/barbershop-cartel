@@ -39,17 +39,19 @@ export class AuthenticationService {
 
   isUserLoggedIn() {
 
-    if (this.isJWTExpired()){
+    const user = sessionStorage.getItem(this.USERNAME_KEY);
+
+    if (user !== null && this.isJWTExpired()){
       this.logOut();
 
       this.routingExtService.reloadComponent();
     }
 
-    const user = sessionStorage.getItem(this.USERNAME_KEY);
     return !(user === null);
   }
 
   isJWTExpired(){
+
     const jwt = JSON.parse(atob(sessionStorage.getItem(this.TOKEN_KEY).split('.')[1]));
 
     const current = Date.now() / 1000;
