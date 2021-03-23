@@ -34,9 +34,11 @@ export class HomeViewComponent implements OnInit {
 
       this.frontPageMessage = data;
 
-      for (const res of result) {
-        const word = res.replace(/#/g, '');
-        this.frontPageMessage = this.frontPageMessage.replace(res, '<span class="limited">' + word + '</span>');
+      if (result) {
+        for (const res of result) {
+          const word = res.replace(/#/g, '');
+          this.frontPageMessage = this.frontPageMessage.replace(res, '<span class="limited">' + word + '</span>');
+        }
       }
     });
 
