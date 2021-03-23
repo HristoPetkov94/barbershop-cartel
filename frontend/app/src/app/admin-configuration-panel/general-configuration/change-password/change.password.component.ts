@@ -41,11 +41,6 @@ export class ChangePasswordComponent implements OnInit {
           PasswordDoNotMatchValidator('newPassword', 'confirmPassword'),
         ]
       });
-
-    this.passwordForm.valueChanges.subscribe(() => {
-      console.log(this.passwordForm.errors);
-      console.log(this.passwordForm.hasError('old'));
-    });
   }
 
   get oldPassword() {
@@ -72,6 +67,8 @@ export class ChangePasswordComponent implements OnInit {
         },
         () => {
           this.notification.showMessage('Password has been changed successfully', 'success');
+
+          this.passwordForm.reset();
         }
       );
     }
