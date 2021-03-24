@@ -9,15 +9,15 @@ import {SocialMediaModel} from '../../models/general.configuration/social.media.
 
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home-view.component.html',
-  styleUrls: ['./home-view.component.css'], animations: [
+  selector: 'app-landing-page',
+  templateUrl: './landing-page-view.component.html',
+  styleUrls: ['./landing-page-view.component.css'], animations: [
     fade
   ],
   encapsulation: ViewEncapsulation.None,
 })
 
-export class HomeViewComponent implements OnInit {
+export class LandingPageViewComponent implements OnInit {
 
   public frontPageMessage: string;
   public query: string;

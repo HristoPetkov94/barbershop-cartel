@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {HomeViewComponent} from './views/home-view/home-view.component';
+import {LandingPageViewComponent} from './views/landing-page-view/landing-page-view.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
@@ -68,7 +68,7 @@ import { ChangeEmailComponent } from './admin-configuration-panel/general-config
 @NgModule({
   declarations: [
     AppComponent,
-    HomeViewComponent,
+    LandingPageViewComponent,
     LoginComponent,
     RegisterComponent,
     DataConfigurationPanelComponent,

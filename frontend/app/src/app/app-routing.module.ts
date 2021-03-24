@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
-import {HomeViewComponent} from './views/home-view/home-view.component';
+import {LandingPageViewComponent} from './views/landing-page-view/landing-page-view.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuardService} from './authentication/auth-guard.service';
 import {BookingViewComponent} from './views/booking-view/booking-view.component';
@@ -19,7 +19,7 @@ import {LayoutComponent} from './views/layout/layout.component';
 
 const routes: Routes = [
   // user visible
-  {path: '', component: HomeViewComponent},
+  {path: '', component: LandingPageViewComponent},
   {
     path: '',
     component: LayoutComponent,
