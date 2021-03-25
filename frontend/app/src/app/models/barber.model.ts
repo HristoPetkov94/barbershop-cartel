@@ -1,5 +1,3 @@
-import {Service} from '../interfaces/service';
-
 export class Barber {
   id: number;
   firstName: string;
@@ -8,5 +6,4 @@ export class Barber {
   picture: string;
   facebook: string;
   instagram: string;
-  services: Service[];
 }

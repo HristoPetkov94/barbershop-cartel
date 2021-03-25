@@ -1,9 +1,8 @@
 package com.barbershop.cartel.barbers.controller;
 
+import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
-import com.barbershop.cartel.services.entity.ServiceEntity;
-import com.barbershop.cartel.services.models.ServiceModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,13 +21,12 @@ public class BarberController {
     }
 
     @PostMapping
-    public BarberModel createBarber(@RequestBody BarberModel barber) {
+    public BarberModel createBarber(@RequestBody BarberModel barberModel) {
 
-        long id = barberInterface.createBarber(barber);
+        BarberEntity barber = barberInterface.createBarber(barberModel);
+        barberModel.setId(barber.getId());
 
-        barber.setId(id);
-
-        return barber;
+        return barberModel;
     }
 
     @PutMapping
@@ -39,24 +37,5 @@ public class BarberController {
     @DeleteMapping
     public void deleteBarber(@RequestParam long barberId) {
         barberInterface.deleteBarber(barberId);
-    }
-
-    @PostMapping("/create-service")
-    public ServiceModel createService(@RequestParam long barberId, @RequestBody ServiceModel serviceModel) throws Exception {
-
-        ServiceEntity service = barberInterface.createService(barberId, serviceModel);
-        serviceModel.setId(service.getId());
-
-        return serviceModel;
-    }
-
-    @PutMapping("/update-service")
-    public void updateService(@RequestParam long barberId, @RequestBody ServiceModel serviceModel) throws Exception {
-        barberInterface.updateService(barberId, serviceModel);
-    }
-
-    @DeleteMapping("/delete-service")
-    public void deleteService(@RequestParam long barberId, @RequestParam long serviceId) throws Exception {
-        barberInterface.deleteService(barberId, serviceId);
     }
 }

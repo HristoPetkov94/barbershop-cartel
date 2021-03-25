@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Service} from '../../interfaces/service';
-import {ServicesService} from '../../services/services.service';
+import {Service} from '../../models/service';
+import {ServiceService} from '../../services/service.service';
 
 @Component({
   selector: 'app-barber-services-panel',
@@ -11,7 +11,7 @@ export class ServiceViewComponent implements OnInit {
 
   public services: Service[];
 
-  constructor(private servicesService: ServicesService) {
+  constructor(private servicesService: ServiceService) {
   }
 
   ngOnInit() {

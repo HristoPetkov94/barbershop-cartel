@@ -42,22 +42,23 @@
 
     <div class="col flex-1 align-items-center" *ngSwitchCase="'two'" [@fadeOut]>
 
-      <div class="hover-me" *ngFor="let service of barber.services" (click)="chooseService(service)">
-        <div class="service">
-          <div class="row flex-space-between align-items-center">
-            <span class="type">{{service.serviceType}}</span>
+      <!--TODO fix here-->
+<!--      <div class="hover-me" *ngFor="let service of barber.services" (click)="chooseService(service)">-->
+<!--        <div class="service">-->
+<!--          <div class="row flex-space-between align-items-center">-->
+<!--            <span class="type">{{service.serviceType}}</span>-->
 
-            <div class="row align-items-center">
+<!--            <div class="row align-items-center">-->
 
-              <mat-icon> access_time </mat-icon>
-              <span class="duration">{{service.duration}} мин.</span>
+<!--              <mat-icon> access_time </mat-icon>-->
+<!--              <span class="duration">{{service.duration}} мин.</span>-->
 
-              <mat-icon> attach_money </mat-icon>
-              <span class="price">{{service.price}} лв.</span>
-            </div>
-          </div>
-        </div>
-      </div>
+<!--              <mat-icon> attach_money </mat-icon>-->
+<!--              <span class="price">{{service.price}} лв.</span>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
     </div>
 
@@ -90,14 +91,14 @@
             <span> <b> BarberModel: </b> </span> <span> {{this.barber.firstName}} {{this.barber.lastName}}</span>
           </div>
           <div class="info-row">
-            <span> <b> Service: </b> </span> <span> {{this.service.serviceType}} </span>
+            <span> <b> ServiceModel: </b> </span> <span> {{this.service.serviceTitle}} </span>
           </div>
-          <div class="info-row">
+         <!-- <div class="info-row">
             <span> <b> Price: </b> </span> <span> {{this.service.price}} лв.</span>
           </div>
           <div class="info-row">
             <span> <b> Duration: </b> </span> <span> {{this.service.duration}} мин.</span>
-          </div>
+          </div>-->
 
           <button class="confirm-button" (click)="sendEmail()">
             Confirm with Facebook

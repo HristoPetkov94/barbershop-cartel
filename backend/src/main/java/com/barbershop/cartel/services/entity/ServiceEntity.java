@@ -1,9 +1,11 @@
 package com.barbershop.cartel.services.entity;
 
+import com.barbershop.cartel.assignments.entity.AssignmentEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -17,8 +19,8 @@ public class ServiceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "service_type")
-    private String serviceType;
+    @Column(name = "service_title")
+    private String serviceTitle;
 
     @Column(name = "price")
     private int price;
@@ -31,4 +33,7 @@ public class ServiceEntity {
 
     @Column(name = "description")
     private String description;
+
+    @OneToMany(mappedBy = "service", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<AssignmentEntity> assignments;
 }

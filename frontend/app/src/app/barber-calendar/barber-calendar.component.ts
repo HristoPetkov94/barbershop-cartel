@@ -8,7 +8,7 @@ import {
 import {ScheduleService} from '../services/schedule.service';
 import {Week} from '../models/week.model';
 import {Barber} from '../models/barber.model';
-import {Service} from '../interfaces/service';
+import {Service} from '../models/service';
 import {LOCALE_ID, Inject} from '@angular/core';
 import {fade} from '../views/animations/fade';
 

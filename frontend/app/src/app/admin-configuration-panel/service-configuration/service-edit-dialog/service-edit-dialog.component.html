@@ -26,29 +26,8 @@
         <div class="col margin-left-10">
 
           <div class="row max-width">
-            <input formControlName="serviceType" placeholder="Service Type" type="text"
+            <input formControlName="serviceTitle" placeholder="ServiceModel Title" type="text"
                    class="text-input max-width flex-4"/>
-
-            <div class="row flex-1 margin-left-10">
-              <input readonly formControlName="duration" placeholder="min." type="number"
-                     class="text-input max-width">
-
-              <div class="col">
-                <button class="increment-btn" (click)="incrementDuration()">+</button>
-                <button class="decrement-btn" (click)="decrementDuration()">-</button>
-              </div>
-            </div>
-
-            <div class="row flex-1 margin-left-10">
-              <input formControlName="price" placeholder=".лв" type="number"
-                     class="text-input max-width" oninput="this.value = Math.abs(this.value)"/>
-
-              <div class="col">
-                <button class="increment-btn" (click)="incrementPrice()"> +</button>
-                <button class="decrement-btn" (click)="decrementPrice()"> -</button>
-              </div>
-            </div>
-
           </div>
 
           <textarea style="width: 90.8%;" formControlName="description" placeholder="Description"

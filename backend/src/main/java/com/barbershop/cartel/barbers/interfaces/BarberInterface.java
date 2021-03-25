@@ -13,15 +13,9 @@ public interface BarberInterface {
 
     Optional<BarberEntity> getBarberById(long barberId);
 
-    long createBarber(BarberModel barbers);
+    BarberEntity createBarber(BarberModel barberModel);
 
     void updateBarber(BarberModel barberModel) throws Exception;
 
-    ServiceEntity createService(long barberId, ServiceModel serviceModel) throws Exception;
-
-    void updateService(long barberId, ServiceModel serviceModel) throws Exception;
-
     void deleteBarber(long barberId);
-
-    void deleteService(long barberId, long serviceId) throws Exception;
 }

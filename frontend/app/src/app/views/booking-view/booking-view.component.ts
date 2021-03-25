@@ -5,9 +5,9 @@ import {FacebookLoginProvider, SocialAuthService} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
 import {AppointmentRequest} from '../../interfaces/appointment-request';
 import {BarberService} from '../../services/barber.service';
-import {ServicesService} from '../../services/services.service';
+import {ServiceService} from '../../services/service.service';
 import {Barber} from '../../models/barber.model';
-import {Service} from '../../interfaces/service';
+import {Service} from '../../models/service';
 import {EmailNotification} from '../../models/email.notification.model';
 import {NotificationService} from '../../services/notification.service';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
@@ -48,7 +48,7 @@ export class BookingViewComponent implements OnInit {
   constructor(private scheduleService: ScheduleService,
               private facebook: SocialAuthService,
               private barberService: BarberService,
-              private servicesService: ServicesService,
+              private servicesService: ServiceService,
               private notificationService: NotificationService,
               private generalConfigurationService: GeneralConfigurationService) {
   }
@@ -172,7 +172,7 @@ export class BookingViewComponent implements OnInit {
     emailNotification.to = 'petkovhristo94@gmail.com';
     emailNotification.from = 'testov.email.2020@gmail.com';
     emailNotification.subject = 'Cartel Резервация';
-    emailNotification.text = 'Здравейте, \n\nУспешно направихте своята резервация!\n\n' + '<b>Бръснар:</b> ' + this.barber.firstName + ' ' + this.barber.lastName + '\n <b>Вид:</b> ' + this.service.serviceType + '\n <b>Цена:</b> ' + this.service.price + ' лв.' + '\n <b>Продължителност:</b> ' + this.service.duration + ' мин.' + '\n\nПоздрави,\nCartel';
+    emailNotification.text = 'Здравейте, \n\nУспешно направихте своята резервация!\n\n' + '<b>Бръснар:</b> ' + this.barber.firstName + ' ' + this.barber.lastName + '\n <b>Вид:</b> ' + this.service.serviceTitle + '\n <b>Цена:</b> ' + ' лв.' + '\n <b>Продължителност:</b> ' + ' мин.' + '\n\nПоздрави,\nCartel';
 
     this.notificationService.sendEmail(emailNotification).subscribe();
   }

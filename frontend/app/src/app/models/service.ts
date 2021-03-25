@@ -1,8 +1,6 @@
 export class Service {
   id: number;
-  serviceType: string;
-  price: number;
-  duration: number;
+  serviceTitle: string;
   description: string;
   picture: string;
 }

@@ -7,20 +7,11 @@
   <div class="col">
     <button (click)="add()" style="padding: 5px 20px;" mat-raised-button color="primary">
       <mat-icon> add</mat-icon>
-      <span>Add New Service</span>
+      <span>Add New ServiceModel</span>
     </button>
 
     <div class="sized-box-height-40"></div>
 
-    <h1 class="margin-bottom-10"> Choose barber </h1>
-
-    <select class="dropdown margin-bottom-10" name="barbers" id="barbers" (change)="loadServices(select.value)"
-            #select>
-
-      <option *ngFor="let barber of barbers"
-              value="{{barber.id}}"> {{barber.firstName + ' ' + barber.lastName}} </option>
-
-    </select>
   </div>
 </div>
 
@@ -30,7 +21,7 @@
 
 
 <div *ngFor="let service of services">
-  <app-service-configuration-view [service]="service" [barber]="selectedBarber"></app-service-configuration-view>
+  <app-service-configuration-view [service]="service"></app-service-configuration-view>
 </div>
 
 <app-notification></app-notification>

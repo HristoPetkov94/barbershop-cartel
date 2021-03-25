@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {ServicesService} from '../services/services.service';
+import {ServiceService} from '../services/service.service';
 import {BarberService} from '../services/barber.service';
-import {Service} from '../interfaces/service';
+import {Service} from '../models/service';
 import {Barber} from '../models/barber.model';
 
 @Component({
@@ -13,7 +13,7 @@ export class DataConfigurationPanelComponent implements OnInit {
   public barbers: Barber[];
   public services: Service[];
 
-  constructor(private servicesService: ServicesService, private barberService: BarberService) {}
+  constructor(private servicesService: ServiceService, private barberService: BarberService) {}
 
   ngOnInit() {
     this.barberService.getBarbers().subscribe(b => this.barbers = b);

@@ -1,5 +1,6 @@
 package com.barbershop.cartel.barbers.entity;
 
+import com.barbershop.cartel.assignments.entity.AssignmentEntity;
 import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import lombok.Getter;
@@ -39,9 +40,8 @@ public class BarberEntity {
     private String instagram;
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScheduleConfigEntity> scheduleConfig;
+    private List<AssignmentEntity> assignments;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "barber_id")
-    private List<ServiceEntity> services;
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ScheduleConfigEntity> scheduleConfig;
 }

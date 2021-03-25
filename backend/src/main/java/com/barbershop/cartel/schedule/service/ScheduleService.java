@@ -190,12 +190,12 @@ public class ScheduleService implements ScheduleInterface {
     private ServiceEntity getService(BarberEntity barber, long serviceId) {
 
         ServiceEntity service = null;
-
-        for (ServiceEntity selectedService : barber.getServices()) {
+        // TODO fix here
+        /*for (ServiceEntity selectedService : barber.getServices()) {
             if (selectedService.getId() == serviceId) {
                 service = selectedService;
             }
-        }
+        }*/
 
         return service;
     }

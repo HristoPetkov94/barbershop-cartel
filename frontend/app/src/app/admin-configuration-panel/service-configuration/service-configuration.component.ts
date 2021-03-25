@@ -1,11 +1,10 @@
 import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {BarberService} from '../../services/barber.service';
-import {Service} from '../../interfaces/service';
-import {Barber} from '../../models/barber.model';
+import {Service} from '../../models/service';
 import {NotificationComponent} from '../../notification/notification.component';
 import {ImageService} from '../../services/image.service';
 import {ServiceEditDialogComponent} from './service-edit-dialog/service-edit-dialog.component';
+import {ServiceService} from '../../services/service.service';
 
 @Component({
   selector: 'app-services-configuration',
@@ -19,20 +18,14 @@ export class ServiceConfigurationComponent implements OnInit {
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
   public loading = true;
-  public barbers: Barber[];
   public services: Service[];
-  public selectedBarber: Barber;
 
-  constructor(private dialog: MatDialog, private barberService: BarberService, private  imageService: ImageService) {
+  constructor(private dialog: MatDialog, private servicesService: ServiceService, private  imageService: ImageService) {
   }
 
   ngOnInit(): void {
-    this.barberService.getBarbers().subscribe(barbers => {
-
-      this.barbers = barbers;
-      this.selectedBarber = this.barbers[0];
-      this.services = this.selectedBarber.services;
-
+    this.servicesService.getServices().subscribe(data => {
+      this.services = data;
     }, () => {
     }, () => {
       this.loading = false;
@@ -56,7 +49,7 @@ export class ServiceConfigurationComponent implements OnInit {
 
   save(service: Service): void {
 
-    this.barberService.createService(this.selectedBarber.id, service).subscribe((data: Service) => {
+    this.servicesService.createService(service).subscribe((data: Service) => {
         this.services.unshift(data);
       }, () => {
         this.notification.showMessage('update unsuccessful', 'warn');
@@ -65,14 +58,6 @@ export class ServiceConfigurationComponent implements OnInit {
         this.notification.showMessage('update successful', 'success');
       }
     );
-  }
-
-  loadServices(val) {
-    const barber = this.barbers.find(b => b.id + '' === val);
-
-    this.selectedBarber = barber;
-
-    this.services = barber.services;
   }
 }
 

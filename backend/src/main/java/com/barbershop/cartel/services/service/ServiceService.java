@@ -1,5 +1,6 @@
 package com.barbershop.cartel.services.service;
 
+import com.barbershop.cartel.errors.CartelCustomException;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import com.barbershop.cartel.services.models.ServiceModel;
@@ -29,5 +30,41 @@ public class ServiceService implements ServiceInterface {
         }
 
         return serviceModels;
+    }
+
+    @Override
+    public ServiceEntity createService(ServiceModel serviceModel) {
+
+        ServiceEntity service = new ServiceEntity();
+
+        service.setServiceTitle(serviceModel.getServiceTitle());
+        service.setDescription(serviceModel.getDescription());
+        service.setPicture(serviceModel.getPicture());
+
+        return serviceRepository.save(service);
+    }
+
+    @Override
+    public void updateService(ServiceModel serviceModel) {
+
+        Long serviceId = serviceModel.getId();
+
+        ServiceEntity service = serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new CartelCustomException("Service with id:" + serviceId + " is not existing"));
+
+        service.setServiceTitle(serviceModel.getServiceTitle());
+        service.setDescription(serviceModel.getDescription());
+        service.setPicture(serviceModel.getPicture());
+
+        serviceRepository.save(service);
+    }
+
+    @Override
+    public void deleteService(long serviceId) {
+
+        ServiceEntity service = serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new CartelCustomException("Service with id:" + serviceId + " is not existing"));
+
+        serviceRepository.delete(service);
     }
 }
