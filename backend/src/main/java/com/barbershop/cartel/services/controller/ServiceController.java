@@ -35,7 +35,7 @@ public class ServiceController {
     }
 
     @DeleteMapping
-    public void deleteService(@RequestParam long serviceId){
+    public void deleteService(@RequestParam long serviceId) {
         serviceInterface.deleteService(serviceId);
     }
 }

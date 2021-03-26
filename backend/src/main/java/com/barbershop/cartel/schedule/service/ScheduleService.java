@@ -62,14 +62,10 @@ public class ScheduleService implements ScheduleInterface {
 
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
-        Optional<BarberEntity> barber = barberInterface.getBarberById(barberId);
+        BarberEntity barber = barberInterface.getBarberById(barberId);
 
-        if (barber.isEmpty()) {
-            throw new NullPointerException("Barber is not existing.");
-        }
-
-        ServiceEntity service = getService(barber.get(), serviceId);
-        List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarber(day, barber.get());
+        ServiceEntity service = getService(barber, serviceId);
+        List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarber(day, barber);
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
 
         LocalTime currentAppointment = firstAppointment(configuration);
@@ -271,13 +267,9 @@ public class ScheduleService implements ScheduleInterface {
     @Override
     public void save(AppointmentRequestModel requestModel) {
 
-        Optional<BarberEntity> barber = barberInterface.getBarberById(requestModel.getBarberId());
+        BarberEntity barber = barberInterface.getBarberById(requestModel.getBarberId());
 
-        if (barber.isEmpty()) {
-            throw new NullPointerException("Barber is not existing.");
-        }
-
-        ServiceEntity service = getService(barber.get(), requestModel.getServiceId());
+        ServiceEntity service = getService(barber, requestModel.getServiceId());
 
         int numberHoursToBook = service.getDuration() / MIN_SERVICE_DURATION;
 
@@ -286,7 +278,7 @@ public class ScheduleService implements ScheduleInterface {
 
         for (int i = 0; i < numberHoursToBook; i++) {
 
-            createAppointment(date, hour, requestModel, barber.get(), service);
+            createAppointment(date, hour, requestModel, barber, service);
 
             hour = hour.plusMinutes(MIN_SERVICE_DURATION);
         }

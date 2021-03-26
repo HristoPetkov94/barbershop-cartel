@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface BarberInterface {
     List<BarberModel> getBarbers();
 
-    Optional<BarberEntity> getBarberById(long barberId);
+    BarberEntity getBarberById(long barberId);
 
     BarberEntity createBarber(BarberModel barberModel);
 

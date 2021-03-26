@@ -25,20 +25,18 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
 
     private void saveConfiguration(ScheduleConfigModel configuration) {
 
-        Optional<BarberEntity> barber = barberInterface.getBarberById(configuration.getBarberId());
+        BarberEntity barber = barberInterface.getBarberById(configuration.getBarberId());
 
-        if (barber.isPresent()) {
 
-            ScheduleConfigEntity scheduleConfig = new ScheduleConfigEntity();
+        ScheduleConfigEntity scheduleConfig = new ScheduleConfigEntity();
 
-            scheduleConfig.setBarber(barber.get());
-            scheduleConfig.setFirstAppointment(configuration.getFirstAppointment());
-            scheduleConfig.setLastAppointment(configuration.getLastAppointment());
-            scheduleConfig.setDate(configuration.getDate());
-            scheduleConfig.setWorkingDay(configuration.isHoliday());
+        scheduleConfig.setBarber(barber);
+        scheduleConfig.setFirstAppointment(configuration.getFirstAppointment());
+        scheduleConfig.setLastAppointment(configuration.getLastAppointment());
+        scheduleConfig.setDate(configuration.getDate());
+        scheduleConfig.setWorkingDay(configuration.isHoliday());
 
-            scheduleConfigRepository.save(scheduleConfig);
-        }
+        scheduleConfigRepository.save(scheduleConfig);
     }
 
     @Override
@@ -58,25 +56,23 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
     @Override
     public List<ScheduleConfigModel> getConfigurationsByBarberId(long barberId) {
 
-        Optional<BarberEntity> barber = barberInterface.getBarberById(barberId);
+        BarberEntity barber = barberInterface.getBarberById(barberId);
 
         List<ScheduleConfigModel> configurations = new ArrayList<>();
 
-        if (barber.isPresent()) {
 
-            List<ScheduleConfigEntity> configsByBarber = scheduleConfigRepository.findAllByBarber(barber.get());
+        List<ScheduleConfigEntity> configsByBarber = scheduleConfigRepository.findAllByBarber(barber);
 
-            for (ScheduleConfigEntity config : configsByBarber) {
+        for (ScheduleConfigEntity config : configsByBarber) {
 
-                ScheduleConfigModel configuration = new ScheduleConfigModel();
-                configuration.setBarberId(config.getId());
-                configuration.setFirstAppointment(config.getFirstAppointment());
-                configuration.setLastAppointment(config.getLastAppointment());
-                configuration.setDate(config.getDate());
-                configuration.setHoliday(config.isWorkingDay());
+            ScheduleConfigModel configuration = new ScheduleConfigModel();
+            configuration.setBarberId(config.getId());
+            configuration.setFirstAppointment(config.getFirstAppointment());
+            configuration.setLastAppointment(config.getLastAppointment());
+            configuration.setDate(config.getDate());
+            configuration.setHoliday(config.isWorkingDay());
 
-                configurations.add(configuration);
-            }
+            configurations.add(configuration);
         }
 
         return configurations;
@@ -85,24 +81,22 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
     @Override
     public ScheduleConfigModel getConfigurationByBarberIdAndDate(long barberId, LocalDate date) {
 
-        Optional<BarberEntity> barber = barberInterface.getBarberById(barberId);
+        BarberEntity barber = barberInterface.getBarberById(barberId);
 
         ScheduleConfigModel configuration = new ScheduleConfigModel();
 
-        if (barber.isPresent()) {
 
-            ScheduleConfigEntity config = scheduleConfigRepository.findByBarberAndDate(barber.get(), date);
+        ScheduleConfigEntity config = scheduleConfigRepository.findByBarberAndDate(barber, date);
 
-            if (config != null) {
+        if (config != null) {
 
-                configuration = new ScheduleConfigModel();
+            configuration = new ScheduleConfigModel();
 
-                configuration.setBarberId(config.getId());
-                configuration.setFirstAppointment(config.getFirstAppointment());
-                configuration.setLastAppointment(config.getLastAppointment());
-                configuration.setDate(config.getDate());
-                configuration.setHoliday(config.isWorkingDay());
-            }
+            configuration.setBarberId(config.getId());
+            configuration.setFirstAppointment(config.getFirstAppointment());
+            configuration.setLastAppointment(config.getLastAppointment());
+            configuration.setDate(config.getDate());
+            configuration.setHoliday(config.isWorkingDay());
         }
 
         return configuration;

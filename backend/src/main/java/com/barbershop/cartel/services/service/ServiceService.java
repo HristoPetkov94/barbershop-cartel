@@ -33,6 +33,12 @@ public class ServiceService implements ServiceInterface {
     }
 
     @Override
+    public ServiceEntity getServiceById(long serviceId) {
+        return serviceRepository.findById(serviceId)
+                .orElseThrow(() -> new CartelCustomException("Service with id:" + serviceId + " is not existing"));
+    }
+
+    @Override
     public ServiceEntity createService(ServiceModel serviceModel) {
 
         ServiceEntity service = new ServiceEntity();

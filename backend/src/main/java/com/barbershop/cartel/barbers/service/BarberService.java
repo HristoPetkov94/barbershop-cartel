@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -46,8 +45,9 @@ public class BarberService implements BarberInterface {
     }
 
     @Override
-    public Optional<BarberEntity> getBarberById(long barberId) {
-        return barberRepository.findById(barberId);
+    public BarberEntity getBarberById(long barberId) {
+        return barberRepository.findById(barberId)
+                .orElseThrow(() -> new CartelCustomException("Barber with id:" + barberId + " is not existing"));
     }
 
     @Override

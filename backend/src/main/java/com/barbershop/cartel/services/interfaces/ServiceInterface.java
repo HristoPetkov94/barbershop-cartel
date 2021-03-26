@@ -8,6 +8,8 @@ import java.util.List;
 public interface ServiceInterface {
     List<ServiceModel> getServices();
 
+    ServiceEntity getServiceById(long serviceId);
+
     ServiceEntity createService(ServiceModel serviceModel) throws Exception;
 
     void updateService(ServiceModel serviceModel) throws Exception;
