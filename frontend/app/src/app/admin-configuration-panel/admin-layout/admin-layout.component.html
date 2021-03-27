@@ -9,42 +9,50 @@
       <div class="row content-wrapper">
         <div class="drawer">
 
-          <div class="go-home" [routerLink]="'/'" >
+          <div class="go-home" [routerLink]="'/'">
             <mat-icon> home</mat-icon>
             <div class="sized-box-width-10"></div>
             <h2> Home </h2>
           </div>
 
-            <div [routerLink]="'/configuration/general'" [routerLinkActive]="['selected']"
-                class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-              <mat-icon>settings</mat-icon>
-              <h2>General</h2>
-              <div class="sized-box-width-100"></div>
-            </div>
+          <div [routerLink]="'/configuration/general'" [routerLinkActive]="['selected']"
+               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
+            <mat-icon>settings</mat-icon>
+            <h2>General</h2>
+            <div class="sized-box-width-100"></div>
+          </div>
 
-            <div [routerLink]="'/configuration/barbers'" [routerLinkActive]="['selected']"
-                class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-              <mat-icon>groups</mat-icon>
-              <h2>Barbers</h2>
-              <div class="sized-box-width-100"></div>
-            </div>
+          <div [routerLink]="'/configuration/barbers'" [routerLinkActive]="['selected']"
+               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
+            <mat-icon>groups</mat-icon>
+            <h2>Barbers</h2>
+            <div class="sized-box-width-100"></div>
+          </div>
 
-            <div [routerLink]="'/configuration/services'" [routerLinkActive]="['selected']"
-                class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-              <mat-icon>menu_book</mat-icon>
-              <h2>Services</h2>
-              <div class="sized-box-width-100"></div>
-            </div>
+          <div [routerLink]="'/configuration/services'" [routerLinkActive]="['selected']"
+               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
+            <mat-icon>menu_book</mat-icon>
+            <h2>Services</h2>
+            <div class="sized-box-width-100"></div>
+          </div>
 
-            <div [routerLink]="'/configuration/store'" [routerLinkActive]="['selected']"
-                class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-              <mat-icon>shopping_cart</mat-icon>
-              <h2>Store</h2>
-              <div class="sized-box-width-100"></div>
-            </div>
+          <div [routerLink]="'/configuration/assignments'" [routerLinkActive]="['selected']"
+               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
+            <mat-icon>assignment</mat-icon>
+            <h2>Assignments</h2>
+            <div class="sized-box-width-100"></div>
+          </div>
+
+
+          <div [routerLink]="'/configuration/store'" [routerLinkActive]="['selected']"
+               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
+            <mat-icon>shopping_cart</mat-icon>
+            <h2>Store</h2>
+            <div class="sized-box-width-100"></div>
+          </div>
 
           <div class="go-home" (click)="logout()">
-            <mat-icon> logout </mat-icon>
+            <mat-icon> logout</mat-icon>
             <div class="sized-box-width-10"></div>
             <h2> Logout </h2>
           </div>
@@ -52,7 +60,7 @@
         </div>
         <div class="content">
           <div class="content-container">
-              <router-outlet></router-outlet>
+            <router-outlet></router-outlet>
             <div class="footer-fixer"></div>
           </div>
         </div>

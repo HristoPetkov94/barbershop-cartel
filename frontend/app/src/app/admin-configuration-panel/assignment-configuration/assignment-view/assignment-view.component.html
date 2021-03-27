@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col">
+    <h1 class="margin-bottom-10"> Choose service </h1>
+
+   <div class="row">
+     <mat-form-field appearance="outline">
+       <mat-label>Choose service</mat-label>
+       <mat-select [(value)]="selectedServiceId" (selectionChange)="changeSelectedService()" [disabled]="isDisabled()">
+
+         <mat-option *ngFor="let service of availableServices"
+                     [value]="service.id"> {{service.serviceTitle}} </mat-option>
+       </mat-select>
+     </mat-form-field>
+
+     <div class="sized-box-width-20"> </div>
+
+     <div class="col justify-content-center mat-field-padding-margin">
+       <button class="max-height" (click)="add()" mat-raised-button color="warn" [disabled]="isDisabled()">
+         <mat-icon matTooltip="Add" [matTooltipPosition]="'left'">add</mat-icon>
+       </button>
+     </div>
+   </div>
+  </div>
+
+</div>
+<div *ngFor="let assignment of assignments; let i = index">
+
+  <div class="row justify-content-center">
+    <div class="col flex-4">
+      <h2 class="margin-bottom-10"> Услуга </h2>
+      <span label="" class="text-input">{{ getServiceName(assignment.serviceId) }}</span>
+    </div>
+
+    <div class="col flex-1 margin-left-10">
+      <h2 class="margin-bottom-10"> Продължителност </h2>
+      <span label="" class="text-input text-align-center">{{assignment.duration}}</span>
+    </div>
+
+    <div class="col flex-1 margin-left-10">
+      <h2 class="margin-bottom-10"> Цена </h2>
+      <span label="" class="text-input text-align-center">{{assignment.price}}</span>
+    </div>
+
+    <div class="row flex-1 margin-left-10">
+      <button (click)="edit(assignment, getServiceName(assignment.serviceId))" mat-icon-button color="primary">
+        <mat-icon matTooltip="Edit" [matTooltipPosition]="'left'">edit</mat-icon>
+      </button>
+
+      <button (click)="delete(assignment, i)" mat-icon-button color="warn">
+        <mat-icon matTooltip="Delete" [matTooltipPosition]="'left'">delete</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="sized-box-height-20"></div>
+</div>
+
+<app-notification></app-notification>

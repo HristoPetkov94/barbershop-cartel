@@ -1,0 +1,29 @@
+.increment-btn, .decrement-btn {
+  background: transparent;
+  border: none;
+
+  padding: 5px 10px;
+  margin: 0 2px 0 2px;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.increment-btn:hover, .decrement-btn:hover {
+  background: #e0dfdf;
+}
+
+.increment-btn:focus, .decrement-btn:focus {
+  outline: none !important;
+  border-color: #80bdff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.vl {
+  border-left: 1px solid #d7d7d7;
+}

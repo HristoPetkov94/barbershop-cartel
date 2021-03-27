@@ -17,6 +17,8 @@ export class ServiceConfigurationViewComponent implements OnInit {
 
   @Input() service: Service;
   public deleted = false;
+  public durationInMinutes = 'мин.';
+  public barber: Barber;
 
   constructor(private dialog: MatDialog,
               private serviceService: ServiceService) {

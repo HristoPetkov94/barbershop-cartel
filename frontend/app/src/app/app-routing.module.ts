@@ -14,6 +14,7 @@ import {BarberConfigurationComponent} from './admin-configuration-panel/barber-c
 import {GeneralConfigurationComponent} from './admin-configuration-panel/general-configuration/general-configuration.component';
 import {ServiceConfigurationComponent} from './admin-configuration-panel/service-configuration/service-configuration.component';
 import {StoreConfigurationComponent} from './admin-configuration-panel/store-configuration/store-configuration.component';
+import {AssignmentConfigurationComponent} from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import {LayoutComponent} from './views/layout/layout.component';
 
 
@@ -41,6 +42,7 @@ const routes: Routes = [
       {path: 'general', component: GeneralConfigurationComponent},
       {path: 'barbers', component: BarberConfigurationComponent},
       {path: 'services', component: ServiceConfigurationComponent},
+      {path: 'assignments', component: AssignmentConfigurationComponent},
       {path: 'store', component: StoreConfigurationComponent},
     ],
     canActivate: [AuthGuardService]

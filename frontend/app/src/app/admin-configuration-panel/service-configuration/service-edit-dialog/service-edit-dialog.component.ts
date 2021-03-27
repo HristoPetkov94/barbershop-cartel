@@ -16,11 +16,13 @@ export class ServiceEditDialogComponent implements OnInit {
   @ViewChild('chooseFile') public chooseFile: ElementRef;
 
   myForm: FormGroup;
+  barbers: Barber[];
 
   constructor(
     public dialogRef: MatDialogRef<ServiceEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public service: Service,
     private imageService: ImageService,
+    private barberService: BarberService,
     private fb: FormBuilder) {
   }
 

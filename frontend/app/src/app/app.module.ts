@@ -64,6 +64,9 @@ import { ServiceConfigurationViewComponent } from './admin-configuration-panel/s
 import { ServiceEditDialogComponent } from './admin-configuration-panel/service-configuration/service-edit-dialog/service-edit-dialog.component';
 import { LayoutComponent } from './views/layout/layout.component';
 import { ChangeEmailComponent } from './admin-configuration-panel/general-configuration/change-email/change-email.component';
+import { AssignmentConfigurationComponent } from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
+import { AssignmentViewComponent } from './admin-configuration-panel/assignment-configuration/assignment-view/assignment-view.component';
+import { AssignmentEditDialogComponent } from './admin-configuration-panel/assignment-configuration/assignment-edit-dialog/assignment-edit-dialog.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +101,9 @@ import { ChangeEmailComponent } from './admin-configuration-panel/general-config
     ServiceEditDialogComponent,
     ChangeEmailComponent,
     LayoutComponent,
+    AssignmentConfigurationComponent,
+    AssignmentViewComponent,
+    AssignmentEditDialogComponent,
   ],
     imports: [
         BrowserModule,
