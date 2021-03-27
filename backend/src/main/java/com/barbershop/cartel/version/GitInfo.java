@@ -1,4 +1,4 @@
-package com.barbershop.cartel.security.config;
+package com.barbershop.cartel.version;
 
 import lombok.Getter;
 import lombok.Setter;

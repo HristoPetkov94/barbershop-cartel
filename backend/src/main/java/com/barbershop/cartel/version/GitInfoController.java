@@ -1,6 +1,5 @@
 package com.barbershop.cartel.version;
 
-import com.barbershop.cartel.security.config.GitInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
