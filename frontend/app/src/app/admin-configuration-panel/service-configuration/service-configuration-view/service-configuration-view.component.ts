@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {ServiceEditDialogComponent} from '../service-edit-dialog/service-edit-dialog.component';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {ServiceService} from '../../../services/service.service';
+import {Barber} from '../../../models/barber.model';
 
 @Component({
   selector: 'app-service-configuration-view',
