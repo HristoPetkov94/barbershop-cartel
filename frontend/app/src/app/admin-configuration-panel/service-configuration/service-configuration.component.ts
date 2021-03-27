@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
 import {Service} from '../../models/service';
 import {NotificationComponent} from '../../notification/notification.component';
@@ -13,8 +13,6 @@ import {ServiceService} from '../../services/service.service';
 })
 export class ServiceConfigurationComponent implements OnInit {
 
-  @ViewChildren('price') prices!: QueryList<ElementRef>;
-  @ViewChildren('duration') durations!: QueryList<ElementRef>;
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
   public loading = true;

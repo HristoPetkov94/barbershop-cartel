@@ -11,8 +11,8 @@
       </mat-form-field>
 
       <div class="col mat-field-padding-margin">
-        <button class="increment-btn" (click)="incrementDuration()">+</button>
-        <button class="decrement-btn" (click)="decrementDuration()">-</button>
+        <button class="increment-btn" (click)="changeDurationBySteps(1)">+</button>
+        <button class="decrement-btn" (click)="changeDurationBySteps(-1)">-</button>
       </div>
 
       <div class="sized-box-width-20 mat-field-padding-margin">
@@ -26,8 +26,8 @@
       </mat-form-field>
 
       <div class="col mat-field-padding-margin">
-        <button class="increment-btn" (click)="incrementPrice()">+</button>
-        <button class="decrement-btn" (click)="decrementPrice()">-</button>
+        <button class="increment-btn" (click)="changePriceBySteps(1)">+</button>
+        <button class="decrement-btn" (click)="changePriceBySteps(-1)">-</button>
       </div>
     </div>
   </div>

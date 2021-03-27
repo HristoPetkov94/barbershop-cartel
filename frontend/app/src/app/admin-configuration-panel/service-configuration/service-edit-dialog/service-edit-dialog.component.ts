@@ -3,8 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ImageService} from '../../../services/image.service';
 import {Service} from '../../../models/service';
-import {Barber} from '../../../models/barber.model';
-import {BarberService} from '../../../services/barber.service';
 
 @Component({
   selector: 'app-service-edit-dialog',
@@ -16,13 +14,11 @@ export class ServiceEditDialogComponent implements OnInit {
   @ViewChild('chooseFile') public chooseFile: ElementRef;
 
   myForm: FormGroup;
-  barbers: Barber[];
 
   constructor(
     public dialogRef: MatDialogRef<ServiceEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public service: Service,
     private imageService: ImageService,
-    private barberService: BarberService,
     private fb: FormBuilder) {
   }
 

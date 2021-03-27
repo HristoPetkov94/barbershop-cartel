@@ -4,9 +4,9 @@ import {Service} from '../../../models/service';
 import {AssignmentService} from '../../../services/assignment.service';
 import {Assignment} from '../../../models/assignment';
 import {NotificationComponent} from '../../../notification/notification.component';
-import {ServiceEditDialogComponent} from '../../service-configuration/service-edit-dialog/service-edit-dialog.component';
 import {AssignmentEditDialogComponent} from '../assignment-edit-dialog/assignment-edit-dialog.component';
 import {MatDialog} from '@angular/material';
+import {GlobalConstants} from '../../../common/global.constants';
 
 @Component({
   selector: 'app-assignment-view',
@@ -18,8 +18,10 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
 
   @Input()
   private barberId;
+
   public services: Service[];
   public assignments: Assignment[];
+
   public selectedServiceId;
 
   public selectedService: Service;
@@ -93,8 +95,8 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
       id: null,
       barberId: this.barberId,
       serviceId: this.selectedServiceId,
-      duration: 15,
-      price: 15,
+      duration: GlobalConstants.DEFAULT_SERVICE_DURATION,
+      price: GlobalConstants.DEFAULT_SERVICE_PRICE,
     };
 
     this.assignmentService.createAssignment(newAssignment).subscribe(assignment => {
@@ -158,7 +160,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
     }
   }
 
-  isDisabled() {
+  isServiceAddDisabled() {
     return this.availableServices.length === 0;
   }
 }

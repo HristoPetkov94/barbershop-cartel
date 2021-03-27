@@ -8,24 +8,24 @@ import {Service} from '../models/service';
   providedIn: 'root'
 })
 export class ServiceService {
-  private url = environment.apiUrl;
+  private servicesUrl = environment.apiUrl + '/services';
 
   constructor(private http: HttpClient) {
   }
 
   getServices(): Subscribable<Service[]> {
-    return this.http.get<Service[]>(this.url + '/services');
+    return this.http.get<Service[]>(this.servicesUrl);
   }
 
   createService(service: Service) {
-    return this.http.post(this.url + '/services', service);
+    return this.http.post(this.servicesUrl, service);
   }
 
   updateService(service: Service) {
-    return this.http.put(this.url + '/services', service);
+    return this.http.put(this.servicesUrl, service);
   }
 
   deleteService(serviceId: number) {
-    return this.http.delete(this.url + '/services' + '?' + 'serviceId=' + serviceId);
+    return this.http.delete(this.servicesUrl + '?' + 'serviceId=' + serviceId);
   }
 }

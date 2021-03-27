@@ -8,24 +8,25 @@ import {Barber} from '../models/barber.model';
   providedIn: 'root'
 })
 export class BarberService {
-  private url = environment.apiUrl;
+
+  private barbersUrl = environment.apiUrl + '/barbers';
 
   constructor(private http: HttpClient) {
   }
 
   getBarbers(): Subscribable<Barber[]> {
-    return this.http.get<Barber[]>(this.url + '/barbers');
+    return this.http.get<Barber[]>(this.barbersUrl);
   }
 
   createBarber(barber: Barber) {
-    return this.http.post<Barber>(this.url + '/barbers', barber);
+    return this.http.post<Barber>(this.barbersUrl, barber);
   }
 
   updateBarber(barber: Barber) {
-    return this.http.put(this.url + '/barbers', barber);
+    return this.http.put(this.barbersUrl, barber);
   }
 
   deleteBarber(barberId: number) {
-    return this.http.delete(this.url + '/barbers' + '?' + 'barberId=' + barberId);
+    return this.http.delete(this.barbersUrl + '?' + 'barberId=' + barberId);
   }
 }
