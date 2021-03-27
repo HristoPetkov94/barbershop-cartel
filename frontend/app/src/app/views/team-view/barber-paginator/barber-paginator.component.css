@@ -112,6 +112,9 @@
 
   width: 80%;
   justify-self: center;
+
+  word-wrap: break-word;
+  max-width: 300px;
 }
 
 .back-card-button {
