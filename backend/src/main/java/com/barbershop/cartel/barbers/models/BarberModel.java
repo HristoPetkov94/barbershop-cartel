@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 public class BarberModel {
     private Long id;
+
     private String firstName;
     private String lastName;
     private String description;

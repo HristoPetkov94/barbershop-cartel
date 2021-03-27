@@ -32,8 +32,7 @@ public class AssignmentServices implements AssignmentInterface {
 
         List<AssignmentModel> assignmentModels = new ArrayList<>();
 
-        BarberEntity barber = barberInterface.getBarberById(barberId);
-        List<AssignmentEntity> assignmentsByBarber = assignmentRepository.findAllByBarber(barber);
+        List<AssignmentEntity> assignmentsByBarber = assignmentRepository.findAllByBarberId(barberId);
 
         for (AssignmentEntity assignment : assignmentsByBarber) {
 
@@ -78,6 +77,7 @@ public class AssignmentServices implements AssignmentInterface {
 
         assignment.setPrice(assignmentModel.getPrice());
         assignment.setDuration(assignmentModel.getDuration());
+
         assignment.setBarber(barber);
         assignment.setService(service);
 

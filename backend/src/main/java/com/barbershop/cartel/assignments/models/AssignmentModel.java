@@ -8,8 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 public class AssignmentModel {
     private long id;
+
     private int price;
     private int duration;
+
     private long barberId;
     private long serviceId;
 }

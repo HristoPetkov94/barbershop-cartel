@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface AssignmentRepository extends CrudRepository<AssignmentEntity, Long> {
 
-    List<AssignmentEntity> findAllByBarber(BarberEntity barber);
+    List<AssignmentEntity> findAllByBarberId(Long barberId);
 }

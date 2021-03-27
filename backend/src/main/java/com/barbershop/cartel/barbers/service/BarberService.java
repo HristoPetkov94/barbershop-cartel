@@ -19,7 +19,6 @@ public class BarberService implements BarberInterface {
     @Autowired
     private BarberRepository barberRepository;
 
-
     @Override
     public List<BarberModel> getBarbers() {
 
