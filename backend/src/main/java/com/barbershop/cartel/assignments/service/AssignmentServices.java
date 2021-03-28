@@ -12,8 +12,9 @@ import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class AssignmentServices implements AssignmentInterface {
@@ -29,22 +30,10 @@ public class AssignmentServices implements AssignmentInterface {
 
     @Override
     public List<AssignmentModel> getAssignments() {
-        List<AssignmentModel> assignmentModels = new ArrayList<>();
 
         Iterable<AssignmentEntity> assignmentsByBarber = assignmentRepository.findAll();
 
-        for (AssignmentEntity assignment : assignmentsByBarber) {
-
-            AssignmentModel assignmentModel = new AssignmentModel();
-
-            assignmentModel.setId(assignment.getId());
-            assignmentModel.setPrice(assignment.getPrice());
-            assignmentModel.setDuration(assignment.getDuration());
-            assignmentModel.setBarberId(assignment.getBarber().getId());
-            assignmentModel.setServiceId(assignment.getService().getId());
-
-            assignmentModels.add(assignmentModel);
-        }
+        List<AssignmentModel> assignmentModels = getModels(assignmentsByBarber);
 
         return assignmentModels;
     }
@@ -52,24 +41,35 @@ public class AssignmentServices implements AssignmentInterface {
     @Override
     public List<AssignmentModel> getAssignments(long barberId) {
 
-        List<AssignmentModel> assignmentModels = new ArrayList<>();
-
         List<AssignmentEntity> assignmentsByBarber = assignmentRepository.findAllByBarberId(barberId);
 
-        for (AssignmentEntity assignment : assignmentsByBarber) {
-
-            AssignmentModel assignmentModel = new AssignmentModel();
-
-            assignmentModel.setId(assignment.getId());
-            assignmentModel.setPrice(assignment.getPrice());
-            assignmentModel.setDuration(assignment.getDuration());
-            assignmentModel.setBarberId(assignment.getBarber().getId());
-            assignmentModel.setServiceId(assignment.getService().getId());
-
-            assignmentModels.add(assignmentModel);
-        }
+        List<AssignmentModel> assignmentModels = getModels(assignmentsByBarber);
 
         return assignmentModels;
+    }
+
+    private List<AssignmentModel> getModels(Iterable<AssignmentEntity> assignments) {
+
+        List<AssignmentModel> result =
+                StreamSupport.stream(assignments.spliterator(), false)
+                        .map(this::getAssignmentModel)
+                        .collect(Collectors.toList());
+
+        return result;
+    }
+
+    private AssignmentModel getAssignmentModel(AssignmentEntity assignment) {
+
+        AssignmentModel assignmentModel = new AssignmentModel();
+
+        assignmentModel.setId(assignment.getId());
+
+        assignmentModel.setPrice(assignment.getPrice());
+        assignmentModel.setDuration(assignment.getDuration());
+        assignmentModel.setBarberId(assignment.getBarber().getId());
+        assignmentModel.setServiceId(assignment.getService().getId());
+
+        return assignmentModel;
     }
 
     @Override
