@@ -12,7 +12,6 @@ import {GlobalConstants} from '../../../common/global.constants';
 export class AssignmentEditDialogComponent implements OnInit {
   myForm: FormGroup;
 
-  private minServiceDuration = 30;
   public currency = GlobalConstants.currency;
   public time = GlobalConstants.time;
 
@@ -43,11 +42,23 @@ export class AssignmentEditDialogComponent implements OnInit {
     });
   }
 
-  incrementDuration() {
+  checkServiceDurationValid(duration) {
+    if (duration > GlobalConstants.MAX_SERVICE_DURATION) {
+      return false;
+    }
+
+    if (duration < GlobalConstants.MIN_SERVICE_DURATION) {
+      return false;
+    }
+
+    return true;
+  }
+
+  changeDurationBySteps(stepChange) {
     let currentDuration = this.myForm.value.duration;
 
-    currentDuration += this.minServiceDuration;
-    if (currentDuration >= 60) {
+    currentDuration = currentDuration + stepChange * GlobalConstants.SERVICE_DURATION_STEP;
+    if (!this.checkServiceDurationValid(currentDuration)) {
       return;
     }
 
@@ -56,39 +67,16 @@ export class AssignmentEditDialogComponent implements OnInit {
     });
   }
 
-  decrementDuration() {
-
-    let currentDuration: number = this.myForm.value.duration;
-
-    currentDuration -= this.minServiceDuration;
-
-    if (currentDuration < 0) {
-      return;
-    }
-
-    this.myForm.patchValue({
-      duration: currentDuration
-    });
+  checkServicePriceValid(price) {
+    return price > 0;
   }
 
-  incrementPrice() {
-
+  changePriceBySteps(stepChange) {
     let currentPrice: number = this.myForm.value.price;
 
-    currentPrice++;
+    currentPrice = currentPrice + stepChange;
 
-    this.myForm.patchValue({
-      price: currentPrice
-    });
-  }
-
-  decrementPrice() {
-
-    let currentPrice: number = this.myForm.value.price;
-
-    currentPrice--;
-
-    if (currentPrice < 0) {
+    if (!this.checkServicePriceValid(currentPrice)) {
       return;
     }
 
