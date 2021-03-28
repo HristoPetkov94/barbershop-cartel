@@ -56,8 +56,7 @@ section {
 }
 
 .title {
-  text-align: left;
-  font: normal normal bold 18px/20px Roboto;
+  font: normal normal 15px/18px Roboto;
   color: #413F3F;
   opacity: 1;
 }

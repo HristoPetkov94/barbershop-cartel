@@ -17,7 +17,12 @@ public class AssignmentController {
     private AssignmentInterface assignmentInterface;
 
     @GetMapping
-    public List<AssignmentModel> getAssignments(@RequestParam long barberId) {
+    public List<AssignmentModel> getAssignments() {
+        return assignmentInterface.getAssignments();
+    }
+
+    @GetMapping("/barber/{barberId}")
+    public List<AssignmentModel> getAssignmentsByBarberId(@PathVariable long barberId) {
         return assignmentInterface.getAssignments(barberId);
     }
 
@@ -35,8 +40,8 @@ public class AssignmentController {
         return assignmentModel;
     }
 
-    @DeleteMapping
-    public void deleteAssignment(@RequestParam long assignmentId) {
+    @DeleteMapping("/{assignmentId}")
+    public void deleteAssignment(@PathVariable long assignmentId) {
         assignmentInterface.deleteAssignment(assignmentId);
     }
 }

@@ -6,6 +6,8 @@ import com.barbershop.cartel.assignments.models.AssignmentModel;
 import java.util.List;
 
 public interface AssignmentInterface {
+    List<AssignmentModel> getAssignments();
+
     List<AssignmentModel> getAssignments(long barberId);
 
     void updateAssignment(AssignmentModel assignmentModel);

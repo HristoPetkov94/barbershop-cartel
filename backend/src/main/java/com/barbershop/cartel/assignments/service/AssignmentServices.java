@@ -28,6 +28,28 @@ public class AssignmentServices implements AssignmentInterface {
     private ServiceInterface serviceInterface;
 
     @Override
+    public List<AssignmentModel> getAssignments() {
+        List<AssignmentModel> assignmentModels = new ArrayList<>();
+
+        Iterable<AssignmentEntity> assignmentsByBarber = assignmentRepository.findAll();
+
+        for (AssignmentEntity assignment : assignmentsByBarber) {
+
+            AssignmentModel assignmentModel = new AssignmentModel();
+
+            assignmentModel.setId(assignment.getId());
+            assignmentModel.setPrice(assignment.getPrice());
+            assignmentModel.setDuration(assignment.getDuration());
+            assignmentModel.setBarberId(assignment.getBarber().getId());
+            assignmentModel.setServiceId(assignment.getService().getId());
+
+            assignmentModels.add(assignmentModel);
+        }
+
+        return assignmentModels;
+    }
+
+    @Override
     public List<AssignmentModel> getAssignments(long barberId) {
 
         List<AssignmentModel> assignmentModels = new ArrayList<>();

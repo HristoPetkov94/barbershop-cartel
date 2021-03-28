@@ -26,6 +26,9 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
 
   public selectedService: Service;
 
+  public currency = 'лв.';
+  public time = 'мин.';
+
   constructor(private dialog: MatDialog,
               private serviceService: ServiceService,
               private assignmentService: AssignmentService) {
@@ -49,7 +52,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   }
 
   loadAssignments(barberId) {
-    this.assignmentService.getAssignments(barberId).subscribe(assignments => {
+    this.assignmentService.getAssignmentsByBarberId(barberId).subscribe(assignments => {
       this.assignments = assignments;
     });
   }

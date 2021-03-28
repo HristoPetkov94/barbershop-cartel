@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Assignment} from '../../../models/assignment';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {GlobalConstants} from '../../../common/global.constants';
 
 @Component({
   selector: 'app-assignment-edit-dialog',
@@ -11,6 +10,10 @@ import {GlobalConstants} from '../../../common/global.constants';
 })
 export class AssignmentEditDialogComponent implements OnInit {
   myForm: FormGroup;
+
+  private minServiceDuration = 30;
+  public currency = 'лв.';
+  public time = 'мин.';
 
   constructor(
     public dialogRef: MatDialogRef<AssignmentEditDialogComponent>,
@@ -39,23 +42,11 @@ export class AssignmentEditDialogComponent implements OnInit {
     });
   }
 
-  checkServiceDurationValid(duration) {
-    if (duration > GlobalConstants.MAX_SERVICE_DURATION) {
-      return false;
-    }
-
-    if (duration < GlobalConstants.MIN_SERVICE_DURATION) {
-      return false;
-    }
-
-    return true;
-  }
-
-  changeDurationBySteps(stepChange) {
+  incrementDuration() {
     let currentDuration = this.myForm.value.duration;
 
-    currentDuration = currentDuration + stepChange * GlobalConstants.SERVICE_DURATION_STEP;
-    if (!this.checkServiceDurationValid(currentDuration)) {
+    currentDuration += this.minServiceDuration;
+    if (currentDuration >= 60) {
       return;
     }
 
@@ -64,16 +55,39 @@ export class AssignmentEditDialogComponent implements OnInit {
     });
   }
 
-  checkServicePriceValid(price) {
-    return price > 0;
+  decrementDuration() {
+
+    let currentDuration: number = this.myForm.value.duration;
+
+    currentDuration -= this.minServiceDuration;
+
+    if (currentDuration < 0) {
+      return;
+    }
+
+    this.myForm.patchValue({
+      duration: currentDuration
+    });
   }
 
-  changePriceBySteps(stepChange) {
+  incrementPrice() {
+
     let currentPrice: number = this.myForm.value.price;
 
-    currentPrice = currentPrice + stepChange;
+    currentPrice++;
 
-    if (!this.checkServicePriceValid(currentPrice)) {
+    this.myForm.patchValue({
+      price: currentPrice
+    });
+  }
+
+  decrementPrice() {
+
+    let currentPrice: number = this.myForm.value.price;
+
+    currentPrice--;
+
+    if (currentPrice < 0) {
       return;
     }
 

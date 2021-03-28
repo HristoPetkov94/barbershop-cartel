@@ -8,17 +8,22 @@ import {Assignment} from '../models/assignment';
 })
 export class AssignmentService {
 
-  private assignmentsUrl = environment.apiUrl + '/assignments';
+  private apiUrl = environment.apiUrl;
+  private assignmentsUrl = this.apiUrl + '/assignments';
 
   constructor(private http: HttpClient) {
   }
 
-  getAssignments(barberId) {
-    return this.http.get<Assignment[]>(this.assignmentsUrl + '?barberId='.concat(barberId));
+  getAssignments() {
+    return this.http.get<Assignment[]>(this.assignmentsUrl);
+  }
+
+  getAssignmentsByBarberId(barberId) {
+    return this.http.get<Assignment[]>(this.assignmentsUrl + '/barber/'.concat(barberId));
   }
 
   deleteAssignment(assignmentId) {
-    return this.http.delete(this.assignmentsUrl + '?assignmentId='.concat(assignmentId));
+    return this.http.delete(this.assignmentsUrl + '/'.concat(assignmentId));
   }
 
   createAssignment(assignment: Assignment) {

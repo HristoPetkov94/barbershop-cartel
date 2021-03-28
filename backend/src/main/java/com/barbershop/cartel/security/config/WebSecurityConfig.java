@@ -75,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/general-configuration/social-media",
                         "/barbers",
                         "/services",
+                        "/assignments",
                         "/schedule/appointment-current-week**",
                         "/images/**")
                 .antMatchers(HttpMethod.POST,
