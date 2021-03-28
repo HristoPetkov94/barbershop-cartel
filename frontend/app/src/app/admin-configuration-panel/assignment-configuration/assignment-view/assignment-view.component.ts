@@ -26,8 +26,8 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
 
   public selectedService: Service;
 
-  public currency = 'лв.';
-  public time = 'мин.';
+  public currency = GlobalConstants.currency;
+  public time = GlobalConstants.time;
 
   constructor(private dialog: MatDialog,
               private serviceService: ServiceService,

@@ -8,4 +8,6 @@ export class GlobalConstants {
   public static readonly SERVICE_DURATION_STEP = 15;
 
   public static readonly DEFAULT_SERVICE_PRICE = 15;
+  public static readonly currency = 'лв.';
+  public static readonly time = 'мин.';
 }

@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Assignment} from '../../../models/assignment';
 import {FormBuilder, FormGroup} from '@angular/forms';
+import {GlobalConstants} from '../../../common/global.constants';
 
 @Component({
   selector: 'app-assignment-edit-dialog',
@@ -12,8 +13,8 @@ export class AssignmentEditDialogComponent implements OnInit {
   myForm: FormGroup;
 
   private minServiceDuration = 30;
-  public currency = 'лв.';
-  public time = 'мин.';
+  public currency = GlobalConstants.currency;
+  public time = GlobalConstants.time;
 
   constructor(
     public dialogRef: MatDialogRef<AssignmentEditDialogComponent>,
