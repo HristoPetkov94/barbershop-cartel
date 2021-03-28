@@ -1,5 +1,7 @@
 package com.barbershop.cartel.schedule.service;
 
+import com.barbershop.cartel.assignments.entity.AssignmentEntity;
+import com.barbershop.cartel.assignments.interfaces.AssignmentInterface;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.clients.entity.ClientEntity;
 import com.barbershop.cartel.clients.interfaces.ClientInterface;
@@ -10,6 +12,7 @@ import com.barbershop.cartel.schedule.models.*;
 import com.barbershop.cartel.schedule.repository.ScheduleRepository;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
+import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +40,12 @@ public class ScheduleService implements ScheduleInterface {
     @Autowired
     private ScheduleConfigInterface scheduleConfigInterface;
 
+    @Autowired
+    private AssignmentInterface assignmentInterface;
+
+    @Autowired
+    private ServiceInterface serviceInterface;
+
     private LocalTime firstAppointment(ScheduleConfigModel configuration) {
 
         if (configuration.getFirstAppointment() != null) {
@@ -62,10 +71,8 @@ public class ScheduleService implements ScheduleInterface {
 
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
-        BarberEntity barber = barberInterface.getBarberById(barberId);
-
-        ServiceEntity service = getService(barber, serviceId);
-        List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarber(day, barber);
+        AssignmentEntity assignment = assignmentInterface.getAssignment(barberId, serviceId);
+        List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarberId(day, barberId);
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
 
         LocalTime currentAppointment = firstAppointment(configuration);
@@ -97,7 +104,7 @@ public class ScheduleService implements ScheduleInterface {
             currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
         }
 
-        if (service.getDuration() == MAX_SERVICE_DURATION) {
+        if (assignment.getDuration() == MAX_SERVICE_DURATION) {
             hours = availableHoursBasedOnService(hours);
         }
 
@@ -183,19 +190,6 @@ public class ScheduleService implements ScheduleInterface {
         return week;
     }
 
-    private ServiceEntity getService(BarberEntity barber, long serviceId) {
-
-        ServiceEntity service = null;
-        // TODO fix here
-        /*for (ServiceEntity selectedService : barber.getServices()) {
-            if (selectedService.getId() == serviceId) {
-                service = selectedService;
-            }
-        }*/
-
-        return service;
-    }
-
     private void saveNewClient(String email, String username) {
         clientInterface.saveNewClient(email, username);
     }
@@ -268,10 +262,11 @@ public class ScheduleService implements ScheduleInterface {
     public void save(AppointmentRequestModel requestModel) {
 
         BarberEntity barber = barberInterface.getBarberById(requestModel.getBarberId());
+        ServiceEntity service = serviceInterface.getServiceById(requestModel.getServiceId());
 
-        ServiceEntity service = getService(barber, requestModel.getServiceId());
+        AssignmentEntity assignment = assignmentInterface.getAssignment(requestModel.getBarberId(), requestModel.getServiceId());
 
-        int numberHoursToBook = service.getDuration() / MIN_SERVICE_DURATION;
+        int numberHoursToBook = assignment.getDuration() / MIN_SERVICE_DURATION;
 
         LocalDate date = LocalDate.parse(requestModel.getDate());
         LocalTime hour = LocalTime.parse(requestModel.getHour());

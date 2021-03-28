@@ -73,6 +73,13 @@ public class AssignmentServices implements AssignmentInterface {
     }
 
     @Override
+    public AssignmentEntity getAssignment(long barberId, long serviceId) {
+
+        return assignmentRepository.findByBarberIdAndServiceId(barberId, serviceId)
+                .orElseThrow(() -> new CartelCustomException("Assignment for barberId: " + barberId + " and serviceId: " + serviceId + "  is not existing"));
+    }
+
+    @Override
     public void updateAssignment(AssignmentModel assignmentModel) {
 
         BarberEntity barber = barberInterface.getBarberById(assignmentModel.getBarberId());

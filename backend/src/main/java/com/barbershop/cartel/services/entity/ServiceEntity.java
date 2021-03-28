@@ -22,12 +22,6 @@ public class ServiceEntity {
     @Column(name = "service_title")
     private String serviceTitle;
 
-    @Column(name = "price")
-    private int price;
-
-    @Column(name = "duration")
-    private int duration;
-
     @Column(name = "picture", columnDefinition = "TEXT")
     private String picture;
 

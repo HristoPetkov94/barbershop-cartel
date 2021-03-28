@@ -15,4 +15,6 @@ public interface AssignmentInterface {
     AssignmentEntity createAssignment(AssignmentModel assignmentModel);
 
     void deleteAssignment(long assignmentId);
+
+    AssignmentEntity getAssignment(long barberId, long serviceId);
 }
