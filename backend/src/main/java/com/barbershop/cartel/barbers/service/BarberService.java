@@ -5,10 +5,14 @@ import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
 import com.barbershop.cartel.barbers.repository.BarberRepository;
 import com.barbershop.cartel.errors.CartelCustomException;
+import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
+import com.barbershop.cartel.work.weekday.WorkWeekDayRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +22,9 @@ public class BarberService implements BarberInterface {
 
     @Autowired
     private BarberRepository barberRepository;
+
+    @Autowired
+    private  WorkWeekDayRepository workWeekDayRepository;
 
     @Override
     public List<BarberModel> getBarbers() {
@@ -61,9 +68,35 @@ public class BarberService implements BarberInterface {
         barber.setFacebook(barberModel.getFacebook());
         barber.setInstagram(barberModel.getInstagram());
 
-        return barberRepository.save(barber);
+        BarberEntity save = barberRepository.save(barber);
+
+        createWorkingWeek(save, workWeekDayRepository);
+
+        return save;
     }
 
+    private void createWorkingWeek(BarberEntity barber, WorkWeekDayRepository workWeekDayRepository) {
+
+        for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            WorkWeekDayEntity entity = new WorkWeekDayEntity();
+
+            LocalTime from = LocalTime.of(8, 0);
+            LocalTime to = LocalTime.of(18, 0);
+
+            entity.setBarber(barber);
+
+            entity.setDayOfWeek(dayOfWeek);
+
+            entity.setFrom(from);
+            entity.setTo(to);
+
+            boolean notWorking = dayOfWeek == DayOfWeek.SUNDAY || dayOfWeek == DayOfWeek.SATURDAY;
+
+            entity.setNotWorking(notWorking);
+
+            workWeekDayRepository.save(entity);
+        }
+    }
     @Override
     public void updateBarber(BarberModel barberModel) {
 

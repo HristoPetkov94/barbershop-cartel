@@ -1,0 +1,36 @@
+<div class="row max-width justify-content-end">
+  <button mat-button (click)="edit()">
+  <span class="material-icons">
+    edit
+  </span> Edit
+  </button>
+</div>
+<mat-grid-list cols="3" rowHeight="50px">
+
+  <mat-grid-tile>Day of week
+  </mat-grid-tile>
+  <mat-grid-tile>From
+  </mat-grid-tile>
+  <mat-grid-tile>To
+  </mat-grid-tile>
+  <div *ngFor="let workingHoursDay of workingHours; let i = index">
+    <mat-grid-tile>{{workingHoursDay.dayOfWeek}}
+    </mat-grid-tile>
+
+    <div *ngIf="workingHoursDay.notWorking">
+      <mat-grid-tile [colspan]="2">
+            <span class="material-icons">
+            home
+            </span> Not working
+      </mat-grid-tile>
+    </div>
+
+    <div *ngIf="!workingHoursDay.notWorking">
+      <mat-grid-tile>{{workingHoursDay.from}}
+      </mat-grid-tile>
+      <mat-grid-tile>{{workingHoursDay.to}}
+      </mat-grid-tile>
+    </div>
+  </div>
+</mat-grid-list>
+<app-notification></app-notification>

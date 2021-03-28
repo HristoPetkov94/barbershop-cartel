@@ -15,7 +15,9 @@ import {ServiceConfigurationComponent} from './admin-configuration-panel/service
 import {StoreConfigurationComponent} from './admin-configuration-panel/store-configuration/store-configuration.component';
 import {AssignmentConfigurationComponent} from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import {LayoutComponent} from './views/layout/layout.component';
+import {AvailabilityConfigurationComponent} from './admin-configuration-panel/availability-configuration/availability-configuration.component';
 import {AppointmentViewComponent} from './views/appointment-view/appointment-view.component';
+import {AppComponentComponent} from './admin-configuration-panel/app-component/app-component.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EmailConfigurationComponent} from './admin-configuration-panel/email-configuration/email-configuration.component';
 
@@ -47,6 +49,13 @@ const routes: Routes = [
       {path: 'assignments', component: AssignmentConfigurationComponent, data: {animation: 'assignments'}},
       {path: 'emails', component: EmailConfigurationComponent, data: {animation: 'emails'}},
       {path: 'store', component: StoreConfigurationComponent, data: {animation: 'store'}},
+      {path: 'general', component: GeneralConfigurationComponent},
+      {path: 'barbers', component: BarberConfigurationComponent},
+      {path: 'services', component: ServiceConfigurationComponent},
+      {path: 'assignments', component: AssignmentConfigurationComponent},
+      {path: 'availability', component: AvailabilityConfigurationComponent},
+      {path: 'store', component: StoreConfigurationComponent},
+      {path: 'work-hours', component: AppComponentComponent},
     ],
     canActivate: [AuthGuardService]
   },

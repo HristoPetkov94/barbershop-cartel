@@ -1,0 +1,27 @@
+
+<hr/>
+
+<div class="row max-width justify-content-start">
+
+  <div class="col">
+    <div class="sized-box-height-40"></div>
+
+    <h1 class="margin-bottom-10"> Choose barber </h1>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Choose barber</mat-label>
+      <mat-select [(value)]="selectedBarberId">
+
+        <mat-option *ngFor="let barber of barbers"
+                    [value]="barber.id"> {{barber.firstName + ' ' + barber.lastName}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</div>
+
+<app-work-week-day-view *ngIf="selectedBarberId" [barberId]="selectedBarberId"></app-work-week-day-view>
+
+<hr/>
+
+<app-work-day-view *ngIf="selectedBarberId" [barberId]="selectedBarberId"></app-work-day-view>

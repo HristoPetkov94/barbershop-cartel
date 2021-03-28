@@ -65,6 +65,17 @@ import { ChangeEmailComponent } from './admin-configuration-panel/general-config
 import { AssignmentConfigurationComponent } from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import { AssignmentViewComponent } from './admin-configuration-panel/assignment-configuration/assignment-view/assignment-view.component';
 import { AssignmentEditDialogComponent } from './admin-configuration-panel/assignment-configuration/assignment-edit-dialog/assignment-edit-dialog.component';
+import {WorkDayViewComponent} from './admin-configuration-panel/availability-configuration/work-day-view/work-day-view.component';
+import {WorkDayEditDialogComponent} from './admin-configuration-panel/availability-configuration/work-day-edit-dialog/work-day-edit-dialog.component';
+import {WorkWeekDayEditDialogComponent} from './admin-configuration-panel/availability-configuration/work-week-day-edit-dialog/work-week-day-edit-dialog.component';
+import {WorkWeekDayViewComponent} from './admin-configuration-panel/availability-configuration/work-week-day-view/work-week-day-view.component';
+import {AvailabilityConfigurationComponent} from './admin-configuration-panel/availability-configuration/availability-configuration.component';
+
+import { AppComponentComponent } from './admin-configuration-panel/app-component/app-component.component';
+import {CalendarHeaderComponent} from './admin-configuration-panel/app-component/calendar-header.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+
 import { BarberStepComponent } from './views/appointment-view/steps/barber-step/barber-step.component';
 import { ServiceStepComponent } from './views/appointment-view/steps/service-step/service-step.component';
 import { DateStepComponent } from './views/appointment-view/steps/date-step/date-step.component';
@@ -73,6 +84,9 @@ import { AppointmentViewComponent } from './views/appointment-view/appointment-v
 import { EmailConfigurationComponent } from './admin-configuration-panel/email-configuration/email-configuration.component';
 
 @NgModule({
+  exports: [
+    AppComponentComponent
+  ],
   declarations: [
     AppComponent,
     LandingPageViewComponent,
@@ -111,6 +125,16 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
     DateStepComponent,
     FinishStepComponent,
     AppointmentViewComponent,
+    AppComponentComponent,
+    CalendarHeaderComponent,
+    AssignmentConfigurationComponent,
+    AssignmentViewComponent,
+    AssignmentEditDialogComponent,
+    AvailabilityConfigurationComponent,
+    WorkWeekDayViewComponent,
+    WorkWeekDayEditDialogComponent,
+    WorkDayViewComponent,
+    WorkDayEditDialogComponent,
     EmailConfigurationComponent,
   ],
     imports: [
@@ -125,6 +149,7 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
         MatSelectModule,
         MatIconModule,
         MatCardModule,
+        MatGridListModule,
         ReactiveFormsModule,
         MatToolbarModule,
         MatMenuModule,
@@ -146,7 +171,12 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
         MatRadioModule,
         I18nModule,
         MatGridListModule,
-        MatTooltipModule
+        MatTooltipModule,
+      BrowserAnimationsModule,
+      CalendarModule.forRoot({
+        provide: DateAdapter,
+        useFactory: adapterFactory,
+      }),
     ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },
@@ -166,7 +196,9 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
   bootstrap: [AppComponent],
   entryComponents: [
     ServiceEditDialogComponent,
-    BarberEditDialogComponent
+    BarberEditDialogComponent,
+    WorkWeekDayEditDialogComponent,
+    WorkDayEditDialogComponent
   ]
 })
 export class AppModule {

@@ -1,0 +1,49 @@
+<form [formGroup]="myForm">
+  <div mat-dialog-title>
+  </div>
+
+  <div mat-dialog-content>
+    <mat-grid-list cols="4" rowHeight="50px">
+
+      <mat-grid-tile>Day of week</mat-grid-tile>
+      <mat-grid-tile>From</mat-grid-tile>
+      <mat-grid-tile>To</mat-grid-tile>
+      <mat-grid-tile>
+        <span class="material-icons">
+            home
+        </span>
+      </mat-grid-tile>
+      <div formArrayName="workingHours">
+        <div *ngFor="let workingHoursDay of workingHour.controls; let i = index" [formGroupName]="i">
+          <mat-grid-tile>
+            {{workingHoursDay.value.dayOfWeek}}
+          </mat-grid-tile>
+          <div *ngIf="workingHoursDay.value.notWorking">
+            <mat-grid-tile [colspan]="2">
+            <span class="material-icons">
+            home
+            </span> Not working
+            </mat-grid-tile>
+          </div>
+          <div *ngIf="!workingHoursDay.value.notWorking">
+            <mat-grid-tile>
+              <input formControlName="from" type="time">
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <input formControlName="to" type="time">
+            </mat-grid-tile>
+          </div>
+          <mat-grid-tile>
+            <mat-slide-toggle formControlName="notWorking"></mat-slide-toggle>
+          </mat-grid-tile>
+        </div>
+      </div>
+
+    </mat-grid-list>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="myForm" (click)="onNoClick()">Cancel</button>
+    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="myForm" cdkFocusInitial>Save</button>
+  </div>
+</form>
