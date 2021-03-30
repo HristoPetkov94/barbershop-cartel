@@ -14,16 +14,16 @@ export class AppointmentService {
   constructor(private http: HttpClient) {
   }
 
-  getPreviousWeek(numberOfWeeks, barber, service) {
-    return this.http.post<Week>(this.url + '/appointment-previous-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id + '&' + 'numberOfWeeks=' + numberOfWeeks, {});
+  getPreviousWeek(numberOfWeeks, assignmentId) {
+    return this.http.get<Week>(this.url + '/appointment-previous-week' + '?' + 'assignmentId=' + assignmentId + 'numberOfWeeks=' + numberOfWeeks, {});
   }
 
-  getCurrentWeek(barber, service): Subscribable<Week> {
-    return this.http.get<Week>(this.url + '/appointment-current-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id);
+  getCurrentWeek(barber, assignmentId): Subscribable<Week> {
+    return this.http.get<Week>(this.url + '/appointment-current-week' + '?' + 'assignmentId=' + assignmentId);
   }
 
-  getNextWeek(numberOfWeeks, barber, service) {
-    return this.http.post<Week>(this.url + '/appointment-next-week' + '?' + 'barberId=' + barber.id + '&' + 'serviceId=' + service.id + '&' + 'numberOfWeeks=' + numberOfWeeks, {});
+  getNextWeek(numberOfWeeks, assignmentId) {
+    return this.http.get<Week>(this.url + '/appointment-next-week' + '?' + 'assignmentId=' + assignmentId + '&' + 'numberOfWeeks=' + numberOfWeeks, {});
   }
 
   bookNow(req: AppointmentRequest) {

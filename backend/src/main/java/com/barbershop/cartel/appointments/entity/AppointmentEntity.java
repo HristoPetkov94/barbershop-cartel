@@ -1,6 +1,5 @@
 package com.barbershop.cartel.appointments.entity;
 
-import com.barbershop.cartel.assignments.entity.AssignmentEntity;
 import com.barbershop.cartel.clients.entity.ClientEntity;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
@@ -40,9 +39,6 @@ public class AppointmentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ServiceEntity service;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private AssignmentEntity assignment;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ClientEntity client;

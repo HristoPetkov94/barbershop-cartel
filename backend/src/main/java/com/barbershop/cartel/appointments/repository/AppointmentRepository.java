@@ -8,6 +8,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface ScheduleRepository extends CrudRepository<AppointmentEntity, Long> {
+public interface AppointmentRepository extends CrudRepository<AppointmentEntity, Long> {
     List<AppointmentEntity> findByDateAndBarberId(LocalDate date, long barberId);
 }

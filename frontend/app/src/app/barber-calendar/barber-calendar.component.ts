@@ -65,7 +65,7 @@ export class BarberCalendarComponent implements OnInit {
     this.numberOfWeeks--;
     const changedToPositiveNumber = this.numberOfWeeks * -1;
 
-    this.scheduleService.getPreviousWeek(changedToPositiveNumber, this.barber, this.service).subscribe(week => {
+    this.scheduleService.getPreviousWeek(changedToPositiveNumber, null).subscribe(week => {
       this.week = week;
 
       const today = week.days.find(d => d.date === this.today);
@@ -87,7 +87,7 @@ export class BarberCalendarComponent implements OnInit {
 
     this.numberOfWeeks++;
 
-    this.scheduleService.getNextWeek(this.numberOfWeeks, this.barber, this.service).subscribe(week => {
+    this.scheduleService.getNextWeek(this.numberOfWeeks, null).subscribe(week => {
         this.week = week;
 
         const today = week.days.find(d => d.date === this.today);

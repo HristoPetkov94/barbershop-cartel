@@ -151,8 +151,8 @@ export class BookingViewComponent implements OnInit {
 
     const appointment = new AppointmentRequest();
 
-    appointment.barberId = this.barber.id;
-    appointment.serviceId = this.service.id;
+    // appointment.barberId = this.barber.id;
+    // appointment.serviceId = this.service.id;
     appointment.hour = this.datetime.hour;
     appointment.date = this.datetime.date;
 
@@ -191,8 +191,9 @@ export class BookingViewComponent implements OnInit {
         this.facebook.authState.subscribe(u => fbUser = u);
 
         const appointment: AppointmentRequest = {
-          barberId: this.barber.id,
-          serviceId: this.service.id,
+          // barberId: this.barber.id,
+          // serviceId: this.service.id,
+          assignmentId: null,
           hour: this.datetime.hour,
           date: this.datetime.date,
           clientUsername: fbUser.name,

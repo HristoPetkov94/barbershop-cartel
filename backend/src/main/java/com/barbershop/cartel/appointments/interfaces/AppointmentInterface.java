@@ -5,11 +5,11 @@ import com.barbershop.cartel.appointments.models.AppointmentWeekModel;
 
 public interface AppointmentInterface {
 
-    AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId, long serviceId);
+    AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long assignmentId);
 
-    AppointmentWeekModel getAppointmentsCurrentWeek(long barberId, long serviceId);
+    AppointmentWeekModel getAppointmentsCurrentWeek(long assignmentId);
 
-    AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long barberId, long serviceId);
+    AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long assignmentId);
 
-    void save(AppointmentRequestModel appointment);
+    void save(AppointmentRequestModel appointmentModel);
 }

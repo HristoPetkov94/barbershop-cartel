@@ -1,6 +1,5 @@
 export class AppointmentRequest {
-  barberId: number;
-  serviceId: number;
+  assignmentId: number;
   hour: string;
   date: string;
   clientUsername: string;
