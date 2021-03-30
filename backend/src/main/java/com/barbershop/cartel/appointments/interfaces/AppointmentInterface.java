@@ -1,9 +1,9 @@
-package com.barbershop.cartel.schedule.interfaces;
+package com.barbershop.cartel.appointments.interfaces;
 
-import com.barbershop.cartel.schedule.models.AppointmentRequestModel;
-import com.barbershop.cartel.schedule.models.AppointmentWeekModel;
+import com.barbershop.cartel.appointments.models.AppointmentRequestModel;
+import com.barbershop.cartel.appointments.models.AppointmentWeekModel;
 
-public interface ScheduleInterface {
+public interface AppointmentInterface {
 
     AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long barberId, long serviceId);
 

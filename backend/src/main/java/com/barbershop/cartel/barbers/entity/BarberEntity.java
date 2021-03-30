@@ -1,8 +1,7 @@
 package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
-import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
-import com.barbershop.cartel.services.entity.ServiceEntity;
+import com.barbershop.cartel.appointments.entity.ScheduleConfigEntity;
 import lombok.Getter;
 import lombok.Setter;
 

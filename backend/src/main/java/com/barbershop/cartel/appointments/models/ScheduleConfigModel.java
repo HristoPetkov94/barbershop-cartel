@@ -1,4 +1,4 @@
-package com.barbershop.cartel.schedule.models;
+package com.barbershop.cartel.appointments.models;
 
 import lombok.Getter;
 import lombok.Setter;

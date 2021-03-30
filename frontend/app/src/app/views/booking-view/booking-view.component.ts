@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {animate, style, transition, trigger} from '@angular/animations';
-import {ScheduleService} from '../../services/schedule.service';
+import {AppointmentService} from '../../services/appointment.service';
 import {FacebookLoginProvider, SocialAuthService} from 'angularx-social-login';
 import {SocialUser} from 'angularx-social-login';
 import {AppointmentRequest} from '../../interfaces/appointment-request';
@@ -33,6 +33,7 @@ export class BookingViewComponent implements OnInit {
   public client: SocialUser;
 
   public barbers: Barber[];
+  public services: Service[];
   public barber = new Barber();
   public service = new Service();
   public datetime;
@@ -45,7 +46,7 @@ export class BookingViewComponent implements OnInit {
   public steps: Step[] = [];
   public currentStep: Step;
 
-  constructor(private scheduleService: ScheduleService,
+  constructor(private scheduleService: AppointmentService,
               private facebook: SocialAuthService,
               private barberService: BarberService,
               private servicesService: ServiceService,
@@ -73,6 +74,10 @@ export class BookingViewComponent implements OnInit {
 
     this.barberService.getBarbers().subscribe(b => {
       this.barbers = b;
+    });
+
+    this.servicesService.getServices().subscribe(b => {
+      this.services = b;
     });
 
     this.generalConfigurationService.getAppointmentMessage().subscribe(data => {

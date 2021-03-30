@@ -1,4 +1,4 @@
-package com.barbershop.cartel.schedule.entity;
+package com.barbershop.cartel.appointments.entity;
 
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import lombok.Getter;

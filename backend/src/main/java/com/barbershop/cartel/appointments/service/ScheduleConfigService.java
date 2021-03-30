@@ -1,9 +1,9 @@
-package com.barbershop.cartel.schedule.service;
+package com.barbershop.cartel.appointments.service;
 
-import com.barbershop.cartel.schedule.entity.ScheduleConfigEntity;
-import com.barbershop.cartel.schedule.interfaces.ScheduleConfigInterface;
-import com.barbershop.cartel.schedule.models.ScheduleConfigModel;
-import com.barbershop.cartel.schedule.repository.ScheduleConfigRepository;
+import com.barbershop.cartel.appointments.entity.ScheduleConfigEntity;
+import com.barbershop.cartel.appointments.interfaces.ScheduleConfigInterface;
+import com.barbershop.cartel.appointments.models.ScheduleConfigModel;
+import com.barbershop.cartel.appointments.repository.ScheduleConfigRepository;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ScheduleConfigService implements ScheduleConfigInterface {

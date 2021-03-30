@@ -43,22 +43,22 @@
     <div class="col flex-1 align-items-center" *ngSwitchCase="'two'" [@fadeOut]>
 
       <!--TODO fix here-->
-<!--      <div class="hover-me" *ngFor="let service of barber.services" (click)="chooseService(service)">-->
-<!--        <div class="service">-->
-<!--          <div class="row flex-space-between align-items-center">-->
-<!--            <span class="type">{{service.serviceType}}</span>-->
+      <div class="hover-me" *ngFor="let service of services" (click)="chooseService(service)">
+        <div class="service">
+          <div class="row flex-space-between align-items-center">
+            <span class="type">{{service.serviceType}}</span>
 
-<!--            <div class="row align-items-center">-->
+            <div class="row align-items-center">
 
-<!--              <mat-icon> access_time </mat-icon>-->
-<!--              <span class="duration">{{service.duration}} мин.</span>-->
+              <mat-icon> access_time </mat-icon>
+              <span class="duration">{{service.duration}} мин.</span>
 
-<!--              <mat-icon> attach_money </mat-icon>-->
-<!--              <span class="price">{{service.price}} лв.</span>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
+              <mat-icon> attach_money </mat-icon>
+              <span class="price">{{service.price}} лв.</span>
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
 

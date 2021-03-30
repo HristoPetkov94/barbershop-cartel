@@ -5,7 +5,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import {ScheduleService} from '../services/schedule.service';
+import {AppointmentService} from '../services/appointment.service';
 import {Week} from '../models/week.model';
 import {Barber} from '../models/barber.model';
 import {Service} from '../models/service';
@@ -37,7 +37,7 @@ export class BarberCalendarComponent implements OnInit {
   @Output()
   private navigation = new EventEmitter<any>();
 
-  constructor(private scheduleService: ScheduleService,
+  constructor(private scheduleService: AppointmentService,
               @Inject(LOCALE_ID) public locale: string) {
   }
 

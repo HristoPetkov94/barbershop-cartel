@@ -1,15 +1,15 @@
-package com.barbershop.cartel.schedule.service;
+package com.barbershop.cartel.appointments.service;
 
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
 import com.barbershop.cartel.assignments.interfaces.AssignmentInterface;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.clients.entity.ClientEntity;
 import com.barbershop.cartel.clients.interfaces.ClientInterface;
-import com.barbershop.cartel.schedule.entity.ScheduleEntity;
-import com.barbershop.cartel.schedule.interfaces.ScheduleConfigInterface;
-import com.barbershop.cartel.schedule.interfaces.ScheduleInterface;
-import com.barbershop.cartel.schedule.models.*;
-import com.barbershop.cartel.schedule.repository.ScheduleRepository;
+import com.barbershop.cartel.appointments.entity.AppointmentEntity;
+import com.barbershop.cartel.appointments.interfaces.ScheduleConfigInterface;
+import com.barbershop.cartel.appointments.interfaces.AppointmentInterface;
+import com.barbershop.cartel.appointments.models.*;
+import com.barbershop.cartel.appointments.repository.ScheduleRepository;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
@@ -22,7 +22,7 @@ import java.time.LocalTime;
 import java.util.*;
 
 @Service
-public class ScheduleService implements ScheduleInterface {
+public class AppointmentService implements AppointmentInterface {
 
     private static final int DAYS_OF_WEEK = 7;
     private static final int MIN_SERVICE_DURATION = 30;
@@ -72,7 +72,7 @@ public class ScheduleService implements ScheduleInterface {
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
         AssignmentEntity assignment = assignmentInterface.getAssignment(barberId, serviceId);
-        List<ScheduleEntity> bookedHours = scheduleRepository.findByDateAndBarberId(day, barberId);
+        List<AppointmentEntity> bookedHours = scheduleRepository.findByDateAndBarberId(day, barberId);
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
 
         LocalTime currentAppointment = firstAppointment(configuration);
@@ -81,7 +81,7 @@ public class ScheduleService implements ScheduleInterface {
         hoursLoop:
         while (currentAppointment.isBefore(lastAppointment)) {
 
-            for (ScheduleEntity bookedHour : bookedHours) {
+            for (AppointmentEntity bookedHour : bookedHours) {
 
                 // if the currentAppointment is existing(booked) skip it, don't create it again.
                 if (currentAppointment.equals(bookedHour.getHour())) {
@@ -205,7 +205,7 @@ public class ScheduleService implements ScheduleInterface {
 
         Optional<ClientEntity> client = clientInterface.findByEmail(requestModel.getClientEmail());
 
-        ScheduleEntity schedule = new ScheduleEntity();
+        AppointmentEntity schedule = new AppointmentEntity();
 
         schedule.setBarber(barber);
         schedule.setService(service);
@@ -261,10 +261,13 @@ public class ScheduleService implements ScheduleInterface {
     @Override
     public void save(AppointmentRequestModel requestModel) {
 
-        BarberEntity barber = barberInterface.getBarberById(requestModel.getBarberId());
-        ServiceEntity service = serviceInterface.getServiceById(requestModel.getServiceId());
+        long barberId = requestModel.getAssignment().getBarberId();
+        long serviceId = requestModel.getAssignment().getServiceId();
 
-        AssignmentEntity assignment = assignmentInterface.getAssignment(requestModel.getBarberId(), requestModel.getServiceId());
+        BarberEntity barber = barberInterface.getBarberById(barberId);
+        ServiceEntity service = serviceInterface.getServiceById(serviceId);
+
+        AssignmentEntity assignment = assignmentInterface.getAssignment(barberId, barberId);
 
         int numberHoursToBook = assignment.getDuration() / MIN_SERVICE_DURATION;
 

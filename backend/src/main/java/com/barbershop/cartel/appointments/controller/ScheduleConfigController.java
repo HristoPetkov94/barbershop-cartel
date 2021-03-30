@@ -1,7 +1,7 @@
-package com.barbershop.cartel.schedule.controller;
+package com.barbershop.cartel.appointments.controller;
 
-import com.barbershop.cartel.schedule.interfaces.ScheduleConfigInterface;
-import com.barbershop.cartel.schedule.models.ScheduleConfigModel;
+import com.barbershop.cartel.appointments.interfaces.ScheduleConfigInterface;
+import com.barbershop.cartel.appointments.models.ScheduleConfigModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
