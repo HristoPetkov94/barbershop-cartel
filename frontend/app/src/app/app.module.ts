@@ -67,6 +67,11 @@ import { ChangeEmailComponent } from './admin-configuration-panel/general-config
 import { AssignmentConfigurationComponent } from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import { AssignmentViewComponent } from './admin-configuration-panel/assignment-configuration/assignment-view/assignment-view.component';
 import { AssignmentEditDialogComponent } from './admin-configuration-panel/assignment-configuration/assignment-edit-dialog/assignment-edit-dialog.component';
+import { BookViewComponent } from './views/book-view/book-view.component';
+import { BarberStepComponent } from './views/book-view/steps/barber-step-component/barber-step.component';
+import { ServiceStepComponent } from './views/book-view/steps/service-step/service-step.component';
+import { DateStepComponent } from './views/book-view/steps/date-step/date-step.component';
+import { FinishStepComponent } from './views/book-view/steps/finish-step/finish-step.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +109,11 @@ import { AssignmentEditDialogComponent } from './admin-configuration-panel/assig
     AssignmentConfigurationComponent,
     AssignmentViewComponent,
     AssignmentEditDialogComponent,
+    BookViewComponent,
+    BarberStepComponent,
+    ServiceStepComponent,
+    DateStepComponent,
+    FinishStepComponent,
   ],
     imports: [
         BrowserModule,

@@ -1,0 +1,13 @@
+
+
+<div class="row max-width justify-content-center">
+  <button *ngFor="let step of steps" [routerLink]="step.link"
+          [routerLinkActive]="['selected']"> {{step.label}} </button>
+
+</div>
+<hr>
+<span> step </span>
+
+<br/>
+
+<router-outlet></router-outlet>

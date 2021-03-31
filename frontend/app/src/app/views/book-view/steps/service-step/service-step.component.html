@@ -1,0 +1,10 @@
+<p>service-step works!</p>
+
+<button *ngFor="let element of serviceViewArray" (click)="next(element.service)">
+
+  {{element.service.serviceTitle}}
+  |
+  {{element.assignment.duration}}
+  |
+  {{element.assignment.price}}
+</button>
