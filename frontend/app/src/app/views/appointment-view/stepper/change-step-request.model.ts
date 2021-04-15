@@ -1,6 +1,6 @@
 import {StepEnum} from './step.enum';
 
-export class ChangeStepRequest {
+export interface ChangeStepRequest {
   label: string;
   step: StepEnum;
 }

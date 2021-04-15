@@ -4,7 +4,7 @@
 
     <div class="row flex-space-between">
       <div>
-        <button mat-icon-button (click)="previousWeek()" [disabled]="disablePreviousWeekButton()">
+        <button mat-icon-button (click)="previousWeek()" [disabled]="isPreviousWeekButtonDisabled">
           <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
       </div>
@@ -14,7 +14,7 @@
       </div>
 
       <div>
-        <button mat-icon-button (click)="nextWeek()" [disabled]="disableNextWeekButton()">
+        <button mat-icon-button (click)="nextWeek()" [disabled]="isNextWeekButtonDisabled">
           <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
       </div>

@@ -25,7 +25,6 @@ export class BarberStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('barber step');
     this.barberService.getBarbers().subscribe(barbers => {
       this.barbers = barbers;
     });
@@ -37,9 +36,6 @@ export class BarberStepComponent implements OnInit {
 
     this.stepperData.barberId = barber.id;
     this.stepperData.barberName = barberName;
-
-    console.log('from barber to service');
-    // this.stepDataObject.barberId = barber.id;
 
     const request: ChangeStepRequest = {
       label: barberName,

@@ -31,9 +31,6 @@ export class ServiceStepComponent implements OnInit {
   ngOnInit(): void {
     console.log('service step');
 
-    // const routeParams = this.route.snapshot.paramMap;
-    // this.barberId = Number(routeParams.get('barberId'));
-
     this.serviceService.getServices().subscribe(services => {
       this.services = services;
     });

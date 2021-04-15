@@ -40,19 +40,12 @@ export class FinishStepComponent implements OnInit {
     this.appointment.hour = this.stepperData.hour;
     this.appointment.date = this.stepperData.date;
 
-    // let fbUser = null;
-    //
-    // this.facebook.signIn(FacebookLoginProvider.PROVIDER_ID).then(f => {
-    //   this.facebook.authState.subscribe(u => fbUser = u);
-    //   appointment.clientEmail = fbUser.email;
-    //   appointment.clientUsername = fbUser.name;
-    // });
-    //
     this.appointmentService.bookNow(this.appointment).subscribe(() => {
     }, () => {
     }, () => {
       this.done = true;
       this.stepController.disableSteps();
+      // TODO: move to backend
       this.sendMail();
     });
   }

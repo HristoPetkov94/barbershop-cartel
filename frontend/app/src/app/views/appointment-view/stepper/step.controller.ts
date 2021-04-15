@@ -4,7 +4,8 @@ import {StepperDataModel} from './stepper-data.model';
 
 export class StepController {
 
-  public currentStep = 0;
+  private currentStepInternal = 0;
+
   readonly stepArray: Step[];
 
   public data = new StepperDataModel();
@@ -17,19 +18,23 @@ export class StepController {
     this.stepArray.push(step);
   }
 
+  get currentStep() {
+    return this.currentStepInternal;
+  }
+
   get steps() {
     return this.stepArray;
   }
 
   changeStep(request: ChangeStepRequest) {
     // set current step label
-    this.steps[this.currentStep].label = request.label;
+    this.steps[this.currentStepInternal].label = request.label;
 
     // activate next step
     this.steps[request.step].disabled = false;
 
     // switch to next step
-    this.currentStep = request.step;
+    this.currentStepInternal = request.step;
   }
 
   changeStepTo(index: number) {
@@ -38,7 +43,7 @@ export class StepController {
     selectedStep.label = selectedStep.defaultLabel;
 
     // disable steps if going back
-    if (this.currentStep > index) {
+    if (this.currentStepInternal > index) {
       for (let i = index + 1; i < this.steps.length; i++) {
         const step = this.steps[i];
 
@@ -48,7 +53,7 @@ export class StepController {
     }
 
     // switch to selected step
-    this.currentStep = index;
+    this.currentStepInternal = index;
   }
 
   disableSteps() {

@@ -13,10 +13,11 @@ import {StepEnum} from '../../stepper/step.enum';
   styleUrls: ['./date-step.component.css']
 })
 export class DateStepComponent implements OnInit {
-  public assignmentId;
 
   @Input() stepperData;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
+
+  private numberOfWeeks = 0;
 
   assignments: Assignment[];
 
@@ -24,12 +25,6 @@ export class DateStepComponent implements OnInit {
   public week: Week;
 
   public today;
-
-  private numberOfWeeks = 0;
-
-  @Output()
-  private navigation = new EventEmitter<any>();
-
 
   constructor(
     private route: ActivatedRoute,
@@ -40,11 +35,11 @@ export class DateStepComponent implements OnInit {
   ) {
   }
 
+  get assignmentId() {
+    return this.stepperData.assignmentId;
+  }
+
   ngOnInit(): void {
-    console.log('date step');
-    // const routeParams = this.route.snapshot.paramMap;
-    // this.assignmentId = Number(routeParams.get('assignmentId'));
-    this.assignmentId = this.stepperData.assignmentId;
 
     this.scheduleService.getCurrentWeek(this.assignmentId).subscribe(week => {
       this.week = week;
@@ -62,12 +57,9 @@ export class DateStepComponent implements OnInit {
   }
 
   previousWeek() {
-    if (this.disablePreviousWeekButton()) {
-      return;
-    }
 
     this.numberOfWeeks--;
-    const changedToPositiveNumber = this.numberOfWeeks * -1;
+    const changedToPositiveNumber = -this.numberOfWeeks;
 
     this.scheduleService.getPreviousWeek(changedToPositiveNumber, this.assignmentId).subscribe(week => {
       this.week = week;
@@ -78,16 +70,12 @@ export class DateStepComponent implements OnInit {
         today.active = 'selected';
       }
 
-      // this.today = today.date;
     }, err => {
       console.log(err);
     });
   }
 
   nextWeek() {
-    if (this.disableNextWeekButton()) {
-      return;
-    }
 
     this.numberOfWeeks++;
 
@@ -100,7 +88,6 @@ export class DateStepComponent implements OnInit {
           today.active = 'selected';
         }
 
-        // this.today = today.date;
       },
       err => {
         console.log(err);
@@ -108,12 +95,12 @@ export class DateStepComponent implements OnInit {
     );
   }
 
-  disablePreviousWeekButton() {
+  get isPreviousWeekButtonDisabled() {
     // limitation you cannot get past weeks
     return this.numberOfWeeks <= 0;
   }
 
-  disableNextWeekButton() {
+  get isNextWeekButtonDisabled() {
     // limitation you cannot get to see more than 3 weeks
     return this.numberOfWeeks >= 3;
   }
