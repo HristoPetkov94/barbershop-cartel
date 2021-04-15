@@ -1,0 +1,45 @@
+<div class="final-info-container shadow">
+
+  <div *ngIf="done" class="done">
+    <mat-icon> done</mat-icon>
+    <br/>
+
+    <p> Thank you for choosing us !</p>
+    <p> You have a booked hour for {{ stepperData.date }} / {{ stepperData.hour }} h. </p>
+
+    <div class="sized-box-height-20"> </div>
+
+    <div class="hover-me">
+      <button class="go-back-btn" (click)="goBackHome()">
+        Go back home
+      </button>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!done">
+    <div class="info-row">
+      <span> <b> Date: </b> </span> <span> {{ stepperData.date }} </span>
+    </div>
+    <div class="info-row">
+      <span> <b> Hour: </b> </span> <span> {{ stepperData.hour }} </span>
+    </div>
+    <div class="info-row">
+      <span> <b> Barber: </b> </span> <span> {{ stepperData.barberName }}</span>
+    </div>
+    <div class="info-row">
+      <span> <b> Service: </b> </span> <span> {{ stepperData.serviceTitle }} </span>
+    </div>
+    <div class="info-row">
+      <span> <b> Price: </b> </span> <span> {{stepperData.assignmentPrice}} лв.</span>
+    </div>
+    <div class="info-row">
+      <span> <b> Duration: </b> </span> <span> {{stepperData.assignmentDuration}} мин.</span>
+    </div>
+
+    <!--    <button class="confirm-button" (click)="sendEmail()">-->
+    <button class="confirm-button" (click)="makeAnAppointment()">
+      Confirm with Facebook
+    </button>
+  </ng-container>
+</div>
+

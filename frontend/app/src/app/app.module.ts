@@ -44,8 +44,6 @@ import { TeamViewComponent } from './views/team-view/team-view.component';
 import { BarberPaginatorComponent } from './views/team-view/barber-paginator/barber-paginator.component';
 import { FooterComponent } from './views/components/footer/footer.component';
 import { I18nModule } from './i18n/i18n.module';
-import {BookingViewComponent} from './views/booking-view/booking-view.component';
-import { BarberCalendarComponent } from './barber-calendar/barber-calendar.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { GeneralConfigurationComponent } from './admin-configuration-panel/general-configuration/general-configuration.component';
 import { BarberConfigurationComponent } from './admin-configuration-panel/barber-configuration/barber-configuration.component';
@@ -67,11 +65,11 @@ import { ChangeEmailComponent } from './admin-configuration-panel/general-config
 import { AssignmentConfigurationComponent } from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import { AssignmentViewComponent } from './admin-configuration-panel/assignment-configuration/assignment-view/assignment-view.component';
 import { AssignmentEditDialogComponent } from './admin-configuration-panel/assignment-configuration/assignment-edit-dialog/assignment-edit-dialog.component';
-import { BookViewComponent } from './views/book-view/book-view.component';
-import { BarberStepComponent } from './views/book-view/steps/barber-step-component/barber-step.component';
-import { ServiceStepComponent } from './views/book-view/steps/service-step/service-step.component';
-import { DateStepComponent } from './views/book-view/steps/date-step/date-step.component';
-import { FinishStepComponent } from './views/book-view/steps/finish-step/finish-step.component';
+import { BarberStepComponent } from './views/appointment-view/steps/barber-step/barber-step.component';
+import { ServiceStepComponent } from './views/appointment-view/steps/service-step/service-step.component';
+import { DateStepComponent } from './views/appointment-view/steps/date-step/date-step.component';
+import { FinishStepComponent } from './views/appointment-view/steps/finish-step/finish-step.component';
+import { AppointmentViewComponent } from './views/appointment-view/appointment-view.component';
 
 @NgModule({
   declarations: [
@@ -88,8 +86,6 @@ import { FinishStepComponent } from './views/book-view/steps/finish-step/finish-
     TeamViewComponent,
     BarberPaginatorComponent,
     FooterComponent,
-    BookingViewComponent,
-    BarberCalendarComponent,
     GeneralConfigurationComponent,
     BarberConfigurationComponent,
     ServiceConfigurationComponent,
@@ -109,11 +105,11 @@ import { FinishStepComponent } from './views/book-view/steps/finish-step/finish-
     AssignmentConfigurationComponent,
     AssignmentViewComponent,
     AssignmentEditDialogComponent,
-    BookViewComponent,
     BarberStepComponent,
     ServiceStepComponent,
     DateStepComponent,
     FinishStepComponent,
+    AppointmentViewComponent,
   ],
     imports: [
         BrowserModule,

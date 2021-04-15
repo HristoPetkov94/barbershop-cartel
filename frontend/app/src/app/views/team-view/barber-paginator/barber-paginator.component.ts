@@ -2,6 +2,7 @@ import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from 
 import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {Barber} from '../../../models/barber.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-barber-paginator',
@@ -41,7 +42,7 @@ export class BarberPaginatorComponent implements OnChanges {
   @Input()
   public barbersPerPage;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -82,5 +83,16 @@ export class BarberPaginatorComponent implements OnChanges {
     }
 
     this.pages[this.page].active = true;
+  }
+
+  book(barber: Barber) {
+    // https://medium.com/ableneo/how-to-pass-data-between-routed-components-in-angular-2306308d8255
+    this.router.navigate(['/book-now'], {
+      state: {
+        data: {
+          barber
+        },
+      }
+    });
   }
 }

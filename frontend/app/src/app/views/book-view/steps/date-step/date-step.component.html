@@ -1,9 +1,0 @@
-<p>date-step works!</p>
-
-<div *ngIf="barber !== undefined && service !== undefined">
-
-  <app-barber-calendar (navigation)="chooseDateTime($event)" [barber]="barber"
-                       [service]="service"></app-barber-calendar>
-</div>
-
-<button (click)="next()"> next </button>

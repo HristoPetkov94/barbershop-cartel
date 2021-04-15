@@ -1,0 +1,53 @@
+<div>
+
+  <!--navigation-->
+  <nav class="navigation row justify-content-center">
+
+    <div class="row breadcrumb">
+
+      <div *ngFor="let step of steps; let i = index">
+
+        <div class="row justify-content-center align-items-center">
+
+          <button class="breadcrumb-links" id="{{ i === currentStep ? 'active' : 'inactive' }}"
+                  [disabled]="step.disabled"
+                  (click)="changeStepTo(i)">
+            {{ step.label }}
+          </button>
+
+          <div class="sized-box-width-20"></div>
+
+          <div *ngIf="i !== steps.length - 1">
+            <div class="separator"> ></div>
+            <div class="sized-box-width-20"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!--content-->
+  <div [ngSwitch]="currentStep">
+
+    <app-barber-step *ngSwitchCase="BARBER_STEP"
+                     [stepperData]="stepperData"
+                     (changeStep)="changeStep($event)">
+    </app-barber-step>
+
+    <app-service-step *ngSwitchCase="SERVICE_STEP"
+                      [stepperData]="stepperData"
+                      (changeStep)="changeStep($event)"></app-service-step>
+
+    <app-date-step *ngSwitchCase="DATE_STEP"
+                   [stepperData]="stepperData"
+                   (changeStep)="changeStep($event)"></app-date-step>
+
+    <app-finish-step *ngSwitchCase="FINISH_STEP"
+                     [stepController]="stepController"
+                     (changeStep)="changeStep($event)"></app-finish-step>
+  </div>
+
+
+
+</div>

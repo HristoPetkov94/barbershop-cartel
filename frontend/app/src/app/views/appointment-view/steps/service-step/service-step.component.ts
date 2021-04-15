@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ServiceService} from '../../../../services/service.service';
 import {Service} from '../../../../models/service';
 import {AssignmentService} from '../../../../services/assignment.service';
 import {Assignment} from '../../../../models/assignment';
+import {ChangeStepRequest} from '../../stepper/change-step-request.model';
+import {StepEnum} from '../../stepper/step.enum';
 
 @Component({
   selector: 'app-service-step',
@@ -12,7 +14,8 @@ import {Assignment} from '../../../../models/assignment';
 })
 export class ServiceStepComponent implements OnInit {
 
-  private barberId;
+  @Input() stepperData;
+  @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
   services: Service[];
   assignments: Assignment[];
@@ -26,28 +29,25 @@ export class ServiceStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('getting param from route...');
+    console.log('service step');
 
-    const routeParams = this.route.snapshot.paramMap;
-    this.barberId = Number(routeParams.get('barberId'));
+    // const routeParams = this.route.snapshot.paramMap;
+    // this.barberId = Number(routeParams.get('barberId'));
 
     this.serviceService.getServices().subscribe(services => {
-      console.log('loading services...');
       this.services = services;
     });
 
     this.assignmentService.getAssignments().subscribe(assignments => {
-      console.log('loading assignments...');
+
       this.assignments = assignments;
     });
   }
 
   get serviceViewArray() {
-    console.log('preparing services to display...');
-
     const result: { service: Service, assignment: Assignment }[] = [];
 
-    const barberAssignments = this.assignments?.filter(assignment => assignment.barberId === this.barberId);
+    const barberAssignments = this.assignments?.filter(assignment => assignment.barberId === this.stepperData.barberId);
 
     this.services?.forEach(service => {
       barberAssignments?.forEach(assignment => {
@@ -61,7 +61,21 @@ export class ServiceStepComponent implements OnInit {
     return result;
   }
 
-  next(service: Service) {
-    this.router.navigate(['/book-now/datetime', this.barberId, service.id]);
+  next(element: any) {
+    console.log('from service to date');
+
+    this.stepperData.serviceId = element.service.id;
+    this.stepperData.serviceTitle = element.service.serviceTitle;
+
+    this.stepperData.assignmentId = element.assignment.id;
+    this.stepperData.assignmentPrice = element.assignment.price;
+    this.stepperData.assignmentDuration = element.assignment.duration;
+
+    const request: ChangeStepRequest = {
+      label: element.service.serviceTitle,
+      step: StepEnum.DATE_STEP
+    };
+
+    this.changeStep.emit(request);
   }
 }

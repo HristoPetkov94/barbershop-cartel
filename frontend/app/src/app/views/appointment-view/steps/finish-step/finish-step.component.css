@@ -1,0 +1,76 @@
+.final-info-container {
+  width: 30%;
+  margin: auto;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  height: 400px;
+  border: 1px solid #0000000a;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-button {
+  background-color: #385898;
+  padding: 20px 0;
+  cursor: pointer;
+  border: none;
+  color: #EEEEEE;
+}
+
+.shadow {
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(33, 33, 33, 0.16);
+  box-shadow: 5px 5px 5px 0px rgba(33, 33, 33, 0.16);
+}
+
+
+.done {
+  /*font-size: 50px;*/
+  color: #81c519;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+}
+
+.done > .mat-icon {
+  height: 100px;
+  width: 100px;
+
+  border: 5px solid;
+  border-radius: 100px;
+
+  font-size: 100px;
+}
+
+.go-back-btn {
+  width: 100%;
+  height: 100%;
+
+  padding: 20px 40px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.hover-me {
+  width: 33%;
+  padding: 10px;
+
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.hover-me:hover {
+  border:1px solid #212121;
+}

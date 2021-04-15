@@ -1,0 +1,12 @@
+<div class="col flex-1 align-items-center">
+  <div class="row barber-wrapper">
+    <div class="col barber" *ngFor="let barber of barbers" (click)="next(barber)">
+
+      <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
+
+      <div class="row name padding-20 justify-content-center">
+        <span>{{barber.firstName}} {{barber.lastName}}</span>
+      </div>
+    </div>
+  </div>
+</div>

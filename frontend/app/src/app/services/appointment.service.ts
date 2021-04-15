@@ -15,10 +15,10 @@ export class AppointmentService {
   }
 
   getPreviousWeek(numberOfWeeks, assignmentId) {
-    return this.http.get<Week>(this.url + '/appointment-previous-week' + '?' + 'assignmentId=' + assignmentId + 'numberOfWeeks=' + numberOfWeeks, {});
+    return this.http.get<Week>(this.url + '/appointment-previous-week' + '?' + 'assignmentId=' + assignmentId + '&' + 'numberOfWeeks=' + numberOfWeeks, {});
   }
 
-  getCurrentWeek(barber, assignmentId): Subscribable<Week> {
+  getCurrentWeek(assignmentId): Subscribable<Week> {
     return this.http.get<Week>(this.url + '/appointment-current-week' + '?' + 'assignmentId=' + assignmentId);
   }
 

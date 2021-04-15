@@ -6,6 +6,7 @@ import {
 import {fade} from '../animations/fade';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -23,7 +24,10 @@ export class LandingPageViewComponent implements OnInit {
   public query: string;
   public socialMedia = new SocialMediaModel();
 
-  constructor(private generalConfigurationService: GeneralConfigurationService) {
+  constructor(
+    private router: Router,
+    private generalConfigurationService: GeneralConfigurationService,
+  ) {
   }
 
   ngOnInit() {
@@ -45,5 +49,9 @@ export class LandingPageViewComponent implements OnInit {
     this.generalConfigurationService.getSocialMedia().subscribe(data => {
       this.socialMedia = data;
     });
+  }
+
+  book() {
+    this.router.navigate(['/book-now']);
   }
 }

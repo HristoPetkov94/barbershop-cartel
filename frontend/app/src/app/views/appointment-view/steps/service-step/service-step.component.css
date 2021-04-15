@@ -1,0 +1,31 @@
+.hover-me {
+  width: 33%;
+  padding: 10px;
+
+  border: 1px solid transparent;
+  transition: 0.2s;
+}
+
+.hover-me:hover {
+  border:1px solid #212121;
+}
+
+.service {
+  justify-self: center;
+  align-self: center;
+
+  padding: 50px;
+
+  background-color: #212121;
+  color: whitesmoke;
+
+  cursor: pointer;
+}
+
+.duration {
+  padding: 0 20px;
+}
+
+.price {
+  font-weight: bold;
+}
