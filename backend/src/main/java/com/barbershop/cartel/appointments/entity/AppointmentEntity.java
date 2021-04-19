@@ -25,8 +25,8 @@ public class AppointmentEntity {
     @Column(name = "date")
     private LocalDate date;
 
-    @Column(name = "hour")
-    private LocalTime hour;
+    @Column(name = "time")
+    private LocalTime time;
 
     @Column(name = "price")
     private int price;

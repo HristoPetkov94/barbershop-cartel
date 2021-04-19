@@ -87,7 +87,13 @@ public class AppointmentService implements AppointmentInterface {
             for (AppointmentEntity bookedHour : bookedHours) {
 
                 // if the currentAppointment is existing(booked) skip it, don't create it again.
-                if (currentAppointment.equals(bookedHour.getHour())) {
+                if (currentAppointment.equals(bookedHour.getTime())) {
+                    currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
+                    continue hoursLoop;
+                }
+
+                // if the currentAppointment has duration 60min. and the nextAppointment is booked, the currentAppointment is not available.
+                if (assignment.getDuration() == MAX_SERVICE_DURATION && currentAppointment.plusMinutes(MIN_SERVICE_DURATION).equals(bookedHour.getTime())) {
                     currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
                     continue hoursLoop;
                 }
@@ -214,7 +220,7 @@ public class AppointmentService implements AppointmentInterface {
         AppointmentEntity appointment = new AppointmentEntity();
 
         appointment.setDate(date);
-        appointment.setHour(hour);
+        appointment.setTime(hour);
         appointment.setPrice(assignment.getPrice());
         appointment.setDuration(assignment.getDuration());
         appointment.setBarber(barber);
