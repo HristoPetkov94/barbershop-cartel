@@ -1,0 +1,20 @@
+<div class="col flex-1 align-items-center">
+
+  <div class="hover-me" *ngFor="let element of serviceViewArray" (click)="next(element)">
+    <div class="service">
+      <div class="row flex-space-between align-items-center">
+        <span class="type">{{element.service.serviceTitle}}</span>
+
+        <div class="row align-items-center">
+
+          <mat-icon> access_time</mat-icon>
+          <span class="duration">{{element.assignment.duration}} мин.</span>
+
+          <mat-icon> attach_money</mat-icon>
+          <span class="price">{{element.assignment.price}} лв.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

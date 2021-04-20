@@ -76,12 +76,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/barbers",
                         "/services",
                         "/assignments",
-                        "/schedule/appointment-current-week**",
+                        "/appointments/appointment-current-week**",
+                        "/appointments/appointment-next-week**",
+                        "/appointments/appointment-previous-week**",
                         "/images/**")
                 .antMatchers(HttpMethod.POST,
-                        "/schedule/save-appointment",
-                        "/send-email-message",
-                        "/schedule/appointment-next-week**",
-                        "/schedule/appointment-previous-week**");
+                        "/appointments/save-appointment",
+                        "/send-email-message");
     }
 }

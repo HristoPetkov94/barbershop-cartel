@@ -31,9 +31,9 @@ public class AssignmentServices implements AssignmentInterface {
     @Override
     public List<AssignmentModel> getAssignments() {
 
-        Iterable<AssignmentEntity> assignmentsByBarber = assignmentRepository.findAll();
+        Iterable<AssignmentEntity> assignments = assignmentRepository.findAll();
 
-        List<AssignmentModel> assignmentModels = getModels(assignmentsByBarber);
+        List<AssignmentModel> assignmentModels = getModels(assignments);
 
         return assignmentModels;
     }
@@ -76,7 +76,13 @@ public class AssignmentServices implements AssignmentInterface {
     public AssignmentEntity getAssignment(long barberId, long serviceId) {
 
         return assignmentRepository.findByBarberIdAndServiceId(barberId, serviceId)
-                .orElseThrow(() -> new CartelCustomException("Assignment for barberId: " + barberId + " and serviceId: " + serviceId + "  is not existing"));
+                .orElseThrow(() -> new CartelCustomException("Assignment for barberId: " + barberId + " and serviceId: " + serviceId + "  is not existing."));
+    }
+
+    @Override
+    public AssignmentEntity getAssignment(long assignmentId) {
+        return assignmentRepository.findById(assignmentId)
+                .orElseThrow(() -> new CartelCustomException("Assignment with id: " + assignmentId + "  is not existing."));
     }
 
     @Override
@@ -86,7 +92,7 @@ public class AssignmentServices implements AssignmentInterface {
         ServiceEntity service = serviceInterface.getServiceById(assignmentModel.getServiceId());
 
         AssignmentEntity assignment = assignmentRepository.findById(assignmentModel.getId())
-                .orElseThrow(() -> new CartelCustomException("Assignment with id:" + assignmentModel.getId() + " is not existing"));
+                .orElseThrow(() -> new CartelCustomException("Assignment with id:" + assignmentModel.getId() + " is not existing."));
 
         assignment.setPrice(assignmentModel.getPrice());
         assignment.setDuration(assignmentModel.getDuration());
@@ -117,7 +123,7 @@ public class AssignmentServices implements AssignmentInterface {
     public void deleteAssignment(long assignmentId) {
 
         AssignmentEntity assignment = assignmentRepository.findById(assignmentId)
-                .orElseThrow(() -> new CartelCustomException("Assignment with id:" + assignmentId + " is not existing"));
+                .orElseThrow(() -> new CartelCustomException("Assignment with id:" + assignmentId + " is not existing."));
 
         assignmentRepository.delete(assignment);
     }

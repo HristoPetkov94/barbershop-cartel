@@ -1,6 +1,6 @@
 package com.barbershop.cartel.clients.entity;
 
-import com.barbershop.cartel.schedule.entity.ScheduleEntity;
+import com.barbershop.cartel.appointments.entity.AppointmentEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -29,5 +29,5 @@ public class ClientEntity {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScheduleEntity> schedule;
+    private List<AppointmentEntity> schedule;
 }

@@ -5,7 +5,7 @@ import com.barbershop.cartel.clients.entity.ClientEntity;
 import java.util.Optional;
 
 public interface ClientInterface {
-    ClientEntity saveNewClient(String email, String username);
+    ClientEntity createClient(String email, String username);
 
     Optional<ClientEntity> findByEmail(String email);
 }

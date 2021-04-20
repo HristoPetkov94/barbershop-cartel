@@ -20,7 +20,7 @@
         <div class="flip-card-back">
           <p class="back-card-text"> {{barber.description}} </p>
 
-          <button [routerLink]="'/book-now'" class="back-card-button"> {{'bookingMessage' | translate}} </button>
+          <button (click)="book(barber)" class="back-card-button"> {{'bookingMessage' | translate}} </button>
 
           <div class="row justify-content-center padding-20">
             <a *ngIf="barber.instagram" class="col" [href]="barber.instagram">

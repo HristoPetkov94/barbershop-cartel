@@ -14,7 +14,7 @@ public class ClientService implements ClientInterface {
     @Autowired
     private ClientRepository clientRepository;
 
-    public ClientEntity saveNewClient(String email, String username) {
+    public ClientEntity createClient(String email, String username) {
 
         ClientEntity client = new ClientEntity();
 

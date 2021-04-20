@@ -40,7 +40,7 @@
 
           <div *ngIf="getAssignment(barber, service) !== undefined">
 
-            <div class="row max-width title justify-content-center">
+            <div class="row max-width title justify-content-center" (click)="book(barber,service)">
               <span class="flex-1"> {{ barber.firstName + ' ' + barber.lastName }} </span>
 
               <span class="separator"> | </span>
@@ -58,9 +58,9 @@
 
     </div>
 
-    <div class="padding-20 row justify-content-center">
-      <button [routerLink]="'/book-now'" class="book-button">{{'bookingMessage' | translate}}</button>
-    </div>
+<!--    <div class="padding-20 row justify-content-center">-->
+<!--      <button [routerLink]="'/book-now'" class="book-button">{{'bookingMessage' | translate}}</button>-->
+<!--    </div>-->
 
   </div>
 

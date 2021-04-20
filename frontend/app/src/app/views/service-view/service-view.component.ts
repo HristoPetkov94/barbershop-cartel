@@ -5,6 +5,7 @@ import {BarberService} from '../../services/barber.service';
 import {AssignmentService} from '../../services/assignment.service';
 import {Assignment} from '../../models/assignment';
 import {Barber} from '../../models/barber.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-barber-services-panel',
@@ -17,9 +18,12 @@ export class ServiceViewComponent implements OnInit {
   public barbers: Barber[];
   public assignments: Assignment[];
 
-  constructor(private servicesService: ServiceService,
-              private barberService: BarberService,
-              private assignmentService: AssignmentService) {
+  constructor(
+    private router: Router,
+    private servicesService: ServiceService,
+    private barberService: BarberService,
+    private assignmentService: AssignmentService,
+  ) {
   }
 
   ngOnInit() {
@@ -38,5 +42,20 @@ export class ServiceViewComponent implements OnInit {
 
   getAssignment(barber: Barber, service: Service) {
     return this.assignments?.find(assignment => (assignment.barberId === barber.id && assignment.serviceId === service.id));
+  }
+
+  book(barber: Barber, service: Service) {
+    const assignment = this.getAssignment(barber, service);
+
+    // https://medium.com/ableneo/how-to-pass-data-between-routed-components-in-angular-2306308d8255
+    this.router.navigate(['/book-now'], {
+      state: {
+        data: {
+          barber,
+          service,
+          assignment
+        },
+      }
+    });
   }
 }
