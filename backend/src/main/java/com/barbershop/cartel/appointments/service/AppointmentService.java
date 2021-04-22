@@ -66,9 +66,6 @@ public class AppointmentService implements AppointmentInterface {
 
     private List<AppointmentHoursModel> getScheduleHours(LocalDate day, long assignmentId) {
 
-        LocalTime timeNow = LocalTime.now();
-        LocalDate today = LocalDate.now();
-
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
         AssignmentEntity assignment = assignmentInterface.getAssignment(assignmentId);
@@ -76,33 +73,27 @@ public class AppointmentService implements AppointmentInterface {
         long barberId = assignment.getBarber().getId();
 
         List<AppointmentEntity> bookedHours = appointmentRepository.findByDateAndBarberId(day, barberId);
-        ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, day);
+        ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, null);
 
         LocalTime currentAppointment = firstAppointment(configuration);
         LocalTime lastAppointment = lastAppointment(configuration);
 
+        int duration = assignment.getDuration();
+
         hoursLoop:
         while (currentAppointment.isBefore(lastAppointment)) {
 
+            LocalTime currentAppointmentEndTime = currentAppointment.plusMinutes(duration);
+
             for (AppointmentEntity bookedHour : bookedHours) {
 
-                // if the currentAppointment is existing(booked) skip it, don't create it again.
-                if (currentAppointment.equals(bookedHour.getTime())) {
+                LocalTime startTime = bookedHour.getStartTime();
+                LocalTime endTime = bookedHour.getEndTime();
+
+                if ((currentAppointmentEndTime.isAfter(startTime) && currentAppointment.isBefore(endTime)) || currentAppointmentEndTime.isAfter(lastAppointment)) {
                     currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
                     continue hoursLoop;
                 }
-
-                // if the currentAppointment has duration 60min. and the nextAppointment is booked, the currentAppointment is not available.
-                if (assignment.getDuration() == MAX_SERVICE_DURATION && currentAppointment.plusMinutes(MIN_SERVICE_DURATION).equals(bookedHour.getTime())) {
-                    currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
-                    continue hoursLoop;
-                }
-            }
-
-            // if the currentAppointment is already past hour for today, don't create it.
-            if (currentAppointment.isBefore(timeNow) && day.equals(today)) {
-                currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
-                continue;
             }
 
             AppointmentHoursModel newHour = new AppointmentHoursModel();
@@ -113,36 +104,7 @@ public class AppointmentService implements AppointmentInterface {
             currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
         }
 
-        if (assignment.getDuration() == MAX_SERVICE_DURATION) {
-            hours = availableHoursBasedOnService(hours);
-        }
-
         return hours;
-    }
-
-    private List<AppointmentHoursModel> availableHoursBasedOnService(List<AppointmentHoursModel> hours) {
-
-        List<AppointmentHoursModel> availableHours = new ArrayList<>();
-
-        for (int i = 0; i < hours.size(); i++) {
-
-            int nextHourIndex = i + 1;
-
-            if (hours.size() > nextHourIndex) {
-
-                AppointmentHoursModel currentHour = hours.get(i);
-                AppointmentHoursModel nextHour = hours.get(nextHourIndex);
-
-                // if nextHour is more than 60 min. ahead from the currentHour means those hours in between are booked and the currentHour cannot be booked with duration of 60 min.
-                if (currentHour.getTime().plusMinutes(MAX_SERVICE_DURATION).isBefore(nextHour.getTime())) {
-                    continue;
-                }
-
-                availableHours.add(currentHour);
-            }
-        }
-
-        return availableHours;
     }
 
     private List<AppointmentDayModel> getPreviousWeek(int numberOfWeeks, long assignmentId) {
@@ -150,7 +112,7 @@ public class AppointmentService implements AppointmentInterface {
         LocalDate today = LocalDate.now();
         final LocalDate startOfPreviousWeek = today.minusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
 
-        return createWeek(startOfPreviousWeek, assignmentId);
+        return createWeek(startOfPreviousWeek, today, assignmentId);
     }
 
     private List<AppointmentDayModel> getCurrentWeek(long assignmentId) {
@@ -158,7 +120,7 @@ public class AppointmentService implements AppointmentInterface {
         LocalDate today = LocalDate.now();
         final LocalDate startOfCurrentWeek = today.with(DayOfWeek.MONDAY);
 
-        return createWeek(startOfCurrentWeek, assignmentId);
+        return createWeek(startOfCurrentWeek, today, assignmentId);
     }
 
     private List<AppointmentDayModel> getNextWeek(int numberOfWeeks, long assignmentId) {
@@ -166,13 +128,12 @@ public class AppointmentService implements AppointmentInterface {
         LocalDate today = LocalDate.now();
         final LocalDate startOfNextWeek = today.plusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
 
-        return createWeek(startOfNextWeek, assignmentId);
+        return createWeek(startOfNextWeek, today, assignmentId);
     }
 
-    private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, long assignmentId) {
+    private List<AppointmentDayModel> createWeek(LocalDate startOfWeek, LocalDate today, long assignmentId) {
 
         List<AppointmentDayModel> week = new ArrayList<>();
-        LocalDate today = LocalDate.now();
 
         for (int i = 0; i < DAYS_OF_WEEK; i++) {
 
@@ -203,24 +164,31 @@ public class AppointmentService implements AppointmentInterface {
         return clientInterface.createClient(email, username);
     }
 
-    private void createAppointment(LocalDate date, LocalTime hour, AppointmentRequestModel appointmentModel, AssignmentEntity assignment) {
+    private void createAppointment(AppointmentRequestModel appointmentModel) {
+
+        AssignmentEntity assignment = assignmentInterface.getAssignment(appointmentModel.getAssignmentId());
 
         long barberId = assignment.getBarber().getId();
         long serviceId = assignment.getService().getId();
 
-        String clientEmail = appointmentModel.getClientEmail();
-
         BarberEntity barber = barberInterface.getBarberById(barberId);
         ServiceEntity service = serviceInterface.getServiceById(serviceId);
+
+        String clientEmail = appointmentModel.getClientEmail();
 
         ClientEntity client = clientInterface.findByEmail(clientEmail)
                 .orElseGet(() -> createClient(clientEmail, appointmentModel.getClientUsername()));
 
 
+        LocalDate date = LocalDate.parse(appointmentModel.getDate());
+        LocalTime startTime = LocalTime.parse(appointmentModel.getHour());
+        LocalTime endTime = startTime.plusMinutes(assignment.getDuration());
+
         AppointmentEntity appointment = new AppointmentEntity();
 
         appointment.setDate(date);
-        appointment.setTime(hour);
+        appointment.setStartTime(startTime);
+        appointment.setEndTime(endTime);
         appointment.setPrice(assignment.getPrice());
         appointment.setDuration(assignment.getDuration());
         appointment.setBarber(barber);
@@ -265,21 +233,6 @@ public class AppointmentService implements AppointmentInterface {
 
     @Override
     public void save(AppointmentRequestModel appointmentModel) {
-
-        AssignmentEntity assignment = assignmentInterface.getAssignment(appointmentModel.getAssignmentId());
-
-        int duration = assignment.getDuration();
-
-        int numberHoursToBook = duration / MIN_SERVICE_DURATION;
-
-        LocalDate date = LocalDate.parse(appointmentModel.getDate());
-        LocalTime hour = LocalTime.parse(appointmentModel.getHour());
-
-        for (int i = 0; i < numberHoursToBook; i++) {
-
-            createAppointment(date, hour, appointmentModel, assignment);
-
-            hour = hour.plusMinutes(MIN_SERVICE_DURATION);
-        }
+        createAppointment(appointmentModel);
     }
 }
