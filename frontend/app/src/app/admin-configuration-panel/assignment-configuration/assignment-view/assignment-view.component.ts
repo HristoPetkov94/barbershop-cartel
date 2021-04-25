@@ -22,7 +22,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   public services: Service[];
   public assignments: Assignment[];
 
-  public selectedServiceId;
+  public selectedServiceId = 0;
 
   public selectedService: Service;
 
@@ -41,7 +41,6 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
       const first = services[0];
 
       this.selectedService = first;
-      this.selectedServiceId = first.id;
     });
 
     this.loadAssignments(this.barberId);
@@ -94,6 +93,12 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   }
 
   add() {
+
+    if (this.selectedServiceId === undefined) {
+      this.notification.showMessage('Please choose service.', 'warn');
+      return;
+    }
+
     const newAssignment: Assignment = {
       id: null,
       barberId: this.barberId,
@@ -110,6 +115,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
       this.notification.showMessage('Assignment has not been added successfully.', 'warn');
     }, () => {
       this.notification.showMessage('Assignment has been added successfully.', 'success');
+      this.selectedServiceId = 0;
     });
   }
 
@@ -118,7 +124,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
     assignment.serviceTitle = title;
 
     const dialogRef = this.dialog.open(AssignmentEditDialogComponent, {
-      width: 'auto',
+      width: '560px',
       data: Object.assign({}, assignment)
     });
 
@@ -163,7 +169,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
     }
   }
 
-  isServiceAddDisabled() {
+  isServiceDropdownDisabled() {
     return this.availableServices.length === 0;
   }
 }

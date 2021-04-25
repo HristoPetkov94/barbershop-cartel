@@ -4,8 +4,8 @@
 
     <div class="row">
       <mat-form-field appearance="outline">
-        <mat-label>Choose service</mat-label>
-        <mat-select [(value)]="selectedServiceId" (selectionChange)="changeSelectedService()" [disabled]="isServiceAddDisabled()">
+        <mat-select [(value)]="selectedServiceId" (selectionChange)="changeSelectedService()" [disabled]="isServiceDropdownDisabled()">
+          <mat-option [value]="0"> -- Please select -- </mat-option>
 
           <mat-option *ngFor="let service of availableServices"
                       [value]="service.id"> {{service.serviceTitle}} </mat-option>
@@ -15,7 +15,7 @@
       <div class="sized-box-width-20"></div>
 
       <div class="col justify-content-center mat-field-padding-margin">
-        <button class="max-height" (click)="add()" mat-raised-button color="warn" [disabled]="isServiceAddDisabled()">
+        <button class="max-height" (click)="add()" mat-raised-button color=primary [disabled]="isServiceDropdownDisabled() || selectedServiceId === 0">
           <mat-icon matTooltip="Add" [matTooltipPosition]="'left'">add</mat-icon>
         </button>
       </div>

@@ -40,8 +40,8 @@
 
           <div *ngIf="getAssignment(barber, service) !== undefined">
 
-            <div class="row max-width title justify-content-center" (click)="book(barber,service)">
-              <span class="flex-1"> {{ barber.firstName + ' ' + barber.lastName }} </span>
+            <div class="row max-width barber-hover title justify-content-center" (click)="book(barber,service)">
+              <b> <span class="flex-1"> {{ barber.firstName + ' ' + barber.lastName }} </span> </b>
 
               <span class="separator"> | </span>
               <span> {{ getAssignment(barber, service).duration }} мин.</span>
@@ -57,10 +57,6 @@
       </div>
 
     </div>
-
-<!--    <div class="padding-20 row justify-content-center">-->
-<!--      <button [routerLink]="'/book-now'" class="book-button">{{'bookingMessage' | translate}}</button>-->
-<!--    </div>-->
 
   </div>
 

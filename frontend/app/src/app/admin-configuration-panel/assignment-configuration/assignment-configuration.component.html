@@ -8,8 +8,8 @@
     <h1 class="margin-bottom-10"> Choose barber </h1>
 
     <mat-form-field appearance="outline">
-      <mat-label>Choose barber</mat-label>
       <mat-select [(value)]="selectedBarberId">
+        <mat-option [value]="0"> -- Please select -- </mat-option>
 
         <mat-option *ngFor="let barber of barbers"
                 [value]="barber.id"> {{barber.firstName + ' ' + barber.lastName}} </mat-option>

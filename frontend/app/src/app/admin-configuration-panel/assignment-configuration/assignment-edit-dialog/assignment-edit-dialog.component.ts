@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Assignment} from '../../../models/assignment';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GlobalConstants} from '../../../common/global.constants';
 
 @Component({
@@ -29,7 +29,7 @@ export class AssignmentEditDialogComponent implements OnInit {
         serviceId: this.assignment.serviceId,
         barberId: this.assignment.barberId,
         duration: this.assignment.duration,
-        price: this.assignment.price,
+        price: [this.assignment.price, [Validators.required, Validators.max(100), Validators.min(1)]],
       }
     );
 
@@ -40,6 +40,10 @@ export class AssignmentEditDialogComponent implements OnInit {
       data.duration = this.myForm.value.duration;
       data.price = this.myForm.value.price;
     });
+  }
+
+  get price() {
+    return this.myForm.get('price');
   }
 
   checkServiceDurationValid(duration) {

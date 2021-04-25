@@ -27,3 +27,15 @@
 .vl {
   border-left: 1px solid #d7d7d7;
 }
+
+/*zilla*/
+input[type=number] {
+  -moz-appearance:textfield;
+}
+
+/*other browsers*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

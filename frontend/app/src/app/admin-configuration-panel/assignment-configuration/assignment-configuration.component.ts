@@ -9,7 +9,7 @@ import {Barber} from '../../models/barber.model';
 })
 export class AssignmentConfigurationComponent implements OnInit {
   public barbers: Barber[];
-  public selectedBarberId;
+  public selectedBarberId = 0;
 
   constructor(private barberService: BarberService) {
   }
@@ -17,7 +17,6 @@ export class AssignmentConfigurationComponent implements OnInit {
   ngOnInit(): void {
     this.barberService.getBarbers().subscribe(barbers => {
       this.barbers = barbers;
-      this.selectedBarberId = barbers[0].id;
     });
   }
 }
