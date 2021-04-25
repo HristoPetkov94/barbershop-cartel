@@ -1,6 +1,7 @@
 <div class="light-theme">
 
-  <h1 style="color: black">Edit/Create</h1>
+  <h1 *ngIf="isCreatingService" mat-dialog-title> Add </h1>
+  <h1 *ngIf="!isCreatingService" mat-dialog-title> Edit </h1>
 
   <form [formGroup]="myForm">
     <mat-dialog-content>
@@ -8,7 +9,7 @@
       <input hidden matInput>
       <input hidden type="file" (change)="changed($event)" #chooseFile/>
 
-      <div class="row">
+      <div class="row flex-space-between">
 
         <div class="col justify-content-center">
           <div class="profile-picture" [style.backgroundImage]="'url(' + service.picture + ')'"></div>
@@ -23,15 +24,27 @@
           </div>
         </div>
 
-        <div class="col margin-left-10">
+        <div class="sized-box-width-20"></div>
 
-          <div class="row max-width">
-            <input formControlName="serviceTitle" placeholder="ServiceModel Title" type="text"
-                   class="text-input max-width flex-4"/>
-          </div>
+        <div class="col flex-1">
 
-          <textarea style="width: 90.8%;" formControlName="description" placeholder="Description"
-                    class="preserve-whitespace front-page-message-input max-height"></textarea>
+          <mat-form-field>
+            <mat-label>Service Title</mat-label>
+            <input matInput formControlName="serviceTitle">
+          </mat-form-field>
+
+          <div class="sized-box-height-20"></div>
+
+          <mat-form-field>
+            <mat-label>Description</mat-label>
+            <textarea matTextareaAutosize matInput
+                      cdkTextareaAutosize
+                      cdkAutosizeMinRows="6"
+                      cdkAutosizeMaxRows="6"
+                      formControlName="description" ></textarea>
+            <mat-error *ngIf="description.invalid" align="end"> {{ description.value?.length }} / 255</mat-error>
+            <mat-hint *ngIf="description.valid" align="end"> {{ description.value?.length }} / 255</mat-hint>
+          </mat-form-field>
 
         </div>
       </div>

@@ -26,7 +26,7 @@ export class ServiceEditDialogComponent implements OnInit {
     this.myForm = this.fb.group({
         id: this.service.id,
         serviceTitle: [this.service.serviceTitle, [Validators.required]],
-        description: [this.service.description, [Validators.required]]
+        description: [this.service.description,  [Validators.maxLength(255)]]
       }
     );
 
@@ -35,6 +35,14 @@ export class ServiceEditDialogComponent implements OnInit {
       data.serviceTitle = this.myForm.value.serviceTitle;
       data.description = this.myForm.value.description;
     });
+  }
+
+  get description() {
+    return this.myForm.get('description');
+  }
+
+  get isCreatingService() {
+    return this.myForm.get('id').value === null;
   }
 
   changed(event) {

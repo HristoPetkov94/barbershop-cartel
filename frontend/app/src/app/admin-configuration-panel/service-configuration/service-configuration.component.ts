@@ -34,7 +34,7 @@ export class ServiceConfigurationComponent implements OnInit {
     const service = new Service();
     service.picture = this.imageService.getDefaultServiceImage();
     const dialogRef = this.dialog.open(ServiceEditDialogComponent, {
-      width: 'auto',
+      width: '40%',
       data: service
     });
 
@@ -50,10 +50,10 @@ export class ServiceConfigurationComponent implements OnInit {
     this.servicesService.createService(service).subscribe((data: Service) => {
         this.services.unshift(data);
       }, () => {
-        this.notification.showMessage('update unsuccessful', 'warn');
+        this.notification.showMessage('Service has not been added successfully.', 'warn');
       },
       () => {
-        this.notification.showMessage('update successful', 'success');
+        this.notification.showMessage('Service has been added successfully.', 'success');
       }
     );
   }

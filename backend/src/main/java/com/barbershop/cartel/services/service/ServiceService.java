@@ -21,7 +21,7 @@ public class ServiceService implements ServiceInterface {
     public List<ServiceModel> getServices() {
 
         List<ServiceModel> serviceModels = new ArrayList<>();
-        Iterable<ServiceEntity> services = serviceRepository.findAll();
+        Iterable<ServiceEntity> services = serviceRepository.findAllByOrderByIdDesc();
 
         for (ServiceEntity service : services) {
 

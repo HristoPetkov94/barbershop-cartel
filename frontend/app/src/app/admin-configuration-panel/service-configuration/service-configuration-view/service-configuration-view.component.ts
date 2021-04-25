@@ -32,11 +32,11 @@ export class ServiceConfigurationViewComponent implements OnInit {
 
       this.serviceService.deleteService(this.service.id).subscribe(() => {
         }, () => {
-          this.notification.showMessage('update unsuccessful', 'warn');
+          this.notification.showMessage('"Service has not been deleted successfully.', 'warn');
         },
         () => {
           this.deleted = true;
-          this.notification.showMessage('update successful', 'success');
+          this.notification.showMessage('Service has been deleted successfully.', 'success');
         }
       );
     }
@@ -47,18 +47,18 @@ export class ServiceConfigurationViewComponent implements OnInit {
     this.serviceService.updateService(service).subscribe(() => {
       },
       () => {
-        this.notification.showMessage('update unsuccessful', 'warn');
+        this.notification.showMessage('Service has not been updated successfully.', 'warn');
       },
       () => {
         this.service = service;
-        this.notification.showMessage('update successful', 'success');
+        this.notification.showMessage('Service has been updated successfully.', 'success');
       }
     );
   }
 
   edit(): void {
     const dialogRef = this.dialog.open(ServiceEditDialogComponent, {
-      width: 'auto',
+      width: '40%',
       data: Object.assign({}, this.service)
     });
 
