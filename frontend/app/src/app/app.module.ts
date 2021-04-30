@@ -70,6 +70,7 @@ import { ServiceStepComponent } from './views/appointment-view/steps/service-ste
 import { DateStepComponent } from './views/appointment-view/steps/date-step/date-step.component';
 import { FinishStepComponent } from './views/appointment-view/steps/finish-step/finish-step.component';
 import { AppointmentViewComponent } from './views/appointment-view/appointment-view.component';
+import { EmailConfigurationComponent } from './admin-configuration-panel/email-configuration/email-configuration.component';
 
 @NgModule({
   declarations: [
@@ -110,6 +111,7 @@ import { AppointmentViewComponent } from './views/appointment-view/appointment-v
     DateStepComponent,
     FinishStepComponent,
     AppointmentViewComponent,
+    EmailConfigurationComponent,
   ],
     imports: [
         BrowserModule,

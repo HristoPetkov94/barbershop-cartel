@@ -10,6 +10,7 @@ import com.barbershop.cartel.appointments.interfaces.ScheduleConfigInterface;
 import com.barbershop.cartel.appointments.interfaces.AppointmentInterface;
 import com.barbershop.cartel.appointments.models.*;
 import com.barbershop.cartel.appointments.repository.AppointmentRepository;
+import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
@@ -45,6 +46,9 @@ public class AppointmentService implements AppointmentInterface {
 
     @Autowired
     private ServiceInterface serviceInterface;
+
+    @Autowired
+    private EmailDetailInterface emailDetailInterface;
 
     private LocalTime firstAppointment(ScheduleConfigModel configuration) {
 
@@ -233,6 +237,11 @@ public class AppointmentService implements AppointmentInterface {
 
     @Override
     public void save(AppointmentRequestModel appointmentModel) {
+
         createAppointment(appointmentModel);
+
+        String toRecipient = appointmentModel.getClientEmail();
+
+        emailDetailInterface.sendBookingConfirmationMessage(toRecipient);
     }
 }

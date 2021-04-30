@@ -1,7 +1,7 @@
-package com.barbershop.cartel.generalConfig.interfaces;
+package com.barbershop.cartel.general_config.interfaces;
 
-import com.barbershop.cartel.generalConfig.models.ContactInfoModel;
-import com.barbershop.cartel.generalConfig.models.SocialMediaModel;
+import com.barbershop.cartel.general_config.models.ContactInfoModel;
+import com.barbershop.cartel.general_config.models.SocialMediaModel;
 
 public interface GeneralConfigurationInterface {
     void saveFrontPageMessage(String frontPageMessage);

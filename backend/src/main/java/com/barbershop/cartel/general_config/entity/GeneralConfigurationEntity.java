@@ -1,4 +1,4 @@
-package com.barbershop.cartel.generalConfig.entity;
+package com.barbershop.cartel.general_config.entity;
 
 import lombok.Getter;
 import lombok.Setter;

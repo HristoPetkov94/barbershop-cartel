@@ -67,7 +67,6 @@ export class GeneralConfigurationService {
     return this.http.get<ContactInfoModel>(this.apiUrl + this.configUrl + '/contact-info');
   }
 
-
   getGitInfo(): Observable<GitVersion> {
     return this.http.get<GitVersion>(this.apiUrl + '/git-info');
   }

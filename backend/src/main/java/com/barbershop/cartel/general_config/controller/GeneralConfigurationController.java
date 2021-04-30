@@ -1,10 +1,14 @@
-package com.barbershop.cartel.generalConfig.controller;
+package com.barbershop.cartel.general_config.controller;
 
-import com.barbershop.cartel.generalConfig.interfaces.GeneralConfigurationInterface;
-import com.barbershop.cartel.generalConfig.models.ContactInfoModel;
-import com.barbershop.cartel.generalConfig.models.SocialMediaModel;
+import com.barbershop.cartel.general_config.interfaces.GeneralConfigurationInterface;
+import com.barbershop.cartel.general_config.models.ContactInfoModel;
+import com.barbershop.cartel.general_config.models.SocialMediaModel;
+import com.barbershop.cartel.notifications.email.entity.EmailDetailEntity;
+import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/general-configuration")

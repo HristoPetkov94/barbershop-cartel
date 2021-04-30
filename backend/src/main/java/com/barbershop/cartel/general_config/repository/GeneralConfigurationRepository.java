@@ -1,6 +1,6 @@
-package com.barbershop.cartel.generalConfig.repository;
+package com.barbershop.cartel.general_config.repository;
 
-import com.barbershop.cartel.generalConfig.entity.GeneralConfigurationEntity;
+import com.barbershop.cartel.general_config.entity.GeneralConfigurationEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

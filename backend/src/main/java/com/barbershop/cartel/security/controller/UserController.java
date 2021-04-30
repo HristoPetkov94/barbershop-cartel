@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("/forgot-password")
-    public void forgotPassword(@RequestParam String email) throws Exception {
+    public void forgotPassword(@RequestParam String email) {
         passwordService.forgotPassword(email);
     }
 

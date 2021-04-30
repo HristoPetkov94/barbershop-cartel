@@ -16,6 +16,7 @@ import {StoreConfigurationComponent} from './admin-configuration-panel/store-con
 import {AssignmentConfigurationComponent} from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import {LayoutComponent} from './views/layout/layout.component';
 import {AppointmentViewComponent} from './views/appointment-view/appointment-view.component';
+import {EmailConfigurationComponent} from './admin-configuration-panel/email-configuration/email-configuration.component';
 
 
 const routes: Routes = [
@@ -43,6 +44,7 @@ const routes: Routes = [
       {path: 'barbers', component: BarberConfigurationComponent},
       {path: 'services', component: ServiceConfigurationComponent},
       {path: 'assignments', component: AssignmentConfigurationComponent},
+      {path: 'emails', component: EmailConfigurationComponent},
       {path: 'store', component: StoreConfigurationComponent},
     ],
     canActivate: [AuthGuardService]
