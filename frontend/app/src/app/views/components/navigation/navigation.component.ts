@@ -3,6 +3,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../authentication/authentication.service';
 import {getCookie, setCookie} from '../../../utils/cookie.utils';
 import {RoutingExtService} from '../../../services/routing-ext.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-navigation',
@@ -14,7 +15,9 @@ export class NavigationComponent implements OnInit {
 
   constructor(public translate: TranslateService,
               private auth: AuthenticationService,
-              private routeExt: RoutingExtService) {
+              private routeExt: RoutingExtService,
+              private router: Router,
+  ) {
   }
 
   ngOnInit(): void {
@@ -33,6 +36,12 @@ export class NavigationComponent implements OnInit {
     setCookie('lang', lang);
 
     this.translate.use(lang);
+
+    const isHomepage = this.router.url === '/';
+
+    if (isHomepage) {
+      this.routeExt.reloadComponent();
+    }
   }
 
   logout() {

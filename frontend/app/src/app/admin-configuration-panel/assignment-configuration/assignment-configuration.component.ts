@@ -5,7 +5,7 @@ import {Barber} from '../../models/barber.model';
 @Component({
   selector: 'app-assignment-configuration',
   templateUrl: './assignment-configuration.component.html',
-  styleUrls: ['./assignment-configuration.component.css', '../shared-styles/shared.css']
+  styleUrls: ['./assignment-configuration.component.css', '../shared-styles/shared.css'],
 })
 export class AssignmentConfigurationComponent implements OnInit {
   public barbers: Barber[];

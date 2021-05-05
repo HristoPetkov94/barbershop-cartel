@@ -1,19 +1,28 @@
 <hr>
 
+<!--"configuration" : {-->
+<!--"general": {-->
+<!--"change_email": "Change email",-->
+<!--"email_label": "Email",-->
+<!--"admin_email": "Administrator email",-->
+<!--"admin_email_description": "This is the administrators email. Please be aware that changing the email will log you out."-->
+<!--}-->
+<!--  }-->
+
 <mat-grid-list class="margin-top-20" cols="4" rowHeight="70px">
   <!--        column 1-->
   <mat-grid-tile [colspan]="2" [rowspan]="2">
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> Administrator email </h1>
-      <p> This is the administrators email. Please be aware that changing the email will log you out. </p>
+      <h1 class="margin-bottom-10"> {{ 'configuration.general.admin_email' | translate }}  </h1>
+      <p> {{ 'configuration.general.admin_email_description' | translate }} </p>
     </div>
   </mat-grid-tile>
   <!--        column 2-->
   <mat-grid-tile [colspan]="2" [rowspan]="3">
     <div class="col padding-20 max-height max-width">
 
-      <h2 class="margin-bottom-10"> Change email </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.general.change_email' | translate }} </h2>
 
       <app-change-email [email]="email"></app-change-email>
 
@@ -26,8 +35,8 @@
   <mat-grid-tile [colspan]="2" [rowspan]="2">
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> Administrator password </h1>
-      <p> This is the administrators password. You can change it to anything you like at any time. </p>
+      <h1 class="margin-bottom-10"> {{ 'configuration.general.admin_password' | translate }} </h1>
+      <p> {{ 'configuration.general.admin_password_description' | translate }} </p>
     </div>
   </mat-grid-tile>
   <!--        column 2-->
@@ -36,7 +45,7 @@
 
       <div class="sized-box-height-20"></div>
 
-      <h2 class="margin-bottom-10"> Change password </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.general.change_password' | translate }} </h2>
 
       <app-password></app-password>
 
@@ -52,9 +61,8 @@
 
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> Front-page message </h1>
-      <p> This is the message on the home page that people see. It's above the book-now button. You can change it
-        anytime here.</p>
+      <h1 class="margin-bottom-10"> {{ 'configuration.general.front_page_message_label' | translate }} </h1>
+      <p> {{ 'configuration.general.front_page_message_description' | translate }} </p>
 
     </div>
 
@@ -62,7 +70,7 @@
 
   <mat-grid-tile [colspan]="2" [rowspan]="3">
     <div class="col padding-20 max-height max-width">
-      <h2 class="margin-bottom-10"> Message </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.general.message' | translate }} </h2>
 
       <div class="row margin-bottom-10">
         <textarea class="preserve-whitespace front-page-message-input max-width" [(ngModel)]="frontPageMessage"
@@ -72,7 +80,7 @@
 
       <button class="row" mat-stroked-button color="accent" (click)="saveFrontPageMessage()">
         <mat-icon>save</mat-icon>
-        Save
+        {{ 'configuration.general.save' | translate }}
       </button>
     </div>
 
@@ -87,9 +95,8 @@
 
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> Appointment success message </h1>
-      <p> This is the at the last step of booking process. It's about completing the appointment. You can change it
-        anytime here.</p>
+      <h1 class="margin-bottom-10">{{ 'configuration.general.appointment_message_label' | translate }}</h1>
+      <p> {{ 'configuration.general.appointment_message_description' | translate }}</p>
 
     </div>
 
@@ -97,16 +104,15 @@
 
   <mat-grid-tile [colspan]="2" [rowspan]="3">
     <div class="col padding-20 max-height max-width">
-      <h2 class="margin-bottom-10"> Message </h2>
+      <h2 class="margin-bottom-10">{{ 'configuration.general.message' | translate }}</h2>
 
       <div class="row margin-bottom-10">
               <textarea class="front-page-message-input max-width" [(ngModel)]="appointmentMessage" rows="15" cols="50"
                         name="comment"></textarea>
-        <!--        <div class="sized-box-width-100"></div>-->
       </div>
       <button mat-stroked-button color="accent" (click)="saveAppointmentMessage()">
         <mat-icon>save</mat-icon>
-        Save
+        {{ 'configuration.general.save' | translate }}
       </button>
     </div>
   </mat-grid-tile>
@@ -121,8 +127,8 @@
 
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> Social media</h1>
-      <p> Set up the links that lead up to the barbershop's social media pages.</p>
+      <h1 class="margin-bottom-10">{{ 'configuration.general.social_media_label' | translate }}</h1>
+      <p> {{ 'configuration.general.social_media_description' | translate }} </p>
 
     </div>
 
@@ -151,7 +157,7 @@
       </div>
       <button mat-stroked-button color="accent" (click)="saveSocialMedia()">
         <mat-icon>save</mat-icon>
-        Save
+        {{ 'configuration.general.save' | translate }}
       </button>
     </div>
 
@@ -168,8 +174,8 @@
 
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> Contact info</h1>
-      <p> All info like city, address, phone can be set up here to be publicaly exposed</p>
+      <h1 class="margin-bottom-10"> {{ 'configuration.general.contact_info_label' | translate }} </h1>
+      <p> {{ 'configuration.general.contact_info_description' | translate }}</p>
 
     </div>
 
@@ -178,26 +184,26 @@
   <mat-grid-tile [colspan]="2" [rowspan]="2">
     <div class="col padding-20 max-width max-height">
 
-      <h2 class="margin-bottom-10"> City </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.general.city' | translate }} </h2>
       <div class="row justify-content-center">
         <input [(ngModel)]="contactInfo.city" type="text" class="text-input max-width"/>
       </div>
       <div class="sized-box-height-20"></div>
 
-      <h2 class="margin-bottom-10"> Address </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.general.address' | translate }} </h2>
       <div class="row justify-content-center">
         <input [(ngModel)]="contactInfo.address" type="text" class="text-input max-width"/>
       </div>
       <div class="sized-box-height-20"></div>
 
-      <h2 class="margin-bottom-10"> Phone number </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.general.phone' | translate }} </h2>
       <div class="row justify-content-center">
         <input [(ngModel)]="contactInfo.phoneNumber" type="text" class="text-input max-width"/>
       </div>
       <div class="sized-box-height-20"></div>
       <button mat-stroked-button color="accent" (click)="saveContactInfo()">
         <mat-icon>save</mat-icon>
-        Save
+        {{ 'configuration.general.save' | translate }}
       </button>
     </div>
 
