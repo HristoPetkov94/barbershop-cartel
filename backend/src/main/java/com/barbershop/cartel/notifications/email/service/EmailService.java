@@ -59,12 +59,14 @@ public class EmailService implements EmailDetailInterface {
     }
 
     @Override
-    public void sendForgotPasswordMessage(String password, String toRecipient) {
+    public void sendForgotPasswordMessage(String toRecipient, String password) {
 
         EmailDetailEntity emailDetails = emailDetailRepository.findByEmailType(EmailTypeEnum.FORGOT_PASSWORD_TYPE)
                 .orElseThrow(() -> new CartelCustomException("Email notification type: FORGOT_PASSWORD_TYPE is not existing."));
 
-        emailDetails.setText(emailDetails.getText() + " " + password);
+        String text = replaceVariable(emailDetails.getText(), password);
+
+        emailDetails.setText(text);
 
         sendMessage(emailDetails, toRecipient);
     }
@@ -126,5 +128,12 @@ public class EmailService implements EmailDetailInterface {
         } catch (MailException e) {
             System.err.println(e.getMessage());
         }
+    }
+
+    private String replaceVariable(String text, String variable) {
+
+        String placeHolder = "$password";
+
+        return text.replace(placeHolder, variable);
     }
 }

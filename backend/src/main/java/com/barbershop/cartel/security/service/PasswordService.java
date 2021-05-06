@@ -25,7 +25,7 @@ public class PasswordService {
 
     private String generateTemporaryPassword() {
 
-        int passwordLength = 15;
+        int passwordLength = 10;
 
         // chose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
