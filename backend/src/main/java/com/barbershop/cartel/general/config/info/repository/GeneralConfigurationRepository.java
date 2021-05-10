@@ -1,6 +1,6 @@
-package com.barbershop.cartel.general.config.messages.repository;
+package com.barbershop.cartel.general.config.info.repository;
 
-import com.barbershop.cartel.general.config.messages.entity.GeneralConfigurationEntity;
+import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
 import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

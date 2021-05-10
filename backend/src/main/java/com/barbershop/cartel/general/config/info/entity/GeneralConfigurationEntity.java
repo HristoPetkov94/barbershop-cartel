@@ -1,4 +1,4 @@
-package com.barbershop.cartel.general.config.messages.entity;
+package com.barbershop.cartel.general.config.info.entity;
 
 import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
 import lombok.Getter;

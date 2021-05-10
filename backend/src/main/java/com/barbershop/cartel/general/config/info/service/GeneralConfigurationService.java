@@ -1,11 +1,11 @@
 package com.barbershop.cartel.general.config.info.service;
 
 import com.barbershop.cartel.errors.CartelCustomException;
-import com.barbershop.cartel.general.config.messages.entity.GeneralConfigurationEntity;
+import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
 import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
-import com.barbershop.cartel.general.config.messages.interfaces.GeneralConfigurationInterface;
-import com.barbershop.cartel.general.config.messages.models.GeneralConfigurationModel;
-import com.barbershop.cartel.general.config.messages.repository.GeneralConfigurationRepository;
+import com.barbershop.cartel.general.config.info.interfaces.GeneralConfigurationInterface;
+import com.barbershop.cartel.general.config.info.models.GeneralConfigurationModel;
+import com.barbershop.cartel.general.config.info.repository.GeneralConfigurationRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
