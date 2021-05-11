@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col">
-    <h1 class="margin-bottom-10"> Choose service </h1>
+    <h1 class="margin-bottom-10">{{ 'configuration.services.choose' | translate}}</h1>
 
     <div class="row">
       <mat-form-field appearance="outline">
         <mat-select [(value)]="selectedServiceId" (selectionChange)="changeSelectedService()" [disabled]="isServiceDropdownDisabled()">
-          <mat-option [value]="0"> -- Please select -- </mat-option>
+          <mat-option [value]="0">{{ 'configuration.please_select' | translate}}</mat-option>
 
           <mat-option *ngFor="let service of availableServices"
                       [value]="service.id"> {{service.serviceTitle}} </mat-option>
@@ -16,7 +16,7 @@
 
       <div class="col justify-content-center mat-field-padding-margin">
         <button class="max-height" (click)="add()" mat-raised-button color=primary [disabled]="isServiceDropdownDisabled() || selectedServiceId === 0">
-          <mat-icon matTooltip="Add" [matTooltipPosition]="'left'">add</mat-icon>
+          <mat-icon matTooltip="{{ 'configuration.add' | translate}}" [matTooltipPosition]="'left'">add</mat-icon>
         </button>
       </div>
     </div>
@@ -27,19 +27,19 @@
 
   <div class="row justify-content-center">
     <div class="col flex-4">
-      <h2 class="margin-bottom-10"> Услуга </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.services.service' | translate}} </h2>
       <span label="" class="text-input">{{ getServiceName(assignment.serviceId) }}</span>
     </div>
 
     <div class="col flex-1 margin-left-10">
-      <h2 class="margin-bottom-10"> Продължителност </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.services.duration' | translate}} </h2>
       <span label="" class="text-input text-align-center">{{assignment.duration}}
         <span>{{time}}</span>
       </span>
     </div>
 
     <div class="col flex-1 margin-left-10">
-      <h2 class="margin-bottom-10"> Цена </h2>
+      <h2 class="margin-bottom-10"> {{ 'configuration.services.price' | translate}} </h2>
       <span label="" class="text-input text-align-center">{{assignment.price}}
         <span> {{currency}}</span>
       </span>
@@ -47,11 +47,11 @@
 
     <div class="row flex-1 margin-left-10">
       <button (click)="edit(assignment, getServiceName(assignment.serviceId))" mat-icon-button color="primary">
-        <mat-icon matTooltip="Edit" [matTooltipPosition]="'left'">edit</mat-icon>
+        <mat-icon matTooltip="{{ 'configuration.edit' | translate}}" [matTooltipPosition]="'left'">edit</mat-icon>
       </button>
 
       <button (click)="delete(assignment, i)" mat-icon-button color="warn">
-        <mat-icon matTooltip="Delete" [matTooltipPosition]="'left'">delete</mat-icon>
+        <mat-icon matTooltip="{{ 'configuration.delete' | translate}}" [matTooltipPosition]="'left'">delete</mat-icon>
       </button>
     </div>
   </div>

@@ -18,7 +18,11 @@ export class BarberConfigurationComponent implements OnInit {
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
-  constructor(private barberService: BarberService, private dialog: MatDialog, private imageService: ImageService) {
+  constructor(
+    private barberService: BarberService,
+    private dialog: MatDialog,
+    private imageService: ImageService
+  ) {
   }
 
   ngOnInit(): void {

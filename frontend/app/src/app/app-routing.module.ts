@@ -16,6 +16,7 @@ import {StoreConfigurationComponent} from './admin-configuration-panel/store-con
 import {AssignmentConfigurationComponent} from './admin-configuration-panel/assignment-configuration/assignment-configuration.component';
 import {LayoutComponent} from './views/layout/layout.component';
 import {AppointmentViewComponent} from './views/appointment-view/appointment-view.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EmailConfigurationComponent} from './admin-configuration-panel/email-configuration/email-configuration.component';
 
 
@@ -40,12 +41,12 @@ const routes: Routes = [
     path: 'configuration',
     component: AdminLayoutComponent,
     children: [
-      {path: 'general', component: GeneralConfigurationComponent},
-      {path: 'barbers', component: BarberConfigurationComponent},
-      {path: 'services', component: ServiceConfigurationComponent},
-      {path: 'assignments', component: AssignmentConfigurationComponent},
-      {path: 'emails', component: EmailConfigurationComponent},
-      {path: 'store', component: StoreConfigurationComponent},
+      {path: 'general', component: GeneralConfigurationComponent, data: {animation: 'general'}},
+      {path: 'barbers', component: BarberConfigurationComponent, data: {animation: 'barbers'}},
+      {path: 'services', component: ServiceConfigurationComponent, data: {animation: 'services'}},
+      {path: 'assignments', component: AssignmentConfigurationComponent, data: {animation: 'assignments'}},
+      {path: 'emails', component: EmailConfigurationComponent, data: {animation: 'emails'}},
+      {path: 'store', component: StoreConfigurationComponent, data: {animation: 'store'}},
     ],
     canActivate: [AuthGuardService]
   },
@@ -53,7 +54,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    BrowserAnimationsModule,
+    RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule {

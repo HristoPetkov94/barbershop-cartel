@@ -8,6 +8,7 @@ import {ContactInfoModel} from '../models/general.configuration/contact.info.mod
 import {GitVersion} from '../models/git-version.mode';
 import {PasswordChangeRequest} from '../models/password-change-request.model';
 import {EmailChangeRequest} from '../models/email-change-request.model';
+import {Configuration} from '../models/general.configuration/configuration.model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,11 @@ export class GeneralConfigurationService {
     return this.http.get<User[]>(this.apiUrl + '/user');
   }
 
+  getConfiguration(language: string) {
+    const requestUrl = `${this.apiUrl}${this.configUrl}?lang=${language}`;
+    return this.http.get<Configuration>(requestUrl);
+  }
+
   changeEmail(emailChangeRequest: EmailChangeRequest) {
     return this.http.post(this.apiUrl + '/user/change-email', emailChangeRequest);
   }
@@ -31,43 +37,11 @@ export class GeneralConfigurationService {
     return this.http.post(this.apiUrl + '/user/change-password', passwordChangeRequest);
   }
 
-  forgotPassword(email: string) {
-    return this.http.post(this.apiUrl + '/user/forgot-password' + '?' + 'email=' + email, {});
-  }
-
-  saveFrontPageMessage(frontPageMessage: string) {
-    return this.http.post(this.apiUrl + this.configUrl + '/front-page-message' + '?' + 'frontPageMessage=' + frontPageMessage, {});
-  }
-
-  getFrontPageMessage() {
-    return this.http.get(this.apiUrl + this.configUrl + '/front-page-message', {responseType: 'text'});
-  }
-
-  saveAppointmentMessage(appointmentMessage: string) {
-    return this.http.post(this.apiUrl + this.configUrl + '/appointment-message' + '?' + 'appointmentMessage=' + appointmentMessage, {});
-  }
-
-  getAppointmentMessage() {
-    return this.http.get(this.apiUrl + this.configUrl + '/appointment-message', {responseType: 'text'});
-  }
-
-  saveSocialMedia(socialMedia: SocialMediaModel) {
-    return this.http.post(this.apiUrl + this.configUrl + '/social-media', socialMedia);
-  }
-
-  getSocialMedia(): Subscribable<SocialMediaModel> {
-    return this.http.get<SocialMediaModel>(this.apiUrl + this.configUrl + '/social-media');
-  }
-
-  saveContactInfo(contactInfo: ContactInfoModel) {
-    return this.http.post(this.apiUrl + this.configUrl + '/contact-info', contactInfo);
-  }
-
-  getContactInfo(): Subscribable<ContactInfoModel> {
-    return this.http.get<ContactInfoModel>(this.apiUrl + this.configUrl + '/contact-info');
-  }
-
   getGitInfo(): Observable<GitVersion> {
     return this.http.get<GitVersion>(this.apiUrl + '/git-info');
+  }
+
+  saveConfiguration(configuration: Configuration) {
+    return this.http.post(this.apiUrl + this.configUrl, configuration);
   }
 }

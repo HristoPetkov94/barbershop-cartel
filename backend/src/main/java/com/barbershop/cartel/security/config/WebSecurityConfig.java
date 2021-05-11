@@ -79,7 +79,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/appointments/appointment-current-week**",
                         "/appointments/appointment-next-week**",
                         "/appointments/appointment-previous-week**",
-                        "/images/**")
+                        "/images/**",
+                        "/social-media")
                 .antMatchers(HttpMethod.POST,
                         "/appointments/save-appointment");
     }

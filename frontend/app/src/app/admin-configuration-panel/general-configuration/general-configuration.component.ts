@@ -6,6 +6,9 @@ import {ContactInfoModel} from '../../models/general.configuration/contact.info.
 import {Observable} from 'rxjs';
 import {GitVersion} from '../../models/git-version.mode';
 import {User} from '../../models/user.model';
+import {Configuration} from '../../models/general.configuration/configuration.model';
+import {SocialMediaService} from '../../services/socialmedia.service';
+import {getCookie} from '../../utils/cookie.utils';
 
 @Component({
   selector: 'app-general-configuration',
@@ -27,75 +30,35 @@ export class GeneralConfigurationComponent implements OnInit {
 
   public gitInfo$: Observable<GitVersion>;
 
-  constructor(private generalConfigurationService: GeneralConfigurationService) {
+  private configuration: Configuration;
+
+  constructor(
+    private generalConfigurationService: GeneralConfigurationService,
+    private socialMediaService: SocialMediaService,
+  ) {
   }
 
   ngOnInit(): void {
+    const language = getCookie('lang');
+
     this.generalConfigurationService.getUsers().subscribe(data => {
       this.users = data;
       const adminUser = this.users[0];
       this.email = adminUser.email;
     });
 
-    this.generalConfigurationService.getFrontPageMessage().subscribe(data => {
-      this.frontPageMessage = data;
-    });
+    this.getConfiguration(language);
 
-    this.generalConfigurationService.getAppointmentMessage().subscribe(data => {
-      this.appointmentMessage = data;
-    });
-
-    this.generalConfigurationService.getSocialMedia().subscribe(data => {
-      this.socialMedia = data;
-    });
-
-    this.generalConfigurationService.getContactInfo().subscribe(data => {
-      this.contactInfo = data;
+    this.socialMediaService.getSocialMedia().subscribe(media => {
+      this.socialMedia.facebook = media.facebook;
+      this.socialMedia.instagram = media.instagram;
     });
 
     this.gitInfo$ = this.generalConfigurationService.getGitInfo();
   }
 
-  saveFrontPageMessage() {
-    const message = encodeURIComponent(this.frontPageMessage);
-
-    this.generalConfigurationService.saveFrontPageMessage(message).subscribe(() => {
-
-        this.generalConfigurationService.getFrontPageMessage().subscribe(frontPageMessage => {
-          this.frontPageMessage = frontPageMessage;
-        });
-      },
-      () => {
-        this.notification.showMessage('Front page message has not been updated.', 'warn');
-      },
-      () => {
-        this.notification.showMessage('Front page message has been updated successfully.', 'success');
-      }
-    );
-  }
-
-  saveAppointmentMessage() {
-    this.generalConfigurationService.saveAppointmentMessage(this.appointmentMessage).subscribe(() => {
-
-        this.generalConfigurationService.getAppointmentMessage().subscribe(appointmentMessage => {
-          this.appointmentMessage = appointmentMessage;
-        });
-      },
-      () => {
-        this.notification.showMessage('Appointment success message has not been updated.', 'warn');
-      },
-      () => {
-        this.notification.showMessage('Appointment success message has been updated successfully.', 'success');
-      }
-    );
-  }
-
   saveSocialMedia() {
-    this.generalConfigurationService.saveSocialMedia(this.socialMedia).subscribe(() => {
-
-        this.generalConfigurationService.getSocialMedia().subscribe(socialMedia => {
-          this.socialMedia = socialMedia;
-        });
+    this.socialMediaService.saveSocialMedia(this.socialMedia).subscribe(() => {
       },
       () => {
         this.notification.showMessage('Social media has not been updated.', 'warn');
@@ -106,19 +69,46 @@ export class GeneralConfigurationComponent implements OnInit {
     );
   }
 
-  saveContactInfo() {
-    this.generalConfigurationService.saveContactInfo(this.contactInfo).subscribe(() => {
+  saveFrontPageMessage() {
+    this.configuration.frontPageMessage = this.frontPageMessage;
+    this.saveConfiguration('Front page message');
+  }
 
-        this.generalConfigurationService.getContactInfo().subscribe(contactInfo => {
-          this.contactInfo = contactInfo;
-        });
-      },
-      () => {
-        this.notification.showMessage('Contact info has not been updated.', 'warn');
-      },
-      () => {
-        this.notification.showMessage('Contact info has been updated successfully.', 'success');
-      }
-    );
+  saveAppointmentMessage() {
+    this.configuration.appointmentSuccessMessage = this.appointmentMessage;
+    this.saveConfiguration('Appointment message');
+  }
+
+  saveContactInfo() {
+    this.configuration.city = this.contactInfo.city;
+    this.configuration.address = this.contactInfo.address;
+    this.configuration.phoneNumber = this.contactInfo.phoneNumber;
+
+    this.saveConfiguration('Contact info');
+  }
+
+  getConfiguration(language) {
+    this.generalConfigurationService.getConfiguration(language).subscribe(config => {
+
+      console.log('loading config:', language);
+      this.configuration = config;
+
+      this.frontPageMessage = config.frontPageMessage;
+      this.appointmentMessage = config.appointmentSuccessMessage;
+
+      this.contactInfo.city = config.city;
+      this.contactInfo.address = config.address;
+      this.contactInfo.phoneNumber = config.phoneNumber;
+    });
+  }
+
+  private saveConfiguration(message: string) {
+
+    this.generalConfigurationService.saveConfiguration(this.configuration).subscribe(() => {
+    }, error => {
+      this.notification.showMessage(message + ' has not been updated.', 'warn');
+    }, () => {
+      this.notification.showMessage(message + ' has been updated successfully.', 'success');
+    });
   }
 }

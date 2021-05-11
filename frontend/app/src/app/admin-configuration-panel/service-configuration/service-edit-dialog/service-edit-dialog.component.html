@@ -1,7 +1,7 @@
 <div class="light-theme">
 
-  <h1 *ngIf="isCreatingService" mat-dialog-title> Add </h1>
-  <h1 *ngIf="!isCreatingService" mat-dialog-title> Edit </h1>
+  <h1 *ngIf="isCreatingService" mat-dialog-title> {{ 'configuration.add' | translate}} </h1>
+  <h1 *ngIf="!isCreatingService" mat-dialog-title> {{ 'configuration.edit' | translate}} </h1>
 
   <form [formGroup]="myForm">
     <mat-dialog-content>
@@ -16,10 +16,10 @@
           <div class="row">
             <button type="button" (click)="changeImage()" class="remove-picture-btn edit-button" mat-raised-button
                     color="primary">
-              Edit picture
+              {{ 'configuration.edit_picture' | translate}}
             </button>
             <button type="button" (click)="removeImage()" class="remove-picture-btn" mat-raised-button color="warn">
-              Remove picture
+              {{ 'configuration.remove_picture' | translate}}
             </button>
           </div>
         </div>
@@ -29,14 +29,14 @@
         <div class="col flex-1">
 
           <mat-form-field>
-            <mat-label>Service Title</mat-label>
+            <mat-label>{{ 'configuration.services.title' | translate}}</mat-label>
             <input matInput formControlName="serviceTitle">
           </mat-form-field>
 
           <div class="sized-box-height-20"></div>
 
           <mat-form-field>
-            <mat-label>Description</mat-label>
+            <mat-label>{{ 'configuration.services.description' | translate}}</mat-label>
             <textarea matTextareaAutosize matInput
                       cdkTextareaAutosize
                       cdkAutosizeMinRows="6"
@@ -51,8 +51,8 @@
 
     </mat-dialog-content>
     <div mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="service" (click)="onNoClick()">Cancel</button>
-      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="service" cdkFocusInitial>Save</button>
+      <button mat-button [mat-dialog-close]="service" (click)="onNoClick()">{{ 'configuration.cancel' | translate}} </button>
+      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="service" cdkFocusInitial>{{ 'configuration.save' | translate}} </button>
     </div>
   </form>
 </div>

@@ -11,20 +11,86 @@
       "logout": "logout"
     }
   },
-
   "services": {
     "title": "we offer you the best services",
     "subTitle": "Modern man's haircut and styling from our professional Barbers."
   },
-
   "team": {
     "title": "barbers"
   },
-
   "bookingMessage": "book now",
-
   "footer": {
     "title": "14 IVAN N. MOMCHILOV STREET // 5000 KARTALA,",
     "subTitle": "VELIKO TARNOVO TUESDAY THROUGH FRIDAY 10 — 7 // SATURDAY 10 — 5 // PHONE 088 881 4999"
+  },
+  "configuration": {
+    "title": "Configuration panel",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "add": "Add",
+    "delete": "Delete",
+    "edit_picture": "Edit picture",
+    "remove_picture": "Remove picture",
+    "please_select": " -- Please select -- ",
+    "general": {
+      "save": "Save",
+      "message": "Message",
+      "change_email": "Change email",
+      "email_label": "Email",
+      "admin_email": "Administrator email",
+      "admin_email_description": "This is the administrators email. Please be aware that changing the email will log you out.",
+      "change_email_invalid": "* Invalid email",
+      "admin_password": "Administrator password",
+      "admin_password_description": "This is the administrators password. You can change it to anything you like at any time.",
+      "change_password": "Change password",
+      "old_password": "Old password",
+      "new_password": "New password",
+      "confirm_password": "Confirm password",
+      "hide_password": "Hide password",
+      "old_password_error": "* Old password cannot be empty",
+      "new_password_error1": "* New password cannot be empty",
+      "new_password_error2": "* New password matches old password",
+      "confirm_password_error1": "* Confirm password password cannot be empty",
+      "confirm_password_error2": "* Does not match with new password",
+      "front_page_message_label": "Front-page message",
+      "front_page_message_description": "This is the message on the home page that people see. It's above the book-now button. You can change it anytime here.",
+      "appointment_message_label": "Appointment success message",
+      "appointment_message_description": "This is the at the last step of booking process. It's about completing the appointment. You can change it anytime here.",
+      "social_media_label": "Social media",
+      "social_media_description": "Set up the links that lead up to the barbershop's social media pages.",
+      "contact_info_label": "Contact info",
+      "contact_info_description": "All info like city, address, phone can be set up here to be publicaly exposed",
+      "city": "City",
+      "address": "Address",
+      "phone": "Phone number"
+    },
+    "barbers": {
+      "add_btn": "Add New Barber",
+      "firstname": "First name",
+      "lastname": "Last name",
+      "description": "Description",
+      "valid_url_error": "Please enter a valid url.",
+      "choose": "Choose barber"
+    },
+    "services":  {
+      "description": "Description",
+      "service": "Service",
+      "title": "Service Title",
+      "add_btn": "Add New Service",
+      "choose": "Choose service",
+      "price": "Price",
+      "duration": "Duration",
+      "price_error": "Max currency is 100лв."
+    },
+    "tabs": {
+      "home": "Home",
+      "general": "General",
+      "barbers": "Barbers",
+      "services": "Services",
+      "assignments": "Assignments",
+      "store": "Store",
+      "logout": "Logout"
+    }
   }
 }

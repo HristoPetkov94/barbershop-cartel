@@ -1,4 +1,4 @@
-package com.barbershop.cartel.general_config.models;
+package com.barbershop.cartel.general.config.socialmedia.model;
 
 import lombok.Getter;
 import lombok.Setter;
