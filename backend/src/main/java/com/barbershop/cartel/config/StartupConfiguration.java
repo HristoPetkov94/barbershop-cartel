@@ -17,6 +17,8 @@ public class StartupConfiguration {
     @Autowired
     private DataSource dataSource;
 
+
+    //TODO: check if  @Lazy is needed
     @Autowired
     @Lazy
     private GeneralConfigurationRepository generalConfigurationRepository;
@@ -33,6 +35,7 @@ public class StartupConfiguration {
     @Bean
     @Profile("dev")
     public void addConfig() {
+        //TODO: fix imports on LanguageEnum
         GeneralConfigurationEntity configurationEN = new GeneralConfigurationEntity();
         configurationEN.setLanguage(com.barbershop.cartel.general.config.messages.enums.LanguageEnum.en);
 

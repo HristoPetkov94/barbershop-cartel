@@ -27,6 +27,8 @@ public class EmailService implements EmailDetailInterface {
     private EmailDetailRepository emailDetailRepository;
 
     // This is going to be replaced by changeset, currently is here because if test purposes.
+
+    //TODO: move to configuration
     @PostConstruct
     private void initTable() {
 
@@ -119,9 +121,9 @@ public class EmailService implements EmailDetailInterface {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 
         mailMessage.setFrom(emailDetails.getFrom());
-        //mailMessage.setTo(toRecipient);
+        mailMessage.setTo("petkovhristo94@gmail.com");
         mailMessage.setSubject(emailDetails.getSubject());
-        mailMessage.setText(emailDetails.getText());
+        mailMessage.setText("Hi Hristo Petkov how are you");
 
         try {
             mailSender.send(mailMessage);
