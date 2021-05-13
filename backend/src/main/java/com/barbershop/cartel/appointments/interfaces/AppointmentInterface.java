@@ -4,6 +4,8 @@ import com.barbershop.cartel.appointments.models.AppointmentRequestModel;
 import com.barbershop.cartel.appointments.models.AppointmentWeekModel;
 import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 
+import javax.mail.MessagingException;
+
 public interface AppointmentInterface {
 
     AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long assignmentId);
@@ -12,5 +14,5 @@ public interface AppointmentInterface {
 
     AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long assignmentId);
 
-    void save(AppointmentRequestModel appointmentModel, LanguageEnum language);
+    void save(AppointmentRequestModel appointmentModel, LanguageEnum language) throws MessagingException;
 }

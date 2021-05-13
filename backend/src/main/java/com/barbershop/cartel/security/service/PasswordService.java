@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
+
 @Slf4j
 @Service
 public class PasswordService {
@@ -73,7 +75,7 @@ public class PasswordService {
     }
 
     /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/
-    public void forgotPassword(String email) {
+    public void forgotPassword(String email) throws MessagingException {
 
         UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User with email: " + email + " does not exist"));

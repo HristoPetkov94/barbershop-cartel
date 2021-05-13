@@ -18,6 +18,7 @@ import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -237,7 +238,7 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     @Override
-    public void save(AppointmentRequestModel appointmentModel, LanguageEnum language) {
+    public void save(AppointmentRequestModel appointmentModel, LanguageEnum language) throws MessagingException {
 
         createAppointment(appointmentModel);
 

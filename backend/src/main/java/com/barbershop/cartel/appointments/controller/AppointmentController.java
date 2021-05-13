@@ -7,6 +7,8 @@ import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+
 
 @RestController
 @RequestMapping("/appointments")
@@ -31,7 +33,7 @@ public class AppointmentController {
     }
 
     @PostMapping(value = "/save-appointment")
-    public void saveAppointment(@RequestBody AppointmentRequestModel appointmentModel, @RequestParam LanguageEnum language) {
+    public void saveAppointment(@RequestBody AppointmentRequestModel appointmentModel, @RequestParam LanguageEnum language) throws MessagingException {
         appointmentInterface.save(appointmentModel, language);
     }
 }

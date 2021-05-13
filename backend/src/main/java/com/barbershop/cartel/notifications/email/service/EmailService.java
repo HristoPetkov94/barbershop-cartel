@@ -9,11 +9,15 @@ import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.notifications.email.repository.EmailDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Service;
 
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -27,7 +31,7 @@ public class EmailService implements EmailDetailInterface {
     private EmailDetailRepository emailDetailRepository;
 
     @Override
-    public void sendBookingConfirmationMessage(String toRecipient, LanguageEnum language) {
+    public void sendBookingConfirmationMessage(String toRecipient, LanguageEnum language) throws MessagingException {
 
         EmailDetailEntity emailDetails = emailDetailRepository.findByEmailTypeAndLanguage(EmailTypeEnum.BOOKING_EMAIL_TYPE, language)
                 .orElseThrow(() -> new CartelCustomException("Email notification type: BOOKING_EMAIL_TYPE is not existing."));
@@ -36,7 +40,7 @@ public class EmailService implements EmailDetailInterface {
     }
 
     @Override
-    public void sendForgotPasswordMessage(String toRecipient, String password) {
+    public void sendForgotPasswordMessage(String toRecipient, String password) throws MessagingException {
 
         EmailDetailEntity emailDetails = emailDetailRepository.findByEmailType(EmailTypeEnum.FORGOT_PASSWORD_TYPE)
                 .orElseThrow(() -> new CartelCustomException("Email notification type: FORGOT_PASSWORD_TYPE is not existing."));
@@ -91,17 +95,18 @@ public class EmailService implements EmailDetailInterface {
         return emailDetailsModels;
     }
 
-    private synchronized void sendMessage(EmailDetailEntity emailDetails, String toRecipient) {
+    private synchronized void sendMessage(EmailDetailEntity emailDetails, String toRecipient) throws MessagingException {
 
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
 
-        mailMessage.setFrom(emailDetails.getFrom());
-        mailMessage.setTo("petkovhristo94@gmail.com");
-        mailMessage.setSubject(emailDetails.getSubject());
-        mailMessage.setText(emailDetails.getText());
+        mimeMessage.setFrom(emailDetails.getFrom());
+        //mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("petkovhristo94@gmail.com"));
+        mimeMessage.setSubject(emailDetails.getSubject(), "UTF-8");
+        mimeMessage.setText(emailDetails.getText(), "UTF-8", "html");
+        mimeMessage.setSentDate(new Date());
 
         try {
-            mailSender.send(mailMessage);
+            mailSender.send(mimeMessage);
         } catch (MailException e) {
             System.err.println(e.getMessage());
         }
