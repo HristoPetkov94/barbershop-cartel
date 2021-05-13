@@ -75,6 +75,9 @@ public class AppointmentService implements AppointmentInterface {
         List<AppointmentEntity> bookedHours = appointmentRepository.findByDateAndBarberId(day, barberId);
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, null);
 
+        LocalTime timeNow = LocalTime.now();
+        LocalDate today = LocalDate.now();
+
         LocalTime currentAppointment = firstAppointment(configuration);
         LocalTime lastAppointment = lastAppointment(configuration);
 
@@ -94,6 +97,12 @@ public class AppointmentService implements AppointmentInterface {
                     currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
                     continue hoursLoop;
                 }
+            }
+
+            // if the currentAppointment is already past hour for today, don't create it.
+            if (currentAppointment.isBefore(timeNow) && day.equals(today)) {
+                currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
+                continue;
             }
 
             AppointmentHoursModel newHour = new AppointmentHoursModel();
