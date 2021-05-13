@@ -1,16 +1,14 @@
-
+<hr/>
 <div *ngFor="let email of emails">
 
   <mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
 
-    <mat-grid-tile [colspan]="2" [rowspan]="2">
+    <mat-grid-tile [colspan]="2" [rowspan]="4">
 
       <div class="col padding-20 max-height">
 
-        <h1 class="margin-bottom-10"> Booking confirmation email message</h1>
-        <p> You can specify the text of the email message that the system sends when creating a reservation.
-        </p>
-
+        <h1 class="margin-bottom-10"> {{ labels.get(email.emailType).header | translate }}</h1>
+        <p class="pre-line"> {{ labels.get(email.emailType).description | translate }} </p>
       </div>
 
     </mat-grid-tile>
@@ -19,7 +17,7 @@
 
       <div class="col padding-20 max-height max-width">
 
-        <h2 class="margin-bottom-10"> From </h2>
+        <h2 class="margin-bottom-10"> {{ 'configuration.emails.from' | translate }} </h2>
 
         <div class="row justify-content-center">
           <input disabled type="text" class="text-input max-width" [(ngModel)]="email.from"/>
@@ -27,7 +25,7 @@
 
         <br/>
 
-        <h2 class="margin-bottom-10"> Subject </h2>
+        <h2 class="margin-bottom-10">  {{ 'configuration.emails.subject' | translate }}  </h2>
 
         <div class="row justify-content-center">
           <input type="text" class="text-input max-width" [(ngModel)]="email.subject"/>
@@ -35,7 +33,7 @@
 
         <br/>
 
-        <h2 class="margin-bottom-10"> Message </h2>
+        <h2 class="margin-bottom-10">  {{ 'configuration.emails.message' | translate }}  </h2>
 
         <div class="row margin-bottom-10">
               <textarea class="front-page-message-input max-width" [(ngModel)]="email.text" rows="15" cols="50"
@@ -43,7 +41,7 @@
         </div>
         <button mat-stroked-button color="accent" (click)="saveEmailMessages()">
           <mat-icon>save</mat-icon>
-          Save
+          {{ 'configuration.save' | translate }}
         </button>
       </div>
     </mat-grid-tile>

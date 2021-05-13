@@ -1,6 +1,6 @@
 package com.barbershop.cartel.general.config.info.controller;
 
-import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.general.config.info.interfaces.GeneralConfigurationInterface;
 import com.barbershop.cartel.general.config.info.models.GeneralConfigurationModel;
 import org.springframework.beans.factory.annotation.Autowired;

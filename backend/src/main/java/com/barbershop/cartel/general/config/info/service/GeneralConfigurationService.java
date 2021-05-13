@@ -2,7 +2,7 @@ package com.barbershop.cartel.general.config.info.service;
 
 import com.barbershop.cartel.errors.CartelCustomException;
 import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
-import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.general.config.info.interfaces.GeneralConfigurationInterface;
 import com.barbershop.cartel.general.config.info.models.GeneralConfigurationModel;
 import com.barbershop.cartel.general.config.info.repository.GeneralConfigurationRepository;

@@ -1,7 +1,7 @@
 package com.barbershop.cartel.general.config.info.repository;
 
 import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
-import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

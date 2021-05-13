@@ -1,5 +1,6 @@
 package com.barbershop.cartel.notifications.email.entity;
 
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.notifications.email.enums.EmailTypeEnum;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,4 +30,7 @@ public class EmailDetailEntity {
 
     @Column(name = "email_type")
     private EmailTypeEnum emailType;
+
+    @Column(name = "language")
+    private LanguageEnum language;
 }

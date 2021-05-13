@@ -89,8 +89,18 @@
       "barbers": "Barbers",
       "services": "Services",
       "assignments": "Assignments",
+      "emails": "Emails",
       "store": "Store",
       "logout": "Logout"
+    },
+    "emails": {
+      "header_booking_email": "Booking confirmation email message",
+      "header_forgot_password_email": "Forgot password email message",
+      "description_booking_email": "You can specify the text of the email message that the system sends when creating a reservation.\n\nSymbol that represents new line : <br>\n\nIn order to have text formatted bold or italic surround the text like:\n\n<b>bold text</b>\n<i>italic text</i>\n\nAlso in the email you can define barber's name, service's type and the date/time of the appointment using the following key-words: \n\n1.$barber\n2.$service\n3.$appointment",
+      "description_forgot_password_email": "You can specify the text of the email message that the system sends when password is forgotten.\n\nSymbol that represents new line : <br>\n\n You can use special word $password to represent the actual password in the email.",
+      "from": "From",
+      "subject": "Subject",
+      "message": "Message"
     }
   }
 }

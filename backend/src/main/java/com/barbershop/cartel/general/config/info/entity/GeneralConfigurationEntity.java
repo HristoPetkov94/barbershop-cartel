@@ -1,6 +1,6 @@
 package com.barbershop.cartel.general.config.info.entity;
 
-import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,6 +34,5 @@ public class GeneralConfigurationEntity {
     private String phoneNumber;
 
     @Column(name = "language")
-    // default is english
     private LanguageEnum language = LanguageEnum.en;
 }

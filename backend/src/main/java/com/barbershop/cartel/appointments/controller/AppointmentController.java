@@ -3,6 +3,7 @@ package com.barbershop.cartel.appointments.controller;
 import com.barbershop.cartel.appointments.models.AppointmentRequestModel;
 import com.barbershop.cartel.appointments.models.AppointmentWeekModel;
 import com.barbershop.cartel.appointments.interfaces.AppointmentInterface;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,7 +31,7 @@ public class AppointmentController {
     }
 
     @PostMapping(value = "/save-appointment")
-    public void saveAppointment(@RequestBody AppointmentRequestModel appointmentModel) {
-        appointmentInterface.save(appointmentModel);
+    public void saveAppointment(@RequestBody AppointmentRequestModel appointmentModel, @RequestParam LanguageEnum language) {
+        appointmentInterface.save(appointmentModel, language);
     }
 }

@@ -1,7 +1,11 @@
 package com.barbershop.cartel.config;
 
 import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.general.config.info.repository.GeneralConfigurationRepository;
+import com.barbershop.cartel.notifications.email.entity.EmailDetailEntity;
+import com.barbershop.cartel.notifications.email.enums.EmailTypeEnum;
+import com.barbershop.cartel.notifications.email.repository.EmailDetailRepository;
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,11 +21,13 @@ public class StartupConfiguration {
     @Autowired
     private DataSource dataSource;
 
-
-    //TODO: check if  @Lazy is needed
     @Autowired
     @Lazy
     private GeneralConfigurationRepository generalConfigurationRepository;
+
+    @Autowired
+    @Lazy
+    private EmailDetailRepository emailDetailRepository;
 
     @Bean
     @Profile("prod")
@@ -35,14 +41,45 @@ public class StartupConfiguration {
     @Bean
     @Profile("dev")
     public void addConfig() {
-        //TODO: fix imports on LanguageEnum
         GeneralConfigurationEntity configurationEN = new GeneralConfigurationEntity();
-        configurationEN.setLanguage(com.barbershop.cartel.general.config.messages.enums.LanguageEnum.en);
+        configurationEN.setLanguage(LanguageEnum.en);
 
         GeneralConfigurationEntity configurationBG = new GeneralConfigurationEntity();
-        configurationBG.setLanguage(com.barbershop.cartel.general.config.messages.enums.LanguageEnum.bg);
+        configurationBG.setLanguage(LanguageEnum.bg);
 
         generalConfigurationRepository.save(configurationEN);
         generalConfigurationRepository.save(configurationBG);
+
+        EmailDetailEntity bookingEmailBG = new EmailDetailEntity();
+
+        bookingEmailBG.setFrom("admin@cartel.bg");
+        bookingEmailBG.setEmailType(EmailTypeEnum.BOOKING_EMAIL_TYPE);
+        bookingEmailBG.setLanguage(LanguageEnum.bg);
+
+        emailDetailRepository.save(bookingEmailBG);
+
+        EmailDetailEntity forgotPasswordEmailBG = new EmailDetailEntity();
+
+        forgotPasswordEmailBG.setFrom("admin@cartel.bg");
+        forgotPasswordEmailBG.setEmailType(EmailTypeEnum.FORGOT_PASSWORD_TYPE);
+        forgotPasswordEmailBG.setLanguage(LanguageEnum.bg);
+
+        emailDetailRepository.save(forgotPasswordEmailBG);
+
+        EmailDetailEntity bookingEmailEN = new EmailDetailEntity();
+
+        bookingEmailEN.setFrom("admin@cartel.bg");
+        bookingEmailEN.setEmailType(EmailTypeEnum.BOOKING_EMAIL_TYPE);
+        bookingEmailEN.setLanguage(LanguageEnum.en);
+
+        emailDetailRepository.save(bookingEmailEN);
+
+        EmailDetailEntity forgotPasswordEmailEN = new EmailDetailEntity();
+
+        forgotPasswordEmailEN.setFrom("admin@cartel.bg");
+        forgotPasswordEmailEN.setEmailType(EmailTypeEnum.FORGOT_PASSWORD_TYPE);
+        forgotPasswordEmailEN.setLanguage(LanguageEnum.en);
+
+        emailDetailRepository.save(forgotPasswordEmailEN);
     }
 }

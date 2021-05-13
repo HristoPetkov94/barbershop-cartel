@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AppointmentService} from '../../../../services/appointment.service';
 import {AppointmentRequest} from '../../../../interfaces/appointment-request';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
+import {getCookie} from '../../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-finish-step',
@@ -14,10 +15,9 @@ export class FinishStepComponent implements OnInit {
   @Input() stepController;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
+  private language: string;
   public assignmentId;
-
   public appointment = new AppointmentRequest();
-
   public done = false;
 
   constructor(
@@ -28,7 +28,7 @@ export class FinishStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('finish step');
+    this.language = getCookie('lang');
   }
 
   makeAnAppointment() {
@@ -37,7 +37,7 @@ export class FinishStepComponent implements OnInit {
     this.appointment.hour = this.stepperData.hour;
     this.appointment.date = this.stepperData.date;
 
-    this.appointmentService.bookNow(this.appointment).subscribe(() => {
+    this.appointmentService.bookNow(this.appointment, this.language).subscribe(() => {
     }, () => {
     }, () => {
       this.done = true;

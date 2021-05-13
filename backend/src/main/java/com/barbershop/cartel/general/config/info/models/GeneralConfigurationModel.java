@@ -1,6 +1,6 @@
 package com.barbershop.cartel.general.config.info.models;
 
-import com.barbershop.cartel.general.config.messages.enums.LanguageEnum;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import lombok.Getter;
 import lombok.Setter;
 

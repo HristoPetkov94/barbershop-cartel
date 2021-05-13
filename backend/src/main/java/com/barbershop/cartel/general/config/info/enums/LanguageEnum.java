@@ -1,4 +1,4 @@
-package com.barbershop.cartel.general.config.messages.enums;
+package com.barbershop.cartel.general.config.info.enums;
 
 public enum LanguageEnum {
     bg,
