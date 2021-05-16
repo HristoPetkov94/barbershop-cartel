@@ -6,62 +6,58 @@
         <h2> {{ 'configuration.title' | translate }}</h2>
 
         <mat-button-toggle-group (change)="changeLang($event)" [(ngModel)]="language">
-          <mat-button-toggle value="bg">BG</mat-button-toggle>
-          <mat-button-toggle value="en">EN</mat-button-toggle>
+          <mat-button-toggle value="{{bulgarian}}">BG</mat-button-toggle>
+          <mat-button-toggle value="{{english}}">EN</mat-button-toggle>
         </mat-button-toggle-group>
 
       </mat-toolbar>
 
       <div class="row content-wrapper">
-        <div class="drawer">
+        <div class="drawer col flex-space-between">
 
-          <div class="go-home" [routerLink]="'/'">
-            <mat-icon> home</mat-icon>
-            <div class="sized-box-width-10"></div>
-            <h2>  {{ 'configuration.tabs.home' | translate }} </h2>
-          </div>
+          <div class="col">
+            <div class="go-home" [routerLink]="'/'">
+              <mat-icon> home</mat-icon>
+              <div class="sized-box-width-10"></div>
+              <h2>  {{ 'configuration.tabs.home' | translate }} </h2>
+            </div>
 
-          <div [routerLink]="'/configuration/general'" [routerLinkActive]="['selected']"
-               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-            <mat-icon>settings</mat-icon>
-            <h2> {{ 'configuration.tabs.general' | translate }}</h2>
-            <div class="sized-box-width-100"></div>
-          </div>
+            <div [routerLink]="'/configuration/general'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>settings</mat-icon>
+              <h2> {{ 'configuration.tabs.general' | translate }}</h2>
+            </div>
 
-          <div [routerLink]="'/configuration/barbers'" [routerLinkActive]="['selected']"
-               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-            <mat-icon>groups</mat-icon>
-            <h2> {{ 'configuration.tabs.barbers' | translate }}</h2>
-            <div class="sized-box-width-100"></div>
-          </div>
+            <div [routerLink]="'/configuration/barbers'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>groups</mat-icon>
+              <h2> {{ 'configuration.tabs.barbers' | translate }}</h2>
+            </div>
 
-          <div [routerLink]="'/configuration/services'" [routerLinkActive]="['selected']"
-               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-            <mat-icon>menu_book</mat-icon>
-            <h2> {{ 'configuration.tabs.services' | translate }}</h2>
-            <div class="sized-box-width-100"></div>
-          </div>
+            <div [routerLink]="'/configuration/services'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>menu_book</mat-icon>
+              <h2> {{ 'configuration.tabs.services' | translate }}</h2>
+            </div>
 
-          <div [routerLink]="'/configuration/assignments'" [routerLinkActive]="['selected']"
-               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-            <mat-icon>assignment</mat-icon>
-            <h2> {{ 'configuration.tabs.assignments' | translate }}</h2>
-            <div class="sized-box-width-100"></div>
-          </div>
+            <div [routerLink]="'/configuration/assignments'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>assignment</mat-icon>
+              <h2> {{ 'configuration.tabs.assignments' | translate }}</h2>
+            </div>
 
-          <div [routerLink]="'/configuration/emails'" [routerLinkActive]="['selected']"
-               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-            <mat-icon>email</mat-icon>
-            <h2>{{ 'configuration.tabs.emails' | translate }}</h2>
-            <div class="sized-box-width-100"></div>
-          </div>
+            <div [routerLink]="'/configuration/emails'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>email</mat-icon>
+              <h2>{{ 'configuration.tabs.emails' | translate }}</h2>
+            </div>
 
 
-          <div [routerLink]="'/configuration/store'" [routerLinkActive]="['selected']"
-               class="row justify-content-center space-between-5 remove-focus height-50 unselectable">
-            <mat-icon>shopping_cart</mat-icon>
-            <h2> {{ 'configuration.tabs.store' | translate }}</h2>
-            <div class="sized-box-width-100"></div>
+            <div [routerLink]="'/configuration/store'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>shopping_cart</mat-icon>
+              <h2> {{ 'configuration.tabs.store' | translate }}</h2>
+            </div>
           </div>
 
           <div class="go-home" (click)="logout()">

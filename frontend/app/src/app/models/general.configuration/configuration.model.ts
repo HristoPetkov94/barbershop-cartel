@@ -1,3 +1,5 @@
+import {LanguageEnum} from '../../enums/language.enum';
+
 export class Configuration {
   frontPageMessage: string;
   appointmentSuccessMessage: string;
@@ -7,6 +9,5 @@ export class Configuration {
   facebook: string;
   instagram: string;
 
-  //TODO: create enum for languages
-  language: string;
+  language: LanguageEnum;
 }

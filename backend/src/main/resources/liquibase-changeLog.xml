@@ -11,6 +11,7 @@
         <sqlFile path="change_sets/general_configuration.sql"/>
     </changeSet>
 
-<!--    //TODO: add for social media changeset (think if needed)-->
-
+    <changeSet author="pm" id="social_media_id">
+        <sqlFile path="change_sets/social_media.sql"/>
+    </changeSet>
 </databaseChangeLog>

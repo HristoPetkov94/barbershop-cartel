@@ -3,6 +3,8 @@ package com.barbershop.cartel.config;
 import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
 import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.general.config.info.repository.GeneralConfigurationRepository;
+import com.barbershop.cartel.general.config.socialmedia.entity.SocialMediaEntity;
+import com.barbershop.cartel.general.config.socialmedia.repository.SocialMediaRepository;
 import com.barbershop.cartel.notifications.email.entity.EmailDetailEntity;
 import com.barbershop.cartel.notifications.email.enums.EmailTypeEnum;
 import com.barbershop.cartel.notifications.email.repository.EmailDetailRepository;
@@ -29,6 +31,10 @@ public class StartupConfiguration {
     @Lazy
     private EmailDetailRepository emailDetailRepository;
 
+    @Autowired
+    @Lazy
+    private SocialMediaRepository socialMediaRepository;
+
     @Bean
     @Profile("prod")
     public SpringLiquibase liquibase() {
@@ -41,6 +47,12 @@ public class StartupConfiguration {
     @Bean
     @Profile("dev")
     public void addConfig() {
+        generalConfigurationInitialization();
+        emailConfigurationInitialization();
+        socialMediaInitialization();
+    }
+
+    private void generalConfigurationInitialization() {
         GeneralConfigurationEntity configurationEN = new GeneralConfigurationEntity();
         configurationEN.setLanguage(LanguageEnum.en);
 
@@ -49,7 +61,9 @@ public class StartupConfiguration {
 
         generalConfigurationRepository.save(configurationEN);
         generalConfigurationRepository.save(configurationBG);
+    }
 
+    private void emailConfigurationInitialization() {
         EmailDetailEntity bookingEmailBG = new EmailDetailEntity();
 
         bookingEmailBG.setFrom("admin@cartel.bg");
@@ -82,4 +96,9 @@ public class StartupConfiguration {
 
         emailDetailRepository.save(forgotPasswordEmailEN);
     }
+
+    private void socialMediaInitialization() {
+        socialMediaRepository.save(new SocialMediaEntity());
+    }
+
 }

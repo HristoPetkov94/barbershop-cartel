@@ -5,6 +5,7 @@ import {getCookie, setCookie} from '../../utils/cookie.utils';
 import {TranslateService} from '@ngx-translate/core';
 import {fade} from '../../views/animations/fade';
 import {transitionFade} from '../../views/animations/transition.fade';
+import {LanguageEnum} from '../../enums/language.enum';
 
 @Component({
   selector: 'app-admin-layout',
@@ -13,6 +14,9 @@ import {transitionFade} from '../../views/animations/transition.fade';
 })
 export class AdminLayoutComponent implements OnInit {
   public language = getCookie('lang');
+
+  public bulgarian = LanguageEnum.BG;
+  public english = LanguageEnum.EN;
 
   constructor(
     private authenticationService: AuthenticationService,

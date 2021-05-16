@@ -3,7 +3,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../authentication/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../models/user.model';
-// TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
 
 @Component({
   selector: 'app-register',

@@ -90,7 +90,6 @@ export class GeneralConfigurationComponent implements OnInit {
   getConfiguration(language) {
     this.generalConfigurationService.getConfiguration(language).subscribe(config => {
 
-      console.log('loading config:', language);
       this.configuration = config;
 
       this.frontPageMessage = config.frontPageMessage;
