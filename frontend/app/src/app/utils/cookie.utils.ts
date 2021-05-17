@@ -10,7 +10,7 @@ export function setCookie(name: string, val: string) {
 
   // Set it
   // document.cookie = name + '=' + value + '; expires=' + date.toUTCString() + '; path=/';
-  document.cookie = name + '=' + value + '; expires=' + -1 + '; path=/';
+  document.cookie = name + '=' + value + '; expires=' + -1 + '; path=/' + '; Secure';
 }
 
 export function getCookie(name: string) {

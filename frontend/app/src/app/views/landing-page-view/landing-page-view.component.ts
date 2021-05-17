@@ -8,7 +8,6 @@ import {GeneralConfigurationService} from '../../services/general.configuration.
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {Router} from '@angular/router';
 import {getCookie} from '../../utils/cookie.utils';
-import {SocialAuthService} from 'angularx-social-login';
 import {SocialMediaService} from '../../services/socialmedia.service';
 
 
@@ -38,12 +37,11 @@ export class LandingPageViewComponent implements OnInit {
     const language = getCookie('lang');
 
     this.generalConfigurationService.getConfiguration(language).subscribe(config => {
-      console.log('loading ', language);
 
       const message = config.frontPageMessage;
 
       const regex = /#(.*)#/g;
-      const result = config.frontPageMessage.match(regex);
+      const result = message.match(regex);
 
       this.frontPageMessage = message;
 

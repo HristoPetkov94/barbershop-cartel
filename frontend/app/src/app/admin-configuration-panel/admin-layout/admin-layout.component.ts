@@ -13,8 +13,7 @@ import {LanguageEnum} from '../../enums/language.enum';
   styleUrls: ['./admin-layout.component.css', '../shared-styles/shared.css'], animations: [transitionFade, fade]
 })
 export class AdminLayoutComponent implements OnInit {
-  public language = getCookie('lang');
-
+  public language;
   public bulgarian = LanguageEnum.BG;
   public english = LanguageEnum.EN;
 
@@ -26,8 +25,8 @@ export class AdminLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const lang = getCookie('lang');
-    this.translate.use(lang);
+    this.language = getCookie('lang');
+    this.translate.use(this.language);
   }
 
   logout() {

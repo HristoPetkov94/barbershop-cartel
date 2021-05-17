@@ -34,8 +34,7 @@ export class GeneralConfigurationComponent implements OnInit {
 
   constructor(
     private generalConfigurationService: GeneralConfigurationService,
-    private socialMediaService: SocialMediaService,
-  ) {
+    private socialMediaService: SocialMediaService) {
   }
 
   ngOnInit(): void {

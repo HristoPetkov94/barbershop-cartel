@@ -54,9 +54,21 @@ public class StartupConfiguration {
 
     private void generalConfigurationInitialization() {
         GeneralConfigurationEntity configurationEN = new GeneralConfigurationEntity();
+
+        configurationEN.setFrontPageMessage("");
+        configurationEN.setAppointmentSuccessMessage("");
+        configurationEN.setAddress("");
+        configurationEN.setCity("");
+        configurationEN.setPhoneNumber("");
         configurationEN.setLanguage(LanguageEnum.en);
 
         GeneralConfigurationEntity configurationBG = new GeneralConfigurationEntity();
+
+        configurationBG.setFrontPageMessage("");
+        configurationBG.setAppointmentSuccessMessage("");
+        configurationBG.setAddress("");
+        configurationBG.setCity("");
+        configurationBG.setPhoneNumber("");
         configurationBG.setLanguage(LanguageEnum.bg);
 
         generalConfigurationRepository.save(configurationEN);

@@ -1,7 +1,8 @@
-import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {NgModule} from '@angular/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {TranslateLoader, TranslateModule, TranslateService} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import {getCookie, setCookie} from '../utils/cookie.utils';
 
 @NgModule({
   imports: [
@@ -20,7 +21,12 @@ export class I18nModule {
   constructor(translate: TranslateService) {
     translate.addLangs(['en', 'bg']);
     const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|bg/) ? browserLang : 'en');
+
+    const language = browserLang.match(/en|bg/) ? browserLang : 'en';
+
+    setCookie('lang', language);
+
+    translate.use(language);
   }
 }
 
