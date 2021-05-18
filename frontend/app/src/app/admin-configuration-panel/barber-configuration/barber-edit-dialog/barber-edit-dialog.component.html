@@ -23,24 +23,24 @@
       <div class="col max-width margin-left-20">
         <mat-form-field>
           <mat-label> {{'configuration.barbers.firstname' | translate}}</mat-label>
-          <input matInput formControlName="firstName" placeholder=" {{'configuration.barbers.firstname' | translate}}">
+          <input matInput formControlName="firstName" placeholder=" {{'configuration.barbers.firstname' | translate}}" maxlength="100">
         </mat-form-field>
 
         <mat-form-field>
           <mat-label> {{'configuration.barbers.lastname' | translate}}</mat-label>
-          <input matInput formControlName="lastName" placeholder=" {{'configuration.barbers.lastname' | translate}}">
+          <input matInput formControlName="lastName" placeholder=" {{'configuration.barbers.lastname' | translate}}" maxlength="100">
         </mat-form-field>
       </div>
     </div>
 
     <mat-form-field class="example-full-width">
       <mat-label>Instagram link</mat-label>
-      <input matInput formControlName="instagram" placeholder=""/>
+      <input matInput formControlName="instagram" placeholder="" maxlength="100"/>
       <mat-error *ngIf="instagram.invalid" align="end"> {{ 'configuration.barbers.valid_url_error'| translate}}</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Facebook link</mat-label>
-      <input matInput formControlName="facebook" placeholder=""/>
+      <input matInput formControlName="facebook" placeholder="" maxlength="100"/>
       <mat-error *ngIf="facebook.invalid" align="end">{{ 'configuration.barbers.valid_url_error'| translate}}</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">

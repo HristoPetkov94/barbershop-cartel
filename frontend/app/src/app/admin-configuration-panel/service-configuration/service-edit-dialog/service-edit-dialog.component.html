@@ -30,7 +30,7 @@
 
           <mat-form-field>
             <mat-label>{{ 'configuration.services.title' | translate}}</mat-label>
-            <input matInput formControlName="serviceTitle">
+            <input matInput formControlName="serviceTitle" maxlength="100">
           </mat-form-field>
 
           <div class="sized-box-height-20"></div>
@@ -41,7 +41,7 @@
                       cdkTextareaAutosize
                       cdkAutosizeMinRows="6"
                       cdkAutosizeMaxRows="6"
-                      formControlName="description" ></textarea>
+                      formControlName="description"></textarea>
             <mat-error *ngIf="description.invalid" align="end"> {{ description.value?.length }} / 255</mat-error>
             <mat-hint *ngIf="description.valid" align="end"> {{ description.value?.length }} / 255</mat-hint>
           </mat-form-field>
