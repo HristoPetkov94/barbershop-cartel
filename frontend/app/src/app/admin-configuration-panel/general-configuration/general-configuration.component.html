@@ -61,10 +61,14 @@
     <div class="col padding-20 max-height max-width">
       <h2 class="margin-bottom-10"> {{ 'configuration.general.message' | translate }} </h2>
 
-      <div class="row margin-bottom-10">
-        <textarea class="preserve-whitespace front-page-message-input max-width" [(ngModel)]="frontPageMessage"
+      <div class="row margin-bottom-10 symbol-counter">
+        <textarea class="preserve-whitespace front-page-message-input max-width"
+                  [(ngModel)]="frontPageMessage"
                   rows="15" cols="50"
-                  name="comment"></textarea>
+                  name="comment"
+                  maxlength="255">
+        </textarea>
+        <div class="label">{{frontPageMessage?.length}} / 255</div>
       </div>
 
       <button class="row" mat-stroked-button color="accent" (click)="saveFrontPageMessage()">
@@ -95,10 +99,16 @@
     <div class="col padding-20 max-height max-width">
       <h2 class="margin-bottom-10">{{ 'configuration.general.message' | translate }}</h2>
 
-      <div class="row margin-bottom-10">
-              <textarea class="front-page-message-input max-width" [(ngModel)]="appointmentMessage" rows="15" cols="50"
-                        name="comment"></textarea>
+      <div class="row margin-bottom-10 symbol-counter">
+              <textarea class="front-page-message-input max-width"
+                        [(ngModel)]="appointmentMessage"
+                        rows="15" cols="50"
+                        name="comment"
+                        maxlength="255">
+              </textarea>
+        <div class="label">{{appointmentMessage?.length}} / 255</div>
       </div>
+
       <button mat-stroked-button color="accent" (click)="saveAppointmentMessage()">
         <mat-icon>save</mat-icon>
         {{ 'configuration.general.save' | translate }}
@@ -131,7 +141,7 @@
         <div class="sized-box-width-100">
           <img class="social-icons" src="../../assets/images/facebook-icon.png"/>
         </div>
-        <input [(ngModel)]="socialMedia.facebook" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="socialMedia.facebook" type="text" class="text-input max-width" maxlength="100"/>
       </div>
 
       <div class="sized-box-height-20"></div>
@@ -142,7 +152,7 @@
         <div class="sized-box-width-100">
           <img class="social-icons" src="../../assets/images/instagram-icon.png"/>
         </div>
-        <input [(ngModel)]="socialMedia.instagram" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="socialMedia.instagram" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <button mat-stroked-button color="accent" (click)="saveSocialMedia()">
         <mat-icon>save</mat-icon>
@@ -175,19 +185,19 @@
 
       <h2 class="margin-bottom-10"> {{ 'configuration.general.city' | translate }} </h2>
       <div class="row justify-content-center">
-        <input [(ngModel)]="contactInfo.city" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="contactInfo.city" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> {{ 'configuration.general.address' | translate }} </h2>
       <div class="row justify-content-center">
-        <input [(ngModel)]="contactInfo.address" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="contactInfo.address" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> {{ 'configuration.general.phone' | translate }} </h2>
       <div class="row justify-content-center">
-        <input [(ngModel)]="contactInfo.phoneNumber" type="text" class="text-input max-width"/>
+        <input [(ngModel)]="contactInfo.phoneNumber" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <div class="sized-box-height-20"></div>
       <button mat-stroked-button color="accent" (click)="saveContactInfo()">

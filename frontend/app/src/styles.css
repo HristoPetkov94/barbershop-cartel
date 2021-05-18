@@ -227,3 +227,13 @@ h2 {
 .pre-line {
   white-space: pre-line;
 }
+
+.symbol-counter{
+  position: relative;
+}
+
+.label {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}

@@ -20,20 +20,25 @@
         <h2 class="margin-bottom-10"> {{ 'configuration.emails.from' | translate }} </h2>
 
         <div class="row justify-content-center margin-bottom-10">
-          <input disabled type="text" class="text-input max-width" [(ngModel)]="email.from"/>
+          <input disabled type="text" class="text-input max-width" [(ngModel)]="email.from" maxlength="100"/>
         </div>
 
         <h2 class="margin-bottom-10">  {{ 'configuration.emails.subject' | translate }}  </h2>
 
         <div class="row justify-content-center margin-bottom-10">
-          <input type="text" class="text-input max-width" [(ngModel)]="email.subject"/>
+          <input type="text" class="text-input max-width" [(ngModel)]="email.subject" maxlength="100"/>
         </div>
 
         <h2 class="margin-bottom-10">  {{ 'configuration.emails.message' | translate }}  </h2>
 
-        <div class="row margin-bottom-10">
-              <textarea class="front-page-message-input max-width" [(ngModel)]="email.text" rows="15" cols="50"
-                        name="comment"></textarea>
+        <div class="row margin-bottom-10 symbol-counter">
+              <textarea class="front-page-message-input max-width"
+                        [(ngModel)]="email.text"
+                        rows="15" cols="50"
+                        name="comment"
+                        maxlength="255">
+              </textarea>
+          <div class="label">{{email.text?.length}} / 255</div>
         </div>
         <button mat-stroked-button color="accent" (click)="saveEmailMessages()">
           <mat-icon>save</mat-icon>
