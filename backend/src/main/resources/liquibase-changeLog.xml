@@ -7,6 +7,10 @@
    http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
+    <changeSet author="ss" id="intit.sql">
+        <sqlFile path="change_sets/init.sql"/>
+    </changeSet>
+
     <changeSet author="pm" id="configuration_id">
         <sqlFile path="change_sets/general_configuration.sql"/>
     </changeSet>
