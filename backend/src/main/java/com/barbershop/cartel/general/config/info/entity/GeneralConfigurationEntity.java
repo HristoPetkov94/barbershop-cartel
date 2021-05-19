@@ -1,5 +1,6 @@
-package com.barbershop.cartel.generalConfig.entity;
+package com.barbershop.cartel.general.config.info.entity;
 
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,12 +24,6 @@ public class GeneralConfigurationEntity {
     @Column(name = "appointment_success_message")
     private String appointmentSuccessMessage;
 
-    @Column(name = "facebook")
-    private String facebook;
-
-    @Column(name = "instagram")
-    private String instagram;
-
     @Column(name = "city")
     private String city;
 
@@ -37,4 +32,7 @@ public class GeneralConfigurationEntity {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @Column(name = "language")
+    private LanguageEnum language = LanguageEnum.en;
 }

@@ -71,17 +71,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/authenticate", "/register")
                 .antMatchers(HttpMethod.GET,
-                        "/general-configuration/front-page-message",
-                        "/general-configuration/social-media",
                         "/barbers",
                         "/services",
                         "/assignments",
                         "/appointments/appointment-current-week**",
                         "/appointments/appointment-next-week**",
                         "/appointments/appointment-previous-week**",
-                        "/images/**")
+                        "/images/**",
+                        "/social-media",
+                        "/general-configuration**")
                 .antMatchers(HttpMethod.POST,
-                        "/appointments/save-appointment",
-                        "/send-email-message");
+                        "/appointments/save-appointment");
     }
 }

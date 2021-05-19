@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 @RestController
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @PostMapping("/forgot-password")
-    public void forgotPassword(@RequestParam String email) throws Exception {
+    public void forgotPassword(@RequestParam String email) throws MessagingException {
         passwordService.forgotPassword(email);
     }
 

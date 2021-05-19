@@ -11,20 +11,96 @@
       "logout": "logout"
     }
   },
-
   "services": {
     "title": "we offer you the best services",
     "subTitle": "Modern man's haircut and styling from our professional Barbers."
   },
-
   "team": {
     "title": "barbers"
   },
-
   "bookingMessage": "book now",
-
   "footer": {
     "title": "14 IVAN N. MOMCHILOV STREET // 5000 KARTALA,",
     "subTitle": "VELIKO TARNOVO TUESDAY THROUGH FRIDAY 10 — 7 // SATURDAY 10 — 5 // PHONE 088 881 4999"
+  },
+  "configuration": {
+    "title": "Configuration panel",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "add": "Add",
+    "delete": "Delete",
+    "edit_picture": "Edit picture",
+    "remove_picture": "Remove picture",
+    "please_select": " -- Please select -- ",
+    "general": {
+      "save": "Save",
+      "message": "Message",
+      "change_email": "Change email",
+      "email_label": "Email",
+      "admin_email": "Administrator email",
+      "admin_email_description": "This is the administrators email. Please be aware that changing the email will log you out.",
+      "change_email_invalid": "* Invalid email",
+      "admin_password": "Administrator password",
+      "admin_password_description": "This is the administrators password. You can change it to anything you like at any time.",
+      "change_password": "Change password",
+      "old_password": "Old password",
+      "new_password": "New password",
+      "confirm_password": "Confirm password",
+      "hide_password": "Hide password",
+      "old_password_error": "* Old password cannot be empty",
+      "new_password_error1": "* New password cannot be empty",
+      "new_password_error2": "* New password matches old password",
+      "confirm_password_error1": "* Confirm password password cannot be empty",
+      "confirm_password_error2": "* Does not match with new password",
+      "front_page_message_label": "Home page message",
+      "front_page_message_description": "This is the Home page message displayed above \"Book now\" button. You can change it at any time.",
+      "appointment_message_label": "Booking appointments message",
+      "appointment_message_description": "This message is displayed at the last step of the booking process. It appears when an appointment was successfully completed. You can change it at any time.",
+      "social_media_label": "Social media",
+      "social_media_description": "Set up URLs of the barbershop's social media pages. You can change it at any time.",
+      "contact_info_label": "Contact info",
+      "contact_info_description": "Provide contact details to the public. You can change it at any time.",
+      "city": "City",
+      "address": "Address",
+      "phone": "Phone number"
+    },
+    "barbers": {
+      "add_btn": "Add New Barber",
+      "firstname": "First name",
+      "lastname": "Last name",
+      "description": "Description",
+      "valid_url_error": "Please enter a valid url.",
+      "choose": "Choose barber"
+    },
+    "services":  {
+      "description": "Description",
+      "service": "Service",
+      "title": "Service Title",
+      "add_btn": "Add New Service",
+      "choose": "Choose service",
+      "price": "Price",
+      "duration": "Duration",
+      "price_error": "Max currency is 100лв."
+    },
+    "tabs": {
+      "home": "Home",
+      "general": "General",
+      "barbers": "Barbers",
+      "services": "Services",
+      "assignments": "Assignments",
+      "emails": "Emails",
+      "store": "Store",
+      "logout": "Logout"
+    },
+    "emails": {
+      "header_booking_email": "Booking confirmation email message",
+      "header_forgot_password_email": "Forgot password email message",
+      "description_booking_email": "You can specify the text of the email message that the system sends when creating a reservation.\n\nSymbol that represents new line : <br>\n\nIn order to have text formatted bold or italic surround the text like:\n\n<b>bold text</b>\n<i>italic text</i>\n\nAlso in the email you can define barber's name, service's type and the date/time of the appointment using the following key-words: \n\n1.$barber\n2.$service\n3.$appointment",
+      "description_forgot_password_email": "You can specify the text of the email message that the system sends when password is forgotten.\n\nSymbol that represents new line : <br>\n\n You can use special word $password to represent the actual password in the email.",
+      "from": "From",
+      "subject": "Subject",
+      "message": "Message"
+    }
   }
 }

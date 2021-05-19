@@ -1,8 +1,7 @@
 package com.barbershop.cartel.security.service;
 
 import com.barbershop.cartel.errors.CartelCustomException;
-import com.barbershop.cartel.notifications.email.interfaces.EmailInterface;
-import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
+import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
 import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +10,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import javax.mail.MessagingException;
 
 @Slf4j
 @Service
@@ -21,26 +20,14 @@ public class PasswordService {
     private UserRepository userRepository;
 
     @Autowired
-    private EmailInterface emailInterface;
+    private EmailDetailInterface emailDetailInterface;
 
     @Autowired
     private PasswordEncoder bcryptEncoder;
 
-    private EmailDetailsModel emailDetails(String password) {
-
-        EmailDetailsModel emailDetailsModel = new EmailDetailsModel();
-
-        emailDetailsModel.setFrom("noreply@barbershop-cartel.com");
-        emailDetailsModel.setTo("petkovhristo94@gmail.com");
-        emailDetailsModel.setSubject("Забравена парола");
-        emailDetailsModel.setText("Здравей!\n\n Временната Ви парола е <b>" + password + "</b>. \n\nМоля сменете си я от тук: <a href=https://www.google.bg>www.google.bg</a> \n\nПоздрави!");
-
-        return emailDetailsModel;
-    }
-
     private String generateTemporaryPassword() {
 
-        int passwordLength = 15;
+        int passwordLength = 10;
 
         // chose a Character random from this String
         String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
@@ -71,7 +58,7 @@ public class PasswordService {
 
         boolean match = bcryptEncoder.matches(oldPassword, user.getPassword());
 
-        if(!match) {
+        if (!match) {
             throw new CartelCustomException("Old password doesn't match");
         }
 
@@ -88,21 +75,17 @@ public class PasswordService {
     }
 
     /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/
-    public void forgotPassword(String email) throws Exception {
+    public void forgotPassword(String email) throws MessagingException {
 
-        Optional<UserEntity> userOptional = userRepository.findByEmail(email);
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User with email: " + email + " does not exist"));
 
-        if (userOptional.isEmpty()) {
-            throw new UsernameNotFoundException("User with email: " + email + " does not exist");
-        }
-
-        UserEntity user = userOptional.get();
+        String username = user.getEmail();
         String password = generateTemporaryPassword();
 
         changePassword(user, password);
 
-        EmailDetailsModel details = emailDetails(password);
-        emailInterface.sendMailMessage(details);
+        emailDetailInterface.sendForgotPasswordMessage(username, password);
     }
 
 }

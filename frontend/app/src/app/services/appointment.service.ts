@@ -26,7 +26,7 @@ export class AppointmentService {
     return this.http.get<Week>(this.url + '/appointment-next-week' + '?' + 'assignmentId=' + assignmentId + '&' + 'numberOfWeeks=' + numberOfWeeks, {});
   }
 
-  bookNow(req: AppointmentRequest) {
-    return this.http.post(this.url + '/save-appointment', req);
+  bookNow(req: AppointmentRequest, language: string) {
+    return this.http.post(this.url + '/save-appointment' + '?' + 'language=' + language, req);
   }
 }

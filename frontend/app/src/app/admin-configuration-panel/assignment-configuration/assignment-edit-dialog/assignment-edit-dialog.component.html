@@ -6,7 +6,7 @@
   <div mat-dialog-content>
     <div class="row">
       <div class="col">
-        <h2> Продължителност</h2>
+        <h2> {{ 'configuration.services.duration' | translate}}</h2>
 
         <div class="row">
           <mat-form-field appearance="outline" style="width: 100px">
@@ -24,7 +24,7 @@
       <div class="sized-box-width-20 mat-field-padding-margin"></div>
 
       <div class="col">
-        <h2> Цена</h2>
+        <h2> {{ 'configuration.services.price' | translate}} </h2>
 
         <div class="row">
           <mat-form-field appearance="outline" style="width: 100px">
@@ -33,7 +33,7 @@
                    matInput formControlName="price" placeholder=".лв" type="number"
                    oninput="this.value = Math.abs(this.value);">
             <span matSuffix> {{currency}} </span>
-            <mat-error *ngIf="price.invalid"> {{ price.value?.length }} Max currency is 100лв.</mat-error>
+            <mat-error *ngIf="price.invalid"> {{ price.value?.length }} {{'configuration.services.price_error' | translate}}</mat-error>
           </mat-form-field>
 
           <div class="col mat-field-padding-margin">
@@ -48,7 +48,7 @@
   </div>
 
   <div mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="myForm" (click)="onNoClick()">Cancel</button>
-    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="myForm" cdkFocusInitial>Save</button>
+    <button mat-button [mat-dialog-close]="myForm" (click)="onNoClick()">{{ 'configuration.cancel' | translate}}</button>
+    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="myForm" cdkFocusInitial>{{ 'configuration.save' | translate}}</button>
   </div>
 </form>

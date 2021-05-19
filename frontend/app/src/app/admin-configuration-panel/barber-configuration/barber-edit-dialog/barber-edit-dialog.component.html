@@ -1,5 +1,5 @@
-<h1 *ngIf="isCreatingBarber" mat-dialog-title> Add </h1>
-<h1 *ngIf="!isCreatingBarber" mat-dialog-title> Edit </h1>
+<h1 *ngIf="isCreatingBarber" mat-dialog-title> {{'configuration.add' | translate}} </h1>
+<h1 *ngIf="!isCreatingBarber" mat-dialog-title> {{'configuration.edit' | translate}} </h1>
 
 <form [formGroup]="myForm">
   <div mat-dialog-content>
@@ -12,39 +12,39 @@
         <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'"></div>
         <div class="row">
           <button type="button" (click)="changeImage()" class="remove-picture-btn edit-button" mat-raised-button color="primary">
-            Edit picture
+            {{ 'configuration.edit_picture'| translate}}
           </button>
           <button type="button" (click)="removeImage()" class="remove-picture-btn" mat-raised-button color="warn">
-            Remove picture
+            {{ 'configuration.remove_picture'| translate}}
           </button>
         </div>
       </div>
 
       <div class="col max-width margin-left-20">
         <mat-form-field>
-          <mat-label>First name</mat-label>
-          <input matInput formControlName="firstName" placeholder="First name">
+          <mat-label> {{'configuration.barbers.firstname' | translate}}</mat-label>
+          <input matInput formControlName="firstName" placeholder=" {{'configuration.barbers.firstname' | translate}}" maxlength="100">
         </mat-form-field>
 
         <mat-form-field>
-          <mat-label>Last name</mat-label>
-          <input matInput formControlName="lastName" placeholder="Last name">
+          <mat-label> {{'configuration.barbers.lastname' | translate}}</mat-label>
+          <input matInput formControlName="lastName" placeholder=" {{'configuration.barbers.lastname' | translate}}" maxlength="100">
         </mat-form-field>
       </div>
     </div>
 
     <mat-form-field class="example-full-width">
       <mat-label>Instagram link</mat-label>
-      <input matInput formControlName="instagram" placeholder=""/>
-      <mat-error *ngIf="instagram.invalid" align="end"> Please enter a valid url.</mat-error>
+      <input matInput formControlName="instagram" placeholder="" maxlength="100"/>
+      <mat-error *ngIf="instagram.invalid" align="end"> {{ 'configuration.barbers.valid_url_error'| translate}}</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>Facebook link</mat-label>
-      <input matInput formControlName="facebook" placeholder=""/>
-      <mat-error *ngIf="facebook.invalid" align="end"> Please enter a valid url.</mat-error>
+      <input matInput formControlName="facebook" placeholder="" maxlength="100"/>
+      <mat-error *ngIf="facebook.invalid" align="end">{{ 'configuration.barbers.valid_url_error'| translate}}</mat-error>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <mat-label>Description</mat-label>
+      <mat-label>{{ 'configuration.barbers.description'| translate}}</mat-label>
       <textarea matTextareaAutosize matInput formControlName="description" placeholder="Description"></textarea>
       <mat-error *ngIf="description.invalid" align="end"> {{ description.value?.length }} / 255</mat-error>
       <mat-hint *ngIf="description.valid" align="end"> {{ description.value?.length }} / 255</mat-hint>
@@ -52,7 +52,7 @@
 
   </div>
   <div mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="data" (click)="onNoClick()">Cancel</button>
-    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    <button mat-button [mat-dialog-close]="data" (click)="onNoClick()">{{'configuration.cancel' | translate}}</button>
+    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>{{'configuration.save' | translate}}</button>
   </div>
 </form>

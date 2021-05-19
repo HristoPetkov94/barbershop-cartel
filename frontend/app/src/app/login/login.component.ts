@@ -11,7 +11,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
 }
-// TODO: Refactor everything here methods, split into components if you have to, refactor css to make it more readable, delete unused stuff.
 
 @Component({
   selector: 'app-login',
@@ -19,7 +18,6 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
 
   public hide = true;
   public matcher = new MyErrorStateMatcher();

@@ -5,11 +5,11 @@
   <div class="col">
     <div class="sized-box-height-40"></div>
 
-    <h1 class="margin-bottom-10"> Choose barber </h1>
+    <h1 class="margin-bottom-10">{{ 'configuration.barbers.choose' | translate}} </h1>
 
     <mat-form-field appearance="outline">
       <mat-select [(value)]="selectedBarberId">
-        <mat-option [value]="0"> -- Please select -- </mat-option>
+        <mat-option [value]="0">{{ 'configuration.please_select' | translate}}</mat-option>
 
         <mat-option *ngFor="let barber of barbers"
                 [value]="barber.id"> {{barber.firstName + ' ' + barber.lastName}} </mat-option>

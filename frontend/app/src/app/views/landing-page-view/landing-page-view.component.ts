@@ -7,6 +7,8 @@ import {fade} from '../animations/fade';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {Router} from '@angular/router';
+import {getCookie} from '../../utils/cookie.utils';
+import {SocialMediaService} from '../../services/socialmedia.service';
 
 
 @Component({
@@ -27,16 +29,21 @@ export class LandingPageViewComponent implements OnInit {
   constructor(
     private router: Router,
     private generalConfigurationService: GeneralConfigurationService,
+    private socialMediaService: SocialMediaService,
   ) {
   }
 
   ngOnInit() {
-    this.generalConfigurationService.getFrontPageMessage().subscribe(data => {
+    const language = getCookie('lang');
+
+    this.generalConfigurationService.getConfiguration(language).subscribe(config => {
+
+      const message = config.frontPageMessage;
 
       const regex = /#(.*)#/g;
-      const result = data.match(regex);
+      const result = message.match(regex);
 
-      this.frontPageMessage = data;
+      this.frontPageMessage = message;
 
       if (result) {
         for (const res of result) {
@@ -46,7 +53,7 @@ export class LandingPageViewComponent implements OnInit {
       }
     });
 
-    this.generalConfigurationService.getSocialMedia().subscribe(data => {
+    this.socialMediaService.getSocialMedia().subscribe(data => {
       this.socialMedia = data;
     });
   }
