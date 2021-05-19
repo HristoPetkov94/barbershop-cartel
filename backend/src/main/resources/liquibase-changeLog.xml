@@ -14,4 +14,8 @@
     <changeSet author="pm" id="social_media_id">
         <sqlFile path="change_sets/social_media.sql"/>
     </changeSet>
+
+    <changeSet author="pm" id="emails_id">
+        <sqlFile path="change_sets/emails_configuration.sql"/>
+    </changeSet>
 </databaseChangeLog>
