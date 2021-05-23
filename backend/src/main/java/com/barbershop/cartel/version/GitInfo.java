@@ -1,14 +1,12 @@
 package com.barbershop.cartel.version;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-@Getter
-@Setter
+@Data
 @Component
 @Configuration
 @PropertySource("classpath:git.properties")
