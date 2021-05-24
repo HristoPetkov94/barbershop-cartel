@@ -14,4 +14,24 @@
     <changeSet author="ss" id="init_data.sql">
         <sqlFile path="db/init_data.sql"/>
     </changeSet>
+
+    <changeSet author="ss" id="work_day.sql">
+        <sqlFile path="db/work_day.sql"/>
+    </changeSet>
+
+    <changeSet author="ss" id="work_week_days.sql">
+        <sqlFile path="db/work_week_days.sql"/>
+    </changeSet>
+
+    <changeSet author="ss" id="work_week_days_data.sql">
+        <sqlFile path="db/work_week_days_data.sql"/>
+    </changeSet>
+
+    <!-- keep this always as last changeset-->
+    <changeSet author="ss" id="reset_sequences.sql" runAlways="true">
+        <sqlFile path="db/reset_sequences.sql"
+                 splitStatements="false"
+                 stripComments="false"/>
+    </changeSet>
+
 </databaseChangeLog>
