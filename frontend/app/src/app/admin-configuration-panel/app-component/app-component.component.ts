@@ -1,7 +1,17 @@
-import {ChangeDetectionStrategy, Component, TemplateRef, ViewChild,} from '@angular/core';
-import {addDays, addHours, endOfDay, endOfMonth, isSameDay, isSameMonth, startOfDay, subDays,} from 'date-fns';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild,} from '@angular/core';
+import {
+  addDays,
+  addHours,
+  endOfDay,
+  endOfMonth,
+  isSameDay,
+  isSameMonth,
+  startOfDay, startOfWeek,
+  subDays,
+} from 'date-fns';
 import {Subject} from 'rxjs';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
+import {AppointmentService} from '../../services/appointment.service';
 
 const colors: any = {
   red: {
@@ -24,7 +34,7 @@ const colors: any = {
   styleUrls: ['app-component.component.css'],
   templateUrl: 'app-component.component.html',
 })
-export class AppComponentComponent {
+export class AppComponentComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Week;
@@ -37,6 +47,26 @@ export class AppComponentComponent {
     action: string;
     event: CalendarEvent;
   };
+
+  constructor(private appointmentService: AppointmentService) {
+  }
+
+  ngOnInit(): void {
+    this.appointmentService.getFor(1, this.viewDate, addDays(this.viewDate, 7)).subscribe(appointments => {
+      let tempEvents: CalendarEvent[] = [];
+      for (var appointment of appointments) {
+
+        tempEvents.push({
+          start: new Date(appointment.start),
+          end: new Date(appointment.end),
+          title: appointment.title,
+          color: colors.yellow,
+        });
+      }
+
+      this.events = tempEvents;
+    });
+  }
 
   actions: CalendarEventAction[] = [
     {
@@ -59,36 +89,10 @@ export class AppComponentComponent {
   refresh: Subject<any> = new Subject();
 
   events: CalendarEvent[] = [
-    // {
-    //   start: subDays(startOfDay(new Date()), 1),
-    //   end: addDays(new Date(), 1),
-    //   title: 'A 3 day event',
-    //   color: colors.red,
-    //   actions: this.actions,
-    //   allDay: true,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true,
-    //   },
-    //   draggable: true,
-    // },
-    // {
-    //   start: startOfDay(new Date()),
-    //   title: 'An event with no end date',
-    //   color: colors.yellow,
-    //   actions: this.actions,
-    // },
-    // {
-    //   start: subDays(endOfMonth(new Date()), 3),
-    //   end: addDays(endOfMonth(new Date()), 3),
-    //   title: 'A long event that spans 2 months',
-    //   color: colors.blue,
-    //   allDay: true,
-    // },
     {
-      start: addHours(startOfDay(new Date()), 8),
-      end: addHours(startOfDay(new Date()), 12),
-      title: 'A draggable and resizable event',
+      start: startOfWeek(new Date()),
+      end: addDays(startOfWeek(new Date()), 7),
+      title: 'Loading...',
       color: colors.yellow,
       actions: this.actions,
       resizable: {
@@ -96,23 +100,10 @@ export class AppComponentComponent {
         afterEnd: true,
       },
       draggable: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 8),
-      end: addHours(startOfDay(new Date()), 12),
-      title: 'Event 2',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+    }
   ];
 
   activeDayIsOpen: boolean = true;
-
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {

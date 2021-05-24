@@ -21,8 +21,11 @@ import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class AppointmentService implements AppointmentInterface {
@@ -254,5 +257,25 @@ public class AppointmentService implements AppointmentInterface {
         String toRecipient = appointmentModel.getClientEmail();
 
         emailDetailInterface.sendBookingConfirmationMessage(toRecipient, language);
+    }
+
+    @Override
+    public List<AppointmentModel> getAppointments(long barberId, LocalDateTime from, LocalDateTime to) {
+        var appointmentEntityStream = appointmentRepository.findByBarberId(barberId).stream().filter(x -> x.getDate().isAfter(from.toLocalDate()) &&
+                x.getDate().isBefore(to.toLocalDate()));
+
+        var result = appointmentEntityStream.map(x-> toAppointmentModel(x)).collect(toList());
+        return result;
+    }
+
+    private AppointmentModel toAppointmentModel(AppointmentEntity x) {
+        AppointmentModel appointmentModel = new AppointmentModel();
+
+        appointmentModel.setId(x.getId());
+        appointmentModel.setStart(x.getDate().atTime(x.getStartTime()));
+        appointmentModel.setEnd(x.getDate().atTime(x.getEndTime()));
+        appointmentModel.setTitle(x.getService().getDescription());
+
+        return appointmentModel;
     }
 }

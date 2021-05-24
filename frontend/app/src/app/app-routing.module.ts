@@ -55,7 +55,7 @@ const routes: Routes = [
       {path: 'assignments', component: AssignmentConfigurationComponent},
       {path: 'availability', component: AvailabilityConfigurationComponent},
       {path: 'store', component: StoreConfigurationComponent},
-      {path: 'work-hours', component: AppComponentComponent},
+      {path: 'calendar', component: AppComponentComponent},
     ],
     canActivate: [AuthGuardService]
   },

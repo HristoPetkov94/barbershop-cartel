@@ -91,6 +91,8 @@
       "assignments": "Assignments",
       "emails": "Emails",
       "store": "Store",
+      "calendar": "Calendar",
+      "availability": "Work hours",
       "logout": "Logout"
     },
     "emails": {

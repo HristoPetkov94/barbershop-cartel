@@ -91,6 +91,8 @@
       "assignments": "Бръснар/Услуга",
       "emails": "Имейли",
       "store": "Магазин",
+      "calendar": "Календар",
+      "availability": "Работно време",
       "logout": "Изход"
     },
     "emails": {

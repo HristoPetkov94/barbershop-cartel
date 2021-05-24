@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface AppointmentRepository extends CrudRepository<AppointmentEntity, Long> {
     List<AppointmentEntity> findByDateAndBarberId(LocalDate date, long barberId);
+
+    List<AppointmentEntity> findByBarberId(long barberId);
 }
