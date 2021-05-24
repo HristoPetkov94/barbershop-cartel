@@ -48,7 +48,7 @@ export class WorkDayViewComponent implements OnInit, OnChanges {
 
       if (result) {
 
-        this.workDayService.updateWorkingHoursModels(result.value.workDays).subscribe(data => {
+        this.workDayService.updateWorkingHoursModels(this.barberId, result.value.workDays).subscribe(data => {
             this.workDays = data;
           },
           (err) => {

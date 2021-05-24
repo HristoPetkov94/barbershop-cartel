@@ -18,7 +18,7 @@ export class WorkDayService {
     return this.http.get<WorkDayModel[]>(this.servicesUrl + '/barber/' + id);
   }
 
-  updateWorkingHoursModels(models: WorkDayModel[]): Subscribable<WorkDayModel[]> {
-    return this.http.put<WorkDayModel[]>(this.servicesUrl + '/bulk-update', models);
+  updateWorkingHoursModels(barberId: number, models: WorkDayModel[]): Subscribable<WorkDayModel[]> {
+    return this.http.put<WorkDayModel[]>(this.servicesUrl + `/bulk-update/${barberId}`, models);
   }
 }

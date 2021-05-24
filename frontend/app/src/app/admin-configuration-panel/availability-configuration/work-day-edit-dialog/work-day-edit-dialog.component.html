@@ -12,7 +12,7 @@
   </div>
 
 
-    <mat-grid-list cols="14" rowHeight="50px">
+    <mat-grid-list cols="11" rowHeight="50px">
 
       <mat-grid-tile [colspan]="3">Date</mat-grid-tile>
       <mat-grid-tile [colspan]="2" >From</mat-grid-tile>
@@ -21,9 +21,6 @@
         <span class="material-icons">
             home
         </span>
-      </mat-grid-tile>
-      <mat-grid-tile [colspan]="5">
-Break
       </mat-grid-tile>
       <mat-grid-tile >
         <span class="material-icons">
@@ -52,11 +49,6 @@ Break
           </div>
           <mat-grid-tile>
             <mat-slide-toggle formControlName="notWorking"></mat-slide-toggle>
-          </mat-grid-tile>
-          <mat-grid-tile [colspan]="5">
-            <mat-checkbox *ngIf="!workDay.value.notWorking" class="example-margin">Break</mat-checkbox>
-            <input *ngIf="!workDay.value.notWorking" type="time">
-            <input *ngIf="!workDay.value.notWorking" type="time">
           </mat-grid-tile>
           <mat-grid-tile >
             <button (click)="delete(i)">

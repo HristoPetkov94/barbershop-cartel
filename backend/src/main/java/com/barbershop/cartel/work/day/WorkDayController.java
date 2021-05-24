@@ -23,8 +23,8 @@ public class WorkDayController extends BaseController<WorkDayEntity, WorkDayMode
         return models;
     }
 
-    @PutMapping("/bulk-update")
-    public List<WorkDayModel> bulkUpdateValues(@RequestBody List<WorkDayModel> models) {
-        return cartelService.bulkUpdateValues(models);
+    @PutMapping("/bulk-update/{barberId}")
+    public List<WorkDayModel> bulkUpdateValues(@PathVariable Long barberId, @RequestBody List<WorkDayModel> models) {
+        return cartelService.bulkUpdateValues(barberId, models);
     }
 }

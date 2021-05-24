@@ -41,10 +41,9 @@ public class WorkDayService extends BaseService<WorkDayEntity, WorkDayModel, Lon
         return models;
     }
 
-    public List<WorkDayModel> bulkUpdateValues(List<WorkDayModel> models) {
+    public List<WorkDayModel> bulkUpdateValues(Long barberId, List<WorkDayModel> models) {
         WorkDayRepository repository = (WorkDayRepository) this.repository;
 
-        Long barberId = models.get(0).getBarberId();
         List<WorkDayEntity> entityList = repository.findAllByBarberId(barberId);
 
         repository.deleteAll(entityList);
