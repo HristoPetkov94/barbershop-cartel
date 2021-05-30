@@ -7,8 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -22,20 +21,11 @@ public class AppointmentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "date")
-    private LocalDate date;
-
     @Column(name = "startTime")
-    private LocalTime startTime;
+    private LocalDateTime startTime;
 
     @Column(name = "endTime")
-    private LocalTime endTime;
-
-    @Column(name = "price")
-    private int price;
-
-    @Column(name = "duration")
-    private int duration;
+    private LocalDateTime endTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private BarberEntity barber;

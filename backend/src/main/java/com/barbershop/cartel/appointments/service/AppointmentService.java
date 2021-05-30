@@ -55,21 +55,21 @@ public class AppointmentService implements AppointmentInterface {
     @Autowired
     private EmailDetailInterface emailDetailInterface;
 
-    private LocalTime firstAppointment(ScheduleConfigModel configuration) {
+    private LocalDateTime firstAppointment(ScheduleConfigModel configuration) {
 
         if (configuration.getFirstAppointment() != null) {
             return configuration.getFirstAppointment();
         } else {
-            return LocalTime.of(10, 0);
+            return LocalDateTime.of(LocalDate.now(), LocalTime.of(10, 0));
         }
     }
 
-    private LocalTime lastAppointment(ScheduleConfigModel configuration) {
+    private LocalDateTime lastAppointment(ScheduleConfigModel configuration) {
 
         if (configuration.getLastAppointment() != null) {
             return configuration.getLastAppointment();
         } else {
-            return LocalTime.of(19, 0);
+            return LocalDateTime.of(LocalDate.now(), LocalTime.of(19, 0));
         }
     }
 
@@ -81,14 +81,17 @@ public class AppointmentService implements AppointmentInterface {
 
         long barberId = assignment.getBarber().getId();
 
-        List<AppointmentEntity> bookedHours = appointmentRepository.findByDateAndBarberId(day, barberId);
+        LocalDateTime startOfDay = day.atStartOfDay();
+        LocalDateTime endOfDay = day.atTime(LocalTime.MAX);
+
+        List<AppointmentEntity> bookedHours = appointmentRepository.findAllByStartTimeGreaterThanEqualAndEndTimeLessThanEqualAndBarberId(startOfDay, endOfDay, barberId);
         ScheduleConfigModel configuration = scheduleConfigInterface.getConfigurationByBarberIdAndDate(barberId, null);
 
         LocalTime timeNow = LocalTime.now();
         LocalDate today = LocalDate.now();
 
-        LocalTime currentAppointment = firstAppointment(configuration);
-        LocalTime lastAppointment = lastAppointment(configuration);
+        LocalTime currentAppointment = firstAppointment(configuration).toLocalTime();
+        LocalTime lastAppointment = lastAppointment(configuration).toLocalTime();
 
         int duration = assignment.getDuration();
 
@@ -99,8 +102,8 @@ public class AppointmentService implements AppointmentInterface {
 
             for (AppointmentEntity bookedHour : bookedHours) {
 
-                LocalTime startTime = bookedHour.getStartTime();
-                LocalTime endTime = bookedHour.getEndTime();
+                LocalTime startTime = bookedHour.getStartTime().toLocalTime();
+                LocalTime endTime = bookedHour.getEndTime().toLocalTime();
 
                 if ((currentAppointmentEndTime.isAfter(startTime) && currentAppointment.isBefore(endTime)) || currentAppointmentEndTime.isAfter(lastAppointment)) {
                     currentAppointment = currentAppointment.plusMinutes(MIN_SERVICE_DURATION);
@@ -197,18 +200,16 @@ public class AppointmentService implements AppointmentInterface {
         ClientEntity client = clientInterface.findByEmail(clientEmail)
                 .orElseGet(() -> createClient(clientEmail, appointmentModel.getClientUsername()));
 
-
         LocalDate date = LocalDate.parse(appointmentModel.getDate());
-        LocalTime startTime = LocalTime.parse(appointmentModel.getHour());
-        LocalTime endTime = startTime.plusMinutes(assignment.getDuration());
+        LocalTime time = LocalTime.parse(appointmentModel.getHour());
+
+        LocalDateTime startTime = LocalDateTime.of(date, time);
+        LocalDateTime endTime = startTime.plusMinutes(assignment.getDuration());
 
         AppointmentEntity appointment = new AppointmentEntity();
 
-        appointment.setDate(date);
         appointment.setStartTime(startTime);
         appointment.setEndTime(endTime);
-        appointment.setPrice(assignment.getPrice());
-        appointment.setDuration(assignment.getDuration());
         appointment.setBarber(barber);
         appointment.setService(service);
         appointment.setClient(client);
@@ -261,10 +262,10 @@ public class AppointmentService implements AppointmentInterface {
 
     @Override
     public List<AppointmentModel> getAppointments(long barberId, LocalDateTime from, LocalDateTime to) {
-        var appointmentEntityStream = appointmentRepository.findByBarberId(barberId).stream().filter(x -> x.getDate().isAfter(from.toLocalDate()) &&
-                x.getDate().isBefore(to.toLocalDate()));
+        var appointmentEntityStream = appointmentRepository.findByBarberId(barberId).stream().filter(x -> x.getStartTime().toLocalDate().isAfter(from.toLocalDate()) &&
+                x.getStartTime().toLocalDate().isBefore(to.toLocalDate()));
 
-        var result = appointmentEntityStream.map(x-> toAppointmentModel(x)).collect(toList());
+        var result = appointmentEntityStream.map(this::toAppointmentModel).collect(toList());
         return result;
     }
 
@@ -272,8 +273,8 @@ public class AppointmentService implements AppointmentInterface {
         AppointmentModel appointmentModel = new AppointmentModel();
 
         appointmentModel.setId(x.getId());
-        appointmentModel.setStart(x.getDate().atTime(x.getStartTime()));
-        appointmentModel.setEnd(x.getDate().atTime(x.getEndTime()));
+        appointmentModel.setStart(x.getStartTime());
+        appointmentModel.setEnd(x.getEndTime());
         appointmentModel.setTitle(x.getService().getDescription());
 
         return appointmentModel;

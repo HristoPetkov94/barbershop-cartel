@@ -27,6 +27,10 @@
         <sqlFile path="db/work_week_days_data.sql"/>
     </changeSet>
 
+    <changeSet author="hp" id="changes_into_appointments_table.sql">
+        <sqlFile path="db/changes_into_appointments_table.sql"/>
+    </changeSet>
+
     <!-- keep this always as last changeset-->
     <changeSet author="ss" id="reset_sequences.sql" runAlways="true">
         <sqlFile path="db/reset_sequences.sql"

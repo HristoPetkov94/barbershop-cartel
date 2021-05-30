@@ -30,9 +30,9 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
         ScheduleConfigEntity scheduleConfig = new ScheduleConfigEntity();
 
         scheduleConfig.setBarber(barber);
-        scheduleConfig.setFirstAppointment(configuration.getFirstAppointment());
-        scheduleConfig.setLastAppointment(configuration.getLastAppointment());
-        scheduleConfig.setDate(configuration.getDate());
+//        scheduleConfig.setFirstAppointment(configuration.getFirstAppointment());
+//        scheduleConfig.setLastAppointment(configuration.getLastAppointment());
+//        scheduleConfig.setDate(configuration.getDate());
         scheduleConfig.setWorkingDay(configuration.isHoliday());
 
         scheduleConfigRepository.save(scheduleConfig);
@@ -66,9 +66,9 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
 
             ScheduleConfigModel configuration = new ScheduleConfigModel();
             configuration.setBarberId(config.getId());
-            configuration.setFirstAppointment(config.getFirstAppointment());
-            configuration.setLastAppointment(config.getLastAppointment());
-            configuration.setDate(config.getDate());
+            //configuration.setFirstAppointment(config.getFirstAppointment());
+           // configuration.setLastAppointment(config.getLastAppointment());
+            //configuration.setDate(config.getDate());
             configuration.setHoliday(config.isWorkingDay());
 
             configurations.add(configuration);
@@ -92,9 +92,9 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
             configuration = new ScheduleConfigModel();
 
             configuration.setBarberId(config.getId());
-            configuration.setFirstAppointment(config.getFirstAppointment());
-            configuration.setLastAppointment(config.getLastAppointment());
-            configuration.setDate(config.getDate());
+            //configuration.setFirstAppointment(config.getFirstAppointment());
+           // configuration.setLastAppointment(config.getLastAppointment());
+           // configuration.setDate(config.getDate());
             configuration.setHoliday(config.isWorkingDay());
         }
 
