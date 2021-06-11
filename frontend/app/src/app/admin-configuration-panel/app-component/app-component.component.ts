@@ -12,6 +12,8 @@ import {
 import {Subject} from 'rxjs';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
 import {AppointmentService} from '../../services/appointment.service';
+import {Barber} from '../../models/barber.model';
+import {BarberService} from '../../services/barber.service';
 
 const colors: any = {
   red: {
@@ -48,24 +50,20 @@ export class AppComponentComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  constructor(private appointmentService: AppointmentService) {
+  public barbers: Barber[];
+  public selectedBarberId = 0;
+
+  constructor(private appointmentService: AppointmentService, private barberService: BarberService) {
   }
 
   ngOnInit(): void {
-    this.appointmentService.getFor(1, this.viewDate, addDays(this.viewDate, 7)).subscribe(appointments => {
-      let tempEvents: CalendarEvent[] = [];
-      for (var appointment of appointments) {
+    this.barberService.getBarbers().subscribe(barbers => {
+      this.barbers = barbers;
 
-        tempEvents.push({
-          start: new Date(appointment.start),
-          end: new Date(appointment.end),
-          title: appointment.title,
-          color: colors.yellow,
-        });
-      }
-
-      this.events = tempEvents;
+      this.selectedBarberId = barbers[0].id;
+      this.change();
     });
+
   }
 
   actions: CalendarEventAction[] = [
@@ -170,5 +168,27 @@ export class AppComponentComponent implements OnInit {
 
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
+    this.change();
+  }
+
+  change() {
+    let startOfWeekDate = startOfWeek(this.viewDate);
+    let endOfWeekDate = addDays(startOfWeekDate, 7);
+
+    this.appointmentService.getFor(this.selectedBarberId, startOfWeekDate, endOfWeekDate).subscribe(appointments => {
+      let tempEvents: CalendarEvent[] = [];
+      for (var appointment of appointments) {
+
+        tempEvents.push({
+          start: new Date(appointment.start),
+          end: new Date(appointment.end),
+          title: appointment.title,
+          color: colors.yellow,
+        });
+      }
+
+      this.events = tempEvents;
+      this.refresh.next();
+    });
   }
 }
