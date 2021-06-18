@@ -31,10 +31,10 @@ export class AppointmentService {
     return this.http.post(this.url + '/save-appointment' + '?' + 'language=' + language, req);
   }
 
-  getFor(barberId: number, start: Date, end: Date) {
+  getFor(barberIds: number[], start: Date, end: Date) {
 
     let params = new HttpParams()
-      .set("barberId",String(barberId))
+      .set("barberIds", barberIds.join(","))
       .set("from", start.toISOString())
       .set("to", end.toISOString());
 

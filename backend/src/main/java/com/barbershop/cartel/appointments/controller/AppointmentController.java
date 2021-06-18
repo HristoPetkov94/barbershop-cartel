@@ -43,10 +43,10 @@ public class AppointmentController {
     }
 
     @GetMapping
-    public List<AppointmentModel> getAppointments(@RequestParam long barberId,
+    public List<AppointmentModel> getAppointments(@RequestParam long[] barberIds,
                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate from,
                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate to) {
 
-        return appointmentInterface.getAppointments(barberId, from.atStartOfDay(), to.atStartOfDay().plusDays(1));
+        return appointmentInterface.getAppointments(barberIds, from.atStartOfDay(), to.atStartOfDay().plusDays(1));
     }
 }

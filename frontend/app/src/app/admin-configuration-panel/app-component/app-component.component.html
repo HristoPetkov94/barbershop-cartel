@@ -6,11 +6,10 @@
     <h1 class="margin-bottom-10">{{ 'configuration.barbers.choose' | translate}} </h1>
 
     <mat-form-field appearance="outline">
-      <mat-select [(value)]="selectedBarberId" (selectionChange)="change()">
-        <mat-option [value]="0">{{ 'configuration.please_select' | translate}}</mat-option>
+      <mat-select [(value)]="selectedBarberIndex" (selectionChange)="change()">
 
-        <mat-option *ngFor="let barber of barbers"
-                    [value]="barber.id"> {{barber.firstName + ' ' + barber.lastName}} </mat-option>
+        <mat-option *ngFor="let barber of barberDropdowns; let i = index"
+                    [value]="i"> {{barber.label}} </mat-option>
       </mat-select>
     </mat-form-field>
   </div>

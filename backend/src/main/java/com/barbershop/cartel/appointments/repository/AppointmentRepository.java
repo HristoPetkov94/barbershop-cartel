@@ -1,6 +1,7 @@
 package com.barbershop.cartel.appointments.repository;
 
 import com.barbershop.cartel.appointments.entity.AppointmentEntity;
+import com.barbershop.cartel.appointments.models.AppointmentModel;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +12,6 @@ import java.util.List;
 public interface AppointmentRepository extends CrudRepository<AppointmentEntity, Long> {
     List<AppointmentEntity> findAllByStartTimeGreaterThanEqualAndEndTimeLessThanEqualAndBarberId(LocalDateTime startOfDay, LocalDateTime endOfDay, long barberId);
 
-    List<AppointmentEntity> findByBarberId(long barberId);
+    List<AppointmentEntity> findByBarberIdIn(long[] barberId);
+
 }

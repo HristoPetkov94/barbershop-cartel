@@ -261,8 +261,8 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     @Override
-    public List<AppointmentModel> getAppointments(long barberId, LocalDateTime from, LocalDateTime to) {
-        var appointmentEntityStream = appointmentRepository.findByBarberId(barberId).stream().filter(x -> x.getStartTime().toLocalDate().isAfter(from.toLocalDate()) &&
+    public List<AppointmentModel> getAppointments(long[] barberId, LocalDateTime from, LocalDateTime to) {
+        var appointmentEntityStream = appointmentRepository.findByBarberIdIn(barberId).stream().filter(x -> x.getStartTime().toLocalDate().isAfter(from.toLocalDate()) &&
                 x.getStartTime().toLocalDate().isBefore(to.toLocalDate()));
 
         var result = appointmentEntityStream.map(this::toAppointmentModel).collect(toList());
@@ -273,8 +273,12 @@ public class AppointmentService implements AppointmentInterface {
         AppointmentModel appointmentModel = new AppointmentModel();
 
         appointmentModel.setId(x.getId());
+
+        appointmentModel.setBarberId(x.getBarber().getId());
+
         appointmentModel.setStart(x.getStartTime());
         appointmentModel.setEnd(x.getEndTime());
+
         appointmentModel.setTitle(x.getService().getDescription());
 
         return appointmentModel;

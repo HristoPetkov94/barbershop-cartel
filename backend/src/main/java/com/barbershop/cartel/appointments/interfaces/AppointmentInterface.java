@@ -19,5 +19,5 @@ public interface AppointmentInterface {
 
     void save(AppointmentRequestModel appointmentModel, LanguageEnum language) throws MessagingException;
 
-    List<AppointmentModel> getAppointments(long barberId, LocalDateTime from, LocalDateTime to);
+    List<AppointmentModel> getAppointments(long[] barberId, LocalDateTime from, LocalDateTime to);
 }

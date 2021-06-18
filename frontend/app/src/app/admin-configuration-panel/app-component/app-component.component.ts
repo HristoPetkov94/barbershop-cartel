@@ -12,8 +12,8 @@ import {
 import {Subject} from 'rxjs';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
 import {AppointmentService} from '../../services/appointment.service';
-import {Barber} from '../../models/barber.model';
 import {BarberService} from '../../services/barber.service';
+import {Barber} from '../../models/barber.model';
 
 const colors: any = {
   red: {
@@ -29,6 +29,24 @@ const colors: any = {
     secondary: '#FDF1BA',
   },
 };
+
+const baseColors: string[] = [
+  '#91ed71',
+  '#54dddc',
+  '#ff7d46',
+  '#1d986a'
+];
+
+
+export class Dropdown {
+  public barberIds: number[];
+  public label: String;
+
+  constructor(barberIds: number[], label: String) {
+    this.barberIds = barberIds;
+    this.label = label;
+  }
+}
 
 @Component({
   selector: 'app-component',
@@ -50,20 +68,33 @@ export class AppComponentComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  private barberToColor = new Map();
+
   public barbers: Barber[];
-  public selectedBarberId = 0;
+  public barberDropdowns: Dropdown[] = [];
+
+  public selectedBarberIndex: number;
 
   constructor(private appointmentService: AppointmentService, private barberService: BarberService) {
   }
 
   ngOnInit(): void {
     this.barberService.getBarbers().subscribe(barbers => {
+
       this.barbers = barbers;
 
-      this.selectedBarberId = barbers[0].id;
+      barbers.forEach((value, index)=> { this.barberToColor.set(value.id,  { primary : baseColors[index] , secondary: baseColors[index] })});
+
+      let allBarberIds = barbers.map(barber=> barber.id);
+      this.barberDropdowns.push(new Dropdown(allBarberIds, "All barbers"));
+
+      let dropdowns = barbers.map(barber=> { return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`) });
+      dropdowns.forEach(dropdown => this.barberDropdowns.push(dropdown));
+
+      this.selectedBarberIndex = 0;
+
       this.change();
     });
-
   }
 
   actions: CalendarEventAction[] = [
@@ -175,15 +206,23 @@ export class AppComponentComponent implements OnInit {
     let startOfWeekDate = startOfWeek(this.viewDate);
     let endOfWeekDate = addDays(startOfWeekDate, 7);
 
-    this.appointmentService.getFor(this.selectedBarberId, startOfWeekDate, endOfWeekDate).subscribe(appointments => {
+    let barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
+
+    this.appointmentService.getFor(barberIds, startOfWeekDate, endOfWeekDate).subscribe(appointments => {
       let tempEvents: CalendarEvent[] = [];
       for (var appointment of appointments) {
+
+        let color = colors.yellow;
+
+        if(this.barberToColor.has(appointment.barberId)){
+          color = this.barberToColor.get(appointment.barberId)
+        }
 
         tempEvents.push({
           start: new Date(appointment.start),
           end: new Date(appointment.end),
           title: appointment.title,
-          color: colors.yellow,
+          color: color,
         });
       }
 

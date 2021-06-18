@@ -11,6 +11,8 @@ public class AppointmentModel {
 
     public Long id;
 
+    public Long barberId;
+
     public LocalDateTime start;
     public LocalDateTime end;
 
