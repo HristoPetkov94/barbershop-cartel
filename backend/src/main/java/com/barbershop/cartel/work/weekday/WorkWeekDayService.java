@@ -1,20 +1,30 @@
 package com.barbershop.cartel.work.weekday;
 
+import com.barbershop.cartel.appointments.models.AppointmentModel;
 import com.barbershop.cartel.infrastructure.BaseService;
+import com.barbershop.cartel.utils.ListUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
+
+import static java.util.stream.Collectors.groupingBy;
 
 @Slf4j
 @Service
 public class WorkWeekDayService extends BaseService<WorkWeekDayEntity, WorkWeekDayModel, Long> {
 
     @Autowired
-    public void set(WorkWeekDayRepository repo){
+    public void set(WorkWeekDayRepository repo) {
         this.repository = repo;
     }
 
@@ -28,11 +38,14 @@ public class WorkWeekDayService extends BaseService<WorkWeekDayEntity, WorkWeekD
         return new WorkWeekDayEntity();
     }
 
-    public List<WorkWeekDayModel> getAllWhereId(Long id){
+    public List<WorkWeekDayModel> getAllWhereId(Long id) {
 
         WorkWeekDayRepository repository = (WorkWeekDayRepository) this.repository;
 
-        List<WorkWeekDayModel> models = repository.findAllByBarberId(id).stream().sorted(Comparator.comparing(WorkWeekDayEntity::getDayOfWeek)).map(this::toModel).collect(Collectors.toList());
+        List<WorkWeekDayModel> models = repository.findByBarberIdIn(List.of(id))
+                .stream().sorted(Comparator.comparing(WorkWeekDayEntity::getDayOfWeek))
+                .map(this::toModel)
+                .collect(Collectors.toList());
 
         return models;
     }
@@ -50,4 +63,5 @@ public class WorkWeekDayService extends BaseService<WorkWeekDayEntity, WorkWeekD
             repository.save(entity);
         }
     }
+
 }

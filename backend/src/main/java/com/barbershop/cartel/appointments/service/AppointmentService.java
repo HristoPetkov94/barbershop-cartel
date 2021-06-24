@@ -15,6 +15,12 @@ import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
+import com.barbershop.cartel.utils.ListUtils;
+import com.barbershop.cartel.work.day.WorkDayEntity;
+import com.barbershop.cartel.work.day.WorkDayRepository;
+import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
+import com.barbershop.cartel.work.weekday.WorkWeekDayRepository;
+import com.barbershop.cartel.work.weekday.WorkWeekDayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +30,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 @Service
@@ -32,7 +40,6 @@ public class AppointmentService implements AppointmentInterface {
 
     private static final int DAYS_OF_WEEK = 7;
     private static final int MIN_SERVICE_DURATION = 30;
-    private static final int MAX_SERVICE_DURATION = 60;
 
     @Autowired
     private ClientInterface clientInterface;
@@ -54,6 +61,12 @@ public class AppointmentService implements AppointmentInterface {
 
     @Autowired
     private EmailDetailInterface emailDetailInterface;
+
+    @Autowired
+    private WorkWeekDayRepository workWeekDayRepository;
+
+    @Autowired
+    private WorkDayRepository workDayRepository;
 
     private LocalDateTime firstAppointment(ScheduleConfigModel configuration) {
 
@@ -261,12 +274,25 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     @Override
-    public List<AppointmentModel> getAppointments(long[] barberId, LocalDateTime from, LocalDateTime to) {
-        var appointmentEntityStream = appointmentRepository.findByBarberIdIn(barberId).stream().filter(x -> x.getStartTime().toLocalDate().isAfter(from.toLocalDate()) &&
-                x.getStartTime().toLocalDate().isBefore(to.toLocalDate()));
+    public List<AppointmentModel> getAppointments(long[] barberIds, LocalDateTime from, LocalDateTime to) {
 
-        var result = appointmentEntityStream.map(this::toAppointmentModel).collect(toList());
+        var result = appointmentRepository.findByBarberIdIn(barberIds).stream()
+                .filter(x -> isInTimeframe(from, to, x))
+                .map(this::toAppointmentModel)
+                .collect(toList());
+
+        List<Long> ids = Arrays.stream(barberIds).boxed().collect(Collectors.toList());
+
+        var fakeAppointments = getNonWorkingAppointments(ids, from, to);
+
+        result.addAll(fakeAppointments);
+
         return result;
+    }
+
+    private boolean isInTimeframe(LocalDateTime from, LocalDateTime to, AppointmentEntity x) {
+        return x.getStartTime().toLocalDate().isAfter(from.toLocalDate()) &&
+                x.getStartTime().toLocalDate().isBefore(to.toLocalDate());
     }
 
     private AppointmentModel toAppointmentModel(AppointmentEntity x) {
@@ -282,5 +308,109 @@ public class AppointmentService implements AppointmentInterface {
         appointmentModel.setTitle(x.getService().getDescription());
 
         return appointmentModel;
+    }
+
+
+    public List<AppointmentModel> getNonWorkingAppointments(List<Long> ids, LocalDateTime from, LocalDateTime to) {
+
+        final Map<DayOfWeek, List<WorkWeekDayEntity>> dayToWeekDay = workWeekDayRepository.findByBarberIdIn(ids).stream()
+                .collect(groupingBy(WorkWeekDayEntity::getDayOfWeek));
+
+        final List<WorkDayEntity> overrides = workDayRepository.findAllByBarberIdInAndDayAfterAndDayBefore(ids, from.toLocalDate(), to.toLocalDate());
+
+        var result = from.toLocalDate().datesUntil(to.toLocalDate())
+                .map(x -> getAppointmentModel(x, dayToWeekDay.get(x.getDayOfWeek()), overrides))
+                .collect(Collectors.toList());
+
+        return ListUtils.flattenListOfListsStream(result);
+    }
+
+    private List<AppointmentModel> getAppointmentModel(LocalDate date, List<WorkWeekDayEntity> workWeekDayEntities, List<WorkDayEntity> overrides) {
+
+        var list = new ArrayList<AppointmentModel>();
+
+        for (var workWeekDayEntity : workWeekDayEntities) {
+
+            final long barberId = workWeekDayEntity.getBarber().getId();
+            final String barberName = workWeekDayEntity.getBarber().getFirstName();
+            final String title = barberName + " Not available";
+
+            final Optional<WorkDayEntity> first = overrides.stream().filter(x -> x.getDay().isEqual(date) && x.getBarber().getId() == barberId).findFirst();
+
+            if(first.isPresent()) {
+                final WorkDayEntity workDayEntity = first.get();
+                if(workDayEntity.isNotWorking()){
+                    var result = new AppointmentModel();
+
+                    result.id = -1L;
+                    result.barberId = barberId;
+                    result.start = date.atStartOfDay();
+                    result.end = date.atTime(LocalTime.MAX);
+                    result.title = title;
+
+                    list.add(result);
+
+                    continue;
+                }
+
+                var result = new AppointmentModel();
+
+                result.id = -1L;
+                result.barberId = barberId;
+                result.start = date.atStartOfDay();
+                result.end = date.atStartOfDay().with(workDayEntity.getFrom());
+                result.title = title;
+
+
+                list.add(result);
+                var result2 = new AppointmentModel();
+
+                result2.id = -1L;
+                result2.barberId = barberId;
+                result2.start = date.atStartOfDay().with(workDayEntity.getTo());
+                result2.end = date.atTime(LocalTime.MAX);
+                result2.title = title;
+
+                list.add(result2);
+
+                continue;
+            }
+
+            if(workWeekDayEntity.isNotWorking()){
+                var result = new AppointmentModel();
+
+                result.id = -1L;
+                result.barberId = barberId;
+                result.start = date.atStartOfDay();
+                result.end = date.atTime(LocalTime.MAX);
+                result.title = title;
+
+                list.add(result);
+
+                continue;
+            }
+
+            var result = new AppointmentModel();
+
+            result.id = -1L;
+            result.barberId = barberId;
+            result.start = date.atStartOfDay();
+            result.end = date.atStartOfDay().with(workWeekDayEntity.getFrom());
+            result.title = title;
+
+
+            list.add(result);
+            var result2 = new AppointmentModel();
+
+            result2.id = -1L;
+            result2.barberId = barberId;
+            result2.start = date.atStartOfDay().with(workWeekDayEntity.getTo());
+            result2.end = date.atTime(LocalTime.MAX);
+            result2.title = title;
+
+            list.add(result2);
+        }
+
+        return list;
     }
 }

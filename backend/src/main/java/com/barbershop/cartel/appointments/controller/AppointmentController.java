@@ -5,6 +5,7 @@ import com.barbershop.cartel.appointments.models.AppointmentRequestModel;
 import com.barbershop.cartel.appointments.models.AppointmentWeekModel;
 import com.barbershop.cartel.appointments.interfaces.AppointmentInterface;
 import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,8 @@ public class AppointmentController {
                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate from,
                                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDate to) {
 
-        return appointmentInterface.getAppointments(barberIds, from.atStartOfDay(), to.atStartOfDay().plusDays(1));
+        var appointments = appointmentInterface.getAppointments(barberIds, from.atStartOfDay(), to.atStartOfDay().plusDays(1));
+
+        return appointments;
     }
 }

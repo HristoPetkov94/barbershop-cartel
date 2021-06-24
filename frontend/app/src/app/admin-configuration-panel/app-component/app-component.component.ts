@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild,} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import {
   addDays,
   addHours,
@@ -40,9 +40,9 @@ const baseColors: string[] = [
 
 export class Dropdown {
   public barberIds: number[];
-  public label: String;
+  public label: string;
 
-  constructor(barberIds: number[], label: String) {
+  constructor(barberIds: number[], label: string) {
     this.barberIds = barberIds;
     this.label = label;
   }
@@ -83,12 +83,12 @@ export class AppComponentComponent implements OnInit {
 
       this.barbers = barbers;
 
-      barbers.forEach((value, index)=> { this.barberToColor.set(value.id,  { primary : baseColors[index] , secondary: baseColors[index] })});
+      barbers.forEach((value, index) => { this.barberToColor.set(value.id,  { primary : baseColors[index] , secondary: baseColors[index] }); });
 
-      let allBarberIds = barbers.map(barber=> barber.id);
-      this.barberDropdowns.push(new Dropdown(allBarberIds, "All barbers"));
+      const allBarberIds = barbers.map(barber => barber.id);
+      this.barberDropdowns.push(new Dropdown(allBarberIds, 'All barbers'));
 
-      let dropdowns = barbers.map(barber=> { return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`) });
+      const dropdowns = barbers.map(barber => { return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`); });
       dropdowns.forEach(dropdown => this.barberDropdowns.push(dropdown));
 
       this.selectedBarberIndex = 0;

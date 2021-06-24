@@ -8,5 +8,6 @@ import java.util.List;
 @Repository
 public interface WorkWeekDayRepository extends CrudRepository<WorkWeekDayEntity, Long> {
 
-    List<WorkWeekDayEntity> findAllByBarberId(long barberId);
+    List<WorkWeekDayEntity> findByBarberIdIn(List<Long> barberId);
+
 }
