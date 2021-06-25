@@ -16,7 +16,7 @@ public class WorkWeekDayController extends BaseController<WorkWeekDayEntity, Wor
     }
 
     @GetMapping("/barber/{id}")
-    public List<WorkWeekDayModel> getAll(@PathVariable Long id) {
+    public List<WorkWeekDayModel> getAll(@PathVariable long id) {
         List<WorkWeekDayModel> models = cartelService.getAllWhereId(id);
         return models;
     }

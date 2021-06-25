@@ -16,5 +16,7 @@ public class AppointmentModel {
     public LocalDateTime start;
     public LocalDateTime end;
 
+    public boolean notWorking;
+
     public String title;
 }

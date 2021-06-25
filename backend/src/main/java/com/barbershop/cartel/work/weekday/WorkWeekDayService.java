@@ -38,11 +38,11 @@ public class WorkWeekDayService extends BaseService<WorkWeekDayEntity, WorkWeekD
         return new WorkWeekDayEntity();
     }
 
-    public List<WorkWeekDayModel> getAllWhereId(Long id) {
+    public List<WorkWeekDayModel> getAllWhereId(long id) {
 
         WorkWeekDayRepository repository = (WorkWeekDayRepository) this.repository;
 
-        List<WorkWeekDayModel> models = repository.findByBarberIdIn(List.of(id))
+        List<WorkWeekDayModel> models = repository.findByBarberIdIn(new long[]{ id })
                 .stream().sorted(Comparator.comparing(WorkWeekDayEntity::getDayOfWeek))
                 .map(this::toModel)
                 .collect(Collectors.toList());

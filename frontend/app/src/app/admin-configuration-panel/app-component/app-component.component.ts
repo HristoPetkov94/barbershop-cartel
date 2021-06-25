@@ -300,13 +300,13 @@ export class AppComponentComponent implements OnInit {
   }
 
   toggleFullScreenPage() {
-    var doc = window.document;
-    var docEl = doc.documentElement;
+    let doc = window.document;
+    let docEl = doc.documentElement;
 
-    var requestFullScreen = docEl.requestFullscreen;// || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-    var cancelFullScreen = doc.exitFullscreen;// || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+    let requestFullScreen = docEl.requestFullscreen;
+    let cancelFullScreen = doc.exitFullscreen;
 
-    if(!doc.fullscreenElement) { //} && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+    if(!doc.fullscreenElement) {
       requestFullScreen.call(docEl);
     }
     else {
