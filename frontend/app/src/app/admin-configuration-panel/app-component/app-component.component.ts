@@ -259,7 +259,7 @@ export class AppComponentComponent implements OnInit {
   }
 
   change() {
-    let startOfWeekDate = startOfWeek(this.viewDate);
+    let startOfWeekDate = startOfWeek(this.viewDate, { weekStartsOn : 1});
     let endOfWeekDate = addDays(startOfWeekDate, 7);
 
     let barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;

@@ -49,6 +49,7 @@
     </mwl-calendar-month-view>
     <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"
+      weekStartsOn="1"
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
