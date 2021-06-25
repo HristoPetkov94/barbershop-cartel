@@ -6,3 +6,19 @@ pre {
   background-color: #f5f5f5;
   padding: 15px;
 }
+
+.fullscreen {
+  background-color: #ffffff;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#fullscreen-button{
+  position: absolute;
+  right:    20px;
+  bottom:   20px;
+  z-index: 10;
+}

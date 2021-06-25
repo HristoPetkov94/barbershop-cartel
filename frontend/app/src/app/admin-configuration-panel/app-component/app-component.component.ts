@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {
   addDays,
   addHours,
@@ -30,11 +30,47 @@ const colors: any = {
   },
 };
 
-const baseColors: string[] = [
-  '#91ed71',
-  '#54dddc',
-  '#ff7d46',
-  '#1d986a'
+const appointmentColors = [
+  {
+    available: {
+      primary: '#91ed71',
+      secondary: '#91ed71',
+    },
+    unavailable:   {
+      primary: '#e8ffe8',
+      secondary: '#e8ffe8',
+    },
+  },
+  {
+    available: {
+      primary: '#4fcbca',
+      secondary: '#4fcbca',
+    },
+    unavailable:   {
+      primary: '#D1E8FF',
+      secondary: '#D1E8FF',
+    },
+  },
+  {
+    available: {
+      primary: '#ff7d46',
+      secondary: '#ff7d46',
+    },
+    unavailable:   {
+      primary: '#ffc1a6',
+      secondary: '#ffc1a6',
+    },
+  },
+  {
+    available: {
+      primary: '#ff71b1',
+      secondary: '#ff71b1',
+    },
+    unavailable:   {
+      primary: '#ffd7ea',
+      secondary: '#ffd7ea',
+    },
+  },
 ];
 
 
@@ -75,6 +111,8 @@ export class AppComponentComponent implements OnInit {
 
   public selectedBarberIndex: number;
 
+  public fullscreen: boolean = false;
+
   constructor(private appointmentService: AppointmentService, private barberService: BarberService) {
   }
 
@@ -83,17 +121,35 @@ export class AppComponentComponent implements OnInit {
 
       this.barbers = barbers;
 
-      barbers.forEach((value, index) => { this.barberToColor.set(value.id,  { primary : baseColors[index] , secondary: baseColors[index] }); });
+      barbers.forEach((value, index) => {
+        let color = appointmentColors[index];
+
+        this.barberToColor.set(value.id, color);
+      });
 
       const allBarberIds = barbers.map(barber => barber.id);
       this.barberDropdowns.push(new Dropdown(allBarberIds, 'All barbers'));
 
-      const dropdowns = barbers.map(barber => { return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`); });
+      const dropdowns = barbers.map(barber => {
+        return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`);
+      });
       dropdowns.forEach(dropdown => this.barberDropdowns.push(dropdown));
 
       this.selectedBarberIndex = 0;
 
       this.change();
+    });
+
+    document.addEventListener('fullscreenchange', (event) => {
+      // document.fullscreenElement will point to the element that
+      // is in fullscreen mode if there is one. If there isn't one,
+      // the value of the property is null.
+      if (document.fullscreenElement) {
+        console.log(`Element: ${document.fullscreenElement.id} entered full-screen mode.`);
+      } else {
+        this.fullscreen = false;
+        this.refresh.next();
+      }
     });
   }
 
@@ -210,12 +266,19 @@ export class AppComponentComponent implements OnInit {
 
     this.appointmentService.getFor(barberIds, startOfWeekDate, endOfWeekDate).subscribe(appointments => {
       let tempEvents: CalendarEvent[] = [];
-      for (var appointment of appointments) {
+      for (const appointment of appointments) {
 
-        let color = colors.yellow;
+        let color;
 
-        if(this.barberToColor.has(appointment.barberId)){
-          color = this.barberToColor.get(appointment.barberId)
+        if (this.barberToColor.has(appointment.barberId)) {
+          let colors = this.barberToColor.get(appointment.barberId);
+
+          if(appointment.id > 0){
+            color = colors.available;
+            console.log(color);
+          } else {
+            color = colors.unavailable;
+          }
         }
 
         tempEvents.push({
@@ -229,5 +292,25 @@ export class AppComponentComponent implements OnInit {
       this.events = tempEvents;
       this.refresh.next();
     });
+  }
+
+  toggleFullscreen() {
+    this.fullscreen = !this.fullscreen;
+    this.toggleFullScreenPage();
+  }
+
+  toggleFullScreenPage() {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+
+    var requestFullScreen = docEl.requestFullscreen;// || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen;// || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+    if(!doc.fullscreenElement) { //} && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+      requestFullScreen.call(docEl);
+    }
+    else {
+      cancelFullScreen.call(doc);
+    }
   }
 }
