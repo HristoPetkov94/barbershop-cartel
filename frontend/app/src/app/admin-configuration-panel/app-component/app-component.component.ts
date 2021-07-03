@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnInit,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {
   addDays,
   addHours,
@@ -86,6 +94,8 @@ const appointmentColors = [
 export class AppComponentComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
+  status: string = 'connecting';
+
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
@@ -109,33 +119,41 @@ export class AppComponentComponent implements OnInit {
   private stompClient = null;
 
 
-  // setConnected(connected: boolean) {
-  //   this.disabled = !connected;
-  //
-  //   if (connected) {
-  //     this.greetings = [];
-  //   }
-  // }
+  setConected(conected){
+    this.status = conected? 'connected' : 'disconnected';
+
+    this.ref.detectChanges();
+  }
 
   connect() {
     const socket = new SockJS('/api/gkz-stomp-endpoint');
+
     this.stompClient = Stomp.over(socket);
 
     const _this = this;
     this.stompClient.connect({}, function (frame) {
-      // _this.setConnected(true);
       console.log('Connected: ' + frame);
-      console.log(socket._transport.url);
+      _this.setConected(true);
 
       _this.stompClient.subscribe('/topic/event-added', function (hello) {
         console.log('Message: ' + frame);
         _this.change();
       });
-
     });
+
+    this.stompClient.debug = function(str) {
+      if(str.startsWith("Connection closed")){
+        _this.setConected(false);
+      }
+    };
+
+    socket.onclose = function() {
+      console.log('close');
+    };
+
   }
 
-  constructor(private appointmentService: AppointmentService, private barberService: BarberService) {
+  constructor(private appointmentService: AppointmentService, private barberService: BarberService, private ref: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {

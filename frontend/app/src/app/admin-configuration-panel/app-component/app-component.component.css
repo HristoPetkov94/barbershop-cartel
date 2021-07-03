@@ -22,3 +22,15 @@ pre {
   bottom:   20px;
   z-index: 10;
 }
+
+.connected {
+  background-color: lawngreen;
+}
+
+.disconnected {
+  background-color: red;
+}
+
+.connecting {
+  background-color: yellow;
+}
