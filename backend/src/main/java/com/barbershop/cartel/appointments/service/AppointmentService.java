@@ -16,6 +16,7 @@ import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -53,6 +54,8 @@ public class AppointmentService implements AppointmentInterface {
     @Autowired
     private EmailDetailInterface emailDetailInterface;
 
+    @Autowired
+    private SimpMessagingTemplate simpMessagingTemplate;
 
     private List<AppointmentHoursModel> getScheduleHours(LocalDate day, long assignmentId) {
 
@@ -233,6 +236,8 @@ public class AppointmentService implements AppointmentInterface {
         createAppointment(appointmentModel);
 
         String toRecipient = appointmentModel.getClientEmail();
+
+        simpMessagingTemplate.convertAndSend("/topic/event-added", "updated");
 
         emailDetailInterface.sendBookingConfirmationMessage(toRecipient, language);
     }

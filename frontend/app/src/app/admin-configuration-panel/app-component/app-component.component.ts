@@ -15,6 +15,10 @@ import {AppointmentService} from '../../services/appointment.service';
 import {BarberService} from '../../services/barber.service';
 import {Barber} from '../../models/barber.model';
 
+import * as SockJS from 'sockjs-client';
+import {Stomp} from '@stomp/stompjs';
+import {Dropdown} from './dropdown';
+
 const colors: any = {
   red: {
     primary: '#ad2121',
@@ -73,17 +77,6 @@ const appointmentColors = [
   },
 ];
 
-
-export class Dropdown {
-  public barberIds: number[];
-  public label: string;
-
-  constructor(barberIds: number[], label: string) {
-    this.barberIds = barberIds;
-    this.label = label;
-  }
-}
-
 @Component({
   selector: 'app-component',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -112,6 +105,35 @@ export class AppComponentComponent implements OnInit {
   public selectedBarberIndex: number;
 
   public fullscreen: boolean = false;
+
+  private stompClient = null;
+
+
+  // setConnected(connected: boolean) {
+  //   this.disabled = !connected;
+  //
+  //   if (connected) {
+  //     this.greetings = [];
+  //   }
+  // }
+
+  connect() {
+    const socket = new SockJS('/api/gkz-stomp-endpoint');
+    this.stompClient = Stomp.over(socket);
+
+    const _this = this;
+    this.stompClient.connect({}, function (frame) {
+      // _this.setConnected(true);
+      console.log('Connected: ' + frame);
+      console.log(socket._transport.url);
+
+      _this.stompClient.subscribe('/topic/event-added', function (hello) {
+        console.log('Message: ' + frame);
+        _this.change();
+      });
+
+    });
+  }
 
   constructor(private appointmentService: AppointmentService, private barberService: BarberService) {
   }
@@ -151,6 +173,8 @@ export class AppComponentComponent implements OnInit {
         this.refresh.next();
       }
     });
+
+    this.connect();
   }
 
   actions: CalendarEventAction[] = [
@@ -275,7 +299,6 @@ export class AppComponentComponent implements OnInit {
 
           if(appointment.id > 0){
             color = colors.available;
-            console.log(color);
           } else {
             color = colors.unavailable;
           }
