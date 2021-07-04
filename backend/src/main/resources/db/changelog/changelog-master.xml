@@ -38,11 +38,41 @@
                 tableName="schedule_config"/>
     </changeSet>
 
-    <!-- keep this always as last changeset-->
+    <changeSet  author="ss"  id="addForeignKeyConstraint-barbers">
+        <addColumn tableName="barbers">
+            <column name="social_media_id"
+                    type="bigint"/>
+        </addColumn>
+        <addForeignKeyConstraint  baseColumnNames="social_media_id"
+                                  baseTableName="barbers"
+                                  constraintName="fk_barber_social_media"
+                                  referencedColumnNames="id"
+                                  referencedTableName="social_media"
+        />
+        <dropColumn tableName="barbers" columnName="instagram"/>
+        <dropColumn tableName="barbers" columnName="facebook"/>
+    </changeSet>
+
+    <changeSet  author="ss"  id="addForeignKeyConstraint-general_configuration">
+        <addColumn tableName="general_configuration">
+            <column name="social_media_id"
+                    type="bigint"/>
+        </addColumn>
+        <addForeignKeyConstraint  baseColumnNames="social_media_id"
+                                  baseTableName="general_configuration"
+                                  constraintName="fk_general_configuration_social_media"
+                                  referencedColumnNames="id"
+                                  referencedTableName="social_media"
+        />
+    </changeSet>
+
+    <changeSet author="ss" id="social_media_data.sql">
+        <sqlFile path="db/social_media_data.sql"/>
+    </changeSet>
+
     <changeSet author="ss" id="reset_sequences.sql" runAlways="true">
         <sqlFile path="db/reset_sequences.sql"
                  splitStatements="false"
                  stripComments="false"/>
     </changeSet>
-
 </databaseChangeLog>

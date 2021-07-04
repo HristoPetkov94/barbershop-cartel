@@ -1,6 +1,7 @@
 package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
+import com.barbershop.cartel.general.config.info.entity.SocialMediaEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,11 +32,9 @@ public class BarberEntity {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "facebook")
-    private String facebook;
-
-    @Column(name = "instagram")
-    private String instagram;
+    @OneToOne
+    @JoinColumn(name = "social_media_id", referencedColumnName = "id")
+    private SocialMediaEntity socialMedia = new SocialMediaEntity();
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;

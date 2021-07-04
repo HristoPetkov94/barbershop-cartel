@@ -16,9 +16,4 @@ public class SocialMediaController {
     private SocialMediaModel getSocialMedia() {
         return socialMediaInterface.getSocialMedia();
     }
-
-    @PostMapping
-    private void updateSocialMedia(@RequestBody SocialMediaModel socialMedia) {
-        this.socialMediaInterface.saveSocialMedia(socialMedia);
-    }
 }

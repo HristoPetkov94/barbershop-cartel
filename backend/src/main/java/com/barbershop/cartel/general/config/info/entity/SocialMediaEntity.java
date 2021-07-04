@@ -1,6 +1,5 @@
-package com.barbershop.cartel.general.config.socialmedia.entity;
+package com.barbershop.cartel.general.config.info.entity;
 
-import com.barbershop.cartel.general.config.info.entity.GeneralConfigurationEntity;
 import lombok.Getter;
 import lombok.Setter;
 

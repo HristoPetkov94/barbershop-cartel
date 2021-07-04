@@ -40,8 +40,8 @@ public class BarberService implements BarberInterface {
                     .lastName(barber.getLastName())
                     .description(barber.getDescription())
                     .picture(barber.getPicture())
-                    .facebook(barber.getFacebook())
-                    .instagram(barber.getInstagram())
+                    .facebook(barber.getSocialMedia().getFacebook())
+                    .instagram(barber.getSocialMedia().getInstagram())
                     .build();
 
             barbers.add(barberModel);
@@ -65,8 +65,8 @@ public class BarberService implements BarberInterface {
         barber.setLastName(barberModel.getLastName());
         barber.setDescription(barberModel.getDescription());
         barber.setPicture(barberModel.getPicture());
-        barber.setFacebook(barberModel.getFacebook());
-        barber.setInstagram(barberModel.getInstagram());
+        barber.getSocialMedia().setFacebook(barberModel.getFacebook());
+        barber.getSocialMedia().setInstagram(barberModel.getInstagram());
 
         BarberEntity save = barberRepository.save(barber);
 
@@ -109,8 +109,8 @@ public class BarberService implements BarberInterface {
         barber.setLastName(barberModel.getLastName());
         barber.setDescription(barberModel.getDescription());
         barber.setPicture(barberModel.getPicture());
-        barber.setFacebook(barberModel.getFacebook());
-        barber.setInstagram(barberModel.getInstagram());
+        barber.getSocialMedia().setFacebook(barberModel.getFacebook());
+        barber.getSocialMedia().setInstagram(barberModel.getInstagram());
 
         barberRepository.save(barber);
     }

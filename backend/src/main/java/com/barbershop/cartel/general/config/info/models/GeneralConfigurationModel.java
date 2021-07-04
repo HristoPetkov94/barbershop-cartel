@@ -15,5 +15,8 @@ public class GeneralConfigurationModel {
     private String phoneNumber;
 
     private LanguageEnum language;
+
+    private String socialMediaFacebook;
+    private String socialMediaInstagram;
 }
 

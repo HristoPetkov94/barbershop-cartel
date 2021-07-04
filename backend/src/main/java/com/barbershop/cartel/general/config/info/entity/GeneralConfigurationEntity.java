@@ -35,4 +35,8 @@ public class GeneralConfigurationEntity {
 
     @Column(name = "language")
     private LanguageEnum language = LanguageEnum.en;
+
+    @OneToOne
+    @JoinColumn(name = "social_media_id", referencedColumnName = "id")
+    private SocialMediaEntity socialMedia = new SocialMediaEntity();
 }

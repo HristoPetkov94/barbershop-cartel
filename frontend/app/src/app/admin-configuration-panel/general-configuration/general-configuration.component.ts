@@ -1,13 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {NotificationComponent} from '../../notification/notification.component';
-import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {ContactInfoModel} from '../../models/general.configuration/contact.info.model';
 import {Observable} from 'rxjs';
 import {GitVersion} from '../../models/git-version.mode';
 import {User} from '../../models/user.model';
 import {Configuration} from '../../models/general.configuration/configuration.model';
-import {SocialMediaService} from '../../services/socialmedia.service';
 import {getCookie} from '../../utils/cookie.utils';
 
 @Component({
@@ -25,7 +23,9 @@ export class GeneralConfigurationComponent implements OnInit {
   public frontPageMessage: string;
   public appointmentMessage: string;
 
-  public socialMedia = new SocialMediaModel();
+  public facebook: string;
+  public instagram: string;
+
   public contactInfo = new ContactInfoModel();
 
   public gitInfo$: Observable<GitVersion>;
@@ -33,8 +33,7 @@ export class GeneralConfigurationComponent implements OnInit {
   private configuration: Configuration;
 
   constructor(
-    private generalConfigurationService: GeneralConfigurationService,
-    private socialMediaService: SocialMediaService) {
+    private generalConfigurationService: GeneralConfigurationService) {
   }
 
   ngOnInit(): void {
@@ -48,24 +47,14 @@ export class GeneralConfigurationComponent implements OnInit {
 
     this.getConfiguration(language);
 
-    this.socialMediaService.getSocialMedia().subscribe(media => {
-      this.socialMedia.facebook = media.facebook;
-      this.socialMedia.instagram = media.instagram;
-    });
-
     this.gitInfo$ = this.generalConfigurationService.getGitInfo();
   }
 
   saveSocialMedia() {
-    this.socialMediaService.saveSocialMedia(this.socialMedia).subscribe(() => {
-      },
-      () => {
-        this.notification.showMessage('Social media has not been updated.', 'warn');
-      },
-      () => {
-        this.notification.showMessage('Social media has been updated successfully.', 'success');
-      }
-    );
+    this.configuration.socialMediaFacebook = this.instagram;
+    this.configuration.socialMediaFacebook = this.facebook;
+
+    this.saveConfiguration('Social media message');
   }
 
   saveFrontPageMessage() {
@@ -97,6 +86,10 @@ export class GeneralConfigurationComponent implements OnInit {
       this.contactInfo.city = config.city;
       this.contactInfo.address = config.address;
       this.contactInfo.phoneNumber = config.phoneNumber;
+
+      this.facebook = config.socialMediaFacebook;
+      this.instagram = config.socialMediaFacebook;
+
     });
   }
 

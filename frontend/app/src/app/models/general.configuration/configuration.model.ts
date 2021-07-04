@@ -6,8 +6,8 @@ export class Configuration {
   city: string;
   address: string;
   phoneNumber: string;
-  facebook: string;
-  instagram: string;
+  socialMediaFacebook: string;
+  socialMediaInstagram: string;
 
   language: LanguageEnum;
 }

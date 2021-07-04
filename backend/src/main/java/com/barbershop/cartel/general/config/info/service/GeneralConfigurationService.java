@@ -37,6 +37,7 @@ public class GeneralConfigurationService implements GeneralConfigurationInterfac
 
         GeneralConfigurationEntity generalConfigurationEntity = modelMapper.map(config, GeneralConfigurationEntity.class);
         generalConfigurationEntity.setId(id);
+        generalConfigurationEntity.getSocialMedia().setId(configuration.getSocialMedia().getId());
 
         generalConfigurationRepository.save(generalConfigurationEntity);
     }

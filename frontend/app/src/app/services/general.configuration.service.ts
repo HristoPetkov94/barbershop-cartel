@@ -3,8 +3,6 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {Observable, Subscribable} from 'rxjs';
 import {User} from '../models/user.model';
-import {SocialMediaModel} from '../models/general.configuration/social.media.model';
-import {ContactInfoModel} from '../models/general.configuration/contact.info.model';
 import {GitVersion} from '../models/git-version.mode';
 import {PasswordChangeRequest} from '../models/password-change-request.model';
 import {EmailChangeRequest} from '../models/email-change-request.model';
