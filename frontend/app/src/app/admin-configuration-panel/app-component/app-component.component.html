@@ -18,7 +18,9 @@
                                      [view]="view"
                                      [(viewDate)]="viewDate"
                                      (viewDateChange)="closeOpenMonthViewDay()"
-                                     value="Previous">Previous</mat-button-toggle>
+                                     value="Previous">
+          <mat-icon aria-hidden="false" aria-label="Before">navigate_before</mat-icon>
+        </mat-button-toggle>
         <mat-button-toggle
           mwlCalendarToday
           [(viewDate)]="viewDate"
@@ -29,7 +31,9 @@
           [view]="view"
           [(viewDate)]="viewDate"
           (viewDateChange)="closeOpenMonthViewDay()"
-          value="Next">Next</mat-button-toggle>
+          value="Next">
+          <mat-icon aria-hidden="false" aria-label="Next">navigate_next</mat-icon>
+        </mat-button-toggle>
         <mat-button-toggle>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</mat-button-toggle>
         <mat-button-toggle [ngClass]="status">
           <span class="material-icons">

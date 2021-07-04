@@ -96,6 +96,8 @@ export class AppComponentComponent implements OnInit {
 
   status: string = 'connecting';
 
+  reconnecting = false;
+
   view: CalendarView = CalendarView.Week;
 
   CalendarView = CalendarView;
@@ -135,6 +137,7 @@ export class AppComponentComponent implements OnInit {
     this.stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
       _this.setConected(true);
+      _this.reconnecting = false;
       clearInterval(_this.recInterval);
       _this.stompClient.subscribe('/topic/event-added', function (hello) {
         console.log('Message: ' + frame);
@@ -144,8 +147,14 @@ export class AppComponentComponent implements OnInit {
 
     this.stompClient.debug = function(str) {
       if(str.startsWith("Connection closed")){
-        _this.setConected(false);
+        if(_this.reconnecting)
+          return;
+        _this.reconnecting = true;
+
+        console.log("Start reconnect...");
         _this.recInterval = setInterval(function () {
+          _this.setConected(false);
+          _this.stompClient.disconnect({});
           _this.connect();
         }, 5000);
       }
