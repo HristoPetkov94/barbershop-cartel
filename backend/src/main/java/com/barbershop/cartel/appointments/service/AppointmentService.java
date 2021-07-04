@@ -262,6 +262,7 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     private AppointmentModel toAppointmentModel(AppointmentEntity x) {
+
         AppointmentModel appointmentModel = new AppointmentModel();
 
         appointmentModel.setId(x.getId());
@@ -271,7 +272,7 @@ public class AppointmentService implements AppointmentInterface {
         appointmentModel.setStart(x.getStartTime());
         appointmentModel.setEnd(x.getEndTime());
 
-        appointmentModel.setTitle(x.getService().getDescription());
+        appointmentModel.setTitle(x.getService().getServiceTitle());
 
         return appointmentModel;
     }
