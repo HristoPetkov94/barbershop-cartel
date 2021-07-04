@@ -272,7 +272,7 @@ public class AppointmentService implements AppointmentInterface {
         appointmentModel.setStart(x.getStartTime());
         appointmentModel.setEnd(x.getEndTime());
 
-        appointmentModel.setTitle(x.getService().getDescription());
+        appointmentModel.setTitle(x.getService().getServiceTitle());
 
         return appointmentModel;
     }
