@@ -31,6 +31,13 @@
         <sqlFile path="db/changes_into_appointments_table.sql"/>
     </changeSet>
 
+    <changeSet  author="ss"  id="drop_table_schedule_config">
+        <dropTable
+                cascadeConstraints="true"
+                schemaName="public"
+                tableName="schedule_config"/>
+    </changeSet>
+
     <!-- keep this always as last changeset-->
     <changeSet author="ss" id="reset_sequences.sql" runAlways="true">
         <sqlFile path="db/reset_sequences.sql"

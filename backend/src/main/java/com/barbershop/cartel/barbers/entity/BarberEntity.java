@@ -1,7 +1,6 @@
 package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
-import com.barbershop.cartel.appointments.entity.ScheduleConfigEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -40,7 +39,4 @@ public class BarberEntity {
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;
-
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ScheduleConfigEntity> scheduleConfig;
 }

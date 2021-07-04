@@ -1,9 +1,7 @@
 package com.barbershop.cartel.appointments.interfaces;
 
 import com.barbershop.cartel.appointments.models.AppointmentModel;
-import com.barbershop.cartel.appointments.models.ScheduleConfigModel;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
