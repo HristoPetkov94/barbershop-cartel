@@ -51,7 +51,7 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   saveSocialMedia() {
-    this.configuration.socialMediaFacebook = this.instagram;
+    this.configuration.socialMediaInstagram = this.instagram;
     this.configuration.socialMediaFacebook = this.facebook;
 
     this.saveConfiguration('Social media message');
@@ -88,7 +88,7 @@ export class GeneralConfigurationComponent implements OnInit {
       this.contactInfo.phoneNumber = config.phoneNumber;
 
       this.facebook = config.socialMediaFacebook;
-      this.instagram = config.socialMediaFacebook;
+      this.instagram = config.socialMediaInstagram;
 
     });
   }
