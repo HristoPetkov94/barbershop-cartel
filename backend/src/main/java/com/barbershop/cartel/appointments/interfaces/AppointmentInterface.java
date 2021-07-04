@@ -11,11 +11,7 @@ import java.util.List;
 
 public interface AppointmentInterface {
 
-    AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long assignmentId);
-
-    AppointmentWeekModel getAppointmentsCurrentWeek(long assignmentId);
-
-    AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long assignmentId);
+    AppointmentWeekModel getAppointmentsNextWeek(long assignmentId, int numberOfWeeks);
 
     void save(AppointmentRequestModel appointmentModel, LanguageEnum language) throws MessagingException;
 

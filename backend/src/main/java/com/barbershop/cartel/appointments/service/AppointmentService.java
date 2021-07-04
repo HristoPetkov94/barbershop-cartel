@@ -108,22 +108,6 @@ public class AppointmentService implements AppointmentInterface {
         return hours;
     }
 
-    private List<AppointmentDayModel> getPreviousWeek(int numberOfWeeks, long assignmentId) {
-
-        LocalDate today = LocalDate.now();
-        final LocalDate startOfPreviousWeek = today.minusWeeks(numberOfWeeks).with(DayOfWeek.MONDAY);
-
-        return createWeek(startOfPreviousWeek, today, assignmentId);
-    }
-
-    private List<AppointmentDayModel> getCurrentWeek(long assignmentId) {
-
-        LocalDate today = LocalDate.now();
-        final LocalDate startOfCurrentWeek = today.with(DayOfWeek.MONDAY);
-
-        return createWeek(startOfCurrentWeek, today, assignmentId);
-    }
-
     private List<AppointmentDayModel> getNextWeek(int numberOfWeeks, long assignmentId) {
 
         LocalDate today = LocalDate.now();
@@ -198,29 +182,7 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     @Override
-    public AppointmentWeekModel getAppointmentsPreviousWeek(int numberOfWeeks, long assignmentId) {
-
-        List<AppointmentDayModel> previousWeek = getPreviousWeek(numberOfWeeks, assignmentId);
-
-        AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setDays(previousWeek);
-
-        return week;
-    }
-
-    @Override
-    public AppointmentWeekModel getAppointmentsCurrentWeek(long assignmentId) {
-
-        List<AppointmentDayModel> currentWeek = getCurrentWeek(assignmentId);
-
-        AppointmentWeekModel week = new AppointmentWeekModel();
-        week.setDays(currentWeek);
-
-        return week;
-    }
-
-    @Override
-    public AppointmentWeekModel getAppointmentsNextWeek(int numberOfWeeks, long assignmentId) {
+    public AppointmentWeekModel getAppointmentsNextWeek(long assignmentId, int numberOfWeeks) {
 
         List<AppointmentDayModel> nextWeek = getNextWeek(numberOfWeeks, assignmentId);
 

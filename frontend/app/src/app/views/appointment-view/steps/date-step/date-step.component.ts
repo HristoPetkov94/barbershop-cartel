@@ -41,58 +41,38 @@ export class DateStepComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.scheduleService.getCurrentWeek(this.assignmentId).subscribe(week => {
-      this.week = week;
-
-      const today = week.days.find(d => d.today === true);
-
-      today.active = 'selected';
-
-      this.today = today.date;
-      this.hours = today.hours;
-
-    }, err => {
-      console.log(err);
-    });
+    this.currentWeek()
   }
 
   previousWeek() {
 
     this.numberOfWeeks--;
-    const changedToPositiveNumber = -this.numberOfWeeks;
 
-    this.scheduleService.getPreviousWeek(changedToPositiveNumber, this.assignmentId).subscribe(week => {
-      this.week = week;
-
-      const today = week.days.find(d => d.date === this.today);
-
-      if (today !== undefined) {
-        today.active = 'selected';
-      }
-
-    }, err => {
-      console.log(err);
-    });
+    this.currentWeek()
   }
 
   nextWeek() {
 
     this.numberOfWeeks++;
 
-    this.scheduleService.getNextWeek(this.numberOfWeeks, this.assignmentId).subscribe(week => {
-        this.week = week;
+    this.currentWeek()
+  }
 
-        const today = week.days.find(d => d.date === this.today);
+  currentWeek(){
+    this.scheduleService.getWeek(this.numberOfWeeks, this.assignmentId).subscribe(week => {
+      this.week = week;
 
-        if (today !== undefined) {
-          today.active = 'selected';
-        }
+      const today = week.days.find(d => d.today === true);
 
-      },
-      err => {
-        console.log(err);
+      if (today) {
+        today.active = 'selected';
+
+        this.today = today.date;
+        this.hours = today.hours;
       }
-    );
+    }, err => {
+      console.log(err);
+    });
   }
 
   get isPreviousWeekButtonDisabled() {
