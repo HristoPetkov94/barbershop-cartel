@@ -118,6 +118,7 @@ export class AppComponentComponent implements OnInit {
 
   private stompClient = null;
 
+  private recInterval = null;
 
   setConected(conected){
     this.status = conected? 'connected' : 'disconnected';
@@ -134,7 +135,7 @@ export class AppComponentComponent implements OnInit {
     this.stompClient.connect({}, function (frame) {
       console.log('Connected: ' + frame);
       _this.setConected(true);
-
+      clearInterval(_this.recInterval);
       _this.stompClient.subscribe('/topic/event-added', function (hello) {
         console.log('Message: ' + frame);
         _this.change();
@@ -144,11 +145,10 @@ export class AppComponentComponent implements OnInit {
     this.stompClient.debug = function(str) {
       if(str.startsWith("Connection closed")){
         _this.setConected(false);
+        _this.recInterval = setInterval(function () {
+          _this.connect();
+        }, 5000);
       }
-    };
-
-    socket.onclose = function() {
-      console.log('close');
     };
 
   }
