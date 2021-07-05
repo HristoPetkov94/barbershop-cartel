@@ -1,4 +1,4 @@
-package com.barbershop.cartel.websocket;
+package com.barbershop.cartel.notifications.websocket;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;

@@ -15,7 +15,7 @@ import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface
 import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.services.interfaces.ServiceInterface;
-import com.barbershop.cartel.websocket.WebSocketService;
+import com.barbershop.cartel.notifications.websocket.WebSocketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
