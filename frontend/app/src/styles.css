@@ -11,7 +11,9 @@
   padding: 0;
 }
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
 
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -89,6 +91,10 @@ h2 {
   justify-content: space-between;
 }
 
+.flex-space-evenly {
+  justify-content: space-evenly;
+}
+
 .justify-content-space-evenly {
   justify-content: space-evenly;
 }
@@ -124,6 +130,10 @@ h2 {
 
 .sized-box-width-100 {
   width: 100px;
+}
+
+.sized-box-height-10 {
+  height: 10px;
 }
 
 .sized-box-height-20 {
@@ -214,7 +224,7 @@ h2 {
 }
 
 .mat-dialog-container {
-  background-color: whitesmoke!important;
+  background-color: whitesmoke !important;
 }
 
 .mat-field-padding-margin {
@@ -230,7 +240,7 @@ h2 {
   white-space: pre-line;
 }
 
-.symbol-counter{
+.symbol-counter {
   position: relative;
 }
 

@@ -7,7 +7,7 @@
     <p> Thank you for choosing us !</p>
     <p> You have a booked hour for {{ stepperData.date }} / {{ stepperData.hour }} h. </p>
 
-    <div class="sized-box-height-20"> </div>
+    <div class="sized-box-height-20"></div>
 
     <div class="hover-me">
       <button class="go-back-btn" (click)="goBackHome()">
@@ -17,28 +17,88 @@
   </div>
 
   <ng-container *ngIf="!done">
-    <div class="info-row">
-      <span> <b> Date: </b> </span> <span> {{ stepperData.date }} </span>
-    </div>
-    <div class="info-row">
-      <span> <b> Hour: </b> </span> <span> {{ stepperData.hour }} </span>
-    </div>
-    <div class="info-row">
-      <span> <b> Barber: </b> </span> <span> {{ stepperData.barberName }}</span>
-    </div>
-    <div class="info-row">
-      <span> <b> Service: </b> </span> <span> {{ stepperData.serviceTitle }} </span>
-    </div>
-    <div class="info-row">
-      <span> <b> Price: </b> </span> <span> {{stepperData.assignmentPrice}} лв.</span>
-    </div>
-    <div class="info-row">
-      <span> <b> Duration: </b> </span> <span> {{stepperData.assignmentDuration}} мин.</span>
-    </div>
+    <form [formGroup]="myForm">
+      <div class="col">
 
-    <!--    <button class="confirm-button" (click)="sendEmail()">-->
-    <button class="confirm-button" (click)="makeAnAppointment()">
-      Confirm with Facebook
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'booking.email' | translate }}</mat-label>
+            <input matInput formControlName="email"  required>
+            <mat-icon matSuffix>email</mat-icon>
+            <mat-error *ngIf="email.invalid"> {{ 'booking.email_error' | translate }} </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>{{ 'booking.phone' | translate }}</mat-label>
+            <input matInput formControlName="phone" [minLength]="10" required>
+            <mat-icon matSuffix>phone</mat-icon>
+            <mat-error *ngIf="phone.invalid"> {{ 'booking.phone_error' | translate }} </mat-error>
+          </mat-form-field>
+
+        </div>
+
+        <mat-divider></mat-divider>
+
+        <div class="sized-box-height-20"></div>
+
+        <div class="col">
+          <!--      details-->
+          <div class="row align-items-center flex-space-between">
+            <div class="row align-items-center">
+              <mat-icon>person</mat-icon>
+              <div class="sized-box-width-10"></div>
+              <span> {{ stepperData.barberName }}</span>
+            </div>
+
+            <div class="row align-items-center">
+              <mat-icon>calendar_today</mat-icon>
+              <div class="sized-box-width-10"></div>
+              {{ stepperData.date }} / {{ stepperData.hour }} ч.
+            </div>
+
+          </div>
+
+          <div class="sized-box-height-20"></div>
+
+          <mat-divider></mat-divider>
+
+          <div class="sized-box-height-20"></div>
+
+          <div class="col">
+
+            <div class="row align-items-center">
+              <mat-icon>event_note</mat-icon>
+              <div class="sized-box-width-10"></div>
+              {{ stepperData.serviceTitle }}
+            </div>
+
+            <div class="sized-box-height-10"></div>
+
+            <div class="row">
+              <div class="row align-items-center">
+                <mat-icon>attach_money</mat-icon>
+                <div class="sized-box-width-10"></div>
+                {{ stepperData.assignmentPrice }} лв.
+              </div>
+
+              <div class="sized-box-width-20"></div>
+
+              <div class="row align-items-center">
+                <mat-icon>access_time</mat-icon>
+                <div class="sized-box-width-10"></div>
+                {{ stepperData.assignmentDuration }} мин.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </form>
+
+    <div class="sized-box-height-20"></div>
+
+    <button class="confirm-button" (click)="makeAnAppointment()" [disabled]="myForm.invalid" >
+      {{ 'booking.appointment_button' | translate }}
     </button>
   </ng-container>
 </div>

@@ -4,6 +4,8 @@ import {AppointmentService} from '../../../../services/appointment.service';
 import {AppointmentRequest} from '../../../../interfaces/appointment-request';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {getCookie} from '../../../../utils/cookie.utils';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ImageService} from '../../../../services/image.service';
 
 @Component({
   selector: 'app-finish-step',
@@ -20,15 +22,33 @@ export class FinishStepComponent implements OnInit {
   public appointment = new AppointmentRequest();
   public done = false;
 
+  myForm: FormGroup;
+  //TODO: find better regex
+  reg = '(^(\\+359)|0)\\d{9}$';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private appointmentService: AppointmentService,
+    private fb: FormBuilder
   ) {
   }
 
   ngOnInit(): void {
     this.language = getCookie('lang');
+    this.myForm = this.fb.group({
+        email: ['', Validators.email],
+        phone: ['', Validators.pattern(this.reg)],
+      }
+    );
+  }
+
+  get email() {
+    return this.myForm.get('email');
+  }
+
+  get phone() {
+    return this.myForm.get('phone');
   }
 
   makeAnAppointment() {

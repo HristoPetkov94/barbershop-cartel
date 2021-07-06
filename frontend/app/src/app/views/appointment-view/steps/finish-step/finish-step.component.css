@@ -18,11 +18,29 @@
 }
 
 .confirm-button {
-  background-color: #385898;
+  background-color: black;
   padding: 20px 0;
   cursor: pointer;
-  border: none;
+  border: 1px solid black;
   color: #EEEEEE;
+  transition: 0.2s;
+}
+
+.confirm-button:disabled {
+  background-color: gray;
+  padding: 20px 0;
+  cursor: pointer;
+  border: 1px solid darkgray;
+  color: lightgray;
+  transition: 0.2s;
+}
+
+.confirm-button:hover:enabled {
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid black;
+  color: black;
+  transition: 0.2s;
 }
 
 .shadow {
@@ -72,5 +90,5 @@
 }
 
 .hover-me:hover {
-  border:1px solid #212121;
+  border: 1px solid #212121;
 }
