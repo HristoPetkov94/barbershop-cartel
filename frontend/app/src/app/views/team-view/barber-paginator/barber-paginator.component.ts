@@ -1,8 +1,9 @@
-import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {Barber} from '../../../models/barber.model';
 import {Router} from '@angular/router';
+import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-paginator',
@@ -21,12 +22,13 @@ import {Router} from '@angular/router';
       ]),
     ],
 })
-export class BarberPaginatorComponent implements OnChanges {
+export class BarberPaginatorComponent implements OnInit, OnChanges {
 
   @ViewChild('paginator', {static: true}) paginator: ElementRef;
 
   public page = 0;
   public pages: Page[] = [];
+  public language: string;
 
   @Input()
   get data(): Barber[] {
@@ -43,6 +45,10 @@ export class BarberPaginatorComponent implements OnChanges {
   public barbersPerPage;
 
   constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
+    this.language = getCookie('lang');
   }
 
   ngOnChanges(changes: SimpleChanges): void {

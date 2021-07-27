@@ -5,7 +5,7 @@
       <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
 
       <div class="row name padding-20 justify-content-center">
-        <span>{{barber.firstName}} {{barber.lastName}}</span>
+        <span>{{barber.firstName[this.language]}} {{barber.lastName[this.language]}}</span>
       </div>
     </div>
   </div>

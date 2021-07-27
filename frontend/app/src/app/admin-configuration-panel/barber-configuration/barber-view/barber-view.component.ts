@@ -1,9 +1,10 @@
-import {Component, Input, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Barber} from '../../../models/barber.model';
 import {BarberService} from '../../../services/barber.service';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {BarberEditDialogComponent} from '../barber-edit-dialog/barber-edit-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-view',
@@ -12,12 +13,14 @@ import {MatDialog} from '@angular/material/dialog';
 })
 export class BarberViewComponent implements OnInit {
   deleted = false;
+  public language: string;
 
   @Input() barber: Barber;
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
   ngOnInit(): void {
+    this.language = getCookie('lang');
   }
 
   constructor(private barberService: BarberService, private dialog: MatDialog) {
@@ -55,7 +58,7 @@ export class BarberViewComponent implements OnInit {
   edit(): void {
     const dialogRef = this.dialog.open(BarberEditDialogComponent, {
       width: '560px',
-      data:  Object.assign({}, this.barber)
+      data: Object.assign({}, this.barber)
     });
 
     dialogRef.afterClosed().subscribe(result => {

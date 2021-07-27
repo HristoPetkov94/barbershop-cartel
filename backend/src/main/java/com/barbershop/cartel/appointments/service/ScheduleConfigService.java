@@ -2,6 +2,7 @@ package com.barbershop.cartel.appointments.service;
 
 import com.barbershop.cartel.appointments.interfaces.ScheduleConfigInterface;
 import com.barbershop.cartel.appointments.models.AppointmentModel;
+import com.barbershop.cartel.utils.InternationalLanguage;
 import com.barbershop.cartel.utils.ListUtils;
 import com.barbershop.cartel.work.day.WorkDayEntity;
 import com.barbershop.cartel.work.day.WorkDayRepository;
@@ -51,7 +52,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
         for (var workWeekDayEntity : workWeekDayEntities) {
 
             final long barberId = workWeekDayEntity.getBarber().getId();
-            final String barberName = workWeekDayEntity.getBarber().getFirstName();
+            final InternationalLanguage barberName = workWeekDayEntity.getBarber().getFirstName();
             final String title = barberName + " Not available";
 
             final Optional<WorkDayEntity> first = overrides.stream().filter(x -> x.getDay().isEqual(date) && x.getBarber().getId() == barberId).findFirst();

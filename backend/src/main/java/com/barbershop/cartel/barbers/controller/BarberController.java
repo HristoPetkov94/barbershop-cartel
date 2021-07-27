@@ -3,6 +3,7 @@ package com.barbershop.cartel.barbers.controller;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

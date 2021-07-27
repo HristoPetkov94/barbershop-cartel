@@ -3,6 +3,7 @@ import {StepEnum} from './stepper/step.enum';
 import {ChangeStepRequest} from './stepper/change-step-request.model';
 import {StepController} from './stepper/step.controller';
 import {Step} from './stepper/step.model';
+import {getCookie} from '../../utils/cookie.utils';
 
 @Component({
   selector: 'app-appointment-view',
@@ -11,6 +12,7 @@ import {Step} from './stepper/step.model';
 })
 export class AppointmentViewComponent implements OnInit {
 
+  public language: string;
   public stepController = new StepController();
 
   public BARBER_STEP = StepEnum.BARBER_STEP;
@@ -22,6 +24,8 @@ export class AppointmentViewComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.language = getCookie('lang');
+
     this.stepController.addStep(new Step('Бръснар', false));
     this.stepController.addStep(new Step('Услуга', true));
     this.stepController.addStep(new Step('Дата и час', true));
@@ -45,7 +49,7 @@ export class AppointmentViewComponent implements OnInit {
   skipSteps(data: any): void {
     // set data
     if (data.barber) {
-      const barberName = `${data.barber.firstName} ${data.barber.lastName}`;
+      const barberName = `${data.barber.firstName[this.language]} ${data.barber.lastName[this.language]}`;
       this.stepperData.barberId = data.barber.id;
       this.stepperData.barberName = barberName;
 

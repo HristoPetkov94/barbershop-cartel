@@ -1,5 +1,6 @@
 package com.barbershop.cartel.work.weekday;
 
+import com.barbershop.cartel.barbers.entity.BarberEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +11,5 @@ public interface WorkWeekDayRepository extends CrudRepository<WorkWeekDayEntity,
 
     List<WorkWeekDayEntity> findByBarberIdIn(long[] barberId);
 
+    void deleteAllByBarberId(long barberId);
 }

@@ -6,9 +6,6 @@ import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.general.config.info.interfaces.GeneralConfigurationInterface;
 import com.barbershop.cartel.general.config.info.models.GeneralConfigurationModel;
 import com.barbershop.cartel.general.config.info.repository.GeneralConfigurationRepository;
-import com.barbershop.cartel.general.config.socialmedia.interfaces.SocialMediaInterface;
-import com.barbershop.cartel.general.config.socialmedia.repository.SocialMediaRepository;
-import lombok.val;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +15,6 @@ public class GeneralConfigurationService implements GeneralConfigurationInterfac
 
     @Autowired
     private GeneralConfigurationRepository generalConfigurationRepository;
-
-    @Autowired
-    private SocialMediaRepository socialMediaRepository;
 
     private final ModelMapper modelMapper = new ModelMapper();
 
@@ -45,17 +39,10 @@ public class GeneralConfigurationService implements GeneralConfigurationInterfac
         configuration.setFrontPageMessage(config.getFrontPageMessage());
         configuration.setLanguage(config.getLanguage());
         configuration.setPhoneNumber(config.getPhoneNumber());
+        configuration.setFacebook(config.getSocialMediaFacebook());
+        configuration.setInstagram(config.getSocialMediaInstagram());
 
         generalConfigurationRepository.save(configuration);
-
-        val byId = socialMediaRepository.findById(configuration.getSocialMedia().getId());
-
-        val socialMediaEntity = byId.get();
-
-        socialMediaEntity.setFacebook(config.getSocialMediaFacebook());
-        socialMediaEntity.setInstagram(config.getSocialMediaInstagram());
-
-        socialMediaRepository.save(socialMediaEntity);
     }
 
 }

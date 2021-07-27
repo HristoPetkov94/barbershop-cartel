@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Barber} from '../../../models/barber.model';
 import {ImageService} from '../../../services/image.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-edit',
@@ -15,6 +16,7 @@ export class BarberEditDialogComponent implements OnInit {
 
   myForm: FormGroup;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
+  public language: string;
 
   get facebook() {
     return this.myForm.get('facebook');
@@ -40,24 +42,26 @@ export class BarberEditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.language = getCookie('lang');
+
     this.myForm = this.fb.group({
         id: this.data.id,
-        firstName: [this.data.firstName, [Validators.required]],
-        lastName: [this.data.lastName, [Validators.required]],
+        firstName: [this.data.firstName[this.language], [Validators.required]],
+        lastName: [this.data.lastName[this.language], [Validators.required]],
         instagram: [this.data.instagram, [Validators.pattern(this.reg)]],
         facebook: [this.data.facebook, [Validators.pattern(this.reg)]],
-        description: [this.data.description, [Validators.maxLength(255)]]
+        description: [this.data.description[this.language], [Validators.maxLength(255)]]
       }
     );
 
 
     this.dialogRef.beforeClosed().subscribe(value => {
       value.id = this.myForm.value.id;
-      value.firstName = this.myForm.value.firstName;
-      value.lastName = this.myForm.value.lastName;
+      value.firstName[this.language] = this.myForm.value.firstName;
+      value.lastName[this.language] = this.myForm.value.lastName;
       value.instagram = this.myForm.value.instagram;
       value.facebook = this.myForm.value.facebook;
-      value.description = this.myForm.value.description;
+      value.description[this.language] = this.myForm.value.description;
     });
   }
 
@@ -73,7 +77,8 @@ export class BarberEditDialogComponent implements OnInit {
     };
   }
 
-  onNoClick(): void {
+  onCancel(): void {
+    console.log(this.data.firstName);
     this.dialogRef.close();
   }
 

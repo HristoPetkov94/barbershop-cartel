@@ -1,13 +1,15 @@
 package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.appointments.entity.AppointmentEntity;
-import com.barbershop.cartel.appointments.service.AppointmentService;
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
-import com.barbershop.cartel.general.config.info.entity.SocialMediaEntity;
+import com.barbershop.cartel.utils.InternationalLanguage;
 import com.barbershop.cartel.work.day.WorkDayEntity;
 import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -17,6 +19,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Table(name = BarberEntity.TABLE_NAME)
 public class BarberEntity {
 
@@ -26,21 +29,26 @@ public class BarberEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Type(type = "jsonb")
+    @Column(name = "first_name", columnDefinition = "jsonb")
+    private InternationalLanguage firstName;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Type(type = "jsonb")
+    @Column(name = "last_name", columnDefinition = "jsonb")
+    private InternationalLanguage lastName;
+
+    @Type(type = "jsonb")
+    @Column(name = "description", columnDefinition = "jsonb")
+    private InternationalLanguage description;
 
     @Column(name = "picture", columnDefinition = "TEXT")
     private String picture;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "facebook")
+    private String facebook;
 
-    @OneToOne
-    @JoinColumn(name = "social_media_id", referencedColumnName = "id")
-    private SocialMediaEntity socialMedia = new SocialMediaEntity();
+    @Column(name = "instagram")
+    private String instagram;
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;

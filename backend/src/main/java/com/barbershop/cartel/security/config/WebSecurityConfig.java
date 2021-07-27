@@ -72,7 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/assignments",
                         "/appointments/appointment-week**",
                         "/images/**",
-                        "/social-media",
                         "/appointments/appointment-week",
                         "/appointments/**",
                         "/general-configuration**",

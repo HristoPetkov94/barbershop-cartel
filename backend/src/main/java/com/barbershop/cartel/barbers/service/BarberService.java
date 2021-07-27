@@ -5,8 +5,6 @@ import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
 import com.barbershop.cartel.barbers.repository.BarberRepository;
 import com.barbershop.cartel.errors.CartelCustomException;
-import com.barbershop.cartel.general.config.socialmedia.repository.SocialMediaRepository;
-import com.barbershop.cartel.general.config.socialmedia.service.SocialMediaService;
 import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
 import com.barbershop.cartel.work.weekday.WorkWeekDayRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -14,6 +12,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -31,9 +30,6 @@ public class BarberService implements BarberInterface {
     @Autowired
     private  WorkWeekDayRepository workWeekDayRepository;
 
-    @Autowired
-    private SocialMediaRepository socialMediaRepository;
-
     @Override
     public List<BarberModel> getBarbers() {
 
@@ -48,8 +44,8 @@ public class BarberService implements BarberInterface {
                     .lastName(barber.getLastName())
                     .description(barber.getDescription())
                     .picture(barber.getPicture())
-                    .facebook(barber.getSocialMedia().getFacebook())
-                    .instagram(barber.getSocialMedia().getInstagram())
+                    .facebook(barber.getFacebook())
+                    .instagram(barber.getInstagram())
                     .build();
 
             barbers.add(barberModel);
@@ -73,12 +69,10 @@ public class BarberService implements BarberInterface {
         barber.setLastName(barberModel.getLastName());
         barber.setDescription(barberModel.getDescription());
         barber.setPicture(barberModel.getPicture());
+        barber.setFacebook(barberModel.getFacebook());
+        barber.setInstagram(barberModel.getInstagram());
 
-        socialMediaRepository.save(barber.getSocialMedia());
-
-        barber.getSocialMedia().setFacebook(barberModel.getFacebook());
-        barber.getSocialMedia().setInstagram(barberModel.getInstagram());
-
+        BarberEntity save = barberRepository.save(barber);
         var workingWeek = createWorkingWeek();
 
         final var workWeekDayEntities = workWeekDayRepository.saveAll(workingWeek);
@@ -91,7 +85,6 @@ public class BarberService implements BarberInterface {
 
         barber.setWorkWeekDays(workingWeek);
 
-        BarberEntity save = barberRepository.save(barber);
 
         return save;
     }
@@ -132,17 +125,22 @@ public class BarberService implements BarberInterface {
         barber.setLastName(barberModel.getLastName());
         barber.setDescription(barberModel.getDescription());
         barber.setPicture(barberModel.getPicture());
-        barber.getSocialMedia().setFacebook(barberModel.getFacebook());
-        barber.getSocialMedia().setInstagram(barberModel.getInstagram());
+        barber.setFacebook(barberModel.getFacebook());
+        barber.setInstagram(barberModel.getInstagram());
 
         barberRepository.save(barber);
     }
 
     @Override
+    // TODO: check why transactional needed
+    @Transactional
     public void deleteBarber(long barberId) {
 
         BarberEntity barber = barberRepository.findById(barberId)
                 .orElseThrow(() -> new CartelCustomException("Barber with id:" + barberId + " is not existing"));
+
+        // TODO: deleting of working day should be done on entity level
+        workWeekDayRepository.deleteAllByBarberId(barberId);
 
         barberRepository.delete(barber);
     }

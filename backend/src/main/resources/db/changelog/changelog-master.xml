@@ -75,4 +75,24 @@
                  splitStatements="false"
                  stripComments="false"/>
     </changeSet>
+
+    <changeSet author="hp" id="2021-07-19_change_columns_type_barbers.sql">
+        <sqlFile path="db/2021-07-19_change_columns_type_barbers.sql"/>
+    </changeSet>
+
+    <changeSet author="hp" id="2021-07-27_add_columns_to_barbers.sql">
+        <sqlFile path="db/2021-07-27_add_columns_to_barbers.sql"/>
+    </changeSet>
+
+    <changeSet author="hp" id="2021-07-27_add_columns_to_general_configuration.sql">
+        <sqlFile path="db/2021-07-27_add_columns_to_general_configuration.sql"/>
+    </changeSet>
+
+    <changeSet author="hp" id="2021-07-27_drop_columns_social_media.sql">
+        <sqlFile path="db/2021-07-27_drop_columns_social_media.sql"/>
+    </changeSet>
+
+    <changeSet author="hp" id="2021-07-27_drop_table_social_media.sql">
+        <sqlFile path="db/2021-07-27_drop_table_social_media.sql"/>
+    </changeSet>
 </databaseChangeLog>
