@@ -95,4 +95,8 @@
     <changeSet author="hp" id="2021-07-27_drop_table_social_media.sql">
         <sqlFile path="db/2021-07-27_drop_table_social_media.sql"/>
     </changeSet>
+
+    <changeSet author="hp" id="2021-07-28_change_columns_type_services.sql">
+        <sqlFile path="db/2021-07-28_change_columns_type_services.sql"/>
+    </changeSet>
 </databaseChangeLog>

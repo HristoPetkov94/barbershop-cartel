@@ -27,7 +27,7 @@ export class BarberViewComponent implements OnInit {
   }
 
   delete() {
-    if (confirm('Are you sure you want to delete ' + this.barber.firstName + ' ' + this.barber.lastName + '?')) {
+    if (confirm('Are you sure you want to delete ' + this.barber.firstName[this.language] + ' ' + this.barber.lastName[this.language] + '?')) {
 
       this.barberService.deleteBarber(this.barber.id).subscribe(data => {
         },

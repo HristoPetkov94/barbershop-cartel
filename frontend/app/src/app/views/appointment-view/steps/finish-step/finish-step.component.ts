@@ -5,7 +5,6 @@ import {AppointmentRequest} from '../../../../interfaces/appointment-request';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {getCookie} from '../../../../utils/cookie.utils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ImageService} from '../../../../services/image.service';
 
 @Component({
   selector: 'app-finish-step',

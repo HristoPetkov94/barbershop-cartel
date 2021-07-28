@@ -26,6 +26,7 @@ import {Barber} from '../../models/barber.model';
 import * as SockJS from 'sockjs-client';
 import {Stomp} from '@stomp/stompjs';
 import {Dropdown} from './dropdown';
+import {getCookie} from '../../utils/cookie.utils';
 
 const colors: any = {
   red: {
@@ -109,6 +110,8 @@ export class AppComponentComponent implements OnInit {
     event: CalendarEvent;
   };
 
+  public language: string;
+
   private barberToColor = new Map();
 
   public barbers: Barber[];
@@ -166,6 +169,8 @@ export class AppComponentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.language = getCookie('lang');
+
     this.barberService.getBarbers().subscribe(barbers => {
 
       this.barbers = barbers;
@@ -180,7 +185,7 @@ export class AppComponentComponent implements OnInit {
       this.barberDropdowns.push(new Dropdown(allBarberIds, 'All barbers'));
 
       const dropdowns = barbers.map(barber => {
-        return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`);
+        return new Dropdown([barber.id], `${barber.firstName[this.language]} ${barber.lastName[this.language]}`);
       });
       dropdowns.forEach(dropdown => this.barberDropdowns.push(dropdown));
 

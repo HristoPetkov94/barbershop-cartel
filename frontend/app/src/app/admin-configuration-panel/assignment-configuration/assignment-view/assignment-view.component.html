@@ -8,7 +8,7 @@
           <mat-option [value]="0">{{ 'configuration.please_select' | translate}}</mat-option>
 
           <mat-option *ngFor="let service of availableServices"
-                      [value]="service.id"> {{service.serviceTitle}} </mat-option>
+                      [value]="service.id"> {{service.serviceTitle[this.language]}} </mat-option>
         </mat-select>
       </mat-form-field>
 

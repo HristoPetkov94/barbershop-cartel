@@ -13,7 +13,7 @@
       <mat-select [(value)]="selectedBarberId">
 
         <mat-option *ngFor="let barber of barbers"
-                    [value]="barber.id"> {{barber.firstName + ' ' + barber.lastName}} </mat-option>
+                    [value]="barber.id"> {{barber.firstName[this.language] + ' ' + barber.lastName[this.language]}} </mat-option>
       </mat-select>
     </mat-form-field>
   </div>

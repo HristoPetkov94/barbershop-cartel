@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ImageService} from '../../../services/image.service';
 import {Service} from '../../../models/service';
+import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-service-edit-dialog',
@@ -14,6 +15,7 @@ export class ServiceEditDialogComponent implements OnInit {
   @ViewChild('chooseFile') public chooseFile: ElementRef;
 
   myForm: FormGroup;
+  public language: string;
 
   constructor(
     public dialogRef: MatDialogRef<ServiceEditDialogComponent>,
@@ -23,17 +25,19 @@ export class ServiceEditDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.language = getCookie('lang');
+
     this.myForm = this.fb.group({
         id: this.service.id,
-        serviceTitle: [this.service.serviceTitle, [Validators.required]],
-        description: [this.service.description,  [Validators.maxLength(255)]]
+        serviceTitle: [this.service.serviceTitle[this.language], [Validators.required]],
+        description: [this.service.description[this.language], [Validators.maxLength(255)]]
       }
     );
 
     this.dialogRef.beforeClosed().subscribe(data => {
       data.id = this.myForm.value.id;
-      data.serviceTitle = this.myForm.value.serviceTitle;
-      data.description = this.myForm.value.description;
+      data.serviceTitle[this.language] = this.myForm.value.serviceTitle;
+      data.description[this.language] = this.myForm.value.description;
     });
   }
 

@@ -7,6 +7,7 @@ import {NotificationComponent} from '../../../notification/notification.componen
 import {AssignmentEditDialogComponent} from '../assignment-edit-dialog/assignment-edit-dialog.component';
 import {MatDialog} from '@angular/material';
 import {GlobalConstants} from '../../../common/global.constants';
+import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-assignment-view',
@@ -19,6 +20,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   @Input()
   private barberId;
 
+  public language: string;
   public services: Service[];
   public assignments: Assignment[];
 
@@ -35,6 +37,8 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    this.language = getCookie('lang');
+
     this.serviceService.getServices().subscribe(services => {
       this.services = services;
 
@@ -61,7 +65,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   }
 
   getServiceName(serviceId: number) {
-    return this.services?.find(s => s.id === serviceId).serviceTitle;
+    return this.services?.find(s => s.id === serviceId).serviceTitle[this.language];
   }
 
   get availableServices() {

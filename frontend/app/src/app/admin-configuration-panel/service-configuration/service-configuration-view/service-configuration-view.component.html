@@ -21,13 +21,13 @@
       <div class="row flex-space-between">
         <div class="col flex-1">
           <h2 class="margin-bottom-10"> {{ 'configuration.services.service' | translate}} </h2>
-          <span label="" class="text-input">{{service.serviceTitle}}</span>
+          <span label="" class="text-input">{{service.serviceTitle[this.language]}}</span>
         </div>
       </div>
 
       <div class="col flex-1 margin-top-20">
         <h2 class="margin-bottom-10"> {{ 'configuration.services.description' | translate}} </h2>
-        <span label="" class="text-input max-height">{{service.description}}</span>
+        <span label="" class="text-input max-height">{{service.description[this.language]}}</span>
       </div>
 
     </div>

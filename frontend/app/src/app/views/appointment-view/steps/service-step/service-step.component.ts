@@ -6,6 +6,7 @@ import {AssignmentService} from '../../../../services/assignment.service';
 import {Assignment} from '../../../../models/assignment';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {StepEnum} from '../../stepper/step.enum';
+import {getCookie} from '../../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-service-step',
@@ -17,6 +18,7 @@ export class ServiceStepComponent implements OnInit {
   @Input() stepperData;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
+  public language: string;
   services: Service[];
   assignments: Assignment[];
 
@@ -29,7 +31,7 @@ export class ServiceStepComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('service step');
+    this.language = getCookie('lang');
 
     this.serviceService.getServices().subscribe(services => {
       this.services = services;
@@ -62,7 +64,7 @@ export class ServiceStepComponent implements OnInit {
     console.log('from service to date');
 
     this.stepperData.serviceId = element.service.id;
-    this.stepperData.serviceTitle = element.service.serviceTitle;
+    this.stepperData.serviceTitle = element.service.serviceTitle[this.language];
 
     this.stepperData.assignmentId = element.assignment.id;
     this.stepperData.assignmentPrice = element.assignment.price;
