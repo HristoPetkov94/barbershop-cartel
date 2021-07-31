@@ -13,11 +13,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 
 @Configuration
 @EnableWebSecurity
@@ -70,15 +68,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/authenticate", "/register", "/gkz-stomp-endpoint/**/*")
-                .antMatchers(HttpMethod.GET,
-                        "/barbers",
-                        "/services",
+                .antMatchers(HttpMethod.GET, "/services",
                         "/assignments",
                         "/appointments/appointment-week**",
                         "/images/**",
                         "/social-media",
                         "/appointments/appointment-week",
-                        "/general-configuration**")
+                        "/appointments/**",
+                        "/general-configuration**",
+                        // swagger
+                        "/v2/api-docs",
+                        "/configuration/ui",
+                        "/swagger-resources/**",
+                        "/configuration/security",
+                        "/swagger-ui.html",
+                        "/webjars/**")
                 .antMatchers(HttpMethod.POST,
                         "/appointments/save-appointment");
     }
