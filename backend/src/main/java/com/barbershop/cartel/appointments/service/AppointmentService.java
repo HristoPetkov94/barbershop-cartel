@@ -77,7 +77,7 @@ public class AppointmentService implements AppointmentInterface {
         List<AppointmentHoursModel> hours = new ArrayList<>();
 
         hoursLoop:
-        for(int i= 1; i < 24 * 2; i++) {
+        for(int i= 1; i < 24 * 2 - 1; i++) {
             LocalTime currentAppointmentEndTime = currentAppointment.plusMinutes(duration);
 
             for (AppointmentModel bookedHour : bookedHours) {

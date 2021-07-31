@@ -5,9 +5,12 @@ import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.barbers.models.BarberModel;
 import com.barbershop.cartel.barbers.repository.BarberRepository;
 import com.barbershop.cartel.errors.CartelCustomException;
+import com.barbershop.cartel.general.config.socialmedia.repository.SocialMediaRepository;
+import com.barbershop.cartel.general.config.socialmedia.service.SocialMediaService;
 import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
 import com.barbershop.cartel.work.weekday.WorkWeekDayRepository;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -25,6 +30,9 @@ public class BarberService implements BarberInterface {
 
     @Autowired
     private  WorkWeekDayRepository workWeekDayRepository;
+
+    @Autowired
+    private SocialMediaRepository socialMediaRepository;
 
     @Override
     public List<BarberModel> getBarbers() {
@@ -65,25 +73,38 @@ public class BarberService implements BarberInterface {
         barber.setLastName(barberModel.getLastName());
         barber.setDescription(barberModel.getDescription());
         barber.setPicture(barberModel.getPicture());
+
+        socialMediaRepository.save(barber.getSocialMedia());
+
         barber.getSocialMedia().setFacebook(barberModel.getFacebook());
         barber.getSocialMedia().setInstagram(barberModel.getInstagram());
 
-        BarberEntity save = barberRepository.save(barber);
+        var workingWeek = createWorkingWeek();
 
-        createWorkingWeek(save, workWeekDayRepository);
+        final var workWeekDayEntities = workWeekDayRepository.saveAll(workingWeek);
+
+        workingWeek.forEach(x->x.setBarber(barber));
+
+        workingWeek = StreamSupport
+                .stream(workWeekDayEntities.spliterator(), false)
+                .collect(Collectors.toList());
+
+        barber.setWorkWeekDays(workingWeek);
+
+        BarberEntity save = barberRepository.save(barber);
 
         return save;
     }
 
-    private void createWorkingWeek(BarberEntity barber, WorkWeekDayRepository workWeekDayRepository) {
+    private List<WorkWeekDayEntity> createWorkingWeek() {
+
+        LocalTime from = LocalTime.of(8, 0);
+        LocalTime to = LocalTime.of(18, 0);
+
+        val list = new ArrayList<WorkWeekDayEntity>();
 
         for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
             WorkWeekDayEntity entity = new WorkWeekDayEntity();
-
-            LocalTime from = LocalTime.of(8, 0);
-            LocalTime to = LocalTime.of(18, 0);
-
-            entity.setBarber(barber);
 
             entity.setDayOfWeek(dayOfWeek);
 
@@ -94,8 +115,10 @@ public class BarberService implements BarberInterface {
 
             entity.setNotWorking(notWorking);
 
-            workWeekDayRepository.save(entity);
+            list.add(entity);
         }
+
+        return list;
     }
     @Override
     public void updateBarber(BarberModel barberModel) {

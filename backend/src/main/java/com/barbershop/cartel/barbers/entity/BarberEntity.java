@@ -1,9 +1,15 @@
 package com.barbershop.cartel.barbers.entity;
 
+import com.barbershop.cartel.appointments.entity.AppointmentEntity;
+import com.barbershop.cartel.appointments.service.AppointmentService;
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
 import com.barbershop.cartel.general.config.info.entity.SocialMediaEntity;
+import com.barbershop.cartel.work.day.WorkDayEntity;
+import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -38,4 +44,16 @@ public class BarberEntity {
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;
+
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<WorkDayEntity> workDays;
+
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<WorkWeekDayEntity> workWeekDays;
+
+    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private List<AppointmentEntity> appointments;
 }
