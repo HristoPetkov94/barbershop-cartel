@@ -69,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring()
                 .antMatchers("/authenticate", "/register", "/gkz-stomp-endpoint/**/*")
                 .antMatchers(HttpMethod.GET,
-                        "barbers",
+                        "/barbers",
                         "/services",
                         "/assignments",
                         "/appointments/appointment-week**",
