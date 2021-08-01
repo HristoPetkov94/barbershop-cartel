@@ -82,6 +82,7 @@ import { DateStepComponent } from './views/appointment-view/steps/date-step/date
 import { FinishStepComponent } from './views/appointment-view/steps/finish-step/finish-step.component';
 import { AppointmentViewComponent } from './views/appointment-view/appointment-view.component';
 import { EmailConfigurationComponent } from './admin-configuration-panel/email-configuration/email-configuration.component';
+import {Translate2Pipe} from './pipes/translate-pipe';
 
 @NgModule({
   exports: [
@@ -136,6 +137,7 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
     WorkDayViewComponent,
     WorkDayEditDialogComponent,
     EmailConfigurationComponent,
+    Translate2Pipe
   ],
     imports: [
         BrowserModule,
