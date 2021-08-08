@@ -3,7 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Barber} from '../../../models/barber.model';
 import {ImageService} from '../../../services/image.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {getCookie} from '../../../utils/cookie.utils';
+import {LanguagePipe} from '../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-barber-edit',
@@ -16,7 +16,6 @@ export class BarberEditDialogComponent implements OnInit {
 
   myForm: FormGroup;
   @ViewChild('chooseFile') public chooseFile: ElementRef;
-  public language: string;
 
   get facebook() {
     return this.myForm.get('facebook');
@@ -38,30 +37,34 @@ export class BarberEditDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<BarberEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Barber,
     private imageService: ImageService,
+    private languagePipe: LanguagePipe,
     private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
+
+    const firstName = this.languagePipe.transform(this.data.firstName);
+    const lastName = this.languagePipe.transform(this.data.lastName);
+    const description = this.languagePipe.transform(this.data.description);
 
     this.myForm = this.fb.group({
         id: this.data.id,
-        firstName: [this.data.firstName[this.language], [Validators.required]],
-        lastName: [this.data.lastName[this.language], [Validators.required]],
+        firstName: [firstName, [Validators.required]],
+        lastName: [lastName, [Validators.required]],
         instagram: [this.data.instagram, [Validators.pattern(this.reg)]],
         facebook: [this.data.facebook, [Validators.pattern(this.reg)]],
-        description: [this.data.description[this.language], [Validators.maxLength(255)]]
+        description: [description, [Validators.maxLength(255)]]
       }
     );
 
 
     this.dialogRef.beforeClosed().subscribe(value => {
       value.id = this.myForm.value.id;
-      value.firstName[this.language] = this.myForm.value.firstName;
-      value.lastName[this.language] = this.myForm.value.lastName;
+      value.firstName[this.languagePipe.language] = this.myForm.value.firstName;
+      value.lastName[this.languagePipe.language] = this.myForm.value.lastName;
       value.instagram = this.myForm.value.instagram;
       value.facebook = this.myForm.value.facebook;
-      value.description[this.language] = this.myForm.value.description;
+      value.description[this.languagePipe.language] = this.myForm.value.description;
     });
   }
 

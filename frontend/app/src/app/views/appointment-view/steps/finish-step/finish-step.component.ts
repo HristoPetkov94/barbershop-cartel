@@ -3,8 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AppointmentService} from '../../../../services/appointment.service';
 import {AppointmentRequest} from '../../../../interfaces/appointment-request';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
-import {getCookie} from '../../../../utils/cookie.utils';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-finish-step',
@@ -16,7 +16,6 @@ export class FinishStepComponent implements OnInit {
   @Input() stepController;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
-  private language: string;
   public assignmentId;
   public appointment = new AppointmentRequest();
   public done = false;
@@ -29,12 +28,13 @@ export class FinishStepComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private appointmentService: AppointmentService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private languagePipe: LanguagePipe
   ) {
   }
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
+
     this.myForm = this.fb.group({
         email: ['', Validators.email],
         phone: ['', Validators.pattern(this.reg)],
@@ -56,7 +56,8 @@ export class FinishStepComponent implements OnInit {
     this.appointment.hour = this.stepperData.hour;
     this.appointment.date = this.stepperData.date;
 
-    this.appointmentService.bookNow(this.appointment, this.language).subscribe(() => {
+    const language = this.languagePipe.language;
+    this.appointmentService.bookNow(this.appointment, language).subscribe(() => {
     }, () => {
     }, () => {
       this.done = true;

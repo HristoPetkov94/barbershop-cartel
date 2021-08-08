@@ -3,7 +3,7 @@
   <div class="hover-me" *ngFor="let element of serviceViewArray" (click)="next(element)">
     <div class="service">
       <div class="row flex-space-between align-items-center">
-        <span class="type">{{element.service.serviceTitle[this.language]}}</span>
+        <span class="type">{{element.service.serviceTitle | language}}</span>
 
         <div class="row align-items-center">
 

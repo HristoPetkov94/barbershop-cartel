@@ -5,7 +5,6 @@ import {MatDialog} from '@angular/material/dialog';
 import {NotificationComponent} from '../../notification/notification.component';
 import {BarberEditDialogComponent} from './barber-edit-dialog/barber-edit-dialog.component';
 import {ImageService} from '../../services/image.service';
-import {getCookie} from '../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-configuration',
@@ -14,7 +13,6 @@ import {getCookie} from '../../utils/cookie.utils';
 })
 export class BarberConfigurationComponent implements OnInit {
 
-  public language: string;
   public barbers: Barber[];
   public loading = true;
 
@@ -32,8 +30,6 @@ export class BarberConfigurationComponent implements OnInit {
   }
 
   private fetchData() {
-    this.language = getCookie('lang');
-
     this.barberService.getBarbers().subscribe(data => {
       this.barbers = data;
     }, () => {
@@ -62,7 +58,6 @@ export class BarberConfigurationComponent implements OnInit {
   }
 
   save(barber: Barber) {
-    console.log(barber);
 
     this.barberService.createBarber(barber).subscribe((data: Barber) => {
         this.barbers.unshift(data);

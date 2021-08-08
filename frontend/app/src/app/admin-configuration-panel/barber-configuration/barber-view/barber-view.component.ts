@@ -4,7 +4,7 @@ import {BarberService} from '../../../services/barber.service';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {BarberEditDialogComponent} from '../barber-edit-dialog/barber-edit-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
-import {getCookie} from '../../../utils/cookie.utils';
+import {LanguagePipe} from '../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-barber-view',
@@ -13,21 +13,25 @@ import {getCookie} from '../../../utils/cookie.utils';
 })
 export class BarberViewComponent implements OnInit {
   deleted = false;
-  public language: string;
 
   @Input() barber: Barber;
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
   }
 
-  constructor(private barberService: BarberService, private dialog: MatDialog) {
+  constructor(private barberService: BarberService,
+              private dialog: MatDialog,
+              private languagePipe: LanguagePipe) {
   }
 
   delete() {
-    if (confirm('Are you sure you want to delete ' + this.barber.firstName[this.language] + ' ' + this.barber.lastName[this.language] + '?')) {
+
+    const firstName = this.languagePipe.transform(this.barber.firstName);
+    const lastName = this.languagePipe.transform(this.barber.lastName);
+
+    if (confirm('Are you sure you want to delete ' + firstName + ' ' + lastName + '?')) {
 
       this.barberService.deleteBarber(this.barber.id).subscribe(data => {
         },

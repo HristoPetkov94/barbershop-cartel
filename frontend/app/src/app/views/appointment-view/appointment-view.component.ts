@@ -3,7 +3,7 @@ import {StepEnum} from './stepper/step.enum';
 import {ChangeStepRequest} from './stepper/change-step-request.model';
 import {StepController} from './stepper/step.controller';
 import {Step} from './stepper/step.model';
-import {getCookie} from '../../utils/cookie.utils';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 @Component({
   selector: 'app-appointment-view',
@@ -12,7 +12,6 @@ import {getCookie} from '../../utils/cookie.utils';
 })
 export class AppointmentViewComponent implements OnInit {
 
-  public language: string;
   public stepController = new StepController();
 
   public BARBER_STEP = StepEnum.BARBER_STEP;
@@ -20,16 +19,15 @@ export class AppointmentViewComponent implements OnInit {
   public DATE_STEP = StepEnum.DATE_STEP;
   public FINISH_STEP = StepEnum.FINISH_STEP;
 
-  constructor() {
+  constructor(private languagePipe: LanguagePipe) {
   }
 
   ngOnInit() {
-    this.language = getCookie('lang');
 
-    this.stepController.addStep(new Step('Бръснар', false));
-    this.stepController.addStep(new Step('Услуга', true));
-    this.stepController.addStep(new Step('Дата и час', true));
-    this.stepController.addStep(new Step('Приключване', true));
+    this.stepController.addStep(new Step('stepper.barber', false));
+    this.stepController.addStep(new Step('stepper.service', true));
+    this.stepController.addStep(new Step('stepper.dateTime', true));
+    this.stepController.addStep(new Step('stepper.finish', true));
 
     const data = history.state.data;
 
@@ -49,7 +47,11 @@ export class AppointmentViewComponent implements OnInit {
   skipSteps(data: any): void {
     // set data
     if (data.barber) {
-      const barberName = `${data.barber.firstName[this.language]} ${data.barber.lastName[this.language]}`;
+
+      const firstName = this.languagePipe.transform(data.barber.firstName);
+      const lastName = this.languagePipe.transform(data.barber.lastName);
+
+      const barberName = `${firstName} ${lastName}`;
       this.stepperData.barberId = data.barber.id;
       this.stepperData.barberName = barberName;
 
@@ -62,8 +64,11 @@ export class AppointmentViewComponent implements OnInit {
     }
 
     if (data.service) {
+
+      const serviceTitle = this.languagePipe.transform(data.service.serviceTitle);
+
       this.stepperData.serviceId = data.service.id;
-      this.stepperData.serviceTitle = data.service.serviceTitle;
+      this.stepperData.serviceTitle = serviceTitle.toString();
 
       this.stepperData.assignmentId = data.assignment.id;
       this.stepperData.assignmentPrice = data.assignment.price;

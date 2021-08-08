@@ -22,13 +22,13 @@
 
       <div class="col padding-20">
         <div class="type">
-          {{service.serviceTitle[this.language]}}
+          {{service.serviceTitle | language}}
         </div>
 
         <div class="sized-box-height-20"></div>
 
         <div class="description">
-          {{service.description[this.language]}}
+          {{service.description | language}}
         </div>
 
       </div>
@@ -41,7 +41,7 @@
           <div *ngIf="getAssignment(barber, service) !== undefined">
 
             <div class="row max-width barber-hover title justify-content-center" (click)="book(barber,service)">
-              <b> <span class="flex-1"> {{ barber.firstName[this.language] + ' ' + barber.lastName[this.language] }} </span> </b>
+              <b> <span class="flex-1"> {{ barber.firstName | language }} {{ barber.lastName | language }} </span> </b>
 
               <span class="separator"> | </span>
               <span> {{ getAssignment(barber, service).duration }} мин.</span>

@@ -6,7 +6,7 @@ import {
 import {fade} from '../animations/fade';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {Router} from '@angular/router';
-import {getCookie} from '../../utils/cookie.utils';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 
 @Component({
@@ -28,11 +28,11 @@ export class LandingPageViewComponent implements OnInit {
   constructor(
     private router: Router,
     private generalConfigurationService: GeneralConfigurationService,
-  ) {
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit() {
-    const language = getCookie('lang');
+    const language = this.languagePipe.language;
 
     this.generalConfigurationService.getConfiguration(language).subscribe(config => {
 

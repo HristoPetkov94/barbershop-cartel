@@ -3,7 +3,6 @@ import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {Barber} from '../../../models/barber.model';
 import {Router} from '@angular/router';
-import {getCookie} from '../../../utils/cookie.utils';
 
 @Component({
   selector: 'app-barber-paginator',
@@ -28,7 +27,6 @@ export class BarberPaginatorComponent implements OnInit, OnChanges {
 
   public page = 0;
   public pages: Page[] = [];
-  public language: string;
 
   @Input()
   get data(): Barber[] {
@@ -48,7 +46,6 @@ export class BarberPaginatorComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
   }
 
   ngOnChanges(changes: SimpleChanges): void {

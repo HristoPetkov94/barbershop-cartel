@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {EmailDetails} from '../../models/email.details.model';
 import {EmailNotificationService} from '../../services/email.notification.service';
 import {NotificationComponent} from '../../notification/notification.component';
-import {getCookie} from '../../utils/cookie.utils';
 import {EmailTypeEnum} from '../../enums/email.type.enum';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 @Component({
   selector: 'app-email-configuration',
@@ -18,11 +18,12 @@ export class EmailConfigurationComponent implements OnInit {
   public emails: EmailDetails[];
   public labels = new Map<EmailTypeEnum, any>();
 
-  constructor(private emailNotificationService: EmailNotificationService) {
+  constructor(private emailNotificationService: EmailNotificationService,
+              private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
+    this.language = this.languagePipe.language;
 
     this.emailNotificationService.getEmailMessages(this.language).subscribe(data => {
       this.emails = data;

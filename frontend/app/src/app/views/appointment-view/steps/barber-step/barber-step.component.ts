@@ -5,7 +5,7 @@ import {Barber} from '../../../../models/barber.model';
 import {StepEnum} from '../../stepper/step.enum';
 import {EventEmitter} from '@angular/core';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
-import {getCookie} from '../../../../utils/cookie.utils';
+import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-barber-step',
@@ -15,7 +15,6 @@ import {getCookie} from '../../../../utils/cookie.utils';
 export class BarberStepComponent implements OnInit {
 
   barbers: Barber[];
-  public language: string;
 
   @Input() stepperData;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
@@ -23,11 +22,10 @@ export class BarberStepComponent implements OnInit {
   constructor(
     private router: Router,
     private barberService: BarberService,
-  ) {
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
 
     this.barberService.getBarbers().subscribe(barbers => {
       this.barbers = barbers;
@@ -35,8 +33,12 @@ export class BarberStepComponent implements OnInit {
   }
 
   next(barber: Barber) {
+
+    const firstName = this.languagePipe.transform(barber.firstName);
+    const lastName = this.languagePipe.transform(barber.lastName);
+
     // set data
-    const barberName = `${barber.firstName[this.language]} ${barber.lastName[this.language]}`;
+    const barberName = `${firstName} ${lastName}`;
 
     this.stepperData.barberId = barber.id;
     this.stepperData.barberName = barberName;

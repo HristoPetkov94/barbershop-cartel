@@ -11,14 +11,14 @@
 
           <div class="barber-info">
             <div class="name">
-              {{barber.firstName[this.language]}} {{barber.lastName[this.language]}}
+              {{barber.firstName | language}} {{barber.lastName | language}}
             </div>
 
           </div>
         </div>
 
         <div class="flip-card-back">
-          <p class="back-card-text"> {{barber.description[this.language]}} </p>
+          <p class="back-card-text"> {{barber.description | language}} </p>
 
           <button (click)="book(barber)" class="back-card-button"> {{'bookingMessage' | translate}} </button>
 

@@ -12,7 +12,7 @@
           <button class="breadcrumb-links" id="{{ i === currentStep ? 'active' : 'inactive' }}"
                   [disabled]="step.disabled"
                   (click)="changeStepTo(i)">
-            {{ step.label }}
+            {{ step.label | translate}}
           </button>
 
           <div class="sized-box-width-20"></div>

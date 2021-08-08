@@ -6,7 +6,7 @@ import {AssignmentService} from '../../../../services/assignment.service';
 import {Assignment} from '../../../../models/assignment';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {StepEnum} from '../../stepper/step.enum';
-import {getCookie} from '../../../../utils/cookie.utils';
+import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-service-step',
@@ -18,7 +18,6 @@ export class ServiceStepComponent implements OnInit {
   @Input() stepperData;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
-  public language: string;
   services: Service[];
   assignments: Assignment[];
 
@@ -27,11 +26,10 @@ export class ServiceStepComponent implements OnInit {
     private router: Router,
     private serviceService: ServiceService,
     private assignmentService: AssignmentService,
-  ) {
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
-    this.language = getCookie('lang');
 
     this.serviceService.getServices().subscribe(services => {
       this.services = services;
@@ -61,17 +59,16 @@ export class ServiceStepComponent implements OnInit {
   }
 
   next(element: any) {
-    console.log('from service to date');
 
     this.stepperData.serviceId = element.service.id;
-    this.stepperData.serviceTitle = element.service.serviceTitle[this.language];
+    this.stepperData.serviceTitle = element.service.serviceTitle;
 
     this.stepperData.assignmentId = element.assignment.id;
     this.stepperData.assignmentPrice = element.assignment.price;
     this.stepperData.assignmentDuration = element.assignment.duration;
 
     const request: ChangeStepRequest = {
-      label: element.service.serviceTitle,
+      label: element.service.serviceTitle[this.languagePipe.language],
       step: StepEnum.DATE_STEP
     };
 
