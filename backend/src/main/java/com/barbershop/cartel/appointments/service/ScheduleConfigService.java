@@ -3,7 +3,7 @@ package com.barbershop.cartel.appointments.service;
 import com.barbershop.cartel.appointments.interfaces.ScheduleConfigInterface;
 import com.barbershop.cartel.appointments.models.AppointmentModel;
 import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
-import com.barbershop.cartel.utils.InternationalLanguage;
+import com.barbershop.cartel.utils.InternationalString;
 import com.barbershop.cartel.utils.ListUtils;
 import com.barbershop.cartel.work.day.WorkDayEntity;
 import com.barbershop.cartel.work.day.WorkDayRepository;
@@ -54,9 +54,10 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
 
             final long barberId = workWeekDayEntity.getBarber().getId();
 
-            // TODO: to think a way how to get the language here?
-            final String barberName = workWeekDayEntity.getBarber().getFirstName().get(LanguageEnum.en);
-            final String title = barberName + " Not available";
+            final InternationalString barberName = workWeekDayEntity.getBarber().getFirstName();
+
+            barberName.put(LanguageEnum.bg, barberName.get(LanguageEnum.bg) + " Не е свободен");
+            barberName.put(LanguageEnum.en, barberName.get(LanguageEnum.en) + " Not available");
 
             final Optional<WorkDayEntity> first = overrides.stream().filter(x -> x.getDay().isEqual(date) && x.getBarber().getId() == barberId).findFirst();
 
@@ -69,7 +70,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                     result.barberId = barberId;
                     result.start = date.atStartOfDay();
                     result.end = date.atTime(LocalTime.MAX);
-                    result.title = title;
+                    result.title = barberName;
                     result.setNotWorking(true);
                     list.add(result);
 
@@ -82,7 +83,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                 result.barberId = barberId;
                 result.start = date.atStartOfDay();
                 result.end = date.atStartOfDay().with(workDayEntity.getFrom());
-                result.title = title;
+                result.title = barberName;
 
 
                 list.add(result);
@@ -92,7 +93,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                 result2.barberId = barberId;
                 result2.start = date.atStartOfDay().with(workDayEntity.getTo());
                 result2.end = date.atTime(LocalTime.MAX);
-                result2.title = title;
+                result2.title = barberName;
 
                 list.add(result2);
 
@@ -106,7 +107,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                 result.barberId = barberId;
                 result.start = date.atStartOfDay();
                 result.end = date.atTime(LocalTime.MAX);
-                result.title = title;
+                result.title = barberName;
                 result.setNotWorking(true);
 
                 list.add(result);
@@ -120,7 +121,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
             result.barberId = barberId;
             result.start = date.atStartOfDay();
             result.end = date.atStartOfDay().with(workWeekDayEntity.getFrom());
-            result.title = title;
+            result.title = barberName;
 
 
             list.add(result);
@@ -130,7 +131,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
             result2.barberId = barberId;
             result2.start = date.atStartOfDay().with(workWeekDayEntity.getTo());
             result2.end = date.atTime(LocalTime.MAX);
-            result2.title = title;
+            result2.title = barberName;
 
             list.add(result2);
         }

@@ -41,21 +41,21 @@ export class DateStepComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.currentWeek()
+    this.currentWeek();
   }
 
   previousWeek() {
 
     this.numberOfWeeks--;
 
-    this.currentWeek()
+    this.currentWeek();
   }
 
   nextWeek() {
 
     this.numberOfWeeks++;
 
-    this.currentWeek()
+    this.currentWeek();
   }
 
   currentWeek(){
@@ -81,8 +81,8 @@ export class DateStepComponent implements OnInit {
   }
 
   get isNextWeekButtonDisabled() {
-    // limitation you cannot get to see more than 3 weeks
-    return this.numberOfWeeks >= 3;
+    // limitation you cannot get to see more than 5 weeks
+    return this.numberOfWeeks >= 5;
   }
 
   getHoursForDay(day) {

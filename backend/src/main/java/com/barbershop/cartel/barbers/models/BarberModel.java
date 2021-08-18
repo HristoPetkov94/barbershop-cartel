@@ -1,6 +1,6 @@
 package com.barbershop.cartel.barbers.models;
 
-import com.barbershop.cartel.utils.InternationalLanguage;
+import com.barbershop.cartel.utils.InternationalString;
 import lombok.*;
 
 @Getter
@@ -10,9 +10,9 @@ import lombok.*;
 @NoArgsConstructor
 public class BarberModel {
     private Long id;
-    private InternationalLanguage firstName;
-    private InternationalLanguage lastName;
-    private InternationalLanguage description;
+    private InternationalString firstName;
+    private InternationalString lastName;
+    private InternationalString description;
     private String picture;
     private String facebook;
     private String instagram;

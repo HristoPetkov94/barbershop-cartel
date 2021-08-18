@@ -2,7 +2,7 @@ package com.barbershop.cartel.barbers.entity;
 
 import com.barbershop.cartel.appointments.entity.AppointmentEntity;
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
-import com.barbershop.cartel.utils.InternationalLanguage;
+import com.barbershop.cartel.utils.InternationalString;
 import com.barbershop.cartel.work.day.WorkDayEntity;
 import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
@@ -31,15 +31,15 @@ public class BarberEntity {
 
     @Type(type = "jsonb")
     @Column(name = "first_name", columnDefinition = "jsonb")
-    private InternationalLanguage firstName;
+    private InternationalString firstName;
 
     @Type(type = "jsonb")
     @Column(name = "last_name", columnDefinition = "jsonb")
-    private InternationalLanguage lastName;
+    private InternationalString lastName;
 
     @Type(type = "jsonb")
     @Column(name = "description", columnDefinition = "jsonb")
-    private InternationalLanguage description;
+    private InternationalString description;
 
     @Column(name = "picture", columnDefinition = "TEXT")
     private String picture;

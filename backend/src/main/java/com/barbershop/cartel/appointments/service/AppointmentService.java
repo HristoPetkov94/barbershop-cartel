@@ -234,8 +234,7 @@ public class AppointmentService implements AppointmentInterface {
         appointmentModel.setStart(x.getStartTime());
         appointmentModel.setEnd(x.getEndTime());
 
-        // TODO: to think a way how to get the language here?
-        appointmentModel.setTitle(x.getService().getServiceTitle().get(LanguageEnum.bg));
+        appointmentModel.setTitle(x.getService().getServiceTitle());
 
         return appointmentModel;
     }

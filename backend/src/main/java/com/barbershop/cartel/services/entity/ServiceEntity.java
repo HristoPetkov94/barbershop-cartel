@@ -1,7 +1,7 @@
 package com.barbershop.cartel.services.entity;
 
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
-import com.barbershop.cartel.utils.InternationalLanguage;
+import com.barbershop.cartel.utils.InternationalString;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,11 +26,11 @@ public class ServiceEntity {
 
     @Type(type = "jsonb")
     @Column(name = "service_title", columnDefinition = "jsonb")
-    private InternationalLanguage serviceTitle;
+    private InternationalString serviceTitle;
 
     @Type(type = "jsonb")
     @Column(name = "description", columnDefinition = "jsonb")
-    private InternationalLanguage description;
+    private InternationalString description;
 
     @Column(name = "picture", columnDefinition = "TEXT")
     private String picture;

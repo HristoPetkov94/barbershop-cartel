@@ -1,7 +1,7 @@
 package com.barbershop.cartel.services.models;
 
 import com.barbershop.cartel.services.entity.ServiceEntity;
-import com.barbershop.cartel.utils.InternationalLanguage;
+import com.barbershop.cartel.utils.InternationalString;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ServiceModel {
     private Long id;
-    private InternationalLanguage serviceTitle;
-    private InternationalLanguage description;
+    private InternationalString serviceTitle;
+    private InternationalString description;
     private String picture;
 
     public ServiceModel(ServiceEntity entity) {
