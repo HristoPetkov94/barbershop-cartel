@@ -342,7 +342,7 @@ export class AppComponentComponent implements OnInit {
         tempEvents.push({
           start: new Date(appointment.start),
           end: new Date(appointment.end),
-          title: appointment.title,
+          title: this.languagePipe.transform(appointment.title),
           color: color,
         });
       }

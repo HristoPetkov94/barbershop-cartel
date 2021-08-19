@@ -54,10 +54,22 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
 
             final long barberId = workWeekDayEntity.getBarber().getId();
 
-            final InternationalString barberName = workWeekDayEntity.getBarber().getFirstName();
+            InternationalString firstName = workWeekDayEntity.getBarber().getFirstName();
+            InternationalString lastName = workWeekDayEntity.getBarber().getLastName();
 
-            barberName.put(LanguageEnum.bg, barberName.get(LanguageEnum.bg) + " Не е свободен");
-            barberName.put(LanguageEnum.en, barberName.get(LanguageEnum.en) + " Not available");
+            InternationalString barberName = new InternationalString();
+
+            for (Map.Entry<LanguageEnum, String> languageEnumStringEntry : firstName.entrySet()) {
+                LanguageEnum key = languageEnumStringEntry.getKey();
+                String fullName = String.format("%s %s", firstName.get(key), lastName.get(key));
+
+                barberName.put(languageEnumStringEntry.getKey(), fullName);
+            }
+
+            final InternationalString notPresent = new InternationalString();
+
+            notPresent.put(LanguageEnum.bg, barberName.get(LanguageEnum.bg) + " Не е свободен");
+            notPresent.put(LanguageEnum.en, barberName.get(LanguageEnum.en) + " Not available");
 
             final Optional<WorkDayEntity> first = overrides.stream().filter(x -> x.getDay().isEqual(date) && x.getBarber().getId() == barberId).findFirst();
 
@@ -70,7 +82,7 @@ public class ScheduleConfigService implements ScheduleConfigInterface {
                     result.barberId = barberId;
                     result.start = date.atStartOfDay();
                     result.end = date.atTime(LocalTime.MAX);
-                    result.title = barberName;
+                    result.title = notPresent;
                     result.setNotWorking(true);
                     list.add(result);
 
