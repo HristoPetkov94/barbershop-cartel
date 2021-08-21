@@ -7,7 +7,7 @@ import {getCookie} from '../utils/cookie.utils';
 })
 export class LanguagePipe implements PipeTransform {
 
-  transform(internationalString): number {
+  transform(internationalString) {
 
     return internationalString[this.language];
   }

@@ -40,9 +40,9 @@ export class BarberConfigurationComponent implements OnInit {
 
   add() {
     const newBarber = new Barber();
-    newBarber.firstName = {};
-    newBarber.lastName = {};
-    newBarber.description = {};
+    newBarber.firstName = new Map<string, string>();
+    newBarber.lastName = new Map<string, string>();
+    newBarber.description = new Map<string, string>();
 
     newBarber.picture = this.imageService.getDefaultBarberImage();
     const dialogRef = this.dialog.open(BarberEditDialogComponent, {
