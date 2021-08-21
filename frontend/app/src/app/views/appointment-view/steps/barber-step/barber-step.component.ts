@@ -21,8 +21,7 @@ export class BarberStepComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private barberService: BarberService,
-    private languagePipe: LanguagePipe) {
+    private barberService: BarberService) {
   }
 
   ngOnInit(): void {
@@ -33,18 +32,25 @@ export class BarberStepComponent implements OnInit {
   }
 
   next(barber: Barber) {
-
-    const firstName = this.languagePipe.transform(barber.firstName);
-    const lastName = this.languagePipe.transform(barber.lastName);
-
-    // set data
-    const barberName = `${firstName} ${lastName}`;
-
     this.stepperData.barberId = barber.id;
-    this.stepperData.barberName = barberName;
 
+    this.stepperData.firstName = barber.firstName;
+    this.stepperData.lastName = barber.lastName;
+
+    const fullName = {};
+
+    const entries = barber.firstName;
+
+    for (const [key, value] of Object.entries(entries)) {
+      const fName = barber.firstName[key];
+      const lName = barber.lastName[key];
+
+      fullName[key] = `${fName} ${lName}`;
+    }
+
+    console.log(fullName);
     const request: ChangeStepRequest = {
-      label: barberName,
+      label: fullName,
       step: StepEnum.SERVICE_STEP
     };
 

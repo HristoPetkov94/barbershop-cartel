@@ -1,6 +1,6 @@
 <div class="final-info-container shadow">
 
-  <div *ngIf="done" class="done">
+  <ng-container *ngIf="done" class="done">
     <mat-icon> done</mat-icon>
     <br/>
 
@@ -14,7 +14,7 @@
         Go back home
       </button>
     </div>
-  </div>
+  </ng-container>
 
   <ng-container *ngIf="!done">
     <form [formGroup]="myForm">
@@ -47,7 +47,7 @@
             <div class="row align-items-center">
               <mat-icon>person</mat-icon>
               <div class="sized-box-width-10"></div>
-              <span> {{ stepperData.barberName }}</span>
+              <span> {{ stepperData.firstName | language }}  {{ stepperData.lastName | language}}</span>
             </div>
 
             <div class="row align-items-center">

@@ -68,7 +68,7 @@ export class ServiceStepComponent implements OnInit {
     this.stepperData.assignmentDuration = element.assignment.duration;
 
     const request: ChangeStepRequest = {
-      label: element.service.serviceTitle[this.languagePipe.language],
+      label: element.service.serviceTitle,
       step: StepEnum.DATE_STEP
     };
 

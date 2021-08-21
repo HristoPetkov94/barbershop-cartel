@@ -48,15 +48,23 @@ export class AppointmentViewComponent implements OnInit {
     // set data
     if (data.barber) {
 
-      const firstName = this.languagePipe.transform(data.barber.firstName);
-      const lastName = this.languagePipe.transform(data.barber.lastName);
-
-      const barberName = `${firstName} ${lastName}`;
       this.stepperData.barberId = data.barber.id;
-      this.stepperData.barberName = barberName;
+      this.stepperData.firstName = data.barber.firstName;
+      this.stepperData.lastName = data.barber.lastName;
+
+      const fullName = {};
+
+      const entries = data.barber.firstName;
+
+      for (const [key, value] of Object.entries(entries)) {
+        const fName = data.barber.firstName[key];
+        const lName = data.barber.lastName[key];
+
+        fullName[key] = `${fName} ${lName}`;
+      }
 
       const serviceRequest: ChangeStepRequest = {
-        label: barberName,
+        label: fullName,
         step: StepEnum.SERVICE_STEP
       };
 
@@ -65,7 +73,7 @@ export class AppointmentViewComponent implements OnInit {
 
     if (data.service) {
 
-      const serviceTitle = this.languagePipe.transform(data.service.serviceTitle);
+      const serviceTitle = '';
 
       this.stepperData.serviceId = data.service.id;
       this.stepperData.serviceTitle = serviceTitle.toString();
@@ -93,5 +101,9 @@ export class AppointmentViewComponent implements OnInit {
 
   get stepperData() {
     return this.stepController.data;
+  }
+
+  isString(step) {
+    return typeof step === 'string' || step instanceof String;
   }
 }
