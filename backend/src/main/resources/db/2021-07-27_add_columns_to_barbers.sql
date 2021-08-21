@@ -1,0 +1,3 @@
+ALTER TABLE barbers
+ADD COLUMN facebook VARCHAR(255),
+ADD COLUMN instagram VARCHAR(255);

@@ -65,7 +65,7 @@
             <h2 class="margin-bottom-10"> {{ 'configuration.barbers.firstname'| translate}} </h2>
 
             <div class="row">
-              <span label="" class="text-input max-width">{{barber.firstName}}</span>
+              <span label="" class="text-input max-width">{{barber.firstName | language}}</span>
             </div>
 
             <div class="sized-box-height"></div>
@@ -73,7 +73,7 @@
             <h2 class="margin-bottom-10">  {{'configuration.barbers.lastname' | translate}} </h2>
 
             <div class="row">
-              <span label="" class="text-input max-width">{{barber.lastName}}</span>
+              <span label="" class="text-input max-width">{{barber.lastName | language}}</span>
             </div>
 
             <div class="sized-box-height"></div>
@@ -82,7 +82,7 @@
 
             <div class="row">
               <textarea class="text-input max-width" cols="65" [disabled]="true"
-                        matTextareaAutosize>{{barber.description}}</textarea>
+                        matTextareaAutosize>{{barber.description | language}}</textarea>
             </div>
           </div>
           <div class="sized-box-width-100"></div>

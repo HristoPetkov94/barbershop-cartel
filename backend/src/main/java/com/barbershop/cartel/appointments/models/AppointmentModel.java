@@ -1,5 +1,6 @@
 package com.barbershop.cartel.appointments.models;
 
+import com.barbershop.cartel.utils.InternationalString;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,5 +19,5 @@ public class AppointmentModel {
 
     public boolean notWorking;
 
-    public String title;
+    public InternationalString title;
 }

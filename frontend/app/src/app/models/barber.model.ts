@@ -1,8 +1,8 @@
 export class Barber {
   id: number;
-  firstName: string;
-  lastName: string;
-  description: string;
+  firstName: Map<string, string>;
+  lastName: Map<string, string>;
+  description: {};
   picture: string;
   facebook: string;
   instagram: string;

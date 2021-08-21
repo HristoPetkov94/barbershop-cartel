@@ -1,6 +1,7 @@
 export class StepperDataModel {
   barberId: number;
-  barberName: string;
+  firstName: string;
+  lastName: string;
 
   serviceId: number;
   serviceTitle: string;

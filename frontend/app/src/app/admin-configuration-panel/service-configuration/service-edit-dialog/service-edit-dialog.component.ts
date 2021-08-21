@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ImageService} from '../../../services/image.service';
 import {Service} from '../../../models/service';
+import {LanguagePipe} from '../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-service-edit-dialog',
@@ -19,21 +20,27 @@ export class ServiceEditDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ServiceEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public service: Service,
     private imageService: ImageService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
+
+    const title = this.languagePipe.transform(this.service.serviceTitle);
+    const description = this.languagePipe.transform(this.service.description);
+
     this.myForm = this.fb.group({
         id: this.service.id,
-        serviceTitle: [this.service.serviceTitle, [Validators.required]],
-        description: [this.service.description,  [Validators.maxLength(255)]]
+        serviceTitle: [title, [Validators.required]],
+        description: [description, [Validators.maxLength(255)]]
       }
     );
 
     this.dialogRef.beforeClosed().subscribe(data => {
+
       data.id = this.myForm.value.id;
-      data.serviceTitle = this.myForm.value.serviceTitle;
-      data.description = this.myForm.value.description;
+      data.serviceTitle[this.languagePipe.language] = this.myForm.value.serviceTitle;
+      data.description[this.languagePipe.language] = this.myForm.value.description;
     });
   }
 

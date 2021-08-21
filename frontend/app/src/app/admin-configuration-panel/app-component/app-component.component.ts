@@ -26,6 +26,7 @@ import {Barber} from '../../models/barber.model';
 import * as SockJS from 'sockjs-client';
 import {Stomp} from '@stomp/stompjs';
 import {Dropdown} from './dropdown';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 const colors: any = {
   red: {
@@ -48,7 +49,7 @@ const appointmentColors = [
       primary: '#91ed71',
       secondary: '#91ed71',
     },
-    unavailable:   {
+    unavailable: {
       primary: '#e8ffe8',
       secondary: '#e8ffe8',
     },
@@ -58,7 +59,7 @@ const appointmentColors = [
       primary: '#4fcbca',
       secondary: '#4fcbca',
     },
-    unavailable:   {
+    unavailable: {
       primary: '#D1E8FF',
       secondary: '#D1E8FF',
     },
@@ -68,7 +69,7 @@ const appointmentColors = [
       primary: '#ff7d46',
       secondary: '#ff7d46',
     },
-    unavailable:   {
+    unavailable: {
       primary: '#ffc1a6',
       secondary: '#ffc1a6',
     },
@@ -78,7 +79,7 @@ const appointmentColors = [
       primary: '#ff71b1',
       secondary: '#ff71b1',
     },
-    unavailable:   {
+    unavailable: {
       primary: '#ffd7ea',
       secondary: '#ffd7ea',
     },
@@ -122,8 +123,8 @@ export class AppComponentComponent implements OnInit {
 
   private recInterval = null;
 
-  setConected(conected){
-    this.status = conected? 'connected' : 'disconnected';
+  setConected(conected) {
+    this.status = conected ? 'connected' : 'disconnected';
 
     this.ref.detectChanges();
   }
@@ -145,9 +146,9 @@ export class AppComponentComponent implements OnInit {
       });
     });
 
-    this.stompClient.debug = function(str) {
-      if(str.startsWith("Connection closed")){
-        if(_this.reconnecting)
+    this.stompClient.debug = function (str) {
+      if (str.startsWith("Connection closed")) {
+        if (_this.reconnecting)
           return;
         _this.reconnecting = true;
 
@@ -162,10 +163,14 @@ export class AppComponentComponent implements OnInit {
 
   }
 
-  constructor(private appointmentService: AppointmentService, private barberService: BarberService, private ref: ChangeDetectorRef) {
+  constructor(private appointmentService: AppointmentService,
+              private barberService: BarberService,
+              private ref: ChangeDetectorRef,
+              private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
+
     this.barberService.getBarbers().subscribe(barbers => {
 
       this.barbers = barbers;
@@ -180,7 +185,10 @@ export class AppComponentComponent implements OnInit {
       this.barberDropdowns.push(new Dropdown(allBarberIds, 'All barbers'));
 
       const dropdowns = barbers.map(barber => {
-        return new Dropdown([barber.id], `${barber.firstName} ${barber.lastName}`);
+        const firstName = this.languagePipe.transform(barber.firstName);
+        const lastName = this.languagePipe.transform(barber.lastName);
+
+        return new Dropdown([barber.id], `${firstName} ${lastName}`);
       });
       dropdowns.forEach(dropdown => this.barberDropdowns.push(dropdown));
 
@@ -310,7 +318,7 @@ export class AppComponentComponent implements OnInit {
   }
 
   change() {
-    let startOfWeekDate = startOfWeek(this.viewDate, { weekStartsOn : 1});
+    let startOfWeekDate = startOfWeek(this.viewDate, {weekStartsOn: 1});
     let endOfWeekDate = addDays(startOfWeekDate, 7);
 
     let barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
@@ -324,7 +332,7 @@ export class AppComponentComponent implements OnInit {
         if (this.barberToColor.has(appointment.barberId)) {
           let colors = this.barberToColor.get(appointment.barberId);
 
-          if(appointment.id > 0){
+          if (appointment.id > 0) {
             color = colors.available;
           } else {
             color = colors.unavailable;
@@ -334,7 +342,7 @@ export class AppComponentComponent implements OnInit {
         tempEvents.push({
           start: new Date(appointment.start),
           end: new Date(appointment.end),
-          title: appointment.title,
+          title: this.languagePipe.transform(appointment.title),
           color: color,
         });
       }
@@ -356,10 +364,9 @@ export class AppComponentComponent implements OnInit {
     let requestFullScreen = docEl.requestFullscreen;
     let cancelFullScreen = doc.exitFullscreen;
 
-    if(!doc.fullscreenElement) {
+    if (!doc.fullscreenElement) {
       requestFullScreen.call(docEl);
-    }
-    else {
+    } else {
       cancelFullScreen.call(doc);
     }
   }

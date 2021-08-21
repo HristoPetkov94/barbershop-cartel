@@ -82,6 +82,7 @@ import { DateStepComponent } from './views/appointment-view/steps/date-step/date
 import { FinishStepComponent } from './views/appointment-view/steps/finish-step/finish-step.component';
 import { AppointmentViewComponent } from './views/appointment-view/appointment-view.component';
 import { EmailConfigurationComponent } from './admin-configuration-panel/email-configuration/email-configuration.component';
+import {LanguagePipe} from './pipes/language-pipe';
 
 @NgModule({
   exports: [
@@ -136,6 +137,7 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
     WorkDayViewComponent,
     WorkDayEditDialogComponent,
     EmailConfigurationComponent,
+    LanguagePipe
   ],
     imports: [
         BrowserModule,
@@ -179,7 +181,7 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
       }),
     ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true},
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
@@ -191,7 +193,8 @@ import { EmailConfigurationComponent } from './admin-configuration-panel/email-c
           }
         ],
       } as SocialAuthServiceConfig,
-    }
+    },
+    {provide: LanguagePipe}
   ],
   bootstrap: [AppComponent],
   entryComponents: [

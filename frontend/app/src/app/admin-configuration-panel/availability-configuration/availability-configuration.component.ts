@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Barber} from '../../models/barber.model';
 import {BarberService} from '../../services/barber.service';
 
@@ -16,6 +16,7 @@ export class AvailabilityConfigurationComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.barberService.getBarbers().subscribe(barbers => {
       this.barbers = barbers;
       this.selectedBarberId = barbers[0].id;

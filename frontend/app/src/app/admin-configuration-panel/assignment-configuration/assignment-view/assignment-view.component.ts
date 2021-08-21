@@ -7,6 +7,7 @@ import {NotificationComponent} from '../../../notification/notification.componen
 import {AssignmentEditDialogComponent} from '../assignment-edit-dialog/assignment-edit-dialog.component';
 import {MatDialog} from '@angular/material';
 import {GlobalConstants} from '../../../common/global.constants';
+import {throwToolbarMixedModesError} from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-assignment-view',
@@ -61,7 +62,7 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
   }
 
   getServiceName(serviceId: number) {
-    return this.services?.find(s => s.id === serviceId).serviceTitle;
+     return this.services?.find(s => s.id === serviceId).serviceTitle;
   }
 
   get availableServices() {
@@ -74,11 +75,11 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
 
     const unAvailable = [];
 
-    this.assignments.forEach(x => {
-      if (x.serviceId) {
-        unAvailable.push(+x.serviceId);
+    for (const assignment of this.assignments) {
+      if (assignment.serviceId) {
+        unAvailable.push(+assignment.serviceId);
       }
-    });
+    }
 
     for (const service of this.services) {
 

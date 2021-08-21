@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
 import {GitVersion} from '../../models/git-version.mode';
 import {User} from '../../models/user.model';
 import {Configuration} from '../../models/general.configuration/configuration.model';
-import {getCookie} from '../../utils/cookie.utils';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 @Component({
   selector: 'app-general-configuration',
@@ -33,11 +33,12 @@ export class GeneralConfigurationComponent implements OnInit {
   private configuration: Configuration;
 
   constructor(
-    private generalConfigurationService: GeneralConfigurationService) {
+    private generalConfigurationService: GeneralConfigurationService,
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
-    const language = getCookie('lang');
+    const language = this.languagePipe.language;
 
     this.generalConfigurationService.getUsers().subscribe(data => {
       this.users = data;

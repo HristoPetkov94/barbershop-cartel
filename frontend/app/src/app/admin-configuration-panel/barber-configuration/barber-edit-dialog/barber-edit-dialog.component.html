@@ -52,7 +52,7 @@
 
   </div>
   <div mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="data" (click)="onNoClick()">{{'configuration.cancel' | translate}}</button>
+    <button mat-button [mat-dialog-close]="data" (click)="onCancel()">{{'configuration.cancel' | translate}}</button>
     <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>{{'configuration.save' | translate}}</button>
   </div>
 </form>

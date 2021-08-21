@@ -5,10 +5,8 @@ import {
 } from '@angular/core';
 import {fade} from '../animations/fade';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
-import {SocialMediaModel} from '../../models/general.configuration/social.media.model';
 import {Router} from '@angular/router';
-import {getCookie} from '../../utils/cookie.utils';
-import {SocialMediaService} from '../../services/socialmedia.service';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 
 @Component({
@@ -23,18 +21,18 @@ import {SocialMediaService} from '../../services/socialmedia.service';
 export class LandingPageViewComponent implements OnInit {
 
   public frontPageMessage: string;
+  public facebook: string;
+  public instagram: string;
   public query: string;
-  public socialMedia = new SocialMediaModel();
 
   constructor(
     private router: Router,
     private generalConfigurationService: GeneralConfigurationService,
-    private socialMediaService: SocialMediaService,
-  ) {
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit() {
-    const language = getCookie('lang');
+    const language = this.languagePipe.language;
 
     this.generalConfigurationService.getConfiguration(language).subscribe(config => {
 
@@ -44,6 +42,8 @@ export class LandingPageViewComponent implements OnInit {
       const result = message.match(regex);
 
       this.frontPageMessage = message;
+      this.facebook = config.socialMediaFacebook;
+      this.instagram = config.socialMediaInstagram;
 
       if (result) {
         for (const res of result) {
@@ -51,10 +51,6 @@ export class LandingPageViewComponent implements OnInit {
           this.frontPageMessage = this.frontPageMessage.replace(res, '<span class="limited">' + word + '</span>');
         }
       }
-    });
-
-    this.socialMediaService.getSocialMedia().subscribe(data => {
-      this.socialMedia = data;
     });
   }
 

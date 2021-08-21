@@ -8,6 +8,7 @@ import {Barber} from '../../models/barber.model';
   styleUrls: ['./assignment-configuration.component.css', '../shared-styles/shared.css'],
 })
 export class AssignmentConfigurationComponent implements OnInit {
+
   public barbers: Barber[];
   public selectedBarberId = 0;
 

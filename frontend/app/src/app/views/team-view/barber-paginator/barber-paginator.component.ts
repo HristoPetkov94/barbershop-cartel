@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnChanges, SimpleChanges, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {Barber} from '../../../models/barber.model';
@@ -21,7 +21,7 @@ import {Router} from '@angular/router';
       ]),
     ],
 })
-export class BarberPaginatorComponent implements OnChanges {
+export class BarberPaginatorComponent implements OnInit, OnChanges {
 
   @ViewChild('paginator', {static: true}) paginator: ElementRef;
 
@@ -43,6 +43,9 @@ export class BarberPaginatorComponent implements OnChanges {
   public barbersPerPage;
 
   constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
   }
 
   ngOnChanges(changes: SimpleChanges): void {

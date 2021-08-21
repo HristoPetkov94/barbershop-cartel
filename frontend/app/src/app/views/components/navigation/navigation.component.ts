@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {AuthenticationService} from '../../../authentication/authentication.service';
-import {getCookie, setCookie} from '../../../utils/cookie.utils';
+import {setCookie} from '../../../utils/cookie.utils';
 import {RoutingExtService} from '../../../services/routing-ext.service';
 import {Router} from '@angular/router';
+import {LanguagePipe} from '../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-navigation',
@@ -17,14 +18,14 @@ export class NavigationComponent implements OnInit {
               private auth: AuthenticationService,
               private routeExt: RoutingExtService,
               private router: Router,
-  ) {
+              private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
     this.isAdmin = this.auth.isUserLoggedIn();
 
-    const cookie = getCookie('lang');
-    const preferredLang = cookie === undefined ? 'bg' : cookie;
+    const language = this.languagePipe.language;
+    const preferredLang = language === undefined ? 'bg' : language;
 
     this.translate.use(preferredLang);
   }

@@ -8,7 +8,7 @@
           <mat-option [value]="0">{{ 'configuration.please_select' | translate}}</mat-option>
 
           <mat-option *ngFor="let service of availableServices"
-                      [value]="service.id"> {{service.serviceTitle}} </mat-option>
+                      [value]="service.id"> {{service.serviceTitle | language}} </mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -23,40 +23,43 @@
   </div>
 
 </div>
-<div *ngFor="let assignment of assignments; let i = index">
 
-  <div class="row justify-content-center">
-    <div class="col flex-4">
-      <h2 class="margin-bottom-10"> {{ 'configuration.services.service' | translate}} </h2>
-      <span label="" class="text-input">{{ getServiceName(assignment.serviceId) }}</span>
-    </div>
+<div *ngIf="services != undefined">
+  <div *ngFor="let assignment of assignments; let i = index">
 
-    <div class="col flex-1 margin-left-10">
-      <h2 class="margin-bottom-10"> {{ 'configuration.services.duration' | translate}} </h2>
-      <span label="" class="text-input text-align-center">{{assignment.duration}}
-        <span>{{time}}</span>
+    <div class="row justify-content-center">
+      <div class="col flex-4">
+        <h2 class="margin-bottom-10"> {{ 'configuration.services.service' | translate}} </h2>
+        <span label="" class="text-input">{{ getServiceName(assignment.serviceId) | language }}</span>
+      </div>
+
+      <div class="col flex-1 margin-left-10">
+        <h2 class="margin-bottom-10"> {{ 'configuration.services.duration' | translate}} </h2>
+        <span label="" class="text-input text-align-center">{{assignment.duration}}
+          <span>{{time}}</span>
       </span>
-    </div>
+      </div>
 
-    <div class="col flex-1 margin-left-10">
-      <h2 class="margin-bottom-10"> {{ 'configuration.services.price' | translate}} </h2>
-      <span label="" class="text-input text-align-center">{{assignment.price}}
-        <span> {{currency}}</span>
+      <div class="col flex-1 margin-left-10">
+        <h2 class="margin-bottom-10"> {{ 'configuration.services.price' | translate}} </h2>
+        <span label="" class="text-input text-align-center">{{assignment.price}}
+          <span> {{currency}}</span>
       </span>
+      </div>
+
+      <div class="row flex-1 margin-left-10">
+        <button (click)="edit(assignment, getServiceName(assignment.serviceId))" mat-icon-button color="primary">
+          <mat-icon matTooltip="{{ 'configuration.edit' | translate}}" [matTooltipPosition]="'left'">edit</mat-icon>
+        </button>
+
+        <button (click)="delete(assignment, i)" mat-icon-button color="warn">
+          <mat-icon matTooltip="{{ 'configuration.delete' | translate}}" [matTooltipPosition]="'left'">delete</mat-icon>
+        </button>
+      </div>
     </div>
 
-    <div class="row flex-1 margin-left-10">
-      <button (click)="edit(assignment, getServiceName(assignment.serviceId))" mat-icon-button color="primary">
-        <mat-icon matTooltip="{{ 'configuration.edit' | translate}}" [matTooltipPosition]="'left'">edit</mat-icon>
-      </button>
-
-      <button (click)="delete(assignment, i)" mat-icon-button color="warn">
-        <mat-icon matTooltip="{{ 'configuration.delete' | translate}}" [matTooltipPosition]="'left'">delete</mat-icon>
-      </button>
-    </div>
+    <div class="sized-box-height-20"></div>
   </div>
-
-  <div class="sized-box-height-20"></div>
 </div>
 
 <app-notification></app-notification>

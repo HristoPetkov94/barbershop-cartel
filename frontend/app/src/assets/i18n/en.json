@@ -18,6 +18,12 @@
   "team": {
     "title": "barbers"
   },
+  "stepper" : {
+    "barber": "Barber",
+    "service": "Service",
+    "dateTime": "Date and time",
+    "finish": "Finish"
+  },
   "bookingMessage": "book now",
   "footer": {
     "title": "14 IVAN N. MOMCHILOV STREET // 5000 KARTALA,",

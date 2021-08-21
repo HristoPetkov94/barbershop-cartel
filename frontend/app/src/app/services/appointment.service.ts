@@ -25,10 +25,10 @@ export class AppointmentService {
 
   getFor(barberIds: number[], start: Date, end: Date) {
 
-    let params = new HttpParams()
-      .set("barberIds", barberIds.join(","))
-      .set("from", start.toISOString())
-      .set("to", end.toISOString());
+    const params = new HttpParams()
+      .set('barberIds', barberIds.join(','))
+      .set('from', start.toISOString())
+      .set('to', end.toISOString());
 
     return this.http.get<AppointmentModel[]>(this.url, { params });
   }

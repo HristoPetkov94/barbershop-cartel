@@ -1,9 +1,10 @@
-import {Component, Input, OnInit, ViewChild } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {Barber} from '../../../models/barber.model';
 import {BarberService} from '../../../services/barber.service';
 import {NotificationComponent} from '../../../notification/notification.component';
 import {BarberEditDialogComponent} from '../barber-edit-dialog/barber-edit-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
+import {LanguagePipe} from '../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-barber-view',
@@ -20,11 +21,17 @@ export class BarberViewComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private barberService: BarberService, private dialog: MatDialog) {
+  constructor(private barberService: BarberService,
+              private dialog: MatDialog,
+              private languagePipe: LanguagePipe) {
   }
 
   delete() {
-    if (confirm('Are you sure you want to delete ' + this.barber.firstName + ' ' + this.barber.lastName + '?')) {
+
+    const firstName = this.languagePipe.transform(this.barber.firstName);
+    const lastName = this.languagePipe.transform(this.barber.lastName);
+
+    if (confirm('Are you sure you want to delete ' + firstName + ' ' + lastName + '?')) {
 
       this.barberService.deleteBarber(this.barber.id).subscribe(data => {
         },
@@ -55,7 +62,7 @@ export class BarberViewComponent implements OnInit {
   edit(): void {
     const dialogRef = this.dialog.open(BarberEditDialogComponent, {
       width: '560px',
-      data:  Object.assign({}, this.barber)
+      data: Object.assign({}, this.barber)
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -6,6 +6,7 @@ import {AssignmentService} from '../../../../services/assignment.service';
 import {Assignment} from '../../../../models/assignment';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {StepEnum} from '../../stepper/step.enum';
+import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-service-step',
@@ -25,11 +26,10 @@ export class ServiceStepComponent implements OnInit {
     private router: Router,
     private serviceService: ServiceService,
     private assignmentService: AssignmentService,
-  ) {
+    private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
-    console.log('service step');
 
     this.serviceService.getServices().subscribe(services => {
       this.services = services;
@@ -59,7 +59,6 @@ export class ServiceStepComponent implements OnInit {
   }
 
   next(element: any) {
-    console.log('from service to date');
 
     this.stepperData.serviceId = element.service.id;
     this.stepperData.serviceTitle = element.service.serviceTitle;

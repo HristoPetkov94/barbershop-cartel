@@ -5,6 +5,7 @@ import {ServiceEditDialogComponent} from '../service-edit-dialog/service-edit-di
 import {NotificationComponent} from '../../../notification/notification.component';
 import {ServiceService} from '../../../services/service.service';
 import {Barber} from '../../../models/barber.model';
+import {LanguagePipe} from '../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-service-configuration-view',
@@ -16,19 +17,23 @@ export class ServiceConfigurationViewComponent implements OnInit {
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
   @Input() service: Service;
-  public deleted = false;
 
+  public deleted = false;
   public barber: Barber;
 
   constructor(private dialog: MatDialog,
-              private serviceService: ServiceService) {
+              private serviceService: ServiceService,
+              private languagePipe: LanguagePipe) {
   }
 
   ngOnInit(): void {
   }
 
   delete() {
-    if (confirm('Are you sure you want to delete ' + this.service.serviceTitle + '?')) {
+
+    const serviceTitle = this.languagePipe.transform(this.service.serviceTitle);
+
+    if (confirm('Are you sure you want to delete ' + serviceTitle + '?')) {
 
       this.serviceService.deleteService(this.service.id).subscribe(() => {
         }, () => {

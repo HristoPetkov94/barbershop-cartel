@@ -5,6 +5,7 @@ import {Barber} from '../../../../models/barber.model';
 import {StepEnum} from '../../stepper/step.enum';
 import {EventEmitter} from '@angular/core';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
+import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-barber-step',
@@ -20,25 +21,36 @@ export class BarberStepComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private barberService: BarberService,
-  ) {
+    private barberService: BarberService) {
   }
 
   ngOnInit(): void {
+
     this.barberService.getBarbers().subscribe(barbers => {
       this.barbers = barbers;
     });
   }
 
   next(barber: Barber) {
-    // set data
-    const barberName = `${barber.firstName} ${barber.lastName}`;
-
     this.stepperData.barberId = barber.id;
-    this.stepperData.barberName = barberName;
 
+    this.stepperData.firstName = barber.firstName;
+    this.stepperData.lastName = barber.lastName;
+
+    const fullName = {};
+
+    const entries = barber.firstName;
+
+    for (const [key, value] of Object.entries(entries)) {
+      const fName = barber.firstName[key];
+      const lName = barber.lastName[key];
+
+      fullName[key] = `${fName} ${lName}`;
+    }
+
+    console.log(fullName);
     const request: ChangeStepRequest = {
-      label: barberName,
+      label: fullName,
       step: StepEnum.SERVICE_STEP
     };
 

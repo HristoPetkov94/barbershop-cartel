@@ -27,6 +27,7 @@ export class ServiceViewComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.servicesService.getServices().subscribe(services => {
       this.services = services;
     });

@@ -3,6 +3,7 @@ import {StepEnum} from './stepper/step.enum';
 import {ChangeStepRequest} from './stepper/change-step-request.model';
 import {StepController} from './stepper/step.controller';
 import {Step} from './stepper/step.model';
+import {LanguagePipe} from '../../pipes/language-pipe';
 
 @Component({
   selector: 'app-appointment-view',
@@ -18,14 +19,15 @@ export class AppointmentViewComponent implements OnInit {
   public DATE_STEP = StepEnum.DATE_STEP;
   public FINISH_STEP = StepEnum.FINISH_STEP;
 
-  constructor() {
+  constructor(private languagePipe: LanguagePipe) {
   }
 
   ngOnInit() {
-    this.stepController.addStep(new Step('Бръснар', false));
-    this.stepController.addStep(new Step('Услуга', true));
-    this.stepController.addStep(new Step('Дата и час', true));
-    this.stepController.addStep(new Step('Приключване', true));
+
+    this.stepController.addStep(new Step('stepper.barber', false));
+    this.stepController.addStep(new Step('stepper.service', true));
+    this.stepController.addStep(new Step('stepper.dateTime', true));
+    this.stepController.addStep(new Step('stepper.finish', true));
 
     const data = history.state.data;
 
@@ -45,12 +47,24 @@ export class AppointmentViewComponent implements OnInit {
   skipSteps(data: any): void {
     // set data
     if (data.barber) {
-      const barberName = `${data.barber.firstName} ${data.barber.lastName}`;
+
       this.stepperData.barberId = data.barber.id;
-      this.stepperData.barberName = barberName;
+      this.stepperData.firstName = data.barber.firstName;
+      this.stepperData.lastName = data.barber.lastName;
+
+      const fullName = {};
+
+      const entries = data.barber.firstName;
+
+      for (const [key, value] of Object.entries(entries)) {
+        const fName = data.barber.firstName[key];
+        const lName = data.barber.lastName[key];
+
+        fullName[key] = `${fName} ${lName}`;
+      }
 
       const serviceRequest: ChangeStepRequest = {
-        label: barberName,
+        label: fullName,
         step: StepEnum.SERVICE_STEP
       };
 
@@ -58,8 +72,11 @@ export class AppointmentViewComponent implements OnInit {
     }
 
     if (data.service) {
+
+      const serviceTitle = '';
+
       this.stepperData.serviceId = data.service.id;
-      this.stepperData.serviceTitle = data.service.serviceTitle;
+      this.stepperData.serviceTitle = serviceTitle.toString();
 
       this.stepperData.assignmentId = data.assignment.id;
       this.stepperData.assignmentPrice = data.assignment.price;
@@ -84,5 +101,9 @@ export class AppointmentViewComponent implements OnInit {
 
   get stepperData() {
     return this.stepController.data;
+  }
+
+  isString(step) {
+    return typeof step === 'string' || step instanceof String;
   }
 }

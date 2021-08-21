@@ -1,7 +1,7 @@
 export class Service {
   id: number;
 
-  serviceTitle: string;
-  description: string;
+  serviceTitle: {};
+  description: {};
   picture: string;
 }
