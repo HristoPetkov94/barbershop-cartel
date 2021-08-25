@@ -89,6 +89,15 @@
       "duration": "Продължителност",
       "price_error": "Максималната сума е 100лв."
     },
+    "calendar": {
+      "event": {
+        "email": "Имейл",
+        "phone": "Тел.",
+        "name": "Име",
+        "duration": "Времетраене",
+        "delete": "Изтрий"
+      }
+    },
     "tabs": {
       "home": "Начало",
       "general": "Общи",

@@ -1,8 +1,6 @@
-import {Hour} from './hour';
-
 export interface Day {
   date: Date;
-  hours: Hour[];
+  hours: string[];
   today: boolean;
   active: string;
 }

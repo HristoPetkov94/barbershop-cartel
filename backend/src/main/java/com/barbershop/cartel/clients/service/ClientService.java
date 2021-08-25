@@ -14,12 +14,13 @@ public class ClientService implements ClientInterface {
     @Autowired
     private ClientRepository clientRepository;
 
-    public ClientEntity createClient(String email, String username) {
+    public ClientEntity createClient(String email, String phoneNumber, String username) {
 
         ClientEntity client = new ClientEntity();
 
         client.setEmail(email);
         client.setUsername(username);
+        client.setPhoneNumber(phoneNumber);
 
         return clientRepository.save(client);
     }

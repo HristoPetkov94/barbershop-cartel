@@ -1,22 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  ElementRef,
-  OnInit,
-  TemplateRef,
-  ViewChild
-} from '@angular/core';
-import {
-  addDays,
-  addHours,
-  endOfDay,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  startOfDay, startOfWeek,
-  subDays,
-} from 'date-fns';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {addDays, addHours, isSameDay, isSameMonth, startOfWeek,} from 'date-fns';
 import {Subject} from 'rxjs';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
 import {AppointmentService} from '../../services/appointment.service';
@@ -27,6 +10,9 @@ import * as SockJS from 'sockjs-client';
 import {Stomp} from '@stomp/stompjs';
 import {Dropdown} from './dropdown';
 import {LanguagePipe} from '../../pipes/language-pipe';
+import {MatDialog} from '@angular/material';
+import {AppointmentModel} from '../../models/appointment.model';
+import {EditDialogComponent} from './edit-dialog/edit-dialog.component';
 
 const colors: any = {
   red: {
@@ -87,12 +73,12 @@ const appointmentColors = [
 ];
 
 @Component({
-  selector: 'app-component',
+  selector: 'calendar-component',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['app-component.component.css'],
-  templateUrl: 'app-component.component.html',
+  styleUrls: ['calendar.component.css'],
+  templateUrl: 'calendar.component.html',
 })
-export class AppComponentComponent implements OnInit {
+export class CalendarComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   status: string = 'connecting';
@@ -123,47 +109,45 @@ export class AppComponentComponent implements OnInit {
 
   private recInterval = null;
 
-  setConected(conected) {
-    this.status = conected ? 'connected' : 'disconnected';
+  actions: CalendarEventAction[] = [
+    {
+      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      a11yLabel: 'Edit',
+      onClick: ({event}: { event: CalendarEvent }): void => {
+        this.handleEvent('Edited', event);
+      },
+    },
+    {
+      label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      a11yLabel: 'Delete',
+      onClick: ({event}: { event: CalendarEvent }): void => {
+        this.events = this.events.filter((iEvent) => iEvent !== event);
+        this.handleEvent('Deleted', event);
+      },
+    },
+  ];
 
-    this.ref.detectChanges();
-  }
+  refresh: Subject<any> = new Subject();
 
-  connect() {
-    const socket = new SockJS('/api/gkz-stomp-endpoint');
+  events: CalendarEvent[] = [
+    {
+      start: startOfWeek(new Date()),
+      end: addDays(startOfWeek(new Date()), 7),
+      title: 'Loading...',
+      color: colors.yellow,
+      actions: this.actions,
+      resizable: {
+        beforeStart: true,
+        afterEnd: true,
+      },
+      draggable: true,
+    }
+  ];
 
-    this.stompClient = Stomp.over(socket);
+  activeDayIsOpen: boolean = true;
 
-    const _this = this;
-    this.stompClient.connect({}, function (frame) {
-      console.log('Connected: ' + frame);
-      _this.setConected(true);
-      _this.reconnecting = false;
-      clearInterval(_this.recInterval);
-      _this.stompClient.subscribe('/topic/event-added', function (hello) {
-        console.log('Message: ' + frame);
-        _this.change();
-      });
-    });
-
-    this.stompClient.debug = function (str) {
-      if (str.startsWith("Connection closed")) {
-        if (_this.reconnecting)
-          return;
-        _this.reconnecting = true;
-
-        console.log("Start reconnect...");
-        _this.recInterval = setInterval(function () {
-          _this.setConected(false);
-          _this.stompClient.disconnect({});
-          _this.connect();
-        }, 5000);
-      }
-    };
-
-  }
-
-  constructor(private appointmentService: AppointmentService,
+  constructor(private dialog: MatDialog,
+              private appointmentService: AppointmentService,
               private barberService: BarberService,
               private ref: ChangeDetectorRef,
               private languagePipe: LanguagePipe) {
@@ -212,42 +196,45 @@ export class AppComponentComponent implements OnInit {
     this.connect();
   }
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({event}: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
+  setConnected(connected) {
+    this.status = connected ? 'connected' : 'disconnected';
 
-  refresh: Subject<any> = new Subject();
+    this.ref.detectChanges();
+  }
 
-  events: CalendarEvent[] = [
-    {
-      start: startOfWeek(new Date()),
-      end: addDays(startOfWeek(new Date()), 7),
-      title: 'Loading...',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    }
-  ];
+  connect() {
+    const socket = new SockJS('/api/gkz-stomp-endpoint');
 
-  activeDayIsOpen: boolean = true;
+    this.stompClient = Stomp.over(socket);
+
+    const _this = this;
+    this.stompClient.connect({}, function (frame) {
+      console.log('Connected: ' + frame);
+      _this.setConnected(true);
+      _this.reconnecting = false;
+      clearInterval(_this.recInterval);
+      _this.stompClient.subscribe('/topic/event-added', function (hello) {
+        console.log('Message: ' + frame);
+        _this.change();
+      });
+    });
+
+    this.stompClient.debug = function (str) {
+      if (str.startsWith("Connection closed")) {
+        if (_this.reconnecting)
+          return;
+        _this.reconnecting = true;
+
+        console.log("Start reconnect...");
+        _this.recInterval = setInterval(function () {
+          _this.setConnected(false);
+          _this.stompClient.disconnect({});
+          _this.connect();
+        }, 5000);
+      }
+    };
+
+  }
 
   dayClicked({date, events}: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -281,27 +268,35 @@ export class AppComponentComponent implements OnInit {
     this.handleEvent('Dropped or resized', event);
   }
 
+  private getDialogRef(appointment) {
+    return this.dialog.open(EditDialogComponent, {
+      width: '560px',
+      data: Object.assign({}, appointment)
+    });
+  }
+
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = {event, action};
 
-    console.log(this.modalData);
-  }
+    let appointment = event.meta["appointment"]
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
-      },
-    ];
+    const dialogRef = this.getDialogRef(appointment);
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        console.log(result.value);
+
+        this.appointmentService.update(result.value).subscribe(() => {
+        }, () => {
+        }, () => {
+          console.log("appointment done");
+
+        });
+      }
+    });
+
+    console.log(this.modalData);
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -342,8 +337,11 @@ export class AppComponentComponent implements OnInit {
         tempEvents.push({
           start: new Date(appointment.start),
           end: new Date(appointment.end),
-          title: this.languagePipe.transform(appointment.title),
+          title: this.getTitle(appointment),
           color: color,
+          meta: {
+            appointment: appointment
+          }
         });
       }
 
@@ -352,6 +350,65 @@ export class AppComponentComponent implements OnInit {
     });
   }
 
+  private getTitle(appointment: AppointmentModel){
+    let title = "";
+
+    if(appointment.phone!=null) {
+      title += appointment.phone;
+      title += '</br>'
+    }
+
+    if(appointment.serviceName!=null) {
+      title += this.languagePipe.transform(appointment.serviceName);
+      title += '</br>'
+    }
+
+    // if(appointment.email!=null) {
+    //   title += appointment.email;
+    //   title += '</br>'
+    // }
+
+    if(appointment.barberName!=null) {
+      title += '('
+      title += this.languagePipe.transform(appointment.barberName)
+      title += ')</br>'
+    }
+
+    return title;
+  }
+
+  emptyHourSlotClicked(date: Date) {
+    let barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
+
+    if(barberIds.length > 1)
+      return;
+
+    const appointment = new AppointmentModel();
+    appointment.title = 'test';
+    appointment.start = date;
+    appointment.end = addHours(date, 0.5);
+
+
+    appointment.barberId = barberIds[0];
+
+    const dialogRef = this.getDialogRef(appointment);
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+        console.log(result.value);
+
+        this.appointmentService.create(result.value, true).subscribe(() => {
+        }, () => {
+        }, () => {
+          console.log("appointment done");
+
+        });
+      }
+    });
+  }
+
+  // fullscreen toggle
   toggleFullscreen() {
     this.fullscreen = !this.fullscreen;
     this.toggleFullScreenPage();

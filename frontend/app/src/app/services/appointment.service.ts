@@ -1,10 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
-import {Subscribable} from 'rxjs';
-import {Week} from '../models/week.model';
 import {AppointmentRequest} from '../interfaces/appointment-request';
 import {AppointmentModel} from '../models/appointment.model';
+import {Day} from '../interfaces/day';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +15,19 @@ export class AppointmentService {
   }
 
   getWeek(numberOfWeeksFromNow, assignmentId) {
-    return this.http.get<Week>(this.url + '/appointment-week' + '?' + 'assignmentId=' + assignmentId + '&' + 'numberOfWeeksFromNow=' + numberOfWeeksFromNow, {});
+    return this.http.get<Day[]>(this.url + '/appointment-week' + '?' + 'assignmentId=' + assignmentId + '&' + 'numberOfWeeksFromNow=' + numberOfWeeksFromNow, {});
   }
 
-  bookNow(req: AppointmentRequest, language: string) {
-    return this.http.post(this.url + '/save-appointment' + '?' + 'language=' + language, req);
+  create(req: AppointmentRequest, allowOverlap: boolean = false) {
+    return this.http.post(this.url + "?allowOverlap=" + allowOverlap, req);
+  }
+
+  update(req: AppointmentRequest) {
+    return this.http.put(this.url, req);
+  }
+
+  delete(id: number) {
+    return this.http.delete(this.url + '/'+id);
   }
 
   getFor(barberIds: number[], start: Date, end: Date) {

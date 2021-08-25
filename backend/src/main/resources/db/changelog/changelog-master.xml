@@ -1,10 +1,7 @@
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
-   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
-   http://www.liquibase.org/xml/ns/dbchangelog
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet author="ss" id="init.sql">
@@ -102,6 +99,12 @@
 
     <changeSet author="hp" id="2021-08-07_update_data_internationalization.sql">
         <sqlFile path="db/2021-08-07_update_data_internationalization.sql"/>
+    </changeSet>
+
+    <changeSet  author="ss"  id="2021-08-26_drop_table_work_day">
+        <dropTable
+                schemaName="public"
+                tableName="work_day"/>
     </changeSet>
 
 </databaseChangeLog>

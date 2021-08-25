@@ -9,7 +9,7 @@ public abstract class BaseController<E extends HasId<ID>,M extends HasId<ID>,ID,
     protected S cartelService;
 
     @GetMapping
-    public List<M> getAll() {
+    public List<M> all() {
         return cartelService.getAll();
     }
 
@@ -29,7 +29,7 @@ public abstract class BaseController<E extends HasId<ID>,M extends HasId<ID>,ID,
     }
 
     @DeleteMapping
-    public void deleteBarber(@RequestParam ID id) {
+    public void delete(@RequestParam ID id) {
         cartelService.delete(id);
     }
 }

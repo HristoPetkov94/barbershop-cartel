@@ -4,8 +4,8 @@ import {Assignment} from '../../../../models/assignment';
 import {AssignmentService} from '../../../../services/assignment.service';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {AppointmentService} from '../../../../services/appointment.service';
-import {Week} from '../../../../models/week.model';
 import {StepEnum} from '../../stepper/step.enum';
+import {Day} from '../../../../interfaces/day';
 
 @Component({
   selector: 'app-date-step',
@@ -21,8 +21,8 @@ export class DateStepComponent implements OnInit {
 
   assignments: Assignment[];
 
-  public hours = [];
-  public week: Week;
+  public hours: string[] = [];
+  public week: Day[];
 
   public today;
 
@@ -62,7 +62,7 @@ export class DateStepComponent implements OnInit {
     this.scheduleService.getWeek(this.numberOfWeeks, this.assignmentId).subscribe(week => {
       this.week = week;
 
-      const today = week.days.find(d => d.today === true);
+      const today = week.find(d => d.today === true);
 
       if (today) {
         today.active = 'selected';
@@ -93,7 +93,7 @@ export class DateStepComponent implements OnInit {
   }
 
   selectDay(day) {
-    for (const d of this.week.days) {
+    for (const d of this.week) {
       d.active = '';
     }
 

@@ -3,7 +3,6 @@ package com.barbershop.cartel.barbers.entity;
 import com.barbershop.cartel.appointments.entity.AppointmentEntity;
 import com.barbershop.cartel.assignments.entity.AssignmentEntity;
 import com.barbershop.cartel.utils.InternationalString;
-import com.barbershop.cartel.work.day.WorkDayEntity;
 import com.barbershop.cartel.work.weekday.WorkWeekDayEntity;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
@@ -52,10 +51,6 @@ public class BarberEntity {
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AssignmentEntity> assignments;
-
-    @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL, orphanRemoval = true)
-    @LazyCollection(LazyCollectionOption.TRUE)
-    private List<WorkDayEntity> workDays;
 
     @OneToMany(mappedBy = "barber", cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.TRUE)

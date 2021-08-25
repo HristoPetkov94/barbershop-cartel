@@ -66,6 +66,7 @@
       [dayEndHour]="19"
       (eventClicked)="handleEvent('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
+      (hourSegmentClicked)="emptyHourSlotClicked($event.date)"
     >
     </mwl-calendar-week-view>
     <mwl-calendar-day-view
@@ -77,6 +78,7 @@
       [dayEndHour]="19"
       (eventClicked)="handleEvent('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
+      (hourSegmentClicked)="emptyHourSlotClicked($event.date)"
     >
     </mwl-calendar-day-view>
   </div>

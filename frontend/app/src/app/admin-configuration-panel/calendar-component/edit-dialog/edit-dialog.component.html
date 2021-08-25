@@ -1,0 +1,61 @@
+<form [formGroup]="myForm">
+  <div mat-dialog-title>
+    <h1>{{ appointment.title }}</h1>
+  </div>
+
+  <div mat-dialog-content>
+    <div class="row">
+
+      <div class="sized-box-width-20 mat-field-padding-margin"></div>
+
+      <div class="col">
+
+        <div class="row">
+          <h2> {{ 'configuration.calendar.event.duration' | translate}}</h2>
+          <input type="text" readonly
+                 ngxDaterangepickerMd
+                 [timePicker]="true"
+                 [timePickerSeconds]="false"
+                 [timePickerIncrement]="15"
+                 [timePicker24Hour]="true"
+                 [locale]="{format: 'DD/MM/YYYY HH:mm', firstDay: 1}"
+                 [(ngModel)]="selected"
+                 [ngModelOptions]="{standalone: true}"
+                 class="form-control"/>
+        </div>
+
+        <div class="row">
+          <h2> {{ 'configuration.calendar.event.phone' | translate}}</h2>
+          <mat-form-field>
+            <input matInput formControlName="phone" autocomplete="phone">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <h2> {{ 'configuration.calendar.event.name' | translate}}</h2>
+          <mat-form-field>
+            <input matInput formControlName="name" autocomplete="name">
+          </mat-form-field>
+        </div>
+
+        <div class="row">
+          <h2> {{ 'configuration.calendar.event.email' | translate}}</h2>
+          <mat-form-field>
+            <input matInput formControlName="email" autocomplete="email">
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button color="warn" [mat-dialog-close]="myForm"
+            (click)="delete()">{{ 'configuration.calendar.event.delete' | translate}}</button>
+    <button mat-button [mat-dialog-close]="myForm"
+            (click)="dialogRef.close()">{{ 'configuration.cancel' | translate}}</button>
+    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="myForm"
+            cdkFocusInitial>{{ 'configuration.save' | translate}}</button>
+  </div>
+</form>

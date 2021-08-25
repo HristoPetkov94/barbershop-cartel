@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {LandingPageViewComponent} from './views/landing-page-view/landing-page-view.component';
 import {LoginComponent} from './login/login.component';
 import {AuthGuardService} from './authentication/auth-guard.service';
@@ -17,9 +17,10 @@ import {AssignmentConfigurationComponent} from './admin-configuration-panel/assi
 import {LayoutComponent} from './views/layout/layout.component';
 import {AvailabilityConfigurationComponent} from './admin-configuration-panel/availability-configuration/availability-configuration.component';
 import {AppointmentViewComponent} from './views/appointment-view/appointment-view.component';
-import {AppComponentComponent} from './admin-configuration-panel/app-component/app-component.component';
+
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EmailConfigurationComponent} from './admin-configuration-panel/email-configuration/email-configuration.component';
+import {CalendarComponent} from './admin-configuration-panel/calendar-component/calendar.component';
 
 
 const routes: Routes = [
@@ -55,7 +56,7 @@ const routes: Routes = [
       {path: 'assignments', component: AssignmentConfigurationComponent},
       {path: 'availability', component: AvailabilityConfigurationComponent},
       {path: 'store', component: StoreConfigurationComponent},
-      {path: 'calendar', component: AppComponentComponent},
+      {path: 'calendar', component: CalendarComponent},
     ],
     canActivate: [AuthGuardService]
   },

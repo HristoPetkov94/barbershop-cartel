@@ -89,6 +89,15 @@
       "duration": "Duration",
       "price_error": "Max currency is 100лв."
     },
+    "calendar": {
+      "event": {
+        "email": "Email",
+        "phone": "Phone",
+        "name": "Name",
+        "duration": "Duration",
+        "delete": "Delete"
+      }
+    },
     "tabs": {
       "home": "Home",
       "general": "General",

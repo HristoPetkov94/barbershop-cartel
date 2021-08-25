@@ -5,6 +5,7 @@ import {AppointmentRequest} from '../../../../interfaces/appointment-request';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {LanguagePipe} from '../../../../pipes/language-pipe';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-finish-step',
@@ -15,6 +16,8 @@ export class FinishStepComponent implements OnInit {
 
   @Input() stepController;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
+
+  format: string = "YYYY-MM-DDTHH:mm:ss"
 
   public assignmentId;
   public appointment = new AppointmentRequest();
@@ -53,12 +56,19 @@ export class FinishStepComponent implements OnInit {
   makeAnAppointment() {
 
     this.appointment.assignmentId = this.stepperData.assignmentId;
-    this.appointment.hour = this.stepperData.hour;
-    this.appointment.date = this.stepperData.date;
+    this.appointment.barberId = this.stepperData.barberId;
 
-    const language = this.languagePipe.language;
-    this.appointmentService.bookNow(this.appointment, language).subscribe(() => {
+    let datetime  = dayjs(new Date(this.stepperData.date+' '+this.stepperData.hour));
+
+    this.appointment.start = datetime.format(this.format);
+    this.appointment.end = datetime.add(this.stepperData.assignmentDuration, "m").format(this.format);
+
+    this.appointment.phone = this.phone.value;
+    this.appointment.email = this.email.value;
+
+    this.appointmentService.create(this.appointment).subscribe(() => {
     }, () => {
+      console.log('error')
     }, () => {
       this.done = true;
       this.stepController.disableSteps();
