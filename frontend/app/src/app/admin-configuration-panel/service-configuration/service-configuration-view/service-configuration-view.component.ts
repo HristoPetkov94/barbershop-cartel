@@ -37,7 +37,7 @@ export class ServiceConfigurationViewComponent implements OnInit {
 
       this.serviceService.deleteService(this.service.id).subscribe(() => {
         }, () => {
-          this.notification.showMessage('"Service has not been deleted successfully.', 'warn');
+          this.notification.showMessage('Service has not been deleted successfully.', 'warn');
         },
         () => {
           this.deleted = true;

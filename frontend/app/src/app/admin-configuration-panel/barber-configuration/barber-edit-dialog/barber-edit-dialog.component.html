@@ -45,7 +45,7 @@
     </mat-form-field>
     <mat-form-field class="example-full-width">
       <mat-label>{{ 'configuration.barbers.description'| translate}}</mat-label>
-      <textarea matTextareaAutosize matInput formControlName="description" placeholder="Description"></textarea>
+      <textarea matTextareaAutosize matInput formControlName="description" placeholder="Description" maxlength="255"></textarea>
       <mat-error *ngIf="description.invalid" align="end"> {{ description.value?.length }} / 255</mat-error>
       <mat-hint *ngIf="description.valid" align="end"> {{ description.value?.length }} / 255</mat-hint>
     </mat-form-field>
