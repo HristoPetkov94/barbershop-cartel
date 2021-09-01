@@ -2,7 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {AppointmentModel} from '../../../models/appointment.model';
-import dayjsPluginUTC from 'dayjs-plugin-utc'
+import dayjsPluginUTC from 'dayjs-plugin-utc';
 import * as dayjs from 'dayjs';
 import {AppointmentService} from '../../../services/appointment.service';
 import {AssignmentService} from '../../../services/assignment.service';
@@ -11,7 +11,7 @@ import {Assignment} from '../../../models/assignment';
 import {ServiceService} from '../../../services/service.service';
 import {Service} from '../../../models/service';
 
-dayjs.extend(dayjsPluginUTC)
+dayjs.extend(dayjsPluginUTC);
 
 @Component({
   selector: 'app-edit-dialog',
@@ -20,13 +20,13 @@ dayjs.extend(dayjsPluginUTC)
 })
 export class EditDialogComponent implements OnInit {
 
-  format: string = "YYYY-MM-DDTHH:mm:ss"
+  format = 'YYYY-MM-DDTHH:mm:ss';
 
   myForm: FormGroup;
 
-  selected =  { }
+  selected =  { };
 
-  services = []
+  services = [];
 
   assignments$: Observable<Assignment[]>;
 
@@ -55,8 +55,6 @@ export class EditDialogComponent implements OnInit {
     this.serviceService.getServices().subscribe(services => {
       this.services = services;
     });
-
-    console.log(this.appointment);
 
     this.myForm = this.fb.group({
         id: this.appointment.id,
@@ -93,6 +91,6 @@ export class EditDialogComponent implements OnInit {
     this.appointmentService.delete(this.myForm.value.id).subscribe(result => {
         this.dialogRef.close();
       }
-    )
+    );
   }
 }
