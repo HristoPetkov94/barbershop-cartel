@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -73,16 +74,15 @@ public class AssignmentServices implements AssignmentInterface {
     }
 
     @Override
-    public AssignmentEntity getAssignment(long barberId, long serviceId) {
+    public Optional<AssignmentEntity> getAssignment(long barberId, long serviceId) {
 
-        return assignmentRepository.findByBarberIdAndServiceId(barberId, serviceId)
-                .orElseThrow(() -> new CartelCustomException("Assignment for barberId: " + barberId + " and serviceId: " + serviceId + "  is not existing."));
+        return assignmentRepository.findByBarberIdAndServiceId(barberId, serviceId);
+                //.orElseThrow(() -> new CartelCustomException("Assignment for barberId: " + barberId + " and serviceId: " + serviceId + "  is not existing."));
     }
 
     @Override
-    public AssignmentEntity getAssignment(long assignmentId) {
-        return assignmentRepository.findById(assignmentId)
-                .orElseThrow(() -> new CartelCustomException("Assignment with id: " + assignmentId + "  is not existing."));
+    public Optional<AssignmentEntity> getAssignment(long assignmentId) {
+        return assignmentRepository.findById(assignmentId);
     }
 
     @Override

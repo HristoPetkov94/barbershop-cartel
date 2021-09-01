@@ -1,61 +1,67 @@
-<form [formGroup]="myForm">
-  <div mat-dialog-title>
-    <h1>{{ appointment.title }}</h1>
+<!--<div mat-dialog-title>-->
+<!--  <h1>{{ appointment.title }}</h1>-->
+<!--</div>-->
+
+<div mat-dialog-content>
+  <div class="row">
+          <div class="col">
+
+            <div class="row">
+              <h2> {{ 'configuration.calendar.event.duration' | translate}}</h2>
+              <input type="text" readonly
+                     ngxDaterangepickerMd
+                     [timePicker]="true"
+                     [timePickerSeconds]="false"
+                     [timePickerIncrement]="30"
+                     [timePicker24Hour]="true"
+                     [locale]="{format: 'DD/MM/YYYY HH:mm', firstDay: 1}"
+                     [(ngModel)]="selected"
+                     class="form-control"/>
+            </div>
+            <form [formGroup]="myForm">
+              <div class="row">
+                <h2> {{ 'configuration.calendar.event.service' | translate}}</h2>
+                <br>
+                <mat-form-field>
+                  <mat-select formControlName="assignmentId">
+                    <mat-option *ngFor="let assignment of (assignments$ | async)" [value]="assignment.id">{{ getService(assignment.serviceId).serviceTitle | language }}</mat-option>
+                    <mat-option value="0">{{ 'configuration.calendar.event.custom' | translate}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="row">
+                <h2> {{ 'configuration.calendar.event.phone' | translate}}</h2>
+                <mat-form-field>
+                  <input matInput formControlName="phone">
+                </mat-form-field>
+              </div>
+
+              <div class="row">
+                <h2> {{ 'configuration.calendar.event.name' | translate}}</h2>
+                <mat-form-field>
+                  <input matInput formControlName="name">
+                </mat-form-field>
+              </div>
+
+              <div class="row">
+                <h2> {{ 'configuration.calendar.event.email' | translate}}</h2>
+                <mat-form-field>
+                  <input matInput formControlName="email">
+                </mat-form-field>
+              </div>
+            </form>
+          </div>
+
   </div>
+</div>
 
-  <div mat-dialog-content>
-    <div class="row">
+<div mat-dialog-actions align="end">
+  <button mat-button color="warn" [mat-dialog-close]="myForm"
+          (click)="delete()">{{ 'configuration.calendar.event.delete' | translate}}</button>
+  <button mat-button [mat-dialog-close]="myForm"
+          (click)="dialogRef.close()">{{ 'configuration.cancel' | translate}}</button>
+  <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="myForm"
+          cdkFocusInitial>{{ 'configuration.save' | translate}}</button>
+</div>
 
-      <div class="sized-box-width-20 mat-field-padding-margin"></div>
-
-      <div class="col">
-
-        <div class="row">
-          <h2> {{ 'configuration.calendar.event.duration' | translate}}</h2>
-          <input type="text" readonly
-                 ngxDaterangepickerMd
-                 [timePicker]="true"
-                 [timePickerSeconds]="false"
-                 [timePickerIncrement]="15"
-                 [timePicker24Hour]="true"
-                 [locale]="{format: 'DD/MM/YYYY HH:mm', firstDay: 1}"
-                 [(ngModel)]="selected"
-                 [ngModelOptions]="{standalone: true}"
-                 class="form-control"/>
-        </div>
-
-        <div class="row">
-          <h2> {{ 'configuration.calendar.event.phone' | translate}}</h2>
-          <mat-form-field>
-            <input matInput formControlName="phone" autocomplete="phone">
-          </mat-form-field>
-        </div>
-
-        <div class="row">
-          <h2> {{ 'configuration.calendar.event.name' | translate}}</h2>
-          <mat-form-field>
-            <input matInput formControlName="name" autocomplete="name">
-          </mat-form-field>
-        </div>
-
-        <div class="row">
-          <h2> {{ 'configuration.calendar.event.email' | translate}}</h2>
-          <mat-form-field>
-            <input matInput formControlName="email" autocomplete="email">
-          </mat-form-field>
-        </div>
-
-      </div>
-
-    </div>
-  </div>
-
-  <div mat-dialog-actions align="end">
-    <button mat-button color="warn" [mat-dialog-close]="myForm"
-            (click)="delete()">{{ 'configuration.calendar.event.delete' | translate}}</button>
-    <button mat-button [mat-dialog-close]="myForm"
-            (click)="dialogRef.close()">{{ 'configuration.cancel' | translate}}</button>
-    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="myForm"
-            cdkFocusInitial>{{ 'configuration.save' | translate}}</button>
-  </div>
-</form>

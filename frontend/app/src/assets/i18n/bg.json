@@ -95,7 +95,9 @@
         "phone": "Тел.",
         "name": "Име",
         "duration": "Времетраене",
-        "delete": "Изтрий"
+        "delete": "Изтрий",
+        "service": "Услуга",
+        "custom": "Други"
       }
     },
     "tabs": {

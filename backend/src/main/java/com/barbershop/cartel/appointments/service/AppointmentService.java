@@ -94,7 +94,7 @@ public class AppointmentService implements AppointmentInterface {
         val startDateTime = startOfWeekDate.atStartOfDay();
         val endDateTime = startOfWeekDate.plusWeeks(1).atStartOfDay();
 
-        val barberId = assignment.getBarber().getId();
+        val barberId = assignment.get().getBarber().getId();
         val appointments = appointmentRepository.findBetween(barberId, startDateTime, endDateTime)
                 .stream().map(this::toAppointmentModel).collect(toList());
 
@@ -114,7 +114,7 @@ public class AppointmentService implements AppointmentInterface {
             while(timeSlotStart.compareTo(currentTime) < 0)
                 timeSlotStart = timeSlotStart.plus(MIN_SERVICE_DURATION, ChronoUnit.MINUTES);
 
-            val timeSlotEnd = timeSlotStart.plus(assignment.getDuration(), ChronoUnit.MINUTES);
+            val timeSlotEnd = timeSlotStart.plus(assignment.get().getDuration(), ChronoUnit.MINUTES);
 
             LocalDateTime finalTimeSlotStart = timeSlotStart;
             val collidesWithExisting = appointments.stream().filter(x -> collidesWith(x, finalTimeSlotStart, timeSlotEnd)).findFirst();
@@ -220,9 +220,9 @@ public class AppointmentService implements AppointmentInterface {
         entity.setBarber(barber);
 
         if (appointmentModel.getAssignmentId() != null) {
-            val assignment = assignmentInterface.getAssignment(appointmentModel.getAssignmentId());
-
-            entity.setService(assignment.getService());
+            assignmentInterface.getAssignment(appointmentModel.getAssignmentId()).ifPresent(assignment->
+                entity.setService(assignment.getService())
+            );
         }
     }
 
@@ -239,7 +239,15 @@ public class AppointmentService implements AppointmentInterface {
 
         appointmentModel.setId(x.getId());
 
-        appointmentModel.setBarberId(x.getBarber().getId());
+        val barberId = x.getBarber().getId();
+
+        if(x.getService() != null) {
+            assignmentInterface.getAssignment(barberId, x.getService().getId()).ifPresent(assignment ->
+                    appointmentModel.setAssignmentId(assignment.getId())
+            );
+        }
+
+        appointmentModel.setBarberId(barberId);
 
         InternationalString barberName = new InternationalString();
         barberName.put(LanguageEnum.bg, x.getBarber().getFirstName().get(LanguageEnum.bg) + " " + x.getBarber().getLastName().get(LanguageEnum.bg));

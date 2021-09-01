@@ -95,7 +95,9 @@
         "phone": "Phone",
         "name": "Name",
         "duration": "Duration",
-        "delete": "Delete"
+        "delete": "Delete",
+        "service": "Service",
+        "custom": "Other"
       }
     },
     "tabs": {

@@ -5,6 +5,11 @@ import {AppointmentModel} from '../../../models/appointment.model';
 import dayjsPluginUTC from 'dayjs-plugin-utc'
 import * as dayjs from 'dayjs';
 import {AppointmentService} from '../../../services/appointment.service';
+import {AssignmentService} from '../../../services/assignment.service';
+import {Observable} from 'rxjs';
+import {Assignment} from '../../../models/assignment';
+import {ServiceService} from '../../../services/service.service';
+import {Service} from '../../../models/service';
 
 dayjs.extend(dayjsPluginUTC)
 
@@ -21,15 +26,37 @@ export class EditDialogComponent implements OnInit {
 
   selected =  { }
 
+  services = []
+
+  assignments$: Observable<Assignment[]>;
+
   constructor(
     public dialogRef: MatDialogRef<EditDialogComponent>,
     private appointmentService: AppointmentService,
+    private assignmentService: AssignmentService,
+    private serviceService: ServiceService,
     @Inject(MAT_DIALOG_DATA) public appointment: AppointmentModel,
     private fb: FormBuilder
   ) {
   }
 
+  getService(assignmentId): Service {
+    return this.services.find(s => s.id === +assignmentId);
+  }
+
+  get assignmentId() {
+    return this.myForm.value.assignmentId;
+  }
+
   ngOnInit(): void {
+
+    this.assignments$ = this.assignmentService.getAssignmentsByBarberId(this.appointment.barberId);
+
+    this.serviceService.getServices().subscribe(services => {
+      this.services = services;
+    });
+
+    console.log(this.appointment);
 
     this.myForm = this.fb.group({
         id: this.appointment.id,
@@ -56,7 +83,7 @@ export class EditDialogComponent implements OnInit {
       data.value.end = this.selected["endDate"].format(this.format);
       data.value.title = this.myForm.value.title;
 
-      console.log(this.selected);
+      console.log(data);
     });
 
   }

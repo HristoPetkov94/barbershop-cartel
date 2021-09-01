@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {addDays, addHours, isSameDay, isSameMonth, startOfWeek,} from 'date-fns';
+import {addDays, addMinutes, isSameDay, isSameMonth, startOfWeek,} from 'date-fns';
 import {Subject} from 'rxjs';
 import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
 import {AppointmentService} from '../../services/appointment.service';
@@ -13,6 +13,7 @@ import {LanguagePipe} from '../../pipes/language-pipe';
 import {MatDialog} from '@angular/material';
 import {AppointmentModel} from '../../models/appointment.model';
 import {EditDialogComponent} from './edit-dialog/edit-dialog.component';
+import * as dayjs from 'dayjs'
 
 const colors: any = {
   red: {
@@ -270,7 +271,8 @@ export class CalendarComponent implements OnInit {
 
   private getDialogRef(appointment) {
     return this.dialog.open(EditDialogComponent, {
-      width: '560px',
+      // width: '560px',
+      // height: '360px',
       data: Object.assign({}, appointment)
     });
   }
@@ -385,9 +387,11 @@ export class CalendarComponent implements OnInit {
 
     const appointment = new AppointmentModel();
     appointment.title = 'test';
-    appointment.start = date;
-    appointment.end = addHours(date, 0.5);
+    appointment.start = dayjs(date);
+    appointment.end = dayjs(addMinutes(date, 30));
 
+    console.log(appointment.start);
+    console.log(appointment.end);
 
     appointment.barberId = barberIds[0];
 
