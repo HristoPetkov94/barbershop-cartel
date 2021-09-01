@@ -24,7 +24,7 @@ export class EditDialogComponent implements OnInit {
 
   myForm: FormGroup;
 
-  selected =  { };
+  selected =  { startDate: this.appointment.start, endDate: this.appointment.end };
 
   services = [];
 
@@ -69,16 +69,14 @@ export class EditDialogComponent implements OnInit {
       }
     );
 
-    this.selected = { "startDate": this.appointment.start, "endDate": this.appointment.end }
-
     this.dialogRef.beforeClosed().subscribe(data => {
       data.value.id = this.myForm.value.id;
       data.value.barberId = this.myForm.value.barberId;
       data.value.assignmentId = this.myForm.value.assignmentId;
       data.value.email = this.myForm.value.email;
       data.value.phone = this.myForm.value.phone;
-      data.value.start = this.selected["startDate"].format(this.format);
-      data.value.end = this.selected["endDate"].format(this.format);
+      data.value.start = this.selected.startDate.format(this.format);
+      data.value.end = this.selected.endDate.format(this.format);
       data.value.title = this.myForm.value.title;
 
       console.log(data);
