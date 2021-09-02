@@ -19,13 +19,13 @@ public class ClientService implements ClientInterface {
         ClientEntity client = new ClientEntity();
 
         client.setEmail(email);
-        client.setUsername(username);
-        client.setPhoneNumber(phoneNumber);
+        client.setName(username);
+        client.setPhone(phoneNumber);
 
         return clientRepository.save(client);
     }
 
-    public Optional<ClientEntity> findByEmail(String email) {
-        return clientRepository.findByEmail(email);
+    public Optional<ClientEntity> findByPhone(String phone) {
+        return clientRepository.findByPhone(phone);
     }
 }

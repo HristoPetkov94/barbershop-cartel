@@ -17,14 +17,14 @@ export class FinishStepComponent implements OnInit {
   @Input() stepController;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
-  format: string = "YYYY-MM-DDTHH:mm:ss"
+  format = 'YYYY-MM-DDTHH:mm:ss';
 
   public assignmentId;
   public appointment = new AppointmentRequest();
   public done = false;
 
   myForm: FormGroup;
-  //TODO: find better regex
+  // TODO: find better regex
   reg = '(^(\\+359)|0)\\d{9}$';
 
   constructor(
@@ -58,17 +58,17 @@ export class FinishStepComponent implements OnInit {
     this.appointment.assignmentId = this.stepperData.assignmentId;
     this.appointment.barberId = this.stepperData.barberId;
 
-    let datetime  = dayjs(new Date(this.stepperData.date+' '+this.stepperData.hour));
+    const datetime  = dayjs(new Date(this.stepperData.date + ' ' + this.stepperData.hour));
 
     this.appointment.start = datetime.format(this.format);
-    this.appointment.end = datetime.add(this.stepperData.assignmentDuration, "m").format(this.format);
+    this.appointment.end = datetime.add(this.stepperData.assignmentDuration, 'm').format(this.format);
 
     this.appointment.phone = this.phone.value;
     this.appointment.email = this.email.value;
 
     this.appointmentService.create(this.appointment).subscribe(() => {
     }, () => {
-      console.log('error')
+      console.log('error');
     }, () => {
       this.done = true;
       this.stepController.disableSteps();

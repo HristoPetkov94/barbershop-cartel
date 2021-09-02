@@ -97,7 +97,8 @@
         "duration": "Duration",
         "delete": "Delete",
         "service": "Service",
-        "custom": "Other"
+        "custom": "Other",
+        "noShow": "No-Show"
       }
     },
     "tabs": {

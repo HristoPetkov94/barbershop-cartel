@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface ClientInterface {
     ClientEntity createClient(String email, String phoneNumber, String username);
 
-    Optional<ClientEntity> findByEmail(String email);
+    Optional<ClientEntity> findByPhone(String phone);
 }

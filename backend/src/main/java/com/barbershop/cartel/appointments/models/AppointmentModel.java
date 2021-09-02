@@ -10,19 +10,20 @@ import java.time.LocalDateTime;
 @Setter
 public class AppointmentModel {
 
-    public Long id;
+    private Long id;
 
-    public LocalDateTime start;
-    public LocalDateTime end;
+    private LocalDateTime start;
+    private LocalDateTime end;
 
-    public Long barberId;
-    public InternationalString barberName;
+    private Long barberId;
+    private InternationalString barberName;
 
     private Long assignmentId;
 
-    public String title;
+    private String title;
+    private Boolean noShow;
 
-    public InternationalString serviceName;
+    private InternationalString serviceName;
 
     private String email;
     private String phone;

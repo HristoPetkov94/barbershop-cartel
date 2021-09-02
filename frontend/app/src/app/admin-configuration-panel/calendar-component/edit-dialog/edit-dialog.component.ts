@@ -60,6 +60,7 @@ export class EditDialogComponent implements OnInit {
         id: this.appointment.id,
         barberId: this.appointment.barberId,
         assignmentId: this.appointment.assignmentId,
+        noShow: this.appointment.noShow,
         email: this.appointment.email,
         phone: this.appointment.phone,
         name: this.appointment.name,
@@ -73,10 +74,11 @@ export class EditDialogComponent implements OnInit {
       data.value.id = this.myForm.value.id;
       data.value.barberId = this.myForm.value.barberId;
       data.value.assignmentId = this.myForm.value.assignmentId;
+      data.value.showedUp = this.myForm.value.showedUp;
       data.value.email = this.myForm.value.email;
       data.value.phone = this.myForm.value.phone;
-      data.value.start = this.selected.startDate.format(this.format);
-      data.value.end = this.selected.endDate.format(this.format);
+      data.value.start = dayjs(this.selected.startDate).format(this.format);
+      data.value.end = dayjs(this.selected.endDate).format(this.format);
       data.value.title = this.myForm.value.title;
 
       console.log(data);

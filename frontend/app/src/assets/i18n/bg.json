@@ -97,7 +97,8 @@
         "duration": "Времетраене",
         "delete": "Изтрий",
         "service": "Услуга",
-        "custom": "Други"
+        "custom": "Други",
+        "noShow": "Не дошъл"
       }
     },
     "tabs": {

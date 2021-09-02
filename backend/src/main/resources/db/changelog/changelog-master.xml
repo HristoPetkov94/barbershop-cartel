@@ -107,4 +107,33 @@
                 tableName="work_day"/>
     </changeSet>
 
+    <changeSet  author="ss"  id="2021-09-01_change_clients_table">
+        <renameColumn tableName="clients" oldColumnName="phone_number" newColumnName="phone"/>
+        <renameColumn tableName="clients" oldColumnName="username" newColumnName="name"/>
+
+        <dropUniqueConstraint  constraintName="uk_srv16ica2c1csub334bxjjb59"
+                                schemaName="public"
+                               tableName="clients"
+                               uniqueColumns="email"/>
+
+        <addUniqueConstraint tableName="clients" columnNames="phone"/>
+    </changeSet>
+
+    <changeSet author="ss"  id="2021-09-02_add_columns">
+        <addColumn tableName="appointments">
+            <column name="email" type="varchar"/>
+        </addColumn>
+        <addColumn tableName="appointments">
+            <column name="phone" type="varchar"/>
+        </addColumn>
+        <addColumn tableName="appointments">
+            <column name="name" type="varchar"/>
+        </addColumn>
+
+        <addColumn tableName="appointments">
+            <column name="no_show" type="boolean"/>
+        </addColumn>
+        <dropColumn tableName="appointments" columnName="client_id"/>
+    </changeSet>
+
 </databaseChangeLog>

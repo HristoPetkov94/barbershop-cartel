@@ -111,7 +111,7 @@ public class AppointmentService implements AppointmentInterface {
         while (timeSlotStart.isBefore(endDateTime)) {
 
             //skip past time slots
-            while(timeSlotStart.compareTo(currentTime) < 0)
+            while (timeSlotStart.compareTo(currentTime) < 0)
                 timeSlotStart = timeSlotStart.plus(MIN_SERVICE_DURATION, ChronoUnit.MINUTES);
 
             val timeSlotEnd = timeSlotStart.plus(assignment.get().getDuration(), ChronoUnit.MINUTES);
@@ -136,9 +136,9 @@ public class AppointmentService implements AppointmentInterface {
 
         val result = new ArrayList<AppointmentDayModel>();
 
-        for(LocalDate date : startOfWeekDate.datesUntil(startOfWeekDate.plusWeeks(1)).collect(toList())){
+        for (LocalDate date : startOfWeekDate.datesUntil(startOfWeekDate.plusWeeks(1)).collect(toList())) {
             List<LocalTime> hours;
-            if(week.containsKey(date)){
+            if (week.containsKey(date)) {
                 hours = week.get(date).stream().map(LocalDateTime::toLocalTime).collect(toList());
 
             } else {
@@ -204,24 +204,28 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     private void setData(AppointmentModel appointmentModel, AppointmentEntity entity) {
+
         entity.setStartTime(appointmentModel.getStart());
         entity.setEndTime(appointmentModel.getEnd());
 
-        ClientEntity client = clientInterface.findByEmail(appointmentModel.getEmail())
-                .orElseGet(() -> createClient(appointmentModel.getEmail(), appointmentModel.getPhone(), appointmentModel.getName()));
 
-        client.setPhoneNumber(appointmentModel.getPhone());
-        client.setUsername(appointmentModel.getName());
+        entity.setEmail(appointmentModel.getEmail());
+        entity.setPhone(appointmentModel.getPhone());
+        entity.setName(appointmentModel.getName());
 
-        entity.setClient(client);
+        boolean noShow = false;
+        if (appointmentModel.getNoShow() != null)
+            noShow = appointmentModel.getNoShow();
+
+        entity.setNoShow(noShow);
 
         var barber = barberInterface.getBarberById(appointmentModel.getBarberId());
 
         entity.setBarber(barber);
 
         if (appointmentModel.getAssignmentId() != null) {
-            assignmentInterface.getAssignment(appointmentModel.getAssignmentId()).ifPresent(assignment->
-                entity.setService(assignment.getService())
+            assignmentInterface.getAssignment(appointmentModel.getAssignmentId()).ifPresent(assignment ->
+                    entity.setService(assignment.getService())
             );
         }
     }
@@ -241,7 +245,7 @@ public class AppointmentService implements AppointmentInterface {
 
         val barberId = x.getBarber().getId();
 
-        if(x.getService() != null) {
+        if (x.getService() != null) {
             assignmentInterface.getAssignment(barberId, x.getService().getId()).ifPresent(assignment ->
                     appointmentModel.setAssignmentId(assignment.getId())
             );
@@ -261,17 +265,14 @@ public class AppointmentService implements AppointmentInterface {
         if (x.getService() != null)
             appointmentModel.setServiceName(x.getService().getServiceTitle());
 
-        val client = x.getClient();
+        appointmentModel.setEmail(x.getEmail());
+        appointmentModel.setPhone(x.getPhone());
+        appointmentModel.setName(x.getName());
 
-        if (client != null) {
-            appointmentModel.setEmail(client.getEmail());
-            appointmentModel.setPhone(client.getPhoneNumber());
-            appointmentModel.setName(client.getUsername());
-        }
+        appointmentModel.setNoShow(x.isNoShow());
 
         return appointmentModel;
     }
-
 
     public List<AppointmentModel> getWeeklySystemAppointments(long[] barberIds, LocalDateTime from, LocalDateTime to) {
 
@@ -308,11 +309,11 @@ public class AppointmentService implements AppointmentInterface {
             if (workWeekDayEntity.isNotWorking()) {
                 var result = new AppointmentModel();
 
-                result.id = -1L;
-                result.barberId = barberId;
-                result.start = date.atStartOfDay();
-                result.end = date.atTime(LocalTime.MAX);
-                result.barberName = barberName;
+                result.setId(-1L);
+                result.setBarberId(barberId);
+                result.setStart(date.atStartOfDay());
+                result.setEnd(date.atTime(LocalTime.MAX));
+                result.setBarberName(barberName);
                 result.setAssignmentId(null);
 
                 list.add(result);
@@ -322,22 +323,23 @@ public class AppointmentService implements AppointmentInterface {
 
             var result = new AppointmentModel();
 
-            result.id = -1L;
-            result.barberId = barberId;
-            result.start = date.atStartOfDay();
-            result.end = date.atStartOfDay().with(workWeekDayEntity.getFrom());
-            result.barberName = barberName;
+            result.setId(-1L);
+            result.setBarberId(barberId);
+            result.setStart(date.atStartOfDay());
+            result.setEnd(date.atStartOfDay().with(workWeekDayEntity.getFrom()));
+            result.setBarberName(barberName);
             result.setAssignmentId(null);
 
 
             list.add(result);
+
             var result2 = new AppointmentModel();
 
-            result2.id = -1L;
-            result2.barberId = barberId;
-            result2.start = date.atStartOfDay().with(workWeekDayEntity.getTo());
-            result2.end = date.atTime(LocalTime.MAX);
-            result2.barberName = barberName;
+            result2.setId(-1L);
+            result2.setBarberId(barberId);
+            result2.setStart(date.atStartOfDay().with(workWeekDayEntity.getTo()));
+            result2.setEnd(date.atTime(LocalTime.MAX));
+            result2.setBarberName(barberName);
             result2.setAssignmentId(null);
 
             list.add(result2);

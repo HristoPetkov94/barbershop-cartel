@@ -1,8 +1,7 @@
 package com.barbershop.cartel.appointments.entity;
 
-import com.barbershop.cartel.clients.entity.ClientEntity;
-import com.barbershop.cartel.services.entity.ServiceEntity;
 import com.barbershop.cartel.barbers.entity.BarberEntity;
+import com.barbershop.cartel.services.entity.ServiceEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,12 +26,21 @@ public class AppointmentEntity {
     @Column(name = "endTime")
     private LocalDateTime endTime;
 
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "phone", unique = true)
+    private String phone;
+
+    @Column(name = "no_show")
+    private boolean noShow;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private BarberEntity barber;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private ServiceEntity service;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    private ClientEntity client;
 }

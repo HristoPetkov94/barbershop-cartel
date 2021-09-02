@@ -13,7 +13,7 @@ import {LanguagePipe} from '../../pipes/language-pipe';
 import {MatDialog} from '@angular/material';
 import {AppointmentModel} from '../../models/appointment.model';
 import {EditDialogComponent} from './edit-dialog/edit-dialog.component';
-import * as dayjs from 'dayjs'
+import * as dayjs from 'dayjs';
 
 const colors: any = {
   red: {
@@ -82,7 +82,7 @@ const appointmentColors = [
 export class CalendarComponent implements OnInit {
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
-  status: string = 'connecting';
+  status = 'connecting';
 
   reconnecting = false;
 
@@ -104,7 +104,7 @@ export class CalendarComponent implements OnInit {
 
   public selectedBarberIndex: number;
 
-  public fullscreen: boolean = false;
+  public fullscreen = false;
 
   private stompClient = null;
 
@@ -145,7 +145,7 @@ export class CalendarComponent implements OnInit {
     }
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen = true;
 
   constructor(private dialog: MatDialog,
               private appointmentService: AppointmentService,
@@ -161,7 +161,7 @@ export class CalendarComponent implements OnInit {
       this.barbers = barbers;
 
       barbers.forEach((value, index) => {
-        let color = appointmentColors[index];
+        const color = appointmentColors[index];
 
         this.barberToColor.set(value.id, color);
       });
@@ -209,25 +209,26 @@ export class CalendarComponent implements OnInit {
     this.stompClient = Stomp.over(socket);
 
     const _this = this;
-    this.stompClient.connect({}, function (frame) {
+    this.stompClient.connect({}, function(frame) {
       console.log('Connected: ' + frame);
       _this.setConnected(true);
       _this.reconnecting = false;
       clearInterval(_this.recInterval);
-      _this.stompClient.subscribe('/topic/event-added', function (hello) {
+      _this.stompClient.subscribe('/topic/event-added', function(hello) {
         console.log('Message: ' + frame);
         _this.change();
       });
     });
 
-    this.stompClient.debug = function (str) {
-      if (str.startsWith("Connection closed")) {
-        if (_this.reconnecting)
+    this.stompClient.debug = function(str) {
+      if (str.startsWith('Connection closed')) {
+        if (_this.reconnecting) {
           return;
+        }
         _this.reconnecting = true;
 
-        console.log("Start reconnect...");
-        _this.recInterval = setInterval(function () {
+        console.log('Start reconnect...');
+        _this.recInterval = setInterval(function() {
           _this.setConnected(false);
           _this.stompClient.disconnect({});
           _this.connect();
@@ -280,7 +281,7 @@ export class CalendarComponent implements OnInit {
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = {event, action};
 
-    let appointment = event.meta["appointment"]
+    const appointment = event.meta.appointment;
 
     const dialogRef = this.getDialogRef(appointment);
 
@@ -292,7 +293,7 @@ export class CalendarComponent implements OnInit {
         this.appointmentService.update(result.value).subscribe(() => {
         }, () => {
         }, () => {
-          console.log("appointment done");
+          console.log('appointment done');
 
         });
       }
@@ -315,19 +316,19 @@ export class CalendarComponent implements OnInit {
   }
 
   change() {
-    let startOfWeekDate = startOfWeek(this.viewDate, {weekStartsOn: 1});
-    let endOfWeekDate = addDays(startOfWeekDate, 7);
+    const startOfWeekDate = startOfWeek(this.viewDate, {weekStartsOn: 1});
+    const endOfWeekDate = addDays(startOfWeekDate, 7);
 
-    let barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
+    const barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
 
     this.appointmentService.getFor(barberIds, startOfWeekDate, endOfWeekDate).subscribe(appointments => {
-      let tempEvents: CalendarEvent[] = [];
+      const tempEvents: CalendarEvent[] = [];
       for (const appointment of appointments) {
 
         let color;
 
         if (this.barberToColor.has(appointment.barberId)) {
-          let colors = this.barberToColor.get(appointment.barberId);
+          const colors = this.barberToColor.get(appointment.barberId);
 
           if (appointment.id > 0) {
             color = colors.available;
@@ -340,9 +341,9 @@ export class CalendarComponent implements OnInit {
           start: new Date(appointment.start),
           end: new Date(appointment.end),
           title: this.getTitle(appointment),
-          color: color,
+          color,
           meta: {
-            appointment: appointment
+            appointment
           }
         });
       }
@@ -353,16 +354,16 @@ export class CalendarComponent implements OnInit {
   }
 
   private getTitle(appointment: AppointmentModel){
-    let title = "";
+    let title = '';
 
-    if(appointment.phone!=null) {
+    if (appointment.phone != null) {
       title += appointment.phone;
-      title += '</br>'
+      title += '</br>';
     }
 
-    if(appointment.serviceName!=null) {
+    if (appointment.serviceName != null) {
       title += this.languagePipe.transform(appointment.serviceName);
-      title += '</br>'
+      title += '</br>';
     }
 
     // if(appointment.email!=null) {
@@ -370,20 +371,21 @@ export class CalendarComponent implements OnInit {
     //   title += '</br>'
     // }
 
-    if(appointment.barberName!=null) {
-      title += '('
-      title += this.languagePipe.transform(appointment.barberName)
-      title += ')</br>'
+    if (appointment.barberName != null) {
+      title += '(';
+      title += this.languagePipe.transform(appointment.barberName);
+      title += ')</br>';
     }
 
     return title;
   }
 
   emptyHourSlotClicked(date: Date) {
-    let barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
+    const barberIds = this.barberDropdowns[this.selectedBarberIndex].barberIds;
 
-    if(barberIds.length > 1)
+    if (barberIds.length > 1) {
       return;
+    }
 
     const appointment = new AppointmentModel();
     appointment.title = 'test';
@@ -405,7 +407,7 @@ export class CalendarComponent implements OnInit {
         this.appointmentService.create(result.value, true).subscribe(() => {
         }, () => {
         }, () => {
-          console.log("appointment done");
+          console.log('appointment done');
 
         });
       }
@@ -419,11 +421,11 @@ export class CalendarComponent implements OnInit {
   }
 
   toggleFullScreenPage() {
-    let doc = window.document;
-    let docEl = doc.documentElement;
+    const doc = window.document;
+    const docEl = doc.documentElement;
 
-    let requestFullScreen = docEl.requestFullscreen;
-    let cancelFullScreen = doc.exitFullscreen;
+    const requestFullScreen = docEl.requestFullscreen;
+    const cancelFullScreen = doc.exitFullscreen;
 
     if (!doc.fullscreenElement) {
       requestFullScreen.call(docEl);

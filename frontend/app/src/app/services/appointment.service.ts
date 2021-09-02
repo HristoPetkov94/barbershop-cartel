@@ -27,7 +27,7 @@ export class AppointmentService {
   }
 
   delete(id: number) {
-    return this.http.delete(this.url + '/'+id);
+    return this.http.delete(this.url + '/' + id);
   }
 
   getFor(barberIds: number[], start: Date, end: Date) {

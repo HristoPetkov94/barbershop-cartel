@@ -11,6 +11,8 @@ export class AppointmentModel {
 
   public assignmentId: number;
 
+  public noShow: boolean;
+
   public serviceName: any = null;
 
   public email: string;

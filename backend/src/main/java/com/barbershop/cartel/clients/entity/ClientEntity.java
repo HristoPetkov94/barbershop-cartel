@@ -1,11 +1,9 @@
 package com.barbershop.cartel.clients.entity;
 
-import com.barbershop.cartel.appointments.entity.AppointmentEntity;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Getter
 @Setter
@@ -19,15 +17,12 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "username")
-    private String username;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "phone_number")
-    private String phoneNumber;
-
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AppointmentEntity> schedule;
+    @Column(name = "phone", unique = true)
+    private String phone;
 }
