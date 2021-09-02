@@ -111,6 +111,7 @@
       "store": "Store",
       "calendar": "Calendar",
       "availability": "Work hours",
+      "clients": "Clients",
       "logout": "Logout"
     },
     "emails": {

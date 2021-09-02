@@ -111,6 +111,7 @@
       "store": "Магазин",
       "calendar": "Календар",
       "availability": "Работно време",
+      "clients": "Клиенти",
       "logout": "Изход"
     },
     "emails": {

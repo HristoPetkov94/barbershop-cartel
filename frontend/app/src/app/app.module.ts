@@ -86,6 +86,7 @@ import {EmailConfigurationComponent} from './admin-configuration-panel/email-con
 import {LanguagePipe} from './pipes/language-pipe';
 import {EditDialogComponent} from './admin-configuration-panel/calendar-component/edit-dialog/edit-dialog.component';
 import {CalendarComponent} from './admin-configuration-panel/calendar-component/calendar.component';
+import {ClientsConfigurationComponent} from './admin-configuration-panel/clients-configuration/clients-configuration.component';
 
 @NgModule({
   exports: [
@@ -138,7 +139,8 @@ import {CalendarComponent} from './admin-configuration-panel/calendar-component/
     WorkWeekDayEditDialogComponent,
     EmailConfigurationComponent,
     LanguagePipe,
-    EditDialogComponent
+    EditDialogComponent,
+    ClientsConfigurationComponent
   ],
     imports: [
         BrowserModule,

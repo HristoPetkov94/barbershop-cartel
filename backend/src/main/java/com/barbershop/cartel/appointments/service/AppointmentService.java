@@ -175,6 +175,8 @@ public class AppointmentService implements AppointmentInterface {
 
         setData(appointmentModel, entity);
 
+        createClient(appointmentModel);
+
         if (!allowOverlap) {
             if (overlapsWithExisting(entity)) {
                 return;
@@ -198,9 +200,21 @@ public class AppointmentService implements AppointmentInterface {
 
         setData(appointmentModel, entity);
 
+        createClient(appointmentModel);
+
         appointmentRepository.save(entity);
 
         webSocketService.updateClientCalendars();
+    }
+
+    private void createClient(AppointmentModel appointmentModel) {
+
+        if (clientInterface.findByPhone(appointmentModel.getPhone()).isEmpty()) {
+
+            clientInterface.createClient(appointmentModel.getEmail(),
+                    appointmentModel.getPhone(),
+                    appointmentModel.getName());
+        }
     }
 
     private void setData(AppointmentModel appointmentModel, AppointmentEntity entity) {
