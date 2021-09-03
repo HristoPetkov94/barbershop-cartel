@@ -272,13 +272,15 @@ export class CalendarComponent implements OnInit {
 
   private getDialogRef(appointment) {
     return this.dialog.open(EditDialogComponent, {
-      // width: '560px',
-      // height: '360px',
       data: Object.assign({}, appointment)
     });
   }
 
   handleEvent(action: string, event: CalendarEvent): void {
+    if (event.meta.appointment.id < 0) {
+      return;
+    }
+
     this.modalData = {event, action};
 
     const appointment = event.meta.appointment;
@@ -328,12 +330,12 @@ export class CalendarComponent implements OnInit {
         let color;
 
         if (this.barberToColor.has(appointment.barberId)) {
-          const colors = this.barberToColor.get(appointment.barberId);
+          const barberColors = this.barberToColor.get(appointment.barberId);
 
           if (appointment.id > 0) {
-            color = colors.available;
+            color = barberColors.available;
           } else {
-            color = colors.unavailable;
+            color = barberColors.unavailable;
           }
         }
 
@@ -365,11 +367,6 @@ export class CalendarComponent implements OnInit {
       title += this.languagePipe.transform(appointment.serviceName);
       title += '</br>';
     }
-
-    // if(appointment.email!=null) {
-    //   title += appointment.email;
-    //   title += '</br>'
-    // }
 
     if (appointment.barberName != null) {
       title += '(';

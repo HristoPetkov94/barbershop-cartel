@@ -120,3 +120,7 @@ div.selected:focus{
 .unselectable:hover {
   background-color: #f0f0f0;
 }
+
+.content-container {
+  padding-top : 20px;
+}

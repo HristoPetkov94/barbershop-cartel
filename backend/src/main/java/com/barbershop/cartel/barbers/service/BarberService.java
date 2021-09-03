@@ -17,8 +17,6 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Slf4j
 @Service
@@ -73,23 +71,14 @@ public class BarberService implements BarberInterface {
         barber.setInstagram(barberModel.getInstagram());
 
         BarberEntity save = barberRepository.save(barber);
-        var workingWeek = createWorkingWeek();
 
-        final var workWeekDayEntities = workWeekDayRepository.saveAll(workingWeek);
-
-        workingWeek.forEach(x->x.setBarber(barber));
-
-        workingWeek = StreamSupport
-                .stream(workWeekDayEntities.spliterator(), false)
-                .collect(Collectors.toList());
-
-        barber.setWorkWeekDays(workingWeek);
-
+        var workingWeek = createWorkingWeek(save);
+        workWeekDayRepository.saveAll(workingWeek);
 
         return save;
     }
 
-    private List<WorkWeekDayEntity> createWorkingWeek() {
+    private List<WorkWeekDayEntity> createWorkingWeek(BarberEntity barber) {
 
         LocalTime from = LocalTime.of(8, 0);
         LocalTime to = LocalTime.of(18, 0);
@@ -98,6 +87,8 @@ public class BarberService implements BarberInterface {
 
         for (DayOfWeek dayOfWeek : DayOfWeek.values()) {
             WorkWeekDayEntity entity = new WorkWeekDayEntity();
+
+            entity.setBarber(barber);
 
             entity.setDayOfWeek(dayOfWeek);
 

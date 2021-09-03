@@ -175,13 +175,13 @@ public class AppointmentService implements AppointmentInterface {
 
         setData(appointmentModel, entity);
 
-        createClient(appointmentModel);
-
         if (!allowOverlap) {
             if (overlapsWithExisting(entity)) {
                 return;
             }
         }
+
+        createClient(appointmentModel);
 
         appointmentRepository.save(entity);
 
@@ -257,7 +257,8 @@ public class AppointmentService implements AppointmentInterface {
 
         appointmentModel.setId(x.getId());
 
-        val barberId = x.getBarber().getId();
+        val barberEntity = x.getBarber();
+        val barberId = barberEntity.getId();
 
         if (x.getService() != null) {
             assignmentInterface.getAssignment(barberId, x.getService().getId()).ifPresent(assignment ->
@@ -267,10 +268,7 @@ public class AppointmentService implements AppointmentInterface {
 
         appointmentModel.setBarberId(barberId);
 
-        InternationalString barberName = new InternationalString();
-        barberName.put(LanguageEnum.bg, x.getBarber().getFirstName().get(LanguageEnum.bg) + " " + x.getBarber().getLastName().get(LanguageEnum.bg));
-        barberName.put(LanguageEnum.en, x.getBarber().getFirstName().get(LanguageEnum.en) + " " + x.getBarber().getLastName().get(LanguageEnum.en));
-
+        InternationalString barberName = barberEntity.getFirstName().concatenate(" ", barberEntity.getLastName());
         appointmentModel.setBarberName(barberName);
 
         appointmentModel.setStart(x.getStartTime());
@@ -300,6 +298,7 @@ public class AppointmentService implements AppointmentInterface {
         return ListUtils.flattenListOfListsStream(result);
     }
 
+    //creates virtual appointments for a dayOfWeek
     private List<AppointmentModel> getAppointmentModel(LocalDate date, List<WorkWeekDayEntity> workWeekDayEntities) {
 
         var list = new ArrayList<AppointmentModel>();
@@ -320,45 +319,40 @@ public class AppointmentService implements AppointmentInterface {
                 barberName.put(languageEnumStringEntry.getKey(), fullName);
             }
 
-            if (workWeekDayEntity.isNotWorking()) {
-                var result = new AppointmentModel();
+            val amAppointment = createSystemAppointment(barberId, barberName);
 
-                result.setId(-1L);
-                result.setBarberId(barberId);
-                result.setStart(date.atStartOfDay());
-                result.setEnd(date.atTime(LocalTime.MAX));
-                result.setBarberName(barberName);
-                result.setAssignmentId(null);
+            amAppointment.setStart(date.atStartOfDay());
 
-                list.add(result);
+            list.add(amAppointment);
 
+            if(workWeekDayEntity.isNotWorking()) {
+                amAppointment.setEnd(date.atTime(LocalTime.MAX));
                 continue;
             }
 
-            var result = new AppointmentModel();
-
-            result.setId(-1L);
-            result.setBarberId(barberId);
-            result.setStart(date.atStartOfDay());
-            result.setEnd(date.atStartOfDay().with(workWeekDayEntity.getFrom()));
-            result.setBarberName(barberName);
-            result.setAssignmentId(null);
+            amAppointment.setEnd(date.atStartOfDay().with(workWeekDayEntity.getFrom()));
 
 
-            list.add(result);
+            val pmAppointment = createSystemAppointment(barberId, barberName);
 
-            var result2 = new AppointmentModel();
+            pmAppointment.setStart(date.atStartOfDay().with(workWeekDayEntity.getTo()));
+            pmAppointment.setEnd(date.atTime(LocalTime.MAX));
 
-            result2.setId(-1L);
-            result2.setBarberId(barberId);
-            result2.setStart(date.atStartOfDay().with(workWeekDayEntity.getTo()));
-            result2.setEnd(date.atTime(LocalTime.MAX));
-            result2.setBarberName(barberName);
-            result2.setAssignmentId(null);
-
-            list.add(result2);
+            list.add(pmAppointment);
         }
 
         return list;
+    }
+
+    private AppointmentModel createSystemAppointment(long barberId, InternationalString barberName) {
+
+        var result = new AppointmentModel();
+
+        result.setId(-1L);
+        result.setBarberId(barberId);
+        result.setBarberName(barberName);
+        result.setAssignmentId(null);
+
+        return result;
     }
 }
