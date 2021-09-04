@@ -1,5 +1,13 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 
+:root {
+  --main-color: #864A37;
+  --black-gradient: rgba(0,0,0, 0.3);
+  --header-size: 1fr;
+  --footer-size: 100px;
+  --content-size: calc(100% - var(--footer-size));
+}
+
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: limited;
@@ -99,9 +107,14 @@ h2 {
   justify-content: space-evenly;
 }
 
+/*//TODO: rename this*/
 .justify-content-center {
   justify-content: center;
   align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .space-between-5 > * {
@@ -202,13 +215,25 @@ h2 {
 }
 
 .header {
-  font: normal normal bold 25px/34px Roboto;
-  letter-spacing: 0;
-  color: #000000;
+  /*font: normal normal bold 25px/34px Roboto;*/
+  /*letter-spacing: 0;*/
+  /*color: #000000;*/
   text-transform: uppercase;
-  opacity: 1;
+  /*opacity: 1;*/
 
-  text-align: center;
+  /*text-align: center;*/
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 40px;
+  line-height: 110.4%;
+  /* or 44px */
+
+  letter-spacing: 0.165em;
+
+  color: #FFFFFF;
+
+  background-color: var(--black-gradient);
 }
 
 .sub-header {

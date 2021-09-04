@@ -138,7 +138,6 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
 
   private update(result) {
     const assignment: Assignment = result.value;
-    console.log(assignment);
 
     this.assignmentService.updateAssignment(assignment).subscribe(() => {
       },

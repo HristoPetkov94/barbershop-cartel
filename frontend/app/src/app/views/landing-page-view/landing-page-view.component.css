@@ -1,151 +1,27 @@
-.title-wrapper {
-  width: 50%;
-  margin: auto;
+.brush {
+  width: 500px;
+  height: 802px;
 }
 
-.booking-button-wrapper {
-  /*margin-top: 40px;*/
-  text-align: center;
-
-  margin-top: 50px;
+.horizontal-logo {
+  width: 628px;
+  height: 251px;
 }
 
-.booking-button {
-  background: #FFFFFFE6 0 0 no-repeat padding-box;
+.book-now-btn {
+  width: 378px;
+  height: 87px;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
 
-  text-align: center;
-  /*font: Bold 30px/37px Roboto;*/
-  font-size: 30px;
-  font-weight: bold;
-  letter-spacing: 0;
-  color: #413F3F;
+  color: #FFFFFF;
+  background: var(--main-color);
+
+  border: none;
 
   text-transform: uppercase;
-
-  /*padding: 13px 115px;*/
-  cursor: pointer;
-  width: 500px;
-  height: 100px;
-
-  border-radius: 10px;
-  border: none;
 }
 
-
-.booking-button span {
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-.booking-button span:after {
-  content: '\00bb';
-  position: absolute;
-  opacity: 0;
-  right: -20px;
-  transition: 0.5s;
-}
-
-.booking-button:hover span {
-  padding-right: 25px;
-}
-
-.booking-button:hover span:after {
-  opacity: 1;
-  right: 0;
-}
-
-.booking-button:hover {
-  background: whitesmoke 0 0 no-repeat padding-box;
-}
-
-.title {
-  font: normal normal bold 25px/34px Roboto;
-  letter-spacing: 0;
-  color: #CAC8C8;
-  opacity: 1;
-  text-align: center;
-  /*font-family: 'limited', 'arial', sans-serif;*/
-}
-
-.limited {
-  font-family: 'limited', 'arial', sans-serif;
-  color: #ef0000;
-  font-size: 60px;
-}
-
-.logo-home {
-  width: 200px;
-  height: 200px;
-}
-
-.padding-sides {
-  padding: 0 40px;
-}
-
-.main {
-  background-image: url('src/assets/images/barbershop-homepage.png');
-  /* Full height */
-
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100vh;
-  position: relative;
-}
-
-@media (max-width: 992px) {
-  nav {
-    justify-content: center;
-  }
-
-  .booking-button {
-    width: 200px;
-    height: 50px;
-
-    font-size: 15px;
-  }
-
-  .col-responsive {
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
-
-    justify-content: space-between;
-  }
-
-  .sized-box-width-40 {
-    width: 0;
-  }
-}
-
-@media (max-width: 768px) {
-  nav {
-    justify-content: center;
-  }
-
-  .booking-button {
-    width: 200px;
-    height: 50px;
-
-    font-size: 15px;
-  }
-
-  .col-responsive {
-    display: flex;
-    flex-direction: row;
-
-    width: 100%;
-
-    justify-content: space-between;
-  }
-
-  .sized-box-width-40 {
-    width: 0;
-  }
-}

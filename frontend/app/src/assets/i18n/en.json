@@ -13,10 +13,11 @@
   },
   "services": {
     "title": "we offer you the best services",
-    "subTitle": "Modern man's haircut and styling from our professional Barbers."
+    "subTitle": "Modern man's haircut and styling from our professional Barbers.",
+    "priceList": "Price List"
   },
   "team": {
-    "title": "barbers"
+    "title": "OUR TEAM, WHICH ALWAYS GUARANTEES QUALITY!"
   },
   "stepper" : {
     "barber": "Barber",

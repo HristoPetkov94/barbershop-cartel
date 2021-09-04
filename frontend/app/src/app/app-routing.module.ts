@@ -26,16 +26,20 @@ import {ClientsConfigurationComponent} from './admin-configuration-panel/clients
 
 const routes: Routes = [
   // user visible
-  {path: '', component: LandingPageViewComponent},
   {
-    path: '',
-    component: LayoutComponent,
+    path: '', component: LayoutComponent,
     children: [
-      {path: 'team', component: TeamViewComponent},
-      {path: 'services', component: ServiceViewComponent},
-      {path: 'contacts', component: ContactViewComponent},
-      {path: 'store', component: StoreComponent},
-      {path: 'book-now', component: AppointmentViewComponent},
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {path: 'home', component: LandingPageViewComponent},
+      {path: 'team', component: TeamViewComponent, data: {title: 'team'}},
+      {path: 'services', component: ServiceViewComponent, data: {title: 'services'}},
+      {path: 'contacts', component: ContactViewComponent, data: {title: 'contacts'}},
+      {path: 'store', component: StoreComponent, data: {title: 'store'}},
+      {path: 'book-now', component: AppointmentViewComponent, data: {title: 'book-now'}},
     ],
   },
   {path: 'login', component: LoginComponent},

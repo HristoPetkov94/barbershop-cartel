@@ -126,7 +126,6 @@ export class DateStepComponent implements OnInit {
     this.stepperData.date = this.today;
     this.stepperData.hour = hour;
 
-    console.log('from date to finish');
     // this.stepDataObject.barberId = barber.id;
 
     const request: ChangeStepRequest = {

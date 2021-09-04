@@ -1,0 +1,233 @@
+.card-barber-wrapper {
+  width: 25%;
+  margin: 20px;
+}
+
+.barber-image {
+  /*height: 400px;*/
+  height: 380px;
+  width: 100%;
+
+  background-size: cover;
+
+  background-repeat: no-repeat;
+}
+
+.social-info > p {
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 30px;
+  color: #FFFFFF;
+}
+
+.social-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-info > img {
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+}
+
+.social-info > p {
+  margin: 10px;
+}
+
+.name-btn {
+  /*text-align: center;*/
+  /*font: normal normal normal 30px/53px Roboto;*/
+  color: #FFFFFF;
+  text-transform: uppercase;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+
+  background-color: var(--main-color);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 300px;
+  /*height: 100%;*/
+}
+
+.name-wrapper {
+  height: 100%;
+
+  background-color: var(--main-color);
+}
+
+/*to resize the cards adjust height here*/
+.flip-card {
+  background-color: transparent;
+  /*width: 25%;*/
+  width: 300px;
+  /*height: 510px;*/
+  height: 450px;
+  perspective: 1000px;
+
+  margin: 10px;
+
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  /*position: absolute;*/
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  display: grid;
+  grid-template-rows: 1fr 80px;
+}
+
+.flip-card-front {
+  background-color: white;
+  color: black;
+  position: absolute;
+}
+
+.flip-card-back {
+  background-color: white;
+  color: white;
+  transform: rotateY(180deg);
+}
+
+.back-card-text {
+  /*text-align: left;*/
+  /*align-self: center;*/
+  /*font-family: 'Montserrat', sans-serif;*/
+  /*font-size: 20px;*/
+  /*letter-spacing: 0.3px;*/
+  color: white;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+
+  /*width: 80%;*/
+  /*justify-self: center;*/
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 200px;
+
+  padding: 0 15px;
+
+  text-align: left;
+}
+
+.back-card-button {
+
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  box-shadow: 0 2px 2px #000000;
+
+  text-align: center;
+  font: normal normal bold 20px/42px Roboto;
+  color: #413F3F;
+
+  border: none;
+  border-radius: 10px;
+
+  text-transform: uppercase;
+
+  width: 80%;
+  height: 51px;
+
+  justify-self: center;
+
+  cursor: pointer;
+}
+
+.navigation-buttons-container {
+  height: 30px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navigation-button_true {
+  margin: 0 10px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+
+  /*background: rgb(147, 147, 147);*/
+  /*background: radial-gradient(circle,*/
+  /*rgba(74, 74, 74, 0.92) 90%,*/
+  /*rgba(79, 79, 80, 0.8547794117647058) 50%,*/
+  /*rgba(114, 114, 115, 0.8715861344537815) 16%,*/
+  /*rgba(147, 147, 147, 0.9023984593837535) 0%);*/
+
+  /*background-color: rgba(49, 43, 57, 0.52);*/
+  background-color: var(--main-color);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.navigation-button_false {
+  margin: 0 10px;
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+
+.ripple:hover {
+  background: var(--main-color) radial-gradient(circle, transparent 1%,
+  white 1%) center/15000%;
+}
+
+.back-card-logo {
+  width: 170px;
+  height: 180px;
+}
+
+.logo-text-wrapper {
+  background-color: #000;
+  margin: 20px 20px 50px 20px;
+}
+
+.picture {
+  overflow: hidden;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  margin: 20px 20px 50px 20px;
+}

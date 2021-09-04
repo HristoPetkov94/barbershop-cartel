@@ -12,52 +12,53 @@
 </div>
 
 <div class="row card-wrapper flex-1">
-  <div class="card col flex-space-between" *ngFor="let service of services">
+  <div *ngFor="let service of services">
 
-    <div class="col">
+<!--    <div class="col">-->
 
-      <div class="picture" [style.backgroundImage]="'url(' + service?.picture + ')'"></div>
+<!--      <div class="picture" [style.backgroundImage]="'url(' + service?.picture + ')'"></div>-->
 
-      <div class="sized-box-height-20"></div>
+<!--      <div class="sized-box-height-20"></div>-->
 
-      <div class="col padding-20">
-        <div class="type">
-          {{service.serviceTitle | language}}
-        </div>
+<!--      <div class="col padding-20">-->
+<!--        <div class="type">-->
+<!--          {{service.serviceTitle | language}}-->
+<!--        </div>-->
 
-        <div class="sized-box-height-20"></div>
+<!--        <div class="sized-box-height-20"></div>-->
 
-        <div class="description">
-          {{service.description | language}}
-        </div>
+<!--        <div class="description">-->
+<!--          {{service.description | language}}-->
+<!--        </div>-->
 
-      </div>
+<!--      </div>-->
 
 
-      <div class="col padding-20">
-        <hr style="margin: 10px 0;"/>
-        <div *ngFor="let barber of barbers">
+<!--      <div class="col padding-20">-->
+<!--        <hr style="margin: 10px 0;"/>-->
+<!--        <div *ngFor="let barber of barbers">-->
 
-          <div *ngIf="getAssignment(barber, service) !== undefined">
+<!--          <div *ngIf="getAssignment(barber, service) !== undefined">-->
 
-            <div class="row max-width barber-hover title justify-content-center" (click)="book(barber,service)">
-              <b> <span class="flex-1"> {{ barber.firstName | language }} {{ barber.lastName | language }} </span> </b>
+<!--            <div class="row max-width barber-hover title justify-content-center" (click)="book(barber,service)">-->
+<!--              <b> <span class="flex-1"> {{ barber.firstName | language }} {{ barber.lastName | language }} </span> </b>-->
 
-              <span class="separator"> | </span>
-              <span> {{ getAssignment(barber, service).duration }} мин.</span>
+<!--              <span class="separator"> | </span>-->
+<!--              <span> {{ getAssignment(barber, service).duration }} мин.</span>-->
 
-              <span class="separator"> | </span>
-              <span> {{ getAssignment(barber, service).price }} лв.</span>
-            </div>
+<!--              <span class="separator"> | </span>-->
+<!--              <span> {{ getAssignment(barber, service).price }} лв.</span>-->
+<!--            </div>-->
 
-            <hr style="margin: 10px 0;"/>
-          </div>
+<!--            <hr style="margin: 10px 0;"/>-->
+<!--          </div>-->
 
-        </div>
-      </div>
+<!--        </div>-->
+<!--      </div>-->
 
-    </div>
+<!--    </div>-->
 
+    <app-service-flip-card [service]="service" [barbers]="barbers" [priceList]="getPriceList()"></app-service-flip-card>
   </div>
 
 </div>

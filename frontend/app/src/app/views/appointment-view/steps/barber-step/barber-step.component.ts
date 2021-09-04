@@ -48,7 +48,6 @@ export class BarberStepComponent implements OnInit {
       fullName[key] = `${fName} ${lName}`;
     }
 
-    console.log(fullName);
     const request: ChangeStepRequest = {
       label: fullName,
       step: StepEnum.SERVICE_STEP

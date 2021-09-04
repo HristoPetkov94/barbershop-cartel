@@ -1,0 +1,27 @@
+<div class="flip-card">
+
+  <div class="flip-card-inner">
+
+    <div class="flip-card-front">
+      <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
+
+      <div class="name-wrapper col justify-content-center">
+        <div class="name-btn col justify-content-center">
+          {{barber.firstName | language}} {{barber.lastName | language}}
+        </div>
+      </div>
+    </div>
+
+    <div class="flip-card-back">
+      <div class="col logo-text-wrapper justify-content-center">
+        <img class="back-card-logo" src="assets/images/logo.png"/>
+        <div class="sized-box-height-10"> </div>
+        <div class="back-card-text"> {{barber.description | language}} </div>
+      </div>
+
+      <div class="name-wrapper col justify-content-center">
+        <div (click)="book(barber)" class="name-btn col justify-content-center"> {{'bookingMessage' | translate}} </div>
+      </div>
+    </div>
+  </div>
+</div>

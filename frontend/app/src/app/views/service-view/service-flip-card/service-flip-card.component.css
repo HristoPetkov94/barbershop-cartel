@@ -1,0 +1,125 @@
+/*to resize the cards adjust height here*/
+.flip-card {
+  background-color: transparent;
+  width: 370px;
+  height: 630px;
+  perspective: 1000px;
+
+  margin: 10px;
+
+  cursor: pointer;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front {
+  /*position: absolute;*/
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  display: grid;
+  grid-template-rows: 1fr 30px 200px 80px;
+}
+
+.flip-card-front {
+  background-color: white;
+  color: black;
+  position: absolute;
+}
+
+.flip-card-back {
+  height: calc(100% - 6px);
+  color: white;
+  transform: rotateY(180deg);
+
+  border: 3px solid var(--main-color);
+}
+
+.service-picture {
+  overflow: hidden;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  margin: 20px 20px 20px 20px;
+}
+
+.title {
+  text-transform: uppercase;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #864A37;
+}
+
+.description {
+  margin-top: 10px;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.title, .description {
+  padding: 0 20px;
+  text-align: left;
+}
+
+.price-list {
+  /*height: 100%;*/
+  height: calc(100% - 40px);
+  padding: 20px;
+
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  background-color: var(--black-gradient);
+}
+
+.price-list-btn {
+  color: #FFFFFF;
+  text-transform: uppercase;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 22px;
+
+  background-color: var(--main-color);
+}
+
+.prices {
+  border: 3px solid var(--main-color);
+  padding: 13px 15px;
+  margin: 0 0 10px 0;
+}
+
+.prices:hover {
+  background-color: var(--main-color);
+}
+
+.price-list > .title {
+  color: white;
+}

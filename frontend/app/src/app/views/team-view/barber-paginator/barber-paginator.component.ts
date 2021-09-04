@@ -1,8 +1,19 @@
-import {Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component, ComponentFactoryResolver,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {Page} from './page';
 import {animate, style, transition, trigger} from '@angular/animations';
 import {Barber} from '../../../models/barber.model';
 import {Router} from '@angular/router';
+import {BarberFlipCardComponent} from '../barber-flip-card/barber-flip-card.component';
 
 @Component({
   selector: 'app-barber-paginator',
@@ -21,38 +32,57 @@ import {Router} from '@angular/router';
       ]),
     ],
 })
-export class BarberPaginatorComponent implements OnInit, OnChanges {
+export class BarberPaginatorComponent implements OnInit, OnChanges, AfterViewInit {
 
-  @ViewChild('paginator', {static: true}) paginator: ElementRef;
+  // @ViewChild('flipper', {static: false}) child: BarberFlipCardComponent;
+  @ViewChild('container', { read: ViewContainerRef, static: false }) viewContainerRef?: ViewContainerRef;
+
 
   public page = 0;
   public pages: Page[] = [];
 
   @Input()
-  get data(): Barber[] {
+  get data(): any[] {
     return this.barbers;
   }
 
-  set data(barbers: Barber[]) {
+  set data(barbers: any[]) {
     this.barbers = barbers;
   }
 
-  public barbers: Barber[] = [];
+  public barbers: any[] = [];
 
   @Input()
   public barbersPerPage;
 
-  constructor(private router: Router) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
+
+
   ngOnInit(): void {
+
+  }
+
+  ngAfterViewInit() {
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.spreadDataIntoPages();
+
+    const factory = this.componentFactoryResolver.resolveComponentFactory(BarberFlipCardComponent);
+    const ref = this.viewContainerRef.createComponent(factory);
+    ref.instance.barber = this.data[0];
+    ref.changeDetectorRef.detectChanges();
+    console.log(this.data[0]);
   }
 
   switchPage(index) {
+    if (this.pages[index] === undefined) {
+      return;
+    }
+
     for (const page of this.pages) {
       page.active = false;
     }
@@ -86,16 +116,5 @@ export class BarberPaginatorComponent implements OnInit, OnChanges {
     }
 
     this.pages[this.page].active = true;
-  }
-
-  book(barber: Barber) {
-    // https://medium.com/ableneo/how-to-pass-data-between-routed-components-in-angular-2306308d8255
-    this.router.navigate(['/book-now'], {
-      state: {
-        data: {
-          barber
-        },
-      }
-    });
   }
 }

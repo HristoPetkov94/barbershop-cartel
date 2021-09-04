@@ -1,0 +1,36 @@
+<div class="flip-card">
+
+  <div class="flip-card-inner">
+
+    <div class="flip-card-front">
+
+      <div class="service-picture" [style.backgroundImage]="'url(' + service.picture + ')'"></div>
+      <div class="title"> {{ service.serviceTitle | language }} </div>
+
+      <!--          //TODO: add text wrapper if it goes out of bounds-->
+      <div class="description"> {{service.description | language}} </div>
+      <div class="col justify-content-center price-list-btn"> {{ 'services.priceList' | translate }} </div>
+    </div>
+
+    <div class="flip-card-back">
+      <div class="price-list">
+        <div class="title">
+          <!--          //TODO: add text wrapper if it goes out of bounds-->
+          {{ service.serviceTitle | language }}
+        </div>
+
+        <div class="sized-box-height-10">
+        </div>
+
+        <div class="prices row flex-space-between" *ngFor="let assignment of priceList"
+             (click)="book(assignment.barberId, service, assignment)">
+          <!--          //TODO: add text wrapper if it goes out of bounds-->
+          <div> {{getBarberNames(assignment.barberId)[0] | language }} {{getBarberNames(assignment.barberId)[1] | language }} </div>
+
+          <!--          //TODO: translate min. lv.-->
+          <div> {{assignment.duration}} лв. | {{assignment.price}} мин.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

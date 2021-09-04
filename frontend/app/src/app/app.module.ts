@@ -83,6 +83,8 @@ import {FinishStepComponent} from './views/appointment-view/steps/finish-step/fi
 import {AppointmentViewComponent} from './views/appointment-view/appointment-view.component';
 import {EmailConfigurationComponent} from './admin-configuration-panel/email-configuration/email-configuration.component';
 import {LanguagePipe} from './pipes/language-pipe';
+import { BarberFlipCardComponent } from './views/team-view/barber-flip-card/barber-flip-card.component';
+import { ServiceFlipCardComponent } from './views/service-view/service-flip-card/service-flip-card.component';
 import {EditDialogComponent} from './admin-configuration-panel/calendar-component/edit-dialog/edit-dialog.component';
 import {CalendarComponent} from './admin-configuration-panel/calendar-component/calendar.component';
 import {ClientsConfigurationComponent} from './admin-configuration-panel/clients-configuration/clients-configuration.component';
@@ -141,6 +143,8 @@ import {MatSortModule} from '@angular/material/sort';
     LanguagePipe,
     EditDialogComponent,
     ClientsConfigurationComponent
+    BarberFlipCardComponent,
+    ServiceFlipCardComponent
   ],
     imports: [
         BrowserModule,

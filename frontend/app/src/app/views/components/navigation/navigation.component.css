@@ -1,23 +1,36 @@
 .nav {
   list-style-type: none;
-  padding: 0;
+  padding: 10px 0;
 }
 
 .nav > li {
   padding: 20px;
-  font: Bold 18px/20px Roboto;
-  letter-spacing: 0;
+  /*font: Bold 18px/20px Roboto;*/
+  /*letter-spacing: 0;*/
   color: #FFFFFFB3;
   text-transform: uppercase;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 29px;
 }
 
 .nav > li:hover {
-  color: whitesmoke;
+  /*color: whitesmoke;*/
+  color: var(--main-color);
   cursor: pointer;
 }
 
 .nav > li:focus {
   outline: none;
+}
+
+.underline {
+  color: var(--main-color) !important;
+  text-underline-offset: 5px;
+  text-decoration: underline;
 }
 
 @media (max-width: 992px) {

@@ -1,44 +1,17 @@
-<div class="main" [@Fade]>
-  <div class="col max-height padding-sides">
-    <div class="sized-box-height-20"></div>
-    <nav class="row flex-space-between align-items-center">
-      <img loading="lazy" class="logo-home" [routerLink]="''" src="../../../assets/images/logo.png"/>
+<div class="row justify-content-center">
+  <div class="row flex-1 justify-content-end">
+    <img class="brush" src="assets/images/design/brush.png" />
+    <div class="sized-box-width-40"></div>
+    <div class="sized-box-width-40"></div>
+  </div>
 
-      <app-compact-navbar></app-compact-navbar>
-
-      <app-navigation></app-navigation>
-
-    </nav>
-
-
-
-    <div class="col justify-content-center title-wrapper flex-1">
-      <div class="preserve-whitespace title" [innerHTML]="this.frontPageMessage"> </div>
-
-      <div class="sized-box-height-50"></div>
-
-      <button class="booking-button" (click)="book()">
-        {{'bookingMessage' | translate}}
-      </button>
-    </div>
-
-    <div class="row justify-content-start">
-      <div class="sized-box-width-40"></div>
-
-      <div class="col col-responsive">
-
-        <a href="{{this.facebook}}">
-          <img class="social-icons" src="../../../assets/images/facebook-icon.png"/>
-          <div class="sized-box-height-20"></div>
-        </a>
-
-        <a href="{{this.instagram}}">
-          <img class="social-icons" src="../../../assets/images/instagram-icon.png"/>
-          <div class="sized-box-height-20"></div>
-        </a>
-
+  <div class="row flex-1 justify-content-center">
+    <div class="col">
+      <img class="horizontal-logo" src="assets/images/design/horizontal-logo.png" />
+      <div class="sized-box-height-20"></div>
+      <div class="row justify-content-end">
+        <button class="book-now-btn" (click)="book()"> {{'bookingMessage' | translate}} </button>
       </div>
     </div>
-
   </div>
 </div>

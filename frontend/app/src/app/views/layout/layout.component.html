@@ -1,17 +1,45 @@
-<section class="col" [@Fade]>
+<div class="container">
 
-  <nav class="row flex-space-between align-items-center compact-navigation">
-    <img class="logo" [routerLink]="''" src="../../../assets/images/logo.png"/>
+  <!-- //TODO:  I think we can load all images beforehand and then just switch them when needed -->
+  <div class="item-content"  [style.backgroundImage]="'url(' + background + ')'">
+    <div class="item-header">
 
-    <app-compact-navbar></app-compact-navbar>
-    <app-navigation></app-navigation>
-  </nav>
+      <div class="col max-height padding-sides">
+        <nav class="row flex-space-between align-items-center">
 
-  <div class="flex-2">
-    <router-outlet></router-outlet>
+          <img loading="lazy" class="logo-home" [routerLink]="'home'" src="../../../assets/images/logo.png"/>
+
+          <app-compact-navbar></app-compact-navbar>
+
+          <app-navigation></app-navigation>
+
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="col content-height max-width justify-center">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 
-  <app-footer></app-footer>
-</section>
+  <div class="item-footer col justify-content-center" style="color: white">
+    <div class="row">
 
-<app-notification></app-notification>
+      <img class="icon" src="../../../assets/images/design/icon-facebook.png"/>
+      <img class="icon" src="../../../assets/images/design/icon-instagram.png"/>
+      <img class="icon" src="../../../assets/images/design/icon-email.png"/>
+      <img class="icon" src="../../../assets/images/design/icon-phone.png"/>
+      <img class="icon" src="../../../assets/images/design/icon-location.png"/>
+
+    </div>
+
+    <div class="sized-box-height-10"></div>
+
+    <div class="row">
+      <span> text </span>
+      <span> text </span>
+      <span> text </span>
+    </div>
+  </div>
+</div>

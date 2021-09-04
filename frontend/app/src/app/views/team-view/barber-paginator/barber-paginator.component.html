@@ -1,45 +1,24 @@
-<div [ngSwitch]="page" class="col max-height justify-content-center align-items-center">
+<!--<div [ngSwitch]="page" class="paginator col justify-content-center align-items-center">-->
 
-  <div class="team-card-wrapper" *ngSwitchCase="page">
+<!--  <div class="team-card-wrapper" *ngSwitchCase="page">-->
 
-    <div class="flip-card" *ngFor="let barber of pages[page]?.content" [@slideInOut]>
+<!--    <div *ngFor="let barber of pages[page]?.content" [@slideInOut]>-->
+<!--&lt;!&ndash;      <app-barber-flip-card #flipper [barber]="barber"> </app-barber-flip-card>&ndash;&gt;-->
 
-      <div class="flip-card-inner">
 
-        <div class="flip-card-front">
-          <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
+<!--    </div>-->
 
-          <div class="barber-info">
-            <div class="name">
-              {{barber.firstName | language}} {{barber.lastName | language}}
-            </div>
+<!--  </div>-->
 
-          </div>
-        </div>
+<!--  <div class="navigation-buttons-container">-->
+<!--    <div *ngFor="let page of pages; let i = index" [attr.data-index]="i" id="{{i}}"-->
+<!--         class="navigation-button_{{page.active}} ripple" (click)="switchPage(i)">-->
 
-        <div class="flip-card-back">
-          <p class="back-card-text"> {{barber.description | language}} </p>
+<!--    </div>-->
+<!--  </div>-->
 
-          <button (click)="book(barber)" class="back-card-button"> {{'bookingMessage' | translate}} </button>
-
-          <div class="row justify-content-center padding-20">
-            <a *ngIf="barber.instagram" class="col" [href]="barber.instagram">
-              <img src="../../../../assets/images/instagram-icon.png"/>
-            </a>
-            <a *ngIf="barber.facebook" class="col" [href]="barber.facebook">
-              <img src="../../../../assets/images/facebook-icon.png"/>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="navigation-buttons-container" #paginator>
-    <div *ngFor="let page of pages; let i = index" [attr.data-index]="i" id="{{i}}"
-         class="navigation-button_{{page.active}} ripple" (click)="switchPage(i)">
-
-    </div>
-  </div>
+<!--  <button class="next" (click)="switchPage(page + 1)"> &#10095; </button>-->
+<!--  <button class="prev" (click)="switchPage(page - 1)"> &#10094; </button>-->
+<!--</div>-->
+<div #container>
 </div>

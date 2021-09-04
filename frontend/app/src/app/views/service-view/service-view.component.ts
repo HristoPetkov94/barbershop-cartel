@@ -41,8 +41,31 @@ export class ServiceViewComponent implements OnInit {
     });
   }
 
-  getAssignment(barber: Barber, service: Service) {
+  getAssignment(barber: Barber, service: Service): Assignment {
     return this.assignments?.find(assignment => (assignment.barberId === barber.id && assignment.serviceId === service.id));
+  }
+
+  getPriceList(): Assignment[] {
+    const priceList: Assignment[] = [];
+
+    if (this.barbers === undefined || this.services === undefined) {
+      return priceList;
+    }
+
+    for (const service of this.services) {
+      for (const barber of this.barbers) {
+
+        const assignment = this.getAssignment(barber, service);
+
+        if (assignment === undefined) {
+          continue;
+        }
+
+        priceList.push(assignment);
+      }
+    }
+
+    return priceList;
   }
 
   book(barber: Barber, service: Service) {

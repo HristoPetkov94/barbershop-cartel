@@ -1,8 +1,9 @@
 <ul class="row nav justify-content-center align-items-center">
-  <li [routerLink]="'/team'"> {{ 'home.navigation.team' | translate}} </li>
-  <li [routerLink]="'/services'"> {{ 'home.navigation.services' | translate}} </li>
-  <li [routerLink]="'/store'"> {{ 'home.navigation.store' | translate}} </li>
-  <li [routerLink]="'/contacts'"> {{ 'home.navigation.contacts' | translate}} </li>
+  <li [routerLink]="'/home'" [routerLinkActive]="['underline']"> {{ 'home.navigation.home' | translate}} </li>
+  <li [routerLink]="'/team'" [routerLinkActive]="['underline']"> {{ 'home.navigation.team' | translate}} </li>
+  <li [routerLink]="'/services'" [routerLinkActive]="['underline']"> {{ 'home.navigation.services' | translate}} </li>
+  <li [routerLink]="'/store'"  [routerLinkActive]="['underline']"> {{ 'home.navigation.store' | translate}} </li>
+  <li [routerLink]="'/contacts'"  [routerLinkActive]="['underline']"> {{ 'home.navigation.contacts' | translate}} </li>
   <li (click)="changeLang()">{{translate.currentLang}}</li>
 
   <li *ngIf="isAdmin" style="cursor: pointer;" [routerLink]="'/configuration/general'" >

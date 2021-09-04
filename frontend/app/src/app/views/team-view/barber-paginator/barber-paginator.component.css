@@ -1,147 +1,8 @@
 .team-card-wrapper {
-  width: 60%;
+  /*width: 60%;*/
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.card-barber-wrapper {
-  width: 25%;
-  margin: 20px;
-}
-
-.barber-image {
-  /*height: 400px;*/
-  width: 100%;
-
-  background-size: cover;
-
-  background-repeat: no-repeat;
-}
-
-.barber-info {
-  background-color: black;
-}
-
-.social-info > p {
-  text-align: left;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 30px;
-  color: #FFFFFF;
-}
-
-.social-info {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.social-info > img {
-  width: 30px;
-  height: 30px;
-  margin: 10px;
-}
-
-.social-info > p {
-  margin: 10px;
-}
-
-.barber-info > .name {
-  text-align: center;
-  font: normal normal normal 30px/53px Roboto;
-  color: #FFFFFF;
-  text-transform: uppercase;
-}
-
-/*to resize the cards adjust height here*/
-.flip-card {
-  background-color: transparent;
-  width: 25%;
-  height: 510px;
-  perspective: 1000px;
-
-  margin: 10px;
-
-  cursor: pointer;
-}
-
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-.flip-card:hover .flip-card-inner {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front, .flip-card-back {
-  /*position: absolute;*/
-  width: 100%;
-  height: 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-card-front {
-  background-color: #bbb;
-  color: black;
-  position: absolute;
-
-  display: grid;
-  grid-template-rows: 1fr 130px;
-}
-
-.flip-card-back {
-  background-color: black;
-  color: white;
-  transform: rotateY(180deg);
-}
-
-.back-card-text {
-  text-align: left;
-  align-self: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.3px;
-  color: #FFFFFFB3;
-
-  width: 80%;
-  justify-self: center;
-
-  word-wrap: break-word;
-  max-width: 300px;
-}
-
-.back-card-button {
-
-  background: #FFFFFF 0 0 no-repeat padding-box;
-  box-shadow: 0 2px 2px #000000;
-
-  text-align: center;
-  font: normal normal bold 20px/42px Roboto;
-  color: #413F3F;
-
-  border: none;
-  border-radius: 10px;
-
-  text-transform: uppercase;
-
-  width: 80%;
-  height: 51px;
-
-  justify-self: center;
-
-  cursor: pointer;
-}
-
-.flip-card-back {
-  display: grid;
-  grid-template-rows: 1fr 130px;
 }
 
 .navigation-buttons-container {
@@ -154,18 +15,19 @@
 
 .navigation-button_true {
   margin: 0 10px;
-  width: 13px;
-  height: 13px;
+  width: 15px;
+  height: 15px;
   border-radius: 100%;
 
-  background: rgb(147, 147, 147);
-  background: radial-gradient(circle,
-  rgba(74, 74, 74, 0.92) 90%,
-  rgba(79, 79, 80, 0.8547794117647058) 50%,
-  rgba(114, 114, 115, 0.8715861344537815) 16%,
-  rgba(147, 147, 147, 0.9023984593837535) 0%);
+  /*background: rgb(147, 147, 147);*/
+  /*background: radial-gradient(circle,*/
+  /*rgba(74, 74, 74, 0.92) 90%,*/
+  /*rgba(79, 79, 80, 0.8547794117647058) 50%,*/
+  /*rgba(114, 114, 115, 0.8715861344537815) 16%,*/
+  /*rgba(147, 147, 147, 0.9023984593837535) 0%);*/
 
-  background-color: rgba(49, 43, 57, 0.52);
+  /*background-color: rgba(49, 43, 57, 0.52);*/
+  background-color: var(--main-color);
   cursor: pointer;
   transition: 0.5s;
 }
@@ -175,7 +37,7 @@
   width: 15px;
   height: 15px;
   border-radius: 100%;
-  background-color: black;
+  background-color: white;
   cursor: pointer;
   transition: 0.5s;
 }
@@ -186,8 +48,8 @@
 }
 
 .ripple:hover {
-  background: rgba(74, 74, 74, 0.92) radial-gradient(circle, transparent 1%,
-  rgba(74, 74, 74, 0.92) 1%) center/15000%;
+  background: var(--main-color) radial-gradient(circle, transparent 1%,
+  white 1%) center/15000%;
 }
 
 @media (max-width: 1800px) {
@@ -216,10 +78,6 @@
     align-items: center;
     justify-content: center;
   }
-
-  .flip-card {
-    width: 100%;
-  }
 }
 
 @media (max-width: 992px) {
@@ -234,13 +92,37 @@
   }
 }
 
-.picture {
-  height: 100%;
+.next, .prev {
+  position: absolute;
+  top: 40%;
+  color: white;
 
-  border: 1px solid #e4e4e4;
-  overflow: hidden;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  margin: 0 10px 0 10px;
+
+  font-size: 50px;
+
+  text-align: center;
+  transition: 0.1s;
+}
+
+.next:hover, .prev:hover {
+  color: var(--main-color);
+  transition: 0.1s;
+}
+
+.next {
+  right: 0;
+}
+
+.prev {
+
+  left: 0;
+}
+
+.paginator {
+  position: relative;
 }
