@@ -12,4 +12,6 @@ public interface ClientInterface {
     Optional<ClientEntity> findByPhone(String phone);
 
     List<ClientModel> all();
+
+    void ban(long id, boolean banned);
 }

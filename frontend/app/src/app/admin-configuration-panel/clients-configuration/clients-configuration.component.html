@@ -20,6 +20,25 @@
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="missedAppointmentsCount">
+    <th mat-header-cell *matHeaderCellDef> missedAppointmentsCount </th>
+    <td mat-cell *matCellDef="let element"> {{element.missedAppointmentsCount}} </td>
+  </ng-container>  <!-- Symbol Column -->
+
+  <ng-container matColumnDef="allAppointmentsCount">
+    <th mat-header-cell *matHeaderCellDef> allAppointmentsCount </th>
+    <td mat-cell *matCellDef="let element"> {{element.allAppointmentsCount}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="banned">
+    <th mat-header-cell *matHeaderCellDef> banned </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-slide-toggle [(ngModel)] = "element.banned" (change)="update(element)"></mat-slide-toggle>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>

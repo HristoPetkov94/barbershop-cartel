@@ -87,6 +87,7 @@ import {LanguagePipe} from './pipes/language-pipe';
 import {EditDialogComponent} from './admin-configuration-panel/calendar-component/edit-dialog/edit-dialog.component';
 import {CalendarComponent} from './admin-configuration-panel/calendar-component/calendar.component';
 import {ClientsConfigurationComponent} from './admin-configuration-panel/clients-configuration/clients-configuration.component';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   exports: [
@@ -177,12 +178,13 @@ import {ClientsConfigurationComponent} from './admin-configuration-panel/clients
         I18nModule,
         MatGridListModule,
         MatTooltipModule,
-      NgxDaterangepickerMd.forRoot(),
-      BrowserAnimationsModule,
-      CalendarModule.forRoot({
-        provide: DateAdapter,
-        useFactory: adapterFactory,
-      }),
+        NgxDaterangepickerMd.forRoot(),
+        BrowserAnimationsModule,
+        CalendarModule.forRoot({
+            provide: DateAdapter,
+            useFactory: adapterFactory,
+        }),
+        MatSortModule,
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true},

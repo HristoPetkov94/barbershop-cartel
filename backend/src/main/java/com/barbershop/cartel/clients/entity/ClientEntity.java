@@ -25,4 +25,7 @@ public class ClientEntity {
 
     @Column(name = "phone", unique = true)
     private String phone;
+
+    @Column(name = "banned")
+    private boolean banned;
 }

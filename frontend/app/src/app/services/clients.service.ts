@@ -14,8 +14,13 @@ export class ClientsService {
   constructor(private http: HttpClient) {
   }
 
-  getClients(): Subscribable<ClientModel[]>{
+  getClients(): Subscribable<ClientModel[]> {
 
     return this.http.get<ClientModel[]>(this.url);
+  }
+
+  ban(id: number, banned: boolean)  {
+
+    return this.http.post(this.url + `/ban/${id}/${banned}`, "");
   }
 }

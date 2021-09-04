@@ -133,6 +133,10 @@
         <addColumn tableName="appointments">
             <column name="no_show" type="boolean"/>
         </addColumn>
+
+        <addColumn tableName="clients">
+            <column name="banned" type="boolean"/>
+        </addColumn>
         <dropColumn tableName="appointments" columnName="client_id"/>
     </changeSet>
 

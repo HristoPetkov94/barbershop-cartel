@@ -3,4 +3,9 @@ export class ClientModel {
   email;
   phone;
   name;
+
+  missedAppointmentsCount;
+  allAppointmentsCount;
+
+  banned;
 }
