@@ -14,6 +14,7 @@ import {MatDialog} from '@angular/material';
 import {AppointmentModel} from '../../models/appointment.model';
 import {EditDialogComponent} from './edit-dialog/edit-dialog.component';
 import * as dayjs from 'dayjs';
+import {NotificationComponent} from '../../notification/notification.component';
 
 const colors: any = {
   red: {
@@ -80,6 +81,8 @@ const appointmentColors = [
   templateUrl: 'calendar.component.html',
 })
 export class CalendarComponent implements OnInit {
+  @ViewChild(NotificationComponent) notification: NotificationComponent;
+
   @ViewChild('modalContent', {static: true}) modalContent: TemplateRef<any>;
 
   status = 'connecting';
@@ -402,10 +405,11 @@ export class CalendarComponent implements OnInit {
         console.log(result.value);
 
         this.appointmentService.create(result.value, true).subscribe(() => {
+        }, (error) => {
+          const message = error.error.message;
+          this.notification.showMessage(message, 'warn');
         }, () => {
-        }, () => {
-          console.log('appointment done');
-
+          this.notification.showMessage('Successful', 'success');
         });
       }
     });

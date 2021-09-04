@@ -69,8 +69,17 @@ public class ClientService implements ClientInterface {
 
         val byId = clientRepository.findById(id);
 
-        byId.get().setBanned(banned);
+        byId.ifPresent(clientEntity -> {
+            clientEntity.setBanned(banned);
+            clientRepository.save(clientEntity);
+        });
+    }
 
-        clientRepository.save(byId.get());
+    @Override
+    public boolean isBanned(String phone) {
+
+        val clientEntity = clientRepository.findByPhone(phone);
+
+        return clientEntity.map(ClientEntity::isBanned).orElse(false);
     }
 }

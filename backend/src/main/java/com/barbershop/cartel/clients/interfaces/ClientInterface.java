@@ -14,4 +14,6 @@ public interface ClientInterface {
     List<ClientModel> all();
 
     void ban(long id, boolean banned);
+
+    boolean isBanned(String phone);
 }
