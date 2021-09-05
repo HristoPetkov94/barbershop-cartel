@@ -4,6 +4,15 @@
     <div class="sized-box-height-20"></div>
   </div>
 
-  <app-barber-paginator class="flex-1" [data]="barbers" [barbersPerPage]="3"></app-barber-paginator>
 
+  <app-cartel-paginator [itemsPerPage]="3">
+
+    <ng-container *ngFor="let barber of barbers;">
+
+      <ng-container *appCartelPageItem>
+        <app-barber-flip-card [barber]="barber"></app-barber-flip-card>
+      </ng-container>
+
+    </ng-container>
+  </app-cartel-paginator>
 </div>

@@ -1,0 +1,22 @@
+<div [ngSwitch]="page" class="paginator col justify-content-center align-items-center">
+
+  <div class="team-card-wrapper" *ngSwitchCase="page">
+
+    <div *ngFor="let item of pages[page]?.content" [@slideInOut]>
+      <ng-container [ngTemplateOutlet]="item?.tpl"></ng-container>
+    </div>
+
+  </div>
+
+  <div class="navigation-buttons-container">
+    <div *ngFor="let page of pages; let i = index" [attr.data-index]="i" id="{{i}}"
+         class="navigation-button_{{page.active}} ripple" (click)="switchPage(i)">
+
+    </div>
+  </div>
+
+  <button class="next" (click)="switchPage(page + 1)"> &#10095; </button>
+  <button class="prev" (click)="switchPage(page - 1)"> &#10094; </button>
+</div>
+
+

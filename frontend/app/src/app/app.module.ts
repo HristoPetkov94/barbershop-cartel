@@ -89,6 +89,8 @@ import {EditDialogComponent} from './admin-configuration-panel/calendar-componen
 import {CalendarComponent} from './admin-configuration-panel/calendar-component/calendar.component';
 import {ClientsConfigurationComponent} from './admin-configuration-panel/clients-configuration/clients-configuration.component';
 import {MatSortModule} from '@angular/material/sort';
+import { CartelPaginatorComponent} from './views/cartel-paginator/cartel-paginator.component';
+import { CartelPageItemDirective } from './views/cartel-paginator/cartel-page-item.directive';
 
 @NgModule({
   exports: [
@@ -142,9 +144,11 @@ import {MatSortModule} from '@angular/material/sort';
     EmailConfigurationComponent,
     LanguagePipe,
     EditDialogComponent,
-    ClientsConfigurationComponent
+    ClientsConfigurationComponent,
     BarberFlipCardComponent,
-    ServiceFlipCardComponent
+    ServiceFlipCardComponent,
+    CartelPaginatorComponent,
+    CartelPageItemDirective,
   ],
     imports: [
         BrowserModule,
