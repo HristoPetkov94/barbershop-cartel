@@ -40,13 +40,12 @@ import {RegisterComponent} from './register/register.component';
 import {DataConfigurationPanelComponent} from './configuration-panel/data-configuration-panel.component';
 import {PieChartComponent} from './charts/pie-chart/pie-chart.component';
 import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {NumberCardChartComponent} from './charts/number-card-chart/number-card-chart.component';
-import {CompactNavbarComponent} from './views/components/compact-navbar/compact-navbar.component';
-import {ServiceViewComponent} from './views/service-view/service-view.component';
-import {TeamViewComponent} from './views/team-view/team-view.component';
-import {BarberPaginatorComponent} from './views/team-view/barber-paginator/barber-paginator.component';
-import {FooterComponent} from './views/components/footer/footer.component';
-import {I18nModule} from './i18n/i18n.module';
+import { NumberCardChartComponent } from './charts/number-card-chart/number-card-chart.component';
+import { CompactNavbarComponent } from './views/components/compact-navbar/compact-navbar.component';
+import { ServiceViewComponent } from './views/service-view/service-view.component';
+import { TeamViewComponent } from './views/team-view/team-view.component';
+import { FooterComponent } from './views/components/footer/footer.component';
+import { I18nModule } from './i18n/i18n.module';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {GeneralConfigurationComponent} from './admin-configuration-panel/general-configuration/general-configuration.component';
 import {BarberConfigurationComponent} from './admin-configuration-panel/barber-configuration/barber-configuration.component';
@@ -108,7 +107,6 @@ import { CartelPageItemDirective } from './views/cartel-paginator/cartel-page-it
     CompactNavbarComponent,
     ServiceViewComponent,
     TeamViewComponent,
-    BarberPaginatorComponent,
     FooterComponent,
     GeneralConfigurationComponent,
     BarberConfigurationComponent,

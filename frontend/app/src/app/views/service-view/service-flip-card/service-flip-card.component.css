@@ -2,7 +2,7 @@
 .flip-card {
   background-color: transparent;
   width: 370px;
-  height: 630px;
+  height: 520px;
   perspective: 1000px;
 
   margin: 10px;
@@ -32,7 +32,7 @@
   backface-visibility: hidden;
 
   display: grid;
-  grid-template-rows: 1fr 30px 200px 80px;
+  grid-template-rows: 1fr 20px 100px 80px;
 }
 
 .flip-card-front {
@@ -95,6 +95,10 @@
   overflow-x: hidden;
 
   background-color: var(--black-gradient);
+}
+
+.price-list > .title {
+  padding: 0;
 }
 
 .price-list-btn {

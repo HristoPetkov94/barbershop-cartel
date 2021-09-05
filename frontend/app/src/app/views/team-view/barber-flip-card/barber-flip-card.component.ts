@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+import {Barber} from '../../../models/barber.model';
 
 @Component({
   selector: 'app-barber-flip-card',
@@ -9,16 +10,7 @@ import {Router} from '@angular/router';
 export class BarberFlipCardComponent implements OnInit {
 
   @Input()
-  _barber: any;
-
-  @Input()
-  get barber(): any {
-    return this._barber;
-  }
-
-  set barber(barbers: any) {
-    this._barber = barbers;
-  }
+  barber: Barber;
 
   constructor(private router: Router) {
 

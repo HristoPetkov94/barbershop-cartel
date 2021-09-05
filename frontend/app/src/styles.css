@@ -237,11 +237,19 @@ h2 {
 }
 
 .sub-header {
-  text-align: center;
-  font: normal normal normal 20px/14px Roboto;
-  letter-spacing: 0.3px;
-  color: #000000B3;
-  opacity: 1;
+  text-transform: uppercase;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 110.4%;
+
+  letter-spacing: 0.165em;
+
+  color: #FFFFFF;
+
+  background-color: var(--black-gradient);
 }
 
 .preserve-whitespace {
