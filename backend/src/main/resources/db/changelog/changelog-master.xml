@@ -140,4 +140,15 @@
         <dropColumn tableName="appointments" columnName="client_id"/>
     </changeSet>
 
+    <changeSet author="ss"  id="2021-09-05_set_values">
+
+        <update tableName="appointments">
+            <column name="no_show" value="false" />
+        </update>
+
+        <update tableName="clients">
+            <column name="banned" value="false"/>
+        </update>
+    </changeSet>
+
 </databaseChangeLog>
