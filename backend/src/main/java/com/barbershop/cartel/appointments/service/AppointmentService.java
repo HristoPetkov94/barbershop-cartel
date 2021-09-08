@@ -95,8 +95,8 @@ public class AppointmentService implements AppointmentInterface {
         val appointments = appointmentRepository.findBetween(barberId, startDateTime, endDateTime)
                 .stream().map(this::toAppointmentModel).collect(toList());
 
-        val weeklySystemAppointments = getWeeklySystemAppointments(new long[]{barberId}, startDateTime, endDateTime);
-        appointments.addAll(weeklySystemAppointments);
+        val weeklyNotWorkingAppointments = getWeeklyNotWorkingAppointments(new long[]{barberId}, startDateTime, endDateTime);
+        appointments.addAll(weeklyNotWorkingAppointments);
 
         //time slot represents a clickable button in the frontend
         var timeSlotStart = startDateTime;
@@ -159,7 +159,7 @@ public class AppointmentService implements AppointmentInterface {
                 .filter(x -> collidesWith(x, from, to))
                 .collect(toList());
 
-        List<AppointmentModel> appointments = getWeeklySystemAppointments(barberIds, from, to);
+        List<AppointmentModel> appointments = getWeeklyNotWorkingAppointments(barberIds, from, to);
 
         result.addAll(appointments);
 
@@ -284,7 +284,7 @@ public class AppointmentService implements AppointmentInterface {
         return appointmentModel;
     }
 
-    public List<AppointmentModel> getWeeklySystemAppointments(long[] barberIds, LocalDateTime from, LocalDateTime to) {
+    public List<AppointmentModel> getWeeklyNotWorkingAppointments(long[] barberIds, LocalDateTime from, LocalDateTime to) {
 
         final Map<DayOfWeek, List<WorkWeekDayEntity>> dayToWeekDay = workWeekDayRepository.findByBarberIdIn(barberIds).stream()
                 .collect(groupingBy(WorkWeekDayEntity::getDayOfWeek));
