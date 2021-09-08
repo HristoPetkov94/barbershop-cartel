@@ -1,7 +1,6 @@
 package com.barbershop.cartel.appointments.controller;
 
 import com.barbershop.cartel.appointments.interfaces.AppointmentInterface;
-import com.barbershop.cartel.appointments.models.AppointmentDayModel;
 import com.barbershop.cartel.appointments.models.AppointmentModel;
 import com.barbershop.cartel.clients.interfaces.ClientInterface;
 import com.barbershop.cartel.errors.CartelCustomException;
@@ -55,8 +54,4 @@ public class AppointmentController {
         appointmentInterface.delete(id);
     }
 
-    @GetMapping(value = "/appointment-week")
-    public List<AppointmentDayModel> getAppointmentsNextWeek(@RequestParam int numberOfWeeksFromNow, @RequestParam long assignmentId) {
-        return appointmentInterface.getAppointmentsNextWeek(assignmentId, numberOfWeeksFromNow);
-    }
 }

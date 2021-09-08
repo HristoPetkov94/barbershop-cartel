@@ -33,6 +33,7 @@
     "dayjs": "^1.10.6",
     "dayjs-plugin-utc": "^0.1.2",
     "hammerjs": "^2.0.8",
+    "iso-week": "^0.1.2",
     "ng-packagr": "^10.1.0",
     "ngx-daterangepicker-material": "^5.0.1",
     "rxjs": "~6.6.3",

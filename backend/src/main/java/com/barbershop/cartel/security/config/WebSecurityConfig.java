@@ -71,7 +71,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/assignments",
                         "/appointments/appointment-week**",
                         "/images/**",
-                        "/appointments/appointment-week",
+                        "/appointment-day-models",
                         "/appointments/**",
                         "/general-configuration**",
                         // swagger

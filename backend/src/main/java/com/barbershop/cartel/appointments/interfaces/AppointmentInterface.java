@@ -3,6 +3,7 @@ package com.barbershop.cartel.appointments.interfaces;
 import com.barbershop.cartel.appointments.models.AppointmentDayModel;
 import com.barbershop.cartel.appointments.models.AppointmentModel;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -16,6 +17,6 @@ public interface AppointmentInterface {
 
     void delete(long id);
 
-    List<AppointmentDayModel> getAppointmentsNextWeek(long assignmentId, int numberOfWeeks);
+    List<AppointmentDayModel> getAppointmentDayModels(long assignmentId, LocalDate from, LocalDate to);
 
 }

@@ -7,7 +7,6 @@ import com.barbershop.cartel.appointments.models.AppointmentModel;
 import com.barbershop.cartel.appointments.repository.AppointmentRepository;
 import com.barbershop.cartel.assignments.interfaces.AssignmentInterface;
 import com.barbershop.cartel.barbers.interfaces.BarberInterface;
-import com.barbershop.cartel.clients.entity.ClientEntity;
 import com.barbershop.cartel.clients.interfaces.ClientInterface;
 import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
@@ -25,7 +24,6 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,11 +61,13 @@ public class AppointmentService implements AppointmentInterface {
     private WebSocketService webSocketService;
 
     private boolean overlapsWithExisting(AppointmentEntity entity) {
-        return appointmentRepository.existsBetween(entity.getBarber().getId(), entity.getStartTime(), entity.getEndTime());
-    }
 
-    private ClientEntity createClient(String email, String phoneNumber, String username) {
-        return clientInterface.createClient(email, phoneNumber, username);
+        val barberId = entity.getBarber().getId();
+
+        val start = entity.getStartTime();
+        val end = entity.getEndTime();
+
+        return appointmentRepository.existsBetween(barberId, start, end);
     }
 
     private boolean collidesWith(AppointmentModel appointment, LocalDateTime start, LocalDateTime end) {
@@ -82,17 +82,14 @@ public class AppointmentService implements AppointmentInterface {
     }
 
     @Override
-    public List<AppointmentDayModel> getAppointmentsNextWeek(long assignmentId, int numberOfWeeks) {
+    public List<AppointmentDayModel> getAppointmentDayModels(long assignmentId, LocalDate from, LocalDate to) {
 
         val assignment = assignmentInterface.getAssignment(assignmentId);
 
         val today = LocalDate.now();
-        val startOfWeekDate = today
-                .with(ChronoField.DAY_OF_WEEK, 1)
-                .plusWeeks(numberOfWeeks);
 
-        val startDateTime = startOfWeekDate.atStartOfDay();
-        val endDateTime = startOfWeekDate.plusWeeks(1).atStartOfDay();
+        val startDateTime = from.atStartOfDay();
+        val endDateTime = to.plusWeeks(1).atStartOfDay();
 
         val barberId = assignment.get().getBarber().getId();
         val appointments = appointmentRepository.findBetween(barberId, startDateTime, endDateTime)
@@ -136,7 +133,8 @@ public class AppointmentService implements AppointmentInterface {
 
         val result = new ArrayList<AppointmentDayModel>();
 
-        for (LocalDate date : startOfWeekDate.datesUntil(startOfWeekDate.plusWeeks(1)).collect(toList())) {
+        from.datesUntil(to.plusDays(1)).forEach( date -> {
+
             List<LocalTime> hours;
             if (week.containsKey(date)) {
                 hours = week.get(date).stream().map(LocalDateTime::toLocalTime).collect(toList());
@@ -148,7 +146,7 @@ public class AppointmentService implements AppointmentInterface {
             val appointment = new AppointmentDayModel(date, date.getDayOfWeek(), hours, date.equals(today));
 
             result.add(appointment);
-        }
+        });
 
         return result;
     }

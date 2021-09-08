@@ -6,6 +6,11 @@ import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {AppointmentService} from '../../../../services/appointment.service';
 import {StepEnum} from '../../stepper/step.enum';
 import {Day} from '../../../../interfaces/day';
+import {AppointmentDaysService} from '../../../../services/appointment-days.service';
+import * as dayjs from 'dayjs';
+import * as weekday from 'dayjs/plugin/weekday';
+
+dayjs.extend(weekday);
 
 @Component({
   selector: 'app-date-step',
@@ -17,7 +22,7 @@ export class DateStepComponent implements OnInit {
   @Input() stepperData;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
-  private numberOfWeeks = 0;
+  private numberOfWeeks: number = 0;
 
   assignments: Assignment[];
 
@@ -31,6 +36,7 @@ export class DateStepComponent implements OnInit {
     private assignmentService: AssignmentService,
     private router: Router,
     private scheduleService: AppointmentService,
+    private appointmentDaysService: AppointmentDaysService,
     @Inject(LOCALE_ID) public locale: string,
   ) {
   }
@@ -58,8 +64,23 @@ export class DateStepComponent implements OnInit {
     this.currentWeek();
   }
 
-  currentWeek(){
-    this.scheduleService.getWeek(this.numberOfWeeks, this.assignmentId).subscribe(week => {
+  getFrom() {
+
+    const from = dayjs().weekday(1).startOf('day').add(this.numberOfWeeks * 7, 'day');
+
+    return from;
+  }
+
+  getTo() {
+
+    const to = this.getFrom().add(6, 'day');
+    console.log(to);
+
+    return to;
+  }
+
+  currentWeek() {
+    this.appointmentDaysService.get(this.assignmentId, this.getFrom(), this.getTo()).subscribe(week => {
       this.week = week;
 
       const today = week.find(d => d.today === true);

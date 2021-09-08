@@ -3,7 +3,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {AppointmentRequest} from '../interfaces/appointment-request';
 import {AppointmentModel} from '../models/appointment.model';
-import {Day} from '../interfaces/day';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +11,6 @@ export class AppointmentService {
   private url = environment.apiUrl + '/appointments';
 
   constructor(private http: HttpClient) {
-  }
-
-  getWeek(numberOfWeeksFromNow, assignmentId) {
-    return this.http.get<Day[]>(this.url + '/appointment-week' + '?' + 'assignmentId=' + assignmentId + '&' + 'numberOfWeeksFromNow=' + numberOfWeeksFromNow, {});
   }
 
   create(req: AppointmentRequest, allowOverlap: boolean = false) {
