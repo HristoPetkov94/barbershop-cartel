@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {LandingPageViewComponent} from './views/landing-page-view/landing-page-view.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material-dayjs';
+import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
 import {FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
 
 import {
