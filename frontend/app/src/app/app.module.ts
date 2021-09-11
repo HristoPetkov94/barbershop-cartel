@@ -6,8 +6,7 @@ import {AppComponent} from './app.component';
 import {LandingPageViewComponent} from './views/landing-page-view/landing-page-view.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
-import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
-
+// import {NgxDaterangepickerMd} from 'ngx-daterangepicker-material';
 import {FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
 
 import {
@@ -178,7 +177,7 @@ import {MatSortModule} from '@angular/material/sort';
         I18nModule,
         MatGridListModule,
         MatTooltipModule,
-        NgxDaterangepickerMd.forRoot(),
+        // NgxDaterangepickerMd.forRoot(),
         BrowserAnimationsModule,
         CalendarModule.forRoot({
             provide: DateAdapter,
