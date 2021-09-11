@@ -39,7 +39,7 @@
     "sockjs-client": "^1.5.1",
     "tslib": "~2.0.3",
     "zone.js": "~0.10.2",
-    "ngx-daterangepicker-material": "^5.0.1"
+    "ngx-daterangepicker-material-patched": "^5.0.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1001.6",
