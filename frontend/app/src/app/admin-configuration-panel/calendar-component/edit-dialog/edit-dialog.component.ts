@@ -50,6 +50,8 @@ export class EditDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.selected =  { startDate: dayjs(this.appointment.start).toDate(), endDate: dayjs(this.appointment.end).toDate() };
+
     this.assignments$ = this.assignmentService.getAssignmentsByBarberId(this.appointment.barberId);
 
     this.serviceService.getServices().subscribe(services => {

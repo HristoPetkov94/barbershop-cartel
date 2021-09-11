@@ -118,7 +118,7 @@ export class CalendarComponent implements OnInit {
       label: '<i class="fas fa-fw fa-pencil-alt"></i>',
       a11yLabel: 'Edit',
       onClick: ({event}: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
+        this.eventHourSlotClicked('Edited', event);
       },
     },
     {
@@ -126,7 +126,7 @@ export class CalendarComponent implements OnInit {
       a11yLabel: 'Delete',
       onClick: ({event}: { event: CalendarEvent }): void => {
         this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
+        this.eventHourSlotClicked('Deleted', event);
       },
     },
   ];
@@ -270,7 +270,7 @@ export class CalendarComponent implements OnInit {
       }
       return iEvent;
     });
-    this.handleEvent('Dropped or resized', event);
+    this.eventHourSlotClicked('Dropped or resized', event);
   }
 
   private getDialogRef(appointment) {
@@ -279,7 +279,7 @@ export class CalendarComponent implements OnInit {
     });
   }
 
-  handleEvent(action: string, event: CalendarEvent): void {
+  eventHourSlotClicked(action: string, event: CalendarEvent): void {
     if (event.meta.appointment.id < 0) {
       return;
     }
@@ -389,8 +389,8 @@ export class CalendarComponent implements OnInit {
 
     const appointment = new AppointmentModel();
     appointment.title = 'test';
-    appointment.start = dayjs(date);
-    appointment.end = dayjs(addMinutes(date, 30));
+    appointment.start = dayjs(date).toISOString();
+    appointment.end = dayjs(addMinutes(date, 30)).toISOString();
 
     console.log(appointment.start);
     console.log(appointment.end);

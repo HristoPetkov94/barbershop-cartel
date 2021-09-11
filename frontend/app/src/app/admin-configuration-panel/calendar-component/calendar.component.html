@@ -52,7 +52,7 @@
       [refresh]="refresh"
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="eventHourSlotClicked('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
     >
     </mwl-calendar-month-view>
@@ -64,7 +64,7 @@
       [refresh]="refresh"
       [dayStartHour]="7"
       [dayEndHour]="19"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="eventHourSlotClicked('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       (hourSegmentClicked)="emptyHourSlotClicked($event.date)"
     >
@@ -76,7 +76,7 @@
       [refresh]="refresh"
       [dayStartHour]="8"
       [dayEndHour]="19"
-      (eventClicked)="handleEvent('Clicked', $event.event)"
+      (eventClicked)="eventHourSlotClicked('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       (hourSegmentClicked)="emptyHourSlotClicked($event.date)"
     >
