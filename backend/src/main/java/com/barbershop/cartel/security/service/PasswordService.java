@@ -1,6 +1,7 @@
 package com.barbershop.cartel.security.service;
 
 import com.barbershop.cartel.errors.CartelCustomException;
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
 import com.barbershop.cartel.security.entity.UserEntity;
 import com.barbershop.cartel.security.repository.UserRepository;
@@ -75,17 +76,17 @@ public class PasswordService {
     }
 
     /* ако трябва да добавя таблицата password_change_requests https://stackoverflow.com/questions/1102781/best-way-for-a-forgot-password-implementation*/
-    public void forgotPassword(String email) throws MessagingException {
+    public void forgotPassword(String email, LanguageEnum language) throws MessagingException {
 
         UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User with email: " + email + " does not exist"));
+                .orElseThrow(() -> new CartelCustomException("User with email: " + email + " does not exist"));
 
         String username = user.getEmail();
         String password = generateTemporaryPassword();
 
         changePassword(user, password);
 
-        emailDetailInterface.sendForgotPasswordMessage(username, password);
+        emailDetailInterface.sendForgotPasswordMessage(username, password, language);
     }
 
 }

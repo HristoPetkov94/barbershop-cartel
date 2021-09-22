@@ -1,5 +1,6 @@
 package com.barbershop.cartel.security.controller;
 
+import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.security.models.EmailChangeRequest;
 import com.barbershop.cartel.security.models.PasswordChangeRequest;
 import com.barbershop.cartel.security.models.UserModel;
@@ -38,8 +39,8 @@ public class UserController {
     }
 
     @PostMapping("/forgot-password")
-    public void forgotPassword(@RequestParam String email) throws MessagingException {
-        passwordService.forgotPassword(email);
+    public void forgotPassword(@RequestParam String email, @RequestParam LanguageEnum language) throws MessagingException {
+        passwordService.forgotPassword(email, language);
     }
 
     @PostMapping("/change-email")

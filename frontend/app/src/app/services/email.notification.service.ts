@@ -14,11 +14,11 @@ export class EmailNotificationService {
   constructor(private http: HttpClient) {
   }
 
-  getEmailMessages(language: string): Subscribable<EmailDetails[]> {
-    return this.http.get<EmailDetails[]>(this.apiUrl + this.emailUrl + '?' + 'language=' + language);
+  getEmailMessages(): Subscribable<EmailDetails[]> {
+    return this.http.get<EmailDetails[]>(this.apiUrl + this.emailUrl);
   }
 
-  saveEmailMessages(bookingEmailDetails: EmailDetails[], language: string) {
-    return this.http.post(this.apiUrl + this.emailUrl + '?' + 'language=' + language, bookingEmailDetails);
+  saveEmailMessages(bookingEmailDetails: EmailDetails[]) {
+    return this.http.post(this.apiUrl + this.emailUrl, bookingEmailDetails);
   }
 }

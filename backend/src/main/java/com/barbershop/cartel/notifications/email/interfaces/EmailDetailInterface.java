@@ -7,11 +7,11 @@ import javax.mail.MessagingException;
 import java.util.List;
 
 public interface EmailDetailInterface {
-    List<EmailDetailsModel> getBookingConfirmationMessage(LanguageEnum language);
+    List<EmailDetailsModel> getBookingConfirmationMessage();
 
-    void saveBookingMessage(List<EmailDetailsModel> emailDetailsModel, LanguageEnum language);
+    void saveBookingMessage(List<EmailDetailsModel> emailDetailsModel);
 
     void sendBookingConfirmationMessage(String toRecipient,LanguageEnum language) throws MessagingException;
 
-    void sendForgotPasswordMessage(String toRecipient, String password) throws MessagingException;
+    void sendForgotPasswordMessage(String toRecipient, String password, LanguageEnum language) throws MessagingException;
 }

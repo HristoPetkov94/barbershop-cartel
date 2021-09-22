@@ -14,7 +14,7 @@ export class AppointmentService {
   }
 
   create(req: AppointmentRequest, allowOverlap: boolean = false) {
-    return this.http.post(this.url + "?allowOverlap=" + allowOverlap, req);
+    return this.http.post(this.url + '?allowOverlap=' + allowOverlap, req);
   }
 
   update(req: AppointmentRequest) {

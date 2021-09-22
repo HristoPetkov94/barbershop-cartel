@@ -1,7 +1,6 @@
 package com.barbershop.cartel.notifications.email.controller;
 
 
-import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +16,12 @@ public class EmailNotificationController {
     private EmailDetailInterface emailDetailInterface;
 
     @GetMapping
-    public List<EmailDetailsModel> getBookingConfirmationMessage(@RequestParam LanguageEnum language) {
-        return emailDetailInterface.getBookingConfirmationMessage(language);
+    public List<EmailDetailsModel> getBookingConfirmationMessage() {
+        return emailDetailInterface.getBookingConfirmationMessage();
     }
 
     @PostMapping
-    public void saveBookingConfirmationMessage(@RequestBody List<EmailDetailsModel> emailDetails, @RequestParam LanguageEnum language) {
-        emailDetailInterface.saveBookingMessage(emailDetails, language);
+    public void saveBookingConfirmationMessage(@RequestBody List<EmailDetailsModel> emailDetails) {
+        emailDetailInterface.saveBookingMessage(emailDetails);
     }
 }

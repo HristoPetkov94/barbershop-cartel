@@ -82,6 +82,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/swagger-ui.html",
                         "/webjars/**")
                 .antMatchers(HttpMethod.POST,
-                        "/appointments");
+                        "/appointments",
+                        "/user/forgot-password**");
     }
 }

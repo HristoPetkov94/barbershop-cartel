@@ -37,6 +37,10 @@ export class AuthenticationService {
     return this.httpClient.post<User>(this.url + '/register', user);
   }
 
+  public forgotPassword(email: string, language: string) {
+    return this.httpClient.post(this.url + '/user/forgot-password' + '?' + 'email=' + email + '&' + 'language=' + language, {});
+  }
+
   isUserLoggedIn() {
 
     const user = sessionStorage.getItem(this.USERNAME_KEY);

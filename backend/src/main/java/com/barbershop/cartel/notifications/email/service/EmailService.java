@@ -9,6 +9,7 @@ import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.notifications.email.repository.EmailDetailRepository;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import com.barbershop.cartel.utils.InternationalString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -36,27 +37,27 @@ public class EmailService implements EmailDetailInterface {
     @Override
     public void sendBookingConfirmationMessage(String toRecipient, LanguageEnum language) throws MessagingException {
 
-        EmailDetailEntity emailDetails = emailDetailRepository.findByEmailTypeAndLanguage(EmailTypeEnum.BOOKING_EMAIL_TYPE, language)
+        EmailDetailEntity emailDetails = emailDetailRepository.findByEmailType(EmailTypeEnum.BOOKING_EMAIL_TYPE)
                 .orElseThrow(() -> new CartelCustomException("Email notification type: BOOKING_EMAIL_TYPE is not existing."));
 
-        sendMessage(emailDetails, toRecipient);
+        sendMessage(emailDetails, toRecipient, language);
     }
 
     @Override
-    public void sendForgotPasswordMessage(String toRecipient, String password) throws MessagingException {
+    public void sendForgotPasswordMessage(String toRecipient, String password, LanguageEnum language) throws MessagingException {
 
         EmailDetailEntity emailDetails = emailDetailRepository.findByEmailType(EmailTypeEnum.FORGOT_PASSWORD_TYPE)
                 .orElseThrow(() -> new CartelCustomException("Email notification type: FORGOT_PASSWORD_TYPE is not existing."));
 
-        String text = replaceVariable(emailDetails.getText(), password);
+        InternationalString text = replaceVariable(emailDetails.getText(), password, language);
 
         emailDetails.setText(text);
 
-        sendMessage(emailDetails, toRecipient);
+        sendMessage(emailDetails, toRecipient, language);
     }
 
     @Override
-    public void saveBookingMessage(List<EmailDetailsModel> emailDetailsModel, LanguageEnum language) {
+    public void saveBookingMessage(List<EmailDetailsModel> emailDetailsModel) {
 
         if (emailDetailsModel.isEmpty()) {
             throw new CartelCustomException("No email messages found.");
@@ -64,7 +65,7 @@ public class EmailService implements EmailDetailInterface {
 
         for (EmailDetailsModel details : emailDetailsModel) {
 
-            EmailDetailEntity emailDetails = emailDetailRepository.findByEmailTypeAndLanguage(details.getEmailType(), language)
+            EmailDetailEntity emailDetails = emailDetailRepository.findByEmailType(details.getEmailType())
                     .orElse(new EmailDetailEntity());
 
             emailDetails.setSubject(details.getSubject());
@@ -76,9 +77,9 @@ public class EmailService implements EmailDetailInterface {
     }
 
     @Override
-    public List<EmailDetailsModel> getBookingConfirmationMessage(LanguageEnum language) {
+    public List<EmailDetailsModel> getBookingConfirmationMessage() {
 
-        Iterable<EmailDetailEntity> emailDetails = emailDetailRepository.findAllByLanguage(language);
+        Iterable<EmailDetailEntity> emailDetails = emailDetailRepository.findAll();
 
         List<EmailDetailsModel> emailDetailsModels = new ArrayList<>();
 
@@ -98,7 +99,7 @@ public class EmailService implements EmailDetailInterface {
         return emailDetailsModels;
     }
 
-    private synchronized void sendMessage(EmailDetailEntity emailDetails, String toRecipient) throws MessagingException {
+    private synchronized void sendMessage(EmailDetailEntity emailDetails, String toRecipient, LanguageEnum language) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
@@ -107,8 +108,8 @@ public class EmailService implements EmailDetailInterface {
 
         mimeMessage.setFrom(emailDetails.getFrom());
         mimeMessage.setRecipients(Message.RecipientType.TO, parse);
-        mimeMessage.setSubject(emailDetails.getSubject(), "UTF-8");
-        mimeMessage.setText(emailDetails.getText(), "UTF-8", "html");
+        mimeMessage.setSubject(emailDetails.getSubject().get(language), "UTF-8");
+        mimeMessage.setText(emailDetails.getText().get(language), "UTF-8", "html");
         mimeMessage.setSentDate(new Date());
 
         try {
@@ -119,10 +120,14 @@ public class EmailService implements EmailDetailInterface {
         }
     }
 
-    private String replaceVariable(String text, String variable) {
+    private InternationalString replaceVariable(InternationalString text, String password, LanguageEnum language) {
 
         String placeHolder = "$password";
 
-        return text.replace(placeHolder, variable);
+        String replacement = text.get(language).replace(placeHolder, password);
+
+        text.put(language, replacement);
+
+        return text;
     }
 }

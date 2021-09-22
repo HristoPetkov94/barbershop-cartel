@@ -7,7 +7,7 @@
     <form class="form-wrapper">
       <div class="inputs-wrapper">
         <mat-form-field>
-          <input matInput placeholder="USERNAME" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+          <input matInput placeholder="USERNAME" [formControl]="emailFormControl" [(ngModel)]="email" [errorStateMatcher]="matcher">
         </mat-form-field>
 
         <mat-form-field>
@@ -33,7 +33,7 @@
       </button>
     </div>
 
-    <p class="forgot-pass-text"> Forgot password ?</p>
+    <p (click)="forgotPassword()" class="forgot-pass-text"> Forgot password ?</p>
 
     <div class="footer-text">
       <span> Do you have an account?</span>
@@ -41,3 +41,5 @@
     </div>
   </div>
 </div>
+
+<app-notification></app-notification>

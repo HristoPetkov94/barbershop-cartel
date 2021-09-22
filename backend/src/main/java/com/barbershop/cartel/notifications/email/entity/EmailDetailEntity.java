@@ -1,9 +1,10 @@
 package com.barbershop.cartel.notifications.email.entity;
 
-import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.notifications.email.enums.EmailTypeEnum;
+import com.barbershop.cartel.utils.InternationalString;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -22,15 +23,14 @@ public class EmailDetailEntity {
     @Column(name = "email_from")
     private String from;
 
-    @Column(name = "subject")
-    private String subject;
+    @Type(type = "jsonb")
+    @Column(name = "subject", columnDefinition = "jsonb")
+    private InternationalString subject;
 
-    @Column(name = "text")
-    private String text;
+    @Type(type = "jsonb")
+    @Column(name = "text", columnDefinition = "jsonb")
+    private InternationalString text;
 
     @Column(name = "email_type")
     private EmailTypeEnum emailType;
-
-    @Column(name = "language")
-    private LanguageEnum language;
 }

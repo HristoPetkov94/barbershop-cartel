@@ -151,4 +151,8 @@
         </update>
     </changeSet>
 
+    <changeSet author="hp" id="2021_09_19_change_columns_type_email_details.sql">
+        <sqlFile path="db/2021_09_19_change_columns_type_email_details.sql"/>
+    </changeSet>
+
 </databaseChangeLog>

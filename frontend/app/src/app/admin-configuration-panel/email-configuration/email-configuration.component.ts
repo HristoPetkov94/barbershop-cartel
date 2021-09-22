@@ -14,7 +14,7 @@ export class EmailConfigurationComponent implements OnInit {
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
-  private language: string;
+  public language: string;
   public emails: EmailDetails[];
   public labels = new Map<EmailTypeEnum, any>();
 
@@ -25,7 +25,7 @@ export class EmailConfigurationComponent implements OnInit {
   ngOnInit(): void {
     this.language = this.languagePipe.language;
 
-    this.emailNotificationService.getEmailMessages(this.language).subscribe(data => {
+    this.emailNotificationService.getEmailMessages().subscribe(data => {
       this.emails = data;
       this.emails.sort((a, b) => a.emailType.toString().localeCompare(b.emailType.toString()));
     });
@@ -44,7 +44,7 @@ export class EmailConfigurationComponent implements OnInit {
   }
 
   saveEmailMessages() {
-    this.emailNotificationService.saveEmailMessages(this.emails, this.language).subscribe(() => {
+    this.emailNotificationService.saveEmailMessages(this.emails).subscribe(() => {
       },
       () => {
         this.notification.showMessage('Booking confirmation email message has not been updated.', 'warn');

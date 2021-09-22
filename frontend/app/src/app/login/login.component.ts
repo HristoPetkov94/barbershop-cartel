@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher, MatIconRegistry} from '@angular/material';
+import {ErrorStateMatcher} from '@angular/material';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../authentication/authentication.service';
+import {NotificationComponent} from '../notification/notification.component';
+import {LanguagePipe} from '../pipes/language-pipe';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -22,6 +24,11 @@ export class LoginComponent implements OnInit {
   public hide = true;
   public matcher = new MyErrorStateMatcher();
   public invalidLogin = false;
+  public email: string;
+  private language: string;
+
+  @ViewChild(NotificationComponent) notification: NotificationComponent;
+
 
   public emailFormControl = new FormControl('', [
     Validators.required,
@@ -34,11 +41,13 @@ export class LoginComponent implements OnInit {
   ]);
 
   constructor(private router: Router,
-              private loginservice: AuthenticationService) {
+              private loginservice: AuthenticationService,
+              private languagePipe: LanguagePipe) {
   }
 
   ngOnInit() {
     this.emailFormControl.setValue(sessionStorage.getItem('username'));
+    this.language = this.languagePipe.language;
   }
 
   login() {
@@ -50,6 +59,23 @@ export class LoginComponent implements OnInit {
       err => {
         console.log(err);
         this.invalidLogin = true;
+      }
+    );
+  }
+
+  forgotPassword() {
+
+    if (this.email == null) {
+      this.notification.showMessage('Email must be entered.', 'warn');
+      return;
+    }
+
+    this.loginservice.forgotPassword(this.email, this.language).subscribe(() => {
+      },
+      (err) => {
+        this.notification.showMessage(err.error.message, 'warn');
+      }, () => {
+        this.notification.showMessage(' Password has been send to the email.', 'success');
       }
     );
   }
