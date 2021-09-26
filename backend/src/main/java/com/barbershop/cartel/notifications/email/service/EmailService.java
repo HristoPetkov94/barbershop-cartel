@@ -7,6 +7,7 @@ import com.barbershop.cartel.notifications.email.enums.EmailTypeEnum;
 import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.notifications.email.repository.EmailDetailRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -22,6 +23,7 @@ import java.util.List;
 
 
 @Service
+@Slf4j
 public class EmailService implements EmailDetailInterface {
 
     @Autowired
@@ -108,6 +110,7 @@ public class EmailService implements EmailDetailInterface {
         try {
             mailSender.send(mimeMessage);
         } catch (MailException e) {
+            log.info(e.toString());
             System.err.println(e.getMessage());
         }
     }
