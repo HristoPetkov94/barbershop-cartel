@@ -8,6 +8,7 @@ import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface
 import com.barbershop.cartel.notifications.email.models.EmailDetailsModel;
 import com.barbershop.cartel.notifications.email.repository.EmailDetailRepository;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -101,8 +102,11 @@ public class EmailService implements EmailDetailInterface {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
+        final val parse = InternetAddress.parse(toRecipient);
+        log.info("Sending email from {} to {}", emailDetails.getFrom(), toRecipient);
+
         mimeMessage.setFrom(emailDetails.getFrom());
-        mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toRecipient));
+        mimeMessage.setRecipients(Message.RecipientType.TO, parse);
         mimeMessage.setSubject(emailDetails.getSubject(), "UTF-8");
         mimeMessage.setText(emailDetails.getText(), "UTF-8", "html");
         mimeMessage.setSentDate(new Date());
