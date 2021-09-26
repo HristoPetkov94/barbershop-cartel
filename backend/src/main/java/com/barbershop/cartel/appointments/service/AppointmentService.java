@@ -10,6 +10,7 @@ import com.barbershop.cartel.barbers.interfaces.BarberInterface;
 import com.barbershop.cartel.clients.interfaces.ClientInterface;
 import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.notifications.email.interfaces.EmailDetailInterface;
+import com.barbershop.cartel.notifications.email.service.EmailService;
 import com.barbershop.cartel.notifications.websocket.WebSocketService;
 import com.barbershop.cartel.utils.InternationalString;
 import com.barbershop.cartel.utils.ListUtils;
@@ -20,6 +21,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.mail.MessagingException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -59,6 +61,9 @@ public class AppointmentService implements AppointmentInterface {
 
     @Autowired
     private WebSocketService webSocketService;
+
+    @Autowired
+    private EmailService emailService;
 
     private boolean overlapsWithExisting(AppointmentEntity entity) {
 
@@ -184,6 +189,12 @@ public class AppointmentService implements AppointmentInterface {
         appointmentRepository.save(entity);
 
         webSocketService.updateClientCalendars();
+
+        try {
+            emailService.sendBookingConfirmationMessage(entity.getEmail(), LanguageEnum.bg);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
