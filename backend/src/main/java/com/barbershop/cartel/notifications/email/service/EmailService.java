@@ -100,7 +100,7 @@ public class EmailService implements EmailDetailInterface {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
 
         mimeMessage.setFrom(emailDetails.getFrom());
-        //mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse("petkovhristo94@gmail.com"));
+        mimeMessage.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toRecipient));
         mimeMessage.setSubject(emailDetails.getSubject(), "UTF-8");
         mimeMessage.setText(emailDetails.getText(), "UTF-8", "html");
         mimeMessage.setSentDate(new Date());
