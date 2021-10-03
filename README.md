@@ -1,2 +1,2 @@
 # barbershop-cartel-app
-Currently at https://cartel.bg
+Currently hosted at https://cartel.bg
