@@ -5,7 +5,6 @@ import {Barber} from '../../../../models/barber.model';
 import {StepEnum} from '../../stepper/step.enum';
 import {EventEmitter} from '@angular/core';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
-import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-barber-step',

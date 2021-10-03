@@ -78,6 +78,19 @@
   cursor: pointer;
 }
 
+.flip-card-no-hover {
+  background-color: transparent;
+  /*width: 25%;*/
+  width: 300px;
+  /*height: 510px;*/
+  height: 450px;
+  perspective: 1000px;
+
+  margin: 10px;
+
+  cursor: pointer;
+}
+
 .flip-card-inner {
   position: relative;
   width: 100%;

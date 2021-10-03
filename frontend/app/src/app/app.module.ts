@@ -90,6 +90,7 @@ import {ClientsConfigurationComponent} from './admin-configuration-panel/clients
 import {MatSortModule} from '@angular/material/sort';
 import { CartelPaginatorComponent} from './views/cartel-paginator/cartel-paginator.component';
 import { CartelPageItemDirective } from './views/cartel-paginator/cartel-page-item.directive';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   exports: [
@@ -205,7 +206,8 @@ import { CartelPageItemDirective } from './views/cartel-paginator/cartel-page-it
         ],
       } as SocialAuthServiceConfig,
     },
-    {provide: LanguagePipe}
+    {provide: LanguagePipe},
+    {provide: DatePipe}
   ],
   bootstrap: [AppComponent],
   entryComponents: [

@@ -141,4 +141,11 @@
   height: var(--content-size);
 }
 
+.overflow-scroll {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+.footer-text {
+  padding: 0 20px;
+}
 

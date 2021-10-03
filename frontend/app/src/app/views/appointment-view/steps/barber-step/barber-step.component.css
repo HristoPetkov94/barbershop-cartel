@@ -1,24 +1,20 @@
 .barber-wrapper {
-  width: 60%;
-  flex-wrap: wrap;
 }
 
 .barber {
   font: normal normal normal 18px/20px Roboto;
-
-  height: 300px;
-  width: 29%;
+  width: 300px;
+  height: 460px;
   /*margin: 10px 20px;*/
-  padding: 10px;
   background: transparent;
-
+  padding: 10px;
   cursor: pointer;
 
   border: 1px solid transparent;
 }
 
 .barber:hover {
-  border: 1px solid #212121;
+  border: 1px solid var(--main-color);
   transition: 0.2s;
 }
 
@@ -32,17 +28,15 @@
 }
 
 .picture {
-  height: 100%;
-
-  border-top: 1px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-
   overflow: hidden;
 
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+
+  margin: 20px 20px 50px 20px;
+
+  height: 100%;
 }
 
 .name {
@@ -52,4 +46,13 @@
   padding: 20px 0;
 
   font: normal normal bold 15px/15px Roboto;
+}
+
+.flip-card-hover {
+  border: 1px solid transparent;
+}
+
+.flip-card-hover:hover {
+  transition: 0.2s;
+  border: 1px solid var(--main-color);
 }

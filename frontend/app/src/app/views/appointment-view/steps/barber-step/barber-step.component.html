@@ -1,12 +1,17 @@
 <div class="col flex-1 align-items-center">
-  <div class="row barber-wrapper">
-    <div class="col barber" *ngFor="let barber of barbers" (click)="next(barber)">
+  <div class="row max-width">
 
-      <div class="picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
+    <app-cartel-paginator [itemsPerPage]="3" class="max-width">
 
-      <div class="row name padding-20 justify-content-center">
-        <span [textContent]="(barber.firstName | language) + ' ' + (barber.lastName | language)"></span>
-      </div>
-    </div>
+      <ng-container *ngFor="let barber of barbers;">
+
+        <ng-container *appCartelPageItem>
+             <div class="flip-card-hover">
+               <app-barber-flip-card [barber]="barber" [noFlip]="true" (click)="next(barber)" > </app-barber-flip-card>
+             </div>
+        </ng-container>
+
+      </ng-container>
+    </app-cartel-paginator>
   </div>
 </div>

@@ -1,31 +1,31 @@
-.hover-me {
-  width: 33%;
-  padding: 10px;
-
-  border: 1px solid transparent;
-  transition: 0.2s;
-}
-
-.hover-me:hover {
-  border:1px solid #212121;
-}
-
 .service {
+  width: 653px;
   justify-self: center;
   align-self: center;
 
-  padding: 50px;
+  padding: 20px;
 
-  background-color: #212121;
+  background-color: transparent;
   color: whitesmoke;
 
   cursor: pointer;
+
+  border: 3px solid  var(--main-color);
 }
 
-.duration {
+.service:hover {
+  transition: 0.2s;
+  background-color: var(--main-color);
+}
+
+.type, .price, .duration, .separator {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 130.9%;
+}
+
+.separator {
   padding: 0 20px;
-}
-
-.price {
-  font-weight: bold;
 }

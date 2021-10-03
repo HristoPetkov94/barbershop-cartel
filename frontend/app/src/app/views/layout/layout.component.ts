@@ -1,12 +1,14 @@
 import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {fade} from '../animations/fade';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import {transitionFade} from '../animations/transition.fade';
 
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.css'], animations: [
-    fade
+    transitionFade,
+    fade,
   ]
 })
 export class LayoutComponent implements OnInit {
@@ -41,4 +43,7 @@ export class LayoutComponent implements OnInit {
     this.router.navigate(['/book-now']);
   }
 
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
 }

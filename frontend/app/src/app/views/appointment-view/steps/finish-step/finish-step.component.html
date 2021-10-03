@@ -1,36 +1,51 @@
-<div class="final-info-container shadow">
+<ng-container *ngIf="done" class="done">
+  <!--    <mat-icon> done</mat-icon>-->
+  <!--    <br/>-->
 
-  <ng-container *ngIf="done" class="done">
-    <mat-icon> done</mat-icon>
-    <br/>
+  <!--    <p> Thank you for choosing us !</p>-->
+  <!--    <p> You have a booked hour for {{ stepperData.date }} / {{ stepperData.hour }} h. </p>-->
 
-    <p> Thank you for choosing us !</p>
-    <p> You have a booked hour for {{ stepperData.date }} / {{ stepperData.hour }} h. </p>
+  <!--    <div class="sized-box-height-20"></div>-->
 
-    <div class="sized-box-height-20"></div>
-
-    <div class="hover-me">
-      <button class="go-back-btn" (click)="goBackHome()">
-        Go back home
-      </button>
+  <!--    <div class="hover-me">-->
+  <!--      <button class="go-back-btn" (click)="goBackHome()">-->
+  <!--        Go back home-->
+  <!--      </button>-->
+  <!--    </div>-->
+  <div class="msg-container col align-items-center justify-content-center">
+    <div class="col main-msg">
+      <div>
+        БЛАГОДАРИМ ВИ,
+      </div>
+      <p>
+        ЧЕ ИЗБРАХТЕ НАС!
+      </p>
     </div>
-  </ng-container>
 
-  <ng-container *ngIf="!done">
+    <div class="sub-msg">
+      ОЧАКВАЙТЕ ПОТВЪРЖДЕНИЕ ПО МЕЙЛ.
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!done">
+  <div class="final-info-container shadow new-design-theme">
+
+
     <form [formGroup]="myForm">
       <div class="col">
 
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>{{ 'booking.email' | translate }}</mat-label>
-            <input matInput formControlName="email"  required>
+            <input matInput formControlName="email" required>
             <mat-icon matSuffix>email</mat-icon>
             <mat-error *ngIf="email.invalid"> {{ 'booking.email_error' | translate }} </mat-error>
           </mat-form-field>
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'booking.phone' | translate }}</mat-label>
-            <input matInput formControlName="phone" [minLength]="10" required>
+            <input matInput formControlName="phone" type="tel" [minLength]="10" required>
             <mat-icon matSuffix>phone</mat-icon>
             <mat-error *ngIf="phone.invalid"> {{ 'booking.phone_error' | translate }} </mat-error>
           </mat-form-field>
@@ -41,7 +56,7 @@
 
         <div class="sized-box-height-20"></div>
 
-        <div class="col">
+        <div class="col font">
           <!--      details-->
           <div class="row align-items-center flex-space-between">
             <div class="row align-items-center">
@@ -97,9 +112,10 @@
 
     <div class="sized-box-height-20"></div>
 
-    <button class="confirm-button" (click)="makeAnAppointment()" [disabled]="myForm.invalid" >
+    <button class="confirm-button" (click)="makeAnAppointment()" [disabled]="myForm.invalid">
       {{ 'booking.appointment_button' | translate }}
     </button>
-  </ng-container>
-</div>
 
+  </div>
+
+</ng-container>

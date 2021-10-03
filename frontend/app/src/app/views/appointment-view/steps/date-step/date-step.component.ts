@@ -5,6 +5,7 @@ import {AssignmentService} from '../../../../services/assignment.service';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {AppointmentService} from '../../../../services/appointment.service';
 import {StepEnum} from '../../stepper/step.enum';
+import {DatePipe} from '@angular/common';
 import {Day} from '../../../../interfaces/day';
 import {AppointmentDaysService} from '../../../../services/appointment-days.service';
 import * as dayjs from 'dayjs';
@@ -33,6 +34,7 @@ export class DateStepComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private datePipe: DatePipe,
     private assignmentService: AssignmentService,
     private router: Router,
     private scheduleService: AppointmentService,
@@ -134,5 +136,13 @@ export class DateStepComponent implements OnInit {
     };
 
     this.changeStep.emit(request);
+  }
+
+  getDayFromDate(date) {
+    return this.datePipe.transform(date, 'EEE');
+  }
+
+  isWeekend(date: Date) {
+    return this.getDayFromDate(date) === 'Sat' || this.getDayFromDate(date) === 'Sun';
   }
 }

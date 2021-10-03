@@ -1,17 +1,12 @@
 /*// calendar*/
 .calendar {
-  min-width: 500px;
+  min-width: 440px;
   max-width: 26%;
   margin: auto;
 
   padding: 20px;
 
-  background-color: #fafafa;
-  border-radius: 5px;
-
-  -webkit-box-shadow: 7px 9px 12px -14px rgba(33,33,33,1);
-  -moz-box-shadow: 7px 9px 12px -14px rgba(33,33,33,1);
-  box-shadow: 7px 9px 12px -14px rgba(33,33,33,1);
+  background-color: transparent;
 }
 
 .first-row, .second-row {
@@ -56,7 +51,7 @@
   height: 100%;
   border-radius: 5px;
 
-  color: #212121;
+  color: var(--main-color);
   cursor: pointer;
 
   padding: 10px 0;
@@ -70,21 +65,19 @@
   border: none;
   outline: none;
 
-  background-color: #212121;
-  color: whitesmoke;
+  color: var(--main-color);
 
   transition: 0.2s;
 }
 
 .hour {
-  height: 40px;
+  height: 50px;
   width: 25%;
 
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .booked {
@@ -94,35 +87,34 @@
 }
 
 .calendar-navigation {
-  border: 1px solid #212121;
-  border-radius: 4px;
-  margin: 0 0.5%;
-
+  border: 3px solid var(--main-color);
   padding: 5px 15px 10px 15px;
 }
 
 .hours {
-  width: 500px;
   flex-wrap: wrap;
 }
 
 .time {
-  border: 1px solid #212121;
-  border-radius: 4px;
-  font: normal normal normal 18px/20px Roboto;
+  color: white;
+  border: 2px solid white;
 
-  width: 95%;
-  height: 90%;
+  width: 90px;
 
   cursor: pointer;
-  background-color: #fafafa;
+  background-color: transparent;
+
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 29px;
 }
 
 .time:hover{
-
-  background-color: #212121;
-  color: whitesmoke;
-  transition: 0.3s;
+  color: var(--main-color);
+  border: 2px solid var(--main-color);
+  transition: 0.2s;
 }
 
 .hr {
@@ -134,9 +126,61 @@
   position: absolute;
   bottom: -4px;
   left: 46%;
+
+  font-size: 20px;
 }
 
 .selected-day {
-  padding:20px 0 1px 3px;
-  font: normal normal normal 18px/20px Roboto;
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  /* identical to box height */
+
+  color: #FFFFFF;
+  width: 50%;
+  margin: auto;
+
+  text-align: center;
+
+  padding: 10px 0;
+}
+
+.arrows, .date-banner {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #FFFFFF;
+}
+
+.week-day, .weekend, .not-available-msg {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 29px;
+
+  color: #FFFFFF;
+
+  cursor: pointer;
+}
+
+.week-day:hover, .weekend:hover {
+  color: var(--main-color);
+}
+
+.weekend {
+  font-weight: bold;
+}
+
+.hours-wrapper {
+  border: 3px solid var(--main-color);
+}
+
+.not-available-msg {
+  padding: 0 10px;
 }

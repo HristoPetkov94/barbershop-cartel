@@ -1,4 +1,4 @@
-<div class="flip-card">
+<div [ngClass]="noFlip ? 'flip-card-no-hover' : 'flip-card'">
 
   <div class="flip-card-inner">
 
@@ -15,7 +15,7 @@
     <div class="flip-card-back">
       <div class="col logo-text-wrapper justify-content-center">
         <img class="back-card-logo" src="assets/images/logo.png"/>
-        <div class="sized-box-height-10"> </div>
+        <div class="sized-box-height-10"></div>
         <div class="back-card-text"> {{barber.description | language}} </div>
       </div>
 

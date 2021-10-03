@@ -12,6 +12,9 @@ export class BarberFlipCardComponent implements OnInit {
   @Input()
   barber: Barber;
 
+  @Input()
+  noFlip: boolean;
+
   constructor(private router: Router) {
 
   }

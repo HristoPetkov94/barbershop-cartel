@@ -15,7 +15,6 @@ export interface Page {
   content: CartelPageItemDirective[];
 }
 
-
 // Followed this example https://stackblitz.com/edit/angular-carousel-component?file=app%2Fcarousel.component.ts
 @Component({
   selector: 'app-cartel-paginator',

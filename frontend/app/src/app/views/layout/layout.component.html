@@ -18,8 +18,11 @@
 
     </div>
 
-    <div class="col content-height max-width justify-center">
-      <router-outlet></router-outlet>
+    <div class="col max-width justify-center">
+      <div class="sized-box-height-50" ></div>
+      <div [@TransitionFade]="prepareRoute(outlet)">
+        <router-outlet #outlet="outlet"></router-outlet>
+      </div>
     </div>
   </div>
 
@@ -37,9 +40,9 @@
     <div class="sized-box-height-10"></div>
 
     <div class="row">
-      <span> text </span>
-      <span> text </span>
-      <span> text </span>
+      <span class="footer-text"> Защита на личните данни </span>
+      <span class="footer-text"> Условия за ползване </span>
+      <span class="footer-text"> Условия за проверителност </span>
     </div>
   </div>
 </div>
