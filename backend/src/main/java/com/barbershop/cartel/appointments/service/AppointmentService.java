@@ -188,13 +188,6 @@ public class AppointmentService implements AppointmentInterface {
 
         appointmentRepository.save(entity);
 
-        try {
-            emailDetailInterface.sendBookingConfirmationMessage(appointmentModel.getEmail(), LanguageEnum.bg);
-            System.out.println("Email was send successfully.");
-        } catch (MessagingException e) {
-            System.out.println(e.getMessage());
-        }
-
         webSocketService.updateClientCalendars();
 
         try {
