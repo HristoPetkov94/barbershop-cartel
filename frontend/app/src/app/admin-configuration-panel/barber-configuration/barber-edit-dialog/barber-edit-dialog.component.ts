@@ -56,18 +56,6 @@ export class BarberEditDialogComponent implements OnInit {
         description: [description, [Validators.maxLength(255)]]
       }
     );
-
-    this.dialogRef.beforeClosed().subscribe(value => {
-      // onCancel value is null
-      if (value != null) {
-        value.id = this.myForm.value.id;
-        value.firstName[this.languagePipe.language] = this.myForm.value.firstName;
-        value.lastName[this.languagePipe.language] = this.myForm.value.lastName;
-        value.instagram = this.myForm.value.instagram;
-        value.facebook = this.myForm.value.facebook;
-        value.description[this.languagePipe.language] = this.myForm.value.description;
-      }
-    });
   }
 
   changed(event) {
@@ -84,6 +72,15 @@ export class BarberEditDialogComponent implements OnInit {
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onSave(): void {
+    this.barber.id = this.myForm.value.id;
+    this.barber.firstName[this.languagePipe.language] = this.myForm.value.firstName;
+    this.barber.lastName[this.languagePipe.language] = this.myForm.value.lastName;
+    this.barber.instagram = this.myForm.value.instagram;
+    this.barber.facebook = this.myForm.value.facebook;
+    this.barber.description[this.languagePipe.language] = this.myForm.value.description;
   }
 
   removeImage() {
