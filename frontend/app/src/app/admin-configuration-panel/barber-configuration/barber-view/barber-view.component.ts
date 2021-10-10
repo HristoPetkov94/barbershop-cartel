@@ -62,7 +62,9 @@ export class BarberViewComponent implements OnInit {
   edit(): void {
     const dialogRef = this.dialog.open(BarberEditDialogComponent, {
       width: '560px',
-      data: Object.assign({}, this.barber)
+      data: Object.assign({}, this.barber),
+      disableClose: true,
+      autoFocus: true
     });
 
     dialogRef.afterClosed().subscribe(result => {

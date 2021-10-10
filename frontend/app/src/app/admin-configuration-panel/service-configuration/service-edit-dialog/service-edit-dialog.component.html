@@ -52,8 +52,8 @@
 
     </mat-dialog-content>
     <div mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="service" (click)="onNoClick()">{{ 'configuration.cancel' | translate}} </button>
-      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="service" cdkFocusInitial>{{ 'configuration.save' | translate}} </button>
+      <button mat-button (click)="onCancel()">{{ 'configuration.cancel' | translate}} </button>
+      <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="service">{{ 'configuration.save' | translate}} </button>
     </div>
   </form>
 </div>

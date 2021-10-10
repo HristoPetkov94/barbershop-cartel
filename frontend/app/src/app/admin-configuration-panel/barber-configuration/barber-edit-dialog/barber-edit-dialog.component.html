@@ -9,7 +9,7 @@
 
     <div class="row">
       <div class="col justify-content-center">
-        <div class="profile-picture" [style.backgroundImage]="'url(' + data.picture + ')'"></div>
+        <div class="profile-picture" [style.backgroundImage]="'url(' + barber.picture + ')'"></div>
         <div class="row">
           <button type="button" (click)="changeImage()" class="remove-picture-btn edit-button" mat-raised-button color="primary">
             {{ 'configuration.edit_picture'| translate}}
@@ -52,7 +52,7 @@
 
   </div>
   <div mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="data" (click)="onCancel()">{{'configuration.cancel' | translate}}</button>
-    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="data" cdkFocusInitial>{{'configuration.save' | translate}}</button>
+    <button mat-button (click)="onCancel()">{{'configuration.cancel' | translate}}</button>
+    <button mat-button [disabled]="myForm.invalid" [mat-dialog-close]="barber">{{'configuration.save' | translate}}</button>
   </div>
 </form>

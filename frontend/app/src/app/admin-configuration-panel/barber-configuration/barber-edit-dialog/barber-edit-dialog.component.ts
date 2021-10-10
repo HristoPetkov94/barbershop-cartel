@@ -35,7 +35,7 @@ export class BarberEditDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<BarberEditDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Barber,
+    @Inject(MAT_DIALOG_DATA) public barber: Barber,
     private imageService: ImageService,
     private languagePipe: LanguagePipe,
     private fb: FormBuilder) {
@@ -43,28 +43,30 @@ export class BarberEditDialogComponent implements OnInit {
 
   ngOnInit(): void {
 
-    const firstName = this.languagePipe.transform(this.data.firstName);
-    const lastName = this.languagePipe.transform(this.data.lastName);
-    const description = this.languagePipe.transform(this.data.description);
+    const firstName = this.languagePipe.transform(this.barber.firstName);
+    const lastName = this.languagePipe.transform(this.barber.lastName);
+    const description = this.languagePipe.transform(this.barber.description);
 
     this.myForm = this.fb.group({
-        id: this.data.id,
+        id: this.barber.id,
         firstName: [firstName, [Validators.required]],
         lastName: [lastName, [Validators.required]],
-        instagram: [this.data.instagram, [Validators.pattern(this.reg)]],
-        facebook: [this.data.facebook, [Validators.pattern(this.reg)]],
+        instagram: [this.barber.instagram, [Validators.pattern(this.reg)]],
+        facebook: [this.barber.facebook, [Validators.pattern(this.reg)]],
         description: [description, [Validators.maxLength(255)]]
       }
     );
 
-
     this.dialogRef.beforeClosed().subscribe(value => {
-      value.id = this.myForm.value.id;
-      value.firstName[this.languagePipe.language] = this.myForm.value.firstName;
-      value.lastName[this.languagePipe.language] = this.myForm.value.lastName;
-      value.instagram = this.myForm.value.instagram;
-      value.facebook = this.myForm.value.facebook;
-      value.description[this.languagePipe.language] = this.myForm.value.description;
+      // onCancel value is null
+      if (value != null) {
+        value.id = this.myForm.value.id;
+        value.firstName[this.languagePipe.language] = this.myForm.value.firstName;
+        value.lastName[this.languagePipe.language] = this.myForm.value.lastName;
+        value.instagram = this.myForm.value.instagram;
+        value.facebook = this.myForm.value.facebook;
+        value.description[this.languagePipe.language] = this.myForm.value.description;
+      }
     });
   }
 
@@ -73,7 +75,7 @@ export class BarberEditDialogComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      this.data.picture = reader.result.toString();
+      this.barber.picture = reader.result.toString();
     };
     reader.onerror = (error) => {
       console.log('Error: ', error);
@@ -81,12 +83,11 @@ export class BarberEditDialogComponent implements OnInit {
   }
 
   onCancel(): void {
-    console.log(this.data.firstName);
     this.dialogRef.close();
   }
 
   removeImage() {
-    this.data.picture = this.imageService.getDefaultBarberImage();
+    this.barber.picture = this.imageService.getDefaultBarberImage();
   }
 
   changeImage() {

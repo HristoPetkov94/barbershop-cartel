@@ -36,11 +36,13 @@ export class ServiceEditDialogComponent implements OnInit {
       }
     );
 
-    this.dialogRef.beforeClosed().subscribe(data => {
-
-      data.id = this.myForm.value.id;
-      data.serviceTitle[this.languagePipe.language] = this.myForm.value.serviceTitle;
-      data.description[this.languagePipe.language] = this.myForm.value.description;
+    this.dialogRef.beforeClosed().subscribe(value => {
+      // onCancel value is null
+      if (value != null) {
+        value.id = this.myForm.value.id;
+        value.serviceTitle[this.languagePipe.language] = this.myForm.value.serviceTitle;
+        value.description[this.languagePipe.language] = this.myForm.value.description;
+      }
     });
   }
 
@@ -64,7 +66,7 @@ export class ServiceEditDialogComponent implements OnInit {
     };
   }
 
-  onNoClick(): void {
+  onCancel(): void {
     this.dialogRef.close();
   }
 
