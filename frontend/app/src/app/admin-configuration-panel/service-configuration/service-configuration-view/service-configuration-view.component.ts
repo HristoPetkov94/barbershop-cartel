@@ -65,8 +65,6 @@ export class ServiceConfigurationViewComponent implements OnInit {
     const dialogRef = this.dialog.open(ServiceEditDialogComponent, {
       width: '40%',
       data: Object.assign({}, this.service),
-      disableClose: true,
-      autoFocus: true
     });
 
     dialogRef.afterClosed().subscribe(result => {
