@@ -129,11 +129,11 @@
 
 <hr>
 
-<mat-grid-list class="margin-top-20" cols="4">
+<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
 
   <mat-grid-tile [colspan]="2" [rowspan]="2">
 
-    <div class="col padding-20 max-height">
+    <div class="col padding-20 max-height max-width">
 
       <h1 class="margin-bottom-10"> {{ 'configuration.general.contact_info_label' | translate }} </h1>
       <p> {{ 'configuration.general.contact_info_description' | translate }}</p>
@@ -167,9 +167,8 @@
         {{ 'configuration.general.save' | translate }}
       </button>
     </div>
-
-
   </mat-grid-tile>
+
   <mat-grid-tile [colspan]="4" [rowspan]="1">
     <div *ngIf="gitInfo$ | async as gitInfo">
       <p>Branch : {{ gitInfo.gitBranch }}</p>
