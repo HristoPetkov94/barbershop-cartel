@@ -1,7 +1,6 @@
 ALTER TABLE email_details
 DROP COLUMN subject,
 DROP COLUMN text,
-DROP COLUMN language,
 ADD COLUMN subject json default '{}',
 ADD COLUMN text json default '{}';
 

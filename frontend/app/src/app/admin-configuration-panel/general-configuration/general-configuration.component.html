@@ -50,44 +50,6 @@
 
     <div class="col padding-20 max-height">
 
-      <h1 class="margin-bottom-10"> {{ 'configuration.general.front_page_message_label' | translate }} </h1>
-      <p> {{ 'configuration.general.front_page_message_description' | translate }} </p>
-
-    </div>
-
-  </mat-grid-tile>
-
-  <mat-grid-tile [colspan]="2" [rowspan]="3">
-    <div class="col padding-20 max-height max-width">
-      <h2 class="margin-bottom-10"> {{ 'configuration.general.message' | translate }} </h2>
-
-      <div class="row margin-bottom-10 symbol-counter">
-        <textarea class="preserve-whitespace front-page-message-input max-width"
-                  [(ngModel)]="frontPageMessage"
-                  rows="15" cols="50"
-                  name="comment"
-                  maxlength="255">
-        </textarea>
-        <div class="label font-size-small">{{frontPageMessage?.length}} / 255</div>
-      </div>
-
-      <button class="row" mat-stroked-button color="accent" (click)="saveFrontPageMessage()">
-        <mat-icon>save</mat-icon>
-        {{ 'configuration.general.save' | translate }}
-      </button>
-    </div>
-
-  </mat-grid-tile>
-</mat-grid-list>
-
-<hr>
-
-<mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
-
-  <mat-grid-tile [colspan]="2" [rowspan]="2">
-
-    <div class="col padding-20 max-height">
-
       <h1 class="margin-bottom-10">{{ 'configuration.general.appointment_message_label' | translate }}</h1>
       <p> {{ 'configuration.general.appointment_message_description' | translate }}</p>
 
@@ -100,7 +62,7 @@
       <h2 class="margin-bottom-10">{{ 'configuration.general.message' | translate }}</h2>
 
       <div class="row margin-bottom-10 symbol-counter">
-              <textarea class="front-page-message-input max-width"
+              <textarea class="message-input max-width"
                         [(ngModel)]="appointmentMessage"
                         rows="15" cols="50"
                         name="comment"

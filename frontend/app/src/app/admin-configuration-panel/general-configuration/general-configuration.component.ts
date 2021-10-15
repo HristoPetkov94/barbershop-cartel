@@ -20,7 +20,6 @@ export class GeneralConfigurationComponent implements OnInit {
   public users: User[];
   public email: string;
 
-  public frontPageMessage: string;
   public appointmentMessage: string;
 
   public facebook: string;
@@ -58,11 +57,6 @@ export class GeneralConfigurationComponent implements OnInit {
     this.saveConfiguration('Social media message');
   }
 
-  saveFrontPageMessage() {
-    this.configuration.frontPageMessage = this.frontPageMessage;
-    this.saveConfiguration('Front page message');
-  }
-
   saveAppointmentMessage() {
     this.configuration.appointmentSuccessMessage = this.appointmentMessage;
     this.saveConfiguration('Appointment message');
@@ -81,7 +75,6 @@ export class GeneralConfigurationComponent implements OnInit {
 
       this.configuration = config;
 
-      this.frontPageMessage = config.frontPageMessage;
       this.appointmentMessage = config.appointmentSuccessMessage;
 
       this.contactInfo.city = config.city;

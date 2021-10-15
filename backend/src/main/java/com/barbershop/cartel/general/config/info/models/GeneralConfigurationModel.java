@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GeneralConfigurationModel {
-    private String frontPageMessage;
     private String appointmentSuccessMessage;
 
     private String city;

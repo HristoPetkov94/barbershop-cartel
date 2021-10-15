@@ -36,7 +36,6 @@ public class GeneralConfigurationService implements GeneralConfigurationInterfac
         configuration.setAddress(config.getAddress());
         configuration.setAppointmentSuccessMessage(config.getAppointmentSuccessMessage());
         configuration.setCity(config.getCity());
-        configuration.setFrontPageMessage(config.getFrontPageMessage());
         configuration.setLanguage(config.getLanguage());
         configuration.setPhoneNumber(config.getPhoneNumber());
         configuration.setFacebook(config.getSocialMediaFacebook());

@@ -60,8 +60,6 @@
       "new_password_error2": "* New password matches old password",
       "confirm_password_error1": "* Confirm password password cannot be empty",
       "confirm_password_error2": "* Does not match with new password",
-      "front_page_message_label": "Home page message",
-      "front_page_message_description": "This is the Home page message displayed above \"Book now\" button. You can change it at any time.",
       "appointment_message_label": "Booking appointments message",
       "appointment_message_description": "This message is displayed at the last step of the booking process. It appears when an appointment was successfully completed. You can change it at any time.",
       "social_media_label": "Social media",

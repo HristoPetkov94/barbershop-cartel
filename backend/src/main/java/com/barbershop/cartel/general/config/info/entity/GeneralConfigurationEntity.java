@@ -18,9 +18,6 @@ public class GeneralConfigurationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "front_page_message")
-    private String frontPageMessage;
-
     @Column(name = "appointment_success_message")
     private String appointmentSuccessMessage;
 
