@@ -32,13 +32,14 @@ export class ServiceConfigurationComponent implements OnInit {
 
   add() {
     const service = new Service();
+
     service.serviceTitle = new Map<string, string>();
     service.description = new Map<string, string>();
-
     service.picture = this.imageService.getDefaultServiceImage();
+
     const dialogRef = this.dialog.open(ServiceEditDialogComponent, {
       width: '40%',
-      data: service
+      data: service,
     });
 
     dialogRef.afterClosed().subscribe(result => {

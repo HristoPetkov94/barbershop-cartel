@@ -35,13 +35,6 @@ export class ServiceEditDialogComponent implements OnInit {
         description: [description, [Validators.maxLength(255)]]
       }
     );
-
-    this.dialogRef.beforeClosed().subscribe(data => {
-
-      data.id = this.myForm.value.id;
-      data.serviceTitle[this.languagePipe.language] = this.myForm.value.serviceTitle;
-      data.description[this.languagePipe.language] = this.myForm.value.description;
-    });
   }
 
   get description() {
@@ -64,8 +57,14 @@ export class ServiceEditDialogComponent implements OnInit {
     };
   }
 
-  onNoClick(): void {
+  onCancel(): void {
     this.dialogRef.close();
+  }
+
+  onSave(): void {
+    this.service.id = this.myForm.value.id;
+    this.service.serviceTitle[this.languagePipe.language] = this.myForm.value.serviceTitle;
+    this.service.description[this.languagePipe.language] = this.myForm.value.description;
   }
 
   removeImage() {
