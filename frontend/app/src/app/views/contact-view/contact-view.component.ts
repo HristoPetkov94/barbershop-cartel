@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {GeneralConfigurationService} from '../../services/general.configuration.service';
+import {Configuration} from '../../models/general.configuration/configuration.model';
 
 @Component({
   selector: 'app-contact-view',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactViewComponent implements OnInit {
 
-  constructor() { }
+  public email: string;
+  public configuration: Configuration = new Configuration();
 
-  ngOnInit(): void {
+  constructor(private generalConfigurationService: GeneralConfigurationService) {
   }
 
+  ngOnInit(): void {
+    this.generalConfigurationService.getUsers().subscribe(user => {
+      const adminUser = user[0];
+      this.email = adminUser.email;
+    });
+
+    this.generalConfigurationService.getConfiguration().subscribe(configuration => {
+      this.configuration = configuration;
+    });
+  }
 }

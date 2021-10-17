@@ -19,6 +19,10 @@
   "team": {
     "title": "OUR TEAM, WHICH ALWAYS GUARANTEES QUALITY!"
   },
+  "contacts":{
+    "title": "YOU CAN FIND US HERE:",
+    "working_time": "WORKING TIME:"
+  },
   "stepper" : {
     "barber": "Barber",
     "service": "Service",

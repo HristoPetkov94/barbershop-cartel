@@ -1,10 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {NotificationComponent} from '../../notification/notification.component';
-import {ContactInfoModel} from '../../models/general.configuration/contact.info.model';
 import {Observable} from 'rxjs';
 import {GitVersion} from '../../models/git-version.mode';
-import {User} from '../../models/user.model';
 import {Configuration} from '../../models/general.configuration/configuration.model';
 import {LanguagePipe} from '../../pipes/language-pipe';
 
@@ -17,19 +15,21 @@ export class GeneralConfigurationComponent implements OnInit {
 
   @ViewChild(NotificationComponent) notification: NotificationComponent;
 
-  public users: User[];
   public email: string;
-
-  public appointmentMessage: string;
 
   public facebook: string;
   public instagram: string;
 
-  public contactInfo = new ContactInfoModel();
-
   public gitInfo$: Observable<GitVersion>;
 
-  private configuration: Configuration;
+  public configuration: Configuration;
+
+  public appointmentMessage: string;
+  public city: string;
+  public address: string;
+  public phoneNumber: string;
+
+  private language: string;
 
   constructor(
     private generalConfigurationService: GeneralConfigurationService,
@@ -37,53 +37,51 @@ export class GeneralConfigurationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const language = this.languagePipe.language;
+    this.language = this.languagePipe.language;
 
-    this.generalConfigurationService.getUsers().subscribe(data => {
-      this.users = data;
-      const adminUser = this.users[0];
+    this.generalConfigurationService.getUsers().subscribe(user => {
+      const adminUser = user[0];
       this.email = adminUser.email;
     });
 
-    this.getConfiguration(language);
+    this.getConfiguration();
 
     this.gitInfo$ = this.generalConfigurationService.getGitInfo();
   }
 
   saveSocialMedia() {
-    this.configuration.socialMediaInstagram = this.instagram;
-    this.configuration.socialMediaFacebook = this.facebook;
+    this.configuration.instagram = this.instagram;
+    this.configuration.facebook = this.facebook;
 
     this.saveConfiguration('Social media message');
   }
 
   saveAppointmentMessage() {
-    this.configuration.appointmentSuccessMessage = this.appointmentMessage;
+    this.configuration.appointmentSuccessMessage[this.language] = this.appointmentMessage;
     this.saveConfiguration('Appointment message');
   }
 
   saveContactInfo() {
-    this.configuration.city = this.contactInfo.city;
-    this.configuration.address = this.contactInfo.address;
-    this.configuration.phoneNumber = this.contactInfo.phoneNumber;
+    this.configuration.city[this.language] = this.city;
+    this.configuration.address[this.language] = this.address;
+    this.configuration.phoneNumber = this.phoneNumber;
 
     this.saveConfiguration('Contact info');
   }
 
-  getConfiguration(language) {
-    this.generalConfigurationService.getConfiguration(language).subscribe(config => {
+  getConfiguration() {
+    this.generalConfigurationService.getConfiguration().subscribe(config => {
 
       this.configuration = config;
 
-      this.appointmentMessage = config.appointmentSuccessMessage;
+      this.appointmentMessage = config.appointmentSuccessMessage[this.language];
 
-      this.contactInfo.city = config.city;
-      this.contactInfo.address = config.address;
-      this.contactInfo.phoneNumber = config.phoneNumber;
+      this.city = config.city[this.language];
+      this.address = config.address[this.language];
+      this.phoneNumber = config.phoneNumber;
 
-      this.facebook = config.socialMediaFacebook;
-      this.instagram = config.socialMediaInstagram;
-
+      this.facebook = config.facebook;
+      this.instagram = config.instagram;
     });
   }
 

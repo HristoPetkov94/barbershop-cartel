@@ -1,6 +1,5 @@
 package com.barbershop.cartel.general.config.info.controller;
 
-import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
 import com.barbershop.cartel.general.config.info.interfaces.GeneralConfigurationInterface;
 import com.barbershop.cartel.general.config.info.models.GeneralConfigurationModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +12,13 @@ public class GeneralConfigurationController {
     @Autowired
     private GeneralConfigurationInterface generalConfigurationInterface;
 
-
     @GetMapping
-    public GeneralConfigurationModel getConfiguration(@RequestParam LanguageEnum lang) {
-        return generalConfigurationInterface.getConfiguration(lang);
+    public GeneralConfigurationModel getConfiguration() {
+        return generalConfigurationInterface.getConfiguration();
     }
 
     @PostMapping
-    public void updateConfiguration(@RequestBody GeneralConfigurationModel config) {
+    public void saveConfiguration(@RequestBody GeneralConfigurationModel config) {
         generalConfigurationInterface.updateConfiguration(config);
     }
 }

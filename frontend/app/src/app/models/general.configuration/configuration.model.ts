@@ -1,12 +1,8 @@
-import {LanguageEnum} from '../../enums/language.enum';
-
 export class Configuration {
-  appointmentSuccessMessage: string;
-  city: string;
-  address: string;
+  appointmentSuccessMessage: Map<string, string>;
+  city: Map<string, string>;
+  address: Map<string, string>;
   phoneNumber: string;
-  socialMediaFacebook: string;
-  socialMediaInstagram: string;
-
-  language: LanguageEnum;
+  facebook: string;
+  instagram: string;
 }

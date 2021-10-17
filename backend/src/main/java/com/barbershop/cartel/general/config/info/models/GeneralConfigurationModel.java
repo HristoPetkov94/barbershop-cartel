@@ -1,21 +1,19 @@
 package com.barbershop.cartel.general.config.info.models;
 
-import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
+import com.barbershop.cartel.utils.InternationalString;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class GeneralConfigurationModel {
-    private String appointmentSuccessMessage;
+    private InternationalString appointmentSuccessMessage;
 
-    private String city;
-    private String address;
+    private InternationalString city;
+    private InternationalString address;
     private String phoneNumber;
 
-    private LanguageEnum language;
-
-    private String socialMediaFacebook;
-    private String socialMediaInstagram;
+    private String facebook;
+    private String instagram;
 }
 

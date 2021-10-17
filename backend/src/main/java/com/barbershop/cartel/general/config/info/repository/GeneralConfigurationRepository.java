@@ -9,6 +9,4 @@ import java.util.Optional;
 
 @Repository
 public interface GeneralConfigurationRepository extends CrudRepository<GeneralConfigurationEntity, Long> {
-
-    Optional<GeneralConfigurationEntity> findByLanguage(LanguageEnum language);
 }

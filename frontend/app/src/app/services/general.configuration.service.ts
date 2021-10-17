@@ -22,8 +22,8 @@ export class GeneralConfigurationService {
     return this.http.get<User[]>(this.apiUrl + '/user');
   }
 
-  getConfiguration(language: string) {
-    const requestUrl = `${this.apiUrl}${this.configUrl}?lang=${language}`;
+  getConfiguration() {
+    const requestUrl = `${this.apiUrl}${this.configUrl}`;
     return this.http.get<Configuration>(requestUrl);
   }
 

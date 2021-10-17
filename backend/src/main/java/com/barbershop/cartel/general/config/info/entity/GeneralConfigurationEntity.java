@@ -1,14 +1,18 @@
 package com.barbershop.cartel.general.config.info.entity;
 
-import com.barbershop.cartel.general.config.info.enums.LanguageEnum;
+import com.barbershop.cartel.utils.InternationalString;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 
 @Getter
 @Setter
 @Entity
+@TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 @Table(name = GeneralConfigurationEntity.TABLE_NAME)
 public class GeneralConfigurationEntity {
 
@@ -18,14 +22,17 @@ public class GeneralConfigurationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "appointment_success_message")
-    private String appointmentSuccessMessage;
+    @Type(type = "jsonb")
+    @Column(name = "appointment_success_message", columnDefinition = "jsonb")
+    private InternationalString appointmentSuccessMessage;
 
-    @Column(name = "city")
-    private String city;
+    @Type(type = "jsonb")
+    @Column(name = "city", columnDefinition = "jsonb")
+    private InternationalString city;
 
-    @Column(name = "address")
-    private String address;
+    @Type(type = "jsonb")
+    @Column(name = "address", columnDefinition = "jsonb")
+    private InternationalString address;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -35,7 +42,4 @@ public class GeneralConfigurationEntity {
 
     @Column(name = "instagram")
     private String instagram;
-
-    @Column(name = "language")
-    private LanguageEnum language = LanguageEnum.en;
 }

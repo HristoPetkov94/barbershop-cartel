@@ -147,19 +147,19 @@
 
       <h2 class="margin-bottom-10"> {{ 'configuration.general.city' | translate }} </h2>
       <div class="row justify-content-center">
-        <input [(ngModel)]="contactInfo.city" type="text" class="text-input max-width" maxlength="100"/>
+        <input [(ngModel)]="city" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> {{ 'configuration.general.address' | translate }} </h2>
       <div class="row justify-content-center">
-        <input [(ngModel)]="contactInfo.address" type="text" class="text-input max-width" maxlength="100"/>
+        <input [(ngModel)]="address" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <div class="sized-box-height-20"></div>
 
       <h2 class="margin-bottom-10"> {{ 'configuration.general.phone' | translate }} </h2>
       <div class="row justify-content-center">
-        <input [(ngModel)]="contactInfo.phoneNumber" type="text" class="text-input max-width" maxlength="100"/>
+        <input [(ngModel)]="phoneNumber" type="text" class="text-input max-width" maxlength="100"/>
       </div>
       <div class="sized-box-height-20"></div>
       <button mat-stroked-button color="accent" (click)="saveContactInfo()">
