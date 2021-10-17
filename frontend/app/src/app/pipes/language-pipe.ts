@@ -8,8 +8,7 @@ import {getCookie} from '../utils/cookie.utils';
 export class LanguagePipe implements PipeTransform {
 
   transform(internationalString) {
-
-    return internationalString[this.language];
+    return internationalString ? internationalString[this.language] : '';
   }
 
   get language(): string {

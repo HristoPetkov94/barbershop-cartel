@@ -10,7 +10,7 @@ import {Configuration} from '../../models/general.configuration/configuration.mo
 export class ContactViewComponent implements OnInit {
 
   public email: string;
-  public configuration: Configuration = new Configuration();
+  public configuration: Configuration;
 
   constructor(private generalConfigurationService: GeneralConfigurationService) {
   }
