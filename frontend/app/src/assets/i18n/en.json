@@ -70,6 +70,8 @@
       "social_media_description": "Set up URLs of the barbershop's social media pages. You can change it at any time.",
       "contact_info_label": "Contact info",
       "contact_info_description": "Provide contact details to the public. You can change it at any time.",
+      "working_time_label": "Working time",
+      "working_time_description": "You can define the working time of the barbershop. It is displayed in the tab Contacts.\nIf you want to style the text you can put it in between '#'.\n\nExample: #Monday to Friday:#",
       "city": "City",
       "address": "Address",
       "phone": "Phone number"

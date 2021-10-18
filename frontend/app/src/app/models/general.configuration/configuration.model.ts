@@ -5,4 +5,5 @@ export class Configuration {
   phoneNumber: string;
   facebook: string;
   instagram: string;
+  workingTimeInfo: Map<string, string>;
 }

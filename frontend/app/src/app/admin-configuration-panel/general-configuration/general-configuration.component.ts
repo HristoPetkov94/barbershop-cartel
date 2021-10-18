@@ -28,6 +28,7 @@ export class GeneralConfigurationComponent implements OnInit {
   public city: string;
   public address: string;
   public phoneNumber: string;
+  public workingTimeInfo: string;
 
   private language: string;
 
@@ -65,6 +66,7 @@ export class GeneralConfigurationComponent implements OnInit {
     this.configuration.city[this.language] = this.city;
     this.configuration.address[this.language] = this.address;
     this.configuration.phoneNumber = this.phoneNumber;
+    this.configuration.workingTimeInfo[this.language] = this.workingTimeInfo;
 
     this.saveConfiguration('Contact info');
   }
@@ -82,6 +84,8 @@ export class GeneralConfigurationComponent implements OnInit {
 
       this.facebook = config.facebook;
       this.instagram = config.instagram;
+
+      this.workingTimeInfo = config.workingTimeInfo[this.language];
     });
   }
 

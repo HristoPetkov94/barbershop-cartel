@@ -42,4 +42,8 @@ public class GeneralConfigurationEntity {
 
     @Column(name = "instagram")
     private String instagram;
+
+    @Type(type = "jsonb")
+    @Column(name = "working_time_info", columnDefinition = "jsonb")
+    private InternationalString workingTimeInfo;
 }

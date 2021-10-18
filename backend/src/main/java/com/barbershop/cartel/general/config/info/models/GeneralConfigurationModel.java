@@ -15,5 +15,6 @@ public class GeneralConfigurationModel {
 
     private String facebook;
     private String instagram;
+    private InternationalString workingTimeInfo;
 }
 

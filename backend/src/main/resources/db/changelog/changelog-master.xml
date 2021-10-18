@@ -159,4 +159,8 @@
         <sqlFile path="db/2021-10-16_update_general_configuration_contact_info.sql"/>
     </changeSet>
 
+    <changeSet author="hp" id="2021-10-17_add_column_general_configuration.sql">
+        <sqlFile path="db/2021-10-17_add_column_general_configuration.sql"/>
+    </changeSet>
+
 </databaseChangeLog>

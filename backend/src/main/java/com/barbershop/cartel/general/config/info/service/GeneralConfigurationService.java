@@ -38,6 +38,7 @@ public class GeneralConfigurationService implements GeneralConfigurationInterfac
         configuration.setPhoneNumber(config.getPhoneNumber());
         configuration.setFacebook(config.getFacebook());
         configuration.setInstagram(config.getInstagram());
+        configuration.setWorkingTimeInfo(config.getWorkingTimeInfo());
 
         generalConfigurationRepository.save(configuration);
     }
