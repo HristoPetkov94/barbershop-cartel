@@ -39,8 +39,9 @@ export class NavigationComponent implements OnInit {
     this.translate.use(lang);
 
     const isHomepage = this.router.url === '/';
+    const isContacts = this.router.url === '/contacts';
 
-    if (isHomepage) {
+    if (isHomepage || isContacts) {
       this.routeExt.reloadComponent();
     }
   }

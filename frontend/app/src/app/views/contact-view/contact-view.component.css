@@ -151,10 +151,10 @@
   font-style: normal;
   font-weight: 300;
   font-size: 18px;
-  line-height: 130.9%;
   /* or 24px */
 
-
+  white-space: pre-line;
+  line-height: 200%;
   color: #FFFFFF;
 }
 
@@ -164,9 +164,9 @@
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
-  line-height: 130.9%;
   /* or 24px */
-
+  white-space: pre-line;
+  line-height: 200%;
 
   color: #864A37;
 }
