@@ -29,11 +29,11 @@
   <div class="item-footer col justify-content-center" style="color: white">
     <div class="row">
 
-      <img class="icon" src="../../../assets/images/design/icon-facebook.png"/>
-      <img class="icon" src="../../../assets/images/design/icon-instagram.png"/>
-      <img class="icon" src="../../../assets/images/design/icon-email.png"/>
-      <img class="icon" src="../../../assets/images/design/icon-phone.png"/>
-      <img class="icon" src="../../../assets/images/design/icon-location.png"/>
+      <img (click)="toFacebook()" class="icon" src="../../../assets/images/design/icon-facebook.png"/>
+      <img (click)="toInstagram()" class="icon" src="../../../assets/images/design/icon-instagram.png"/>
+      <img class="icon" [routerLink]="'contacts'" src="../../../assets/images/design/icon-email.png"/>
+      <img class="icon" [routerLink]="'contacts'" src="../../../assets/images/design/icon-phone.png"/>
+      <img class="icon" [routerLink]="'contacts'" src="../../../assets/images/design/icon-location.png"/>
 
     </div>
 
