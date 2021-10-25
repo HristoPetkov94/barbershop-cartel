@@ -1,30 +1,6 @@
 <ng-container *ngIf="done" class="done">
-  <!--    <mat-icon> done</mat-icon>-->
-  <!--    <br/>-->
-
-  <!--    <p> Thank you for choosing us !</p>-->
-  <!--    <p> You have a booked hour for {{ stepperData.date }} / {{ stepperData.hour }} h. </p>-->
-
-  <!--    <div class="sized-box-height-20"></div>-->
-
-  <!--    <div class="hover-me">-->
-  <!--      <button class="go-back-btn" (click)="goBackHome()">-->
-  <!--        Go back home-->
-  <!--      </button>-->
-  <!--    </div>-->
   <div class="msg-container col align-items-center justify-content-center">
-    <div class="col main-msg">
-      <div>
-        БЛАГОДАРИМ ВИ,
-      </div>
-      <p>
-        ЧЕ ИЗБРАХТЕ НАС!
-      </p>
-    </div>
-
-    <div class="sub-msg">
-      ОЧАКВАЙТЕ ПОТВЪРЖДЕНИЕ ПО МЕЙЛ.
-    </div>
+      <div [innerHTML]="appointmentSuccessMessage | language"></div>
   </div>
 </ng-container>
 

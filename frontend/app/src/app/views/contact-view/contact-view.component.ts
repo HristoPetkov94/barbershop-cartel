@@ -1,7 +1,7 @@
-import {Component, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {GeneralConfigurationService} from '../../services/general.configuration.service';
 import {Configuration} from '../../models/general.configuration/configuration.model';
-import {LanguagePipe} from '../../pipes/language-pipe';
+import {LanguageEnum} from '../../enums/language.enum';
 
 @Component({
   selector: 'app-contact-view',
@@ -9,17 +9,13 @@ import {LanguagePipe} from '../../pipes/language-pipe';
   styleUrls: ['./contact-view.component.css'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ContactViewComponent implements OnInit, OnChanges {
+export class ContactViewComponent implements OnInit {
 
   public email: string;
   public configuration: Configuration;
-  public workTimeInfo;
+  public workTimeInfo = {};
 
-  constructor(private generalConfigurationService: GeneralConfigurationService, private languagePipe: LanguagePipe) {
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-      console.log('roroorr');
+  constructor(private generalConfigurationService: GeneralConfigurationService) {
   }
 
   ngOnInit(): void {
@@ -32,22 +28,31 @@ export class ContactViewComponent implements OnInit, OnChanges {
     this.generalConfigurationService.getConfiguration().subscribe(configuration => {
       this.configuration = configuration;
 
-      const data = configuration.workingTimeInfo[this.languagePipe.language];
+      const messageBG = configuration.workingTimeInfo[LanguageEnum.BG];
+      const messageEN = configuration.workingTimeInfo[LanguageEnum.EN];
 
-      const regex = /#(.*)#/g;
-      const result = data.match(regex);
-
-      this.workTimeInfo = data;
-
-      // set default style
-      this.workTimeInfo = `<span class="info-sub-text">${this.workTimeInfo}</span>`;
-
-      // set style on # words
-      for (const res of result) {
-        const word = res.replace(/#/g, '');
-
-        this.workTimeInfo = this.workTimeInfo.replace(res, '<span class="info-sub-text-brown">' + word + '</span>');
-      }
+      // Change style for both of the languages and cash it into variable workTimeInfo.
+      // This way we can change language without reload.
+      this.changeStyle(messageBG, LanguageEnum.BG);
+      this.changeStyle(messageEN, LanguageEnum.EN);
     });
+  }
+
+  private changeStyle(message, language) {
+
+    const regex = /#(.*)#/g;
+    const result = message.match(regex);
+
+    this.workTimeInfo[language] = message;
+
+    // set default style
+    this.workTimeInfo[language] = `<span class="info-sub-text">${this.workTimeInfo[language]}</span>`;
+
+    // set style on # words
+    for (const res of result) {
+      const word = res.replace(/#/g, '');
+
+      this.workTimeInfo[language] = this.workTimeInfo[language].replace(res, '<span class="info-sub-text-brown">' + word + '</span>');
+    }
   }
 }

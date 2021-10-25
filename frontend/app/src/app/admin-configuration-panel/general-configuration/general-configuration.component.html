@@ -51,7 +51,7 @@
     <div class="col padding-20 max-height">
 
       <h1 class="margin-bottom-10">{{ 'configuration.general.appointment_message_label' | translate }}</h1>
-      <p> {{ 'configuration.general.appointment_message_description' | translate }}</p>
+      <p class="pre-line"> {{ 'configuration.general.appointment_message_description' | translate }}</p>
 
     </div>
 
@@ -66,9 +66,9 @@
                         [(ngModel)]="appointmentMessage"
                         rows="15" cols="50"
                         name="comment"
-                        maxlength="255">
+                        maxlength="100">
               </textarea>
-        <div class="label font-size-small">{{appointmentMessage?.length}} / 255</div>
+        <div class="label font-size-small">{{appointmentMessage?.length}} / 100</div>
       </div>
 
       <button mat-stroked-button color="accent" (click)="saveAppointmentMessage()">
@@ -131,7 +131,7 @@
 
 <mat-grid-list class="margin-top-20" cols="4" rowHeight="150px">
 
-  <mat-grid-tile [colspan]="2" [rowspan]="3">
+  <mat-grid-tile [colspan]="2" [rowspan]="4">
 
     <div class="col padding-20 max-height max-width">
 
@@ -176,9 +176,9 @@
                         [(ngModel)]="workingTimeInfo"
                         rows="15" cols="50"
                         name="comment"
-                        maxlength="255">
+                        maxlength="100">
               </textarea>
-        <div class="label font-size-small">{{workingTimeInfo?.length}} / 255</div>
+        <div class="label font-size-small">{{workingTimeInfo?.length}} / 100</div>
       </div>
       <div class="sized-box-height-20"></div>
       <button mat-stroked-button color="accent" (click)="saveContactInfo()">
