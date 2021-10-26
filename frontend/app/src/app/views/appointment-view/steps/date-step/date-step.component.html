@@ -10,7 +10,7 @@
       </div>
 
       <div class="row justify-content-center date-banner">
-        <span> {{week[0].date | date: 'MMMM yyyy'}} </span>
+        <span> {{firstDateOfFirstWeek | date: 'MMMM yyyy'}} </span>
       </div>
 
       <div>
@@ -52,12 +52,12 @@
   <div class="col hours-wrapper">
 
     <div class="selected-day">
-      {{today | date}}
+      {{today | date:'dd MMM'}}
     </div>
 
     <!--this will hold the hours-->
     <div *ngIf="hours.length == 0" class="not-available-msg">
-      <p><b>No available appointments for today.</b></p>
+      <p><b>{{'booking.no_available_appointments' | translate}}</b></p>
     </div>
 
   <div class="row hours" >

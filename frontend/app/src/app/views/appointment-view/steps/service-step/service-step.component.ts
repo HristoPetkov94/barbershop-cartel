@@ -6,7 +6,6 @@ import {AssignmentService} from '../../../../services/assignment.service';
 import {Assignment} from '../../../../models/assignment';
 import {ChangeStepRequest} from '../../stepper/change-step-request.model';
 import {StepEnum} from '../../stepper/step.enum';
-import {LanguagePipe} from '../../../../pipes/language-pipe';
 
 @Component({
   selector: 'app-service-step',
@@ -25,8 +24,7 @@ export class ServiceStepComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private serviceService: ServiceService,
-    private assignmentService: AssignmentService,
-    private languagePipe: LanguagePipe) {
+    private assignmentService: AssignmentService) {
   }
 
   ngOnInit(): void {

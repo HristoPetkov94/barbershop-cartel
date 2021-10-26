@@ -23,7 +23,7 @@ export class DateStepComponent implements OnInit {
   @Input() stepperData;
   @Output() changeStep = new EventEmitter<ChangeStepRequest>();
 
-  private numberOfWeeks: number = 0;
+  private numberOfWeeks = 0;
 
   assignments: Assignment[];
 
@@ -31,6 +31,7 @@ export class DateStepComponent implements OnInit {
   public week: Day[];
 
   public today;
+  public firstDateOfFirstWeek;
 
   constructor(
     private route: ActivatedRoute,
@@ -67,23 +68,19 @@ export class DateStepComponent implements OnInit {
   }
 
   getFrom() {
-
     const from = dayjs().weekday(1).startOf('day').add(this.numberOfWeeks * 7, 'day');
-
     return from;
   }
 
   getTo() {
-
     const to = this.getFrom().add(6, 'day');
-    console.log(to);
-
     return to;
   }
 
   currentWeek() {
     this.appointmentDaysService.get(this.assignmentId, this.getFrom(), this.getTo()).subscribe(week => {
       this.week = week;
+      this.firstDateOfFirstWeek = week[0].date;
 
       const today = week.find(d => d.today === true);
 

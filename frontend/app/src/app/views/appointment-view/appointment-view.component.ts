@@ -3,7 +3,6 @@ import {StepEnum} from './stepper/step.enum';
 import {ChangeStepRequest} from './stepper/change-step-request.model';
 import {StepController} from './stepper/step.controller';
 import {Step} from './stepper/step.model';
-import {LanguagePipe} from '../../pipes/language-pipe';
 
 @Component({
   selector: 'app-appointment-view',
@@ -19,7 +18,7 @@ export class AppointmentViewComponent implements OnInit {
   public DATE_STEP = StepEnum.DATE_STEP;
   public FINISH_STEP = StepEnum.FINISH_STEP;
 
-  constructor(private languagePipe: LanguagePipe) {
+  constructor() {
   }
 
   ngOnInit() {

@@ -134,6 +134,9 @@
     "phone": "Telephone",
     "email_error": "Please enter a valid email",
     "phone_error": "Please enter a valid phone number",
-    "appointment_button": "Make an appointment"
+    "appointment_button": "Make an appointment",
+    "minutes": "min.",
+    "bgn": "BGN",
+    "no_available_appointments": "No available appointments for today."
   }
 }

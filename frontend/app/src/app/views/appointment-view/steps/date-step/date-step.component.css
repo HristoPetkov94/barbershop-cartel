@@ -89,6 +89,7 @@
 .calendar-navigation {
   border: 3px solid var(--main-color);
   padding: 5px 15px 10px 15px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .hours {
@@ -163,7 +164,7 @@
   font-weight: 300;
   font-size: 24px;
   line-height: 29px;
-
+  text-align: center;
   color: #FFFFFF;
 
   cursor: pointer;
@@ -179,6 +180,7 @@
 
 .hours-wrapper {
   border: 3px solid var(--main-color);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .not-available-msg {
