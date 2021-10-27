@@ -12,6 +12,23 @@
       <div class="col">
 
         <div class="col">
+
+          <div class="row">
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>{{'booking.first_name' | translate}}</mat-label>
+              <input matInput formControlName="firstName" required>
+              <mat-error *ngIf="email.invalid">{{'booking.first_name_error' | translate}}</mat-error>
+            </mat-form-field>
+
+            <div class="sized-box-width-10"></div>
+
+            <mat-form-field appearance="outline" class="half-width">
+              <mat-label>{{'booking.last_name' | translate}}</mat-label>
+              <input matInput formControlName="lastName" required>
+              <mat-error *ngIf="email.invalid">{{'booking.last_name_error' | translate}}</mat-error>
+            </mat-form-field>
+          </div>
+
           <mat-form-field appearance="outline">
             <mat-label>{{ 'booking.email' | translate }}</mat-label>
             <input matInput formControlName="email" required>
@@ -25,10 +42,7 @@
             <mat-icon matSuffix>phone</mat-icon>
             <mat-error *ngIf="phone.invalid"> {{ 'booking.phone_error' | translate }} </mat-error>
           </mat-form-field>
-
         </div>
-
-        <mat-divider></mat-divider>
 
         <div class="sized-box-height-20"></div>
 
@@ -36,15 +50,16 @@
           <!--      details-->
           <div class="row align-items-center flex-space-between">
             <div class="row align-items-center">
-              <mat-icon>person</mat-icon>
+              <p class="font-weight-bold">{{'stepper.barber' | translate}}:</p>
               <div class="sized-box-width-10"></div>
-              <span> {{ stepperData.firstName | language }}  {{ stepperData.lastName | language}}</span>
+              <span class="font-weight-bold"> {{ stepperData.firstName | language }}  {{ stepperData.lastName | language}}</span>
             </div>
 
-            <div class="row align-items-center">
-              <mat-icon>calendar_today</mat-icon>
+            <div class="row align-items-center font-weight-bold">
+              {{ stepperData.hour }},
               <div class="sized-box-width-10"></div>
-              {{ stepperData.date }} / {{ stepperData.hour }} ч.
+              {{ stepperData.date | date:'dd MMMM'}}
+              ({{ stepperData.date | date:'EEE'}})
             </div>
 
           </div>
@@ -57,39 +72,41 @@
 
           <div class="col">
 
-            <div class="row align-items-center">
-              <mat-icon>event_note</mat-icon>
-              <div class="sized-box-width-10"></div>
-              {{ stepperData.serviceTitle | language }}
-            </div>
-
-            <div class="sized-box-height-10"></div>
-
-            <div class="row">
-              <div class="row align-items-center">
-                <mat-icon>attach_money</mat-icon>
-                <div class="sized-box-width-10"></div>
-                {{ stepperData.assignmentPrice }} {{'booking.bgn' | translate}}
-              </div>
-
-              <div class="sized-box-width-20"></div>
+            <div class="row flex-space-between">
 
               <div class="row align-items-center">
-                <mat-icon>access_time</mat-icon>
+                <p class="font-weight-bold">{{'stepper.service' | translate}}:</p>
                 <div class="sized-box-width-10"></div>
-                {{ stepperData.assignmentDuration }} {{'booking.minutes' | translate}}
+                <p class="font-weight-bold">{{ stepperData.serviceTitle | language }}</p>
               </div>
+
+              <div class="row">
+
+                <div class="row align-items-center">
+                  <div class="sized-box-width-10"></div>
+                  <p class="font-weight-bold">{{ stepperData.assignmentPrice }} {{'booking.bgn' | translate}}</p>
+                </div>
+
+                <div class="sized-box-width-20"></div>
+
+                <div class="row align-items-center">
+                  <p class="font-weight-bold">{{ stepperData.assignmentDuration }} {{'booking.minutes' | translate}}</p>
+                  <div class="sized-box-width-10"></div>
+                </div>
+
+              </div>
+
             </div>
+
           </div>
         </div>
-
       </div>
     </form>
 
     <div class="sized-box-height-20"></div>
 
     <button class="confirm-button" (click)="makeAnAppointment()" [disabled]="myForm.invalid">
-      {{ 'booking.appointment_button' | translate }}
+      <p class="font-weight-bold">{{ 'booking.appointment_button' | translate }}</p>
     </button>
 
   </div>

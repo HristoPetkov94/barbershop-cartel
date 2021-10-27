@@ -125,6 +125,10 @@ h2 {
   height: 100%;
 }
 
+.half-width {
+  width: 50%;
+}
+
 .max-width {
   width: 100%;
 }

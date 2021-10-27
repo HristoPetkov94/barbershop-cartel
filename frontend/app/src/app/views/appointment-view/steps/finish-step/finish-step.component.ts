@@ -47,6 +47,8 @@ export class FinishStepComponent implements OnInit {
     this.myForm = this.fb.group({
         email: ['', Validators.email],
         phone: ['', Validators.pattern(this.reg)],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required]
       }
     );
 
@@ -70,6 +72,14 @@ export class FinishStepComponent implements OnInit {
     return this.myForm.get('phone');
   }
 
+  get firstName() {
+    return this.myForm.get('firstName');
+  }
+
+  get lastName() {
+    return this.myForm.get('lastName');
+  }
+
   makeAnAppointment() {
 
     this.appointment.assignmentId = this.stepperData.assignmentId;
@@ -82,6 +92,7 @@ export class FinishStepComponent implements OnInit {
 
     this.appointment.phone = this.phone.value;
     this.appointment.email = this.email.value;
+    this.appointment.name = this.firstName.value + ' ' + this.lastName.value;
 
     this.appointmentService.create(this.appointment).subscribe(() => {
     }, () => {

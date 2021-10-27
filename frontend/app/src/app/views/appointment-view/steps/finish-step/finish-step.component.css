@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-evenly;
 
-  height: 400px;
+  height: 480px;
   border: 3px solid var(--main-color);
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
@@ -143,4 +143,20 @@
 
 .msg-container {
   height: 50vh;
+}
+
+.font-weight-bold{
+  font-weight: bold;
+}
+
+/* when auto-filling input field keep background transparent*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+input:-webkit-autofill:valid,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-transition-delay: 99999s;
 }
