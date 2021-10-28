@@ -160,3 +160,26 @@ select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
   -webkit-transition-delay: 99999s;
 }
+
+/* styles for the ngx-mat-intl-tel-input */
+input:not(.country-search){
+  bottom: 3px;
+  left: 10px;
+  height: 20px;
+}
+
+.mat-menu-content:not(:empty){
+  max-height:250px;
+}
+
+.country-list-button{
+  font-size: 0.8rem!important;
+}
+
+.country-selector {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  left: -3px !important;
+  bottom: 8px !important;
+  width: 102px !important;
+}

@@ -30,7 +30,8 @@ export class FinishStepComponent implements OnInit {
 
   myForm: FormGroup;
   // TODO: find better regex
-  reg = '(^(\\+359)|0)\\d{9}$';
+  // reg = '(^(\\+359)|0)\\d{9}$';
+  reg = '^[+][0-9]{12}$';
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,7 @@ export class FinishStepComponent implements OnInit {
 
     this.myForm = this.fb.group({
         email: ['', Validators.email],
-        phone: ['', Validators.pattern(this.reg)],
+        phone: ['', Validators.required],
         firstName: ['', Validators.required],
         lastName: ['', Validators.required]
       }

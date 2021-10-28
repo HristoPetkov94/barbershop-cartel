@@ -91,6 +91,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { CartelPaginatorComponent} from './views/cartel-paginator/cartel-paginator.component';
 import { CartelPageItemDirective } from './views/cartel-paginator/cartel-page-item.directive';
 import {DatePipe} from '@angular/common';
+import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
 
 @NgModule({
   exports: [
@@ -191,6 +192,7 @@ import {DatePipe} from '@angular/common';
             useFactory: adapterFactory,
         }),
         MatSortModule,
+        NgxMatIntlTelInputModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true},

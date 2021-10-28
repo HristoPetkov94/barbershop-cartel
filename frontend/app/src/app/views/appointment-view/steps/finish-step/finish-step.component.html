@@ -38,7 +38,14 @@
 
           <mat-form-field appearance="outline">
             <mat-label>{{ 'booking.phone' | translate }}</mat-label>
-            <input matInput formControlName="phone" type="tel" [minLength]="10" required>
+
+            <ngx-mat-intl-tel-input
+              [preferredCountries]="['bg','gb','de']"
+              [enablePlaceholder]="true"
+              [enableSearch]="true"
+              formControlName="phone" required>
+            </ngx-mat-intl-tel-input>
+
             <mat-icon matSuffix>phone</mat-icon>
             <mat-error *ngIf="phone.invalid"> {{ 'booking.phone_error' | translate }} </mat-error>
           </mat-form-field>
