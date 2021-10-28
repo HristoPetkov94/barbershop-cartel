@@ -361,8 +361,8 @@ export class CalendarComponent implements OnInit {
   private getTitle(appointment: AppointmentModel){
     let title = '';
 
-    if (appointment.phone != null) {
-      title += appointment.phone;
+    if (appointment.name != null) {
+      title += appointment.name;
       title += '</br>';
     }
 
