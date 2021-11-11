@@ -101,16 +101,6 @@ input::placeholder {
   opacity: 1;
 }
 
-.remember-me-wrapper {
-  width: 328px;
-  margin: 24px auto 48px auto;
-}
-
-.checkbox-text {
-  color: #EEF1F3;
-  font: 23px Montserrat;
-}
-
 .forgot-pass-text {
   font: 23px Montserrat;
   letter-spacing: 0;
@@ -119,6 +109,12 @@ input::placeholder {
   text-align: center;
 
   margin-top: 43px;
+}
+
+.forgot-pass-text:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 .footer-text {

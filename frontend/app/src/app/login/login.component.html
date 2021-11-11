@@ -15,15 +15,9 @@
           <mat-error *ngIf="invalidLogin" >Incorrect username or password</mat-error>
         </mat-form-field>
       </div>
-
-      <!--    <div class="action-buttons">-->
-      <!--      <button mat-stroked-button color="warn" (click)="login()"> login</button>-->
-      <!--    </div>-->
     </form>
 
-    <section class="remember-me-wrapper">
-      <mat-checkbox class="checkbox-text">Remember me</mat-checkbox>
-    </section>
+    <div class="sized-box-height-50"></div>
 
     <div class="action-buttons">
       <button class="login-button" (click)="login()">
@@ -34,11 +28,6 @@
     </div>
 
     <p (click)="forgotPassword()" class="forgot-pass-text"> Forgot password ?</p>
-
-    <div class="footer-text">
-      <span> Do you have an account?</span>
-      <a href="/register">sign up</a>
-    </div>
   </div>
 </div>
 
