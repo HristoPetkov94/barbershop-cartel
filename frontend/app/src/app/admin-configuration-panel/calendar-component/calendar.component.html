@@ -3,46 +3,54 @@
     <mat-icon color="primary"> {{fullscreen ? 'close_fullscreen' : 'open_in_full'}}</mat-icon>
   </button>
 
-  <div class="row text-center">
+  <div class="row height-60">
 
-    <div class="col-md-4">
-      <mat-form-field appearance="outline">
-        <mat-select [(value)]="selectedBarberIndex" (selectionChange)="change()">
+    <mat-form-field appearance="outline">
 
-          <mat-option *ngFor="let barber of barberDropdowns; let i = index"
-                      [value]="i"> {{barber.label}} </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
-        <mat-button-toggle           mwlCalendarPreviousView
-                                     [view]="view"
-                                     [(viewDate)]="viewDate"
-                                     (viewDateChange)="closeOpenMonthViewDay()"
-                                     value="Previous">
-          <mat-icon aria-hidden="false" aria-label="Before">navigate_before</mat-icon>
-        </mat-button-toggle>
-        <mat-button-toggle
-          mwlCalendarToday
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-          value="Today">Today</mat-button-toggle>
-        <mat-button-toggle
-          mwlCalendarNextView
-          [view]="view"
-          [(viewDate)]="viewDate"
-          (viewDateChange)="closeOpenMonthViewDay()"
-          value="Next">
-          <mat-icon aria-hidden="false" aria-label="Next">navigate_next</mat-icon>
-        </mat-button-toggle>
-        <mat-button-toggle>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</mat-button-toggle>
-        <mat-button-toggle [ngClass]="status">
+      <mat-select [(value)]="selectedBarberIndex" (selectionChange)="change()">
+
+        <mat-option *ngFor="let barber of barberDropdowns; let i = index"
+                    [value]="i"> {{barber.label}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="sized-box-width-10"></div>
+
+    <mat-button-toggle mwlCalendarPreviousView
+                       [view]="view"
+                       [(viewDate)]="viewDate"
+                       (viewDateChange)="closeOpenMonthViewDay()"
+                       value="Previous">
+      <mat-icon aria-hidden="false" aria-label="Before">navigate_before</mat-icon>
+    </mat-button-toggle>
+
+    <mat-button-toggle
+      mwlCalendarToday
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()"
+      value="Today">Today
+    </mat-button-toggle>
+
+    <mat-button-toggle
+      mwlCalendarNextView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()"
+      value="Next">
+      <mat-icon aria-hidden="false" aria-label="Next">navigate_next</mat-icon>
+    </mat-button-toggle>
+
+    <div class="sized-box-width-10"></div>
+
+    <mat-button-toggle>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</mat-button-toggle>
+
+    <mat-button-toggle [ngClass]="status">
           <span class="material-icons">
-            cloud
+            sync
           </span>
-        </mat-button-toggle>
-      </mat-button-toggle-group>
-    </div>
+    </mat-button-toggle>
   </div>
+
   <br/>
   <div [ngSwitch]="view">
     <mwl-calendar-month-view
@@ -53,29 +61,30 @@
       [activeDayIsOpen]="activeDayIsOpen"
       (dayClicked)="dayClicked($event.day)"
       (eventClicked)="eventHourSlotClicked('Clicked', $event.event)"
-      (eventTimesChanged)="eventTimesChanged($event)"
-    >
+      (eventTimesChanged)="eventTimesChanged($event)">
     </mwl-calendar-month-view>
+
     <mwl-calendar-week-view
       *ngSwitchCase="CalendarView.Week"
       weekStartsOn="1"
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
-      [dayStartHour]="7"
-      [dayEndHour]="19"
+      [dayStartHour]="8"
+      [dayEndHour]="17"
       (eventClicked)="eventHourSlotClicked('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       (hourSegmentClicked)="emptyHourSlotClicked($event.date)"
     >
     </mwl-calendar-week-view>
+
     <mwl-calendar-day-view
       *ngSwitchCase="CalendarView.Day"
       [viewDate]="viewDate"
       [events]="events"
       [refresh]="refresh"
       [dayStartHour]="8"
-      [dayEndHour]="19"
+      [dayEndHour]="18"
       (eventClicked)="eventHourSlotClicked('Clicked', $event.event)"
       (eventTimesChanged)="eventTimesChanged($event)"
       (hourSegmentClicked)="emptyHourSlotClicked($event.date)"

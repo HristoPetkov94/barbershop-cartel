@@ -169,6 +169,10 @@ h2 {
   height: 50px;
 }
 
+.height-60 {
+  height: 60px;
+}
+
 .align-items-center {
   align-items: center;
 }

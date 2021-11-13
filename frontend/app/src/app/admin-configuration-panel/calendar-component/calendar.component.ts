@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {addDays, addMinutes, isSameDay, isSameMonth, startOfWeek,} from 'date-fns';
+import {addDays, addMinutes, isSameDay, isSameMonth, startOfWeek} from 'date-fns';
 import {Subject} from 'rxjs';
-import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView,} from 'angular-calendar';
+import {CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView} from 'angular-calendar';
 import {AppointmentService} from '../../services/appointment.service';
 import {BarberService} from '../../services/barber.service';
 import {Barber} from '../../models/barber.model';
@@ -75,7 +75,7 @@ const appointmentColors = [
 ];
 
 @Component({
-  selector: 'calendar-component',
+  selector: 'app-calendar-component',
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['calendar.component.css'],
   templateUrl: 'calendar.component.html',
