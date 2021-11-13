@@ -114,7 +114,7 @@ export class FinishStepComponent implements OnInit {
 
   private changeStyle(message, language) {
     const regex = /.*\n*.*#/g;
-    const result = message.match(regex);
+    const result = message.match(regex) ?? '';
 
     this.appointmentSuccessMessage[language] = message;
 

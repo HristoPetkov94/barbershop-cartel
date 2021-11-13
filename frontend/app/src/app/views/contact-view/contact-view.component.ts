@@ -41,7 +41,7 @@ export class ContactViewComponent implements OnInit {
   private changeStyle(message, language) {
 
     const regex = /#(.*)#/g;
-    const result = message.match(regex);
+    const result = message.match(regex) ?? '';
 
     this.workTimeInfo[language] = message;
 
