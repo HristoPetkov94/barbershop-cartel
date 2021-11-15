@@ -74,6 +74,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/appointment-day-models",
                         "/appointments/**",
                         "/general-configuration**",
+                        "/user",
                         // swagger
                         "/v2/api-docs",
                         "/configuration/ui",
