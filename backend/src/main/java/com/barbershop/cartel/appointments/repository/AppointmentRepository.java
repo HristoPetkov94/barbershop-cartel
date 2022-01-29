@@ -17,6 +17,6 @@ public interface AppointmentRepository extends CrudRepository<AppointmentEntity,
     @Query("SELECT a FROM AppointmentEntity a WHERE a.barber.id = :barberId and NOT(:end < a.startTime or a.endTime < :start)")
     List<AppointmentEntity> findBetween(@Param("barberId") Long barberId, @Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 
-    @Query("SELECT COUNT(a) > 0 FROM AppointmentEntity a WHERE a.barber.id = :barberId and NOT(:end < a.startTime or a.endTime < :start)")
+    @Query("SELECT COUNT(a) > 0 FROM AppointmentEntity a WHERE a.barber.id = :barberId and NOT(:end <= a.startTime or a.endTime <= :start)")
     boolean existsBetween(@Param("barberId") Long barberId, @Param("start") LocalDateTime start, @Param("end") LocalDateTime end);
 }
