@@ -1,0 +1,1 @@
+ALTER TABLE appointments ADD COLUMN price NUMERIC;

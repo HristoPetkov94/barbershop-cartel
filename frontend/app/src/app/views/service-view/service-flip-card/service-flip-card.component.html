@@ -22,7 +22,7 @@
         <div class="sized-box-height-10">
         </div>
 
-        <div class="prices row flex-space-between" *ngFor="let assignment of priceList"
+        <div class="prices row justify-content-space-between" *ngFor="let assignment of priceList"
              (click)="book(assignment.barberId, service, assignment)">
           <!--          //TODO: add text wrapper if it goes out of bounds-->
           <div> {{getBarberNames(assignment.barberId)[0] | language }} {{getBarberNames(assignment.barberId)[1] | language }} </div>

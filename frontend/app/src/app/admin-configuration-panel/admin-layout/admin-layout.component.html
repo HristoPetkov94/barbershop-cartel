@@ -13,7 +13,7 @@
       </mat-toolbar>
 
       <div class="row content-wrapper">
-        <div class="drawer col flex-space-between">
+        <div class="drawer col justify-content-space-between">
 
           <div class="col">
             <div class="go-home" [routerLink]="'/'">
@@ -77,6 +77,12 @@
                  class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
               <mat-icon>shopping_cart</mat-icon>
               <h2> {{ 'configuration.tabs.store' | translate }}</h2>
+            </div>
+
+            <div [routerLink]="'/configuration/dashboard'" [routerLinkActive]="['selected']"
+                 class="row justify-content-start align-items-center space-between-5 remove-focus height-50 unselectable">
+              <mat-icon>dashboard</mat-icon>
+              <h2> {{ 'configuration.tabs.dashboard' | translate }}</h2>
             </div>
           </div>
 

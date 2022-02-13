@@ -1,0 +1,11 @@
+<div>
+  <p>{{ 'configuration.dashboard.total_appointments' | translate }}:</p>
+  <canvas baseChart width="700" height="300"
+          [datasets]="barChartData"
+          [labels]="barChartLabels"
+          [options]="barChartOptions"
+          [plugins]="barChartPlugins"
+          [legend]="barChartLegend"
+          [chartType]="barChartType">
+  </canvas>
+</div>

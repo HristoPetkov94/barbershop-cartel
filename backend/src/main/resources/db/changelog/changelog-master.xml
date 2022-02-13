@@ -163,4 +163,8 @@
         <sqlFile path="db/2021-10-17_add_column_general_configuration.sql"/>
     </changeSet>
 
+    <changeSet author="ss_hp" id="2022-01-29_add_price_to_appointment.sql">
+        <sqlFile path="db/2022-01-29_add_price_to_appointment.sql"/>
+    </changeSet>
+
 </databaseChangeLog>

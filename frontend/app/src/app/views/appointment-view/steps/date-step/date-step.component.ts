@@ -68,7 +68,8 @@ export class DateStepComponent implements OnInit {
   }
 
   getFrom() {
-    const from = dayjs().weekday(1).startOf('day').add(this.numberOfWeeks * 7, 'day');
+    // TODO: When is sunday, the calendar shows the week from next day (monday to friday). Today's appointments are not available
+    const from = dayjs().weekday(0).startOf('day').add(this.numberOfWeeks * 7, 'day');
     return from;
   }
 

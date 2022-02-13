@@ -23,7 +23,7 @@
   width: 100%;
 }
 
-.flex-space-between {
+.justify-content-space-between {
   width: 100%;
   display: flex;
   justify-content: space-between;

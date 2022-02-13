@@ -9,7 +9,7 @@
       <mat-card-content>
         <mat-list role="list" *ngFor="let service of services;">
           <mat-list-item role="listitem">
-            <div class="flex-space-between">
+            <div class="justify-content-space-between">
               <p> {{ service.name }} </p>
               <mat-icon color="warn" class="cursor-pointer">close</mat-icon>
             </div>
@@ -31,7 +31,7 @@
         <mat-list role="list" *ngFor="let barber of barbers;">
           <mat-card>
 
-            <mat-card-header class="flex-space-between">
+            <mat-card-header class="justify-content-space-between">
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title> <p> {{ barber.name }} </p></mat-card-title>
               <mat-icon color="warn" class="cursor-pointer">close</mat-icon>
@@ -54,7 +54,7 @@
         <mat-list role="list" *ngFor="let barber of barbers;">
           <mat-card>
 
-            <mat-card-header class="flex-space-between">
+            <mat-card-header class="justify-content-space-between">
               <div mat-card-avatar class="example-header-image"></div>
               <mat-card-title> <p> {{ barber.name }} </p></mat-card-title>
               <mat-icon color="warn" class="cursor-pointer">close</mat-icon>

@@ -1,0 +1,128 @@
+<div class="row">
+
+  <div class="col mat-elevation-z8 half-width half-height">
+
+    <h3 class="padding-20 text-align-center">{{ 'configuration.dashboard.select_barber' | translate }}:</h3>
+
+    <!--Check boxes-->
+    <section class="padding-20">
+
+        <span>
+          <mat-checkbox color="primary"
+                        [checked]="isAllCheckboxSelected"
+                        (change)="selectAllCheckboxes($event.checked)"
+                        [indeterminate]="someCheckboxSelected()">
+
+            <p class="font-size-large font-style-italic font-weight-bold">{{ 'configuration.dashboard.select_all' | translate }}</p>
+
+          </mat-checkbox>
+        </span>
+
+      <div class="sized-box-height-5"></div>
+
+      <span>
+         <ul style=" overflow-x: auto; overflow-y: auto; height: 110px; width: 100%">
+           <li *ngFor="let barber of barbers">
+
+             <mat-checkbox color="primary"
+                           [(ngModel)]="barber.isChecked"
+                           (ngModelChange)="updateAllCheckboxes()">
+
+               <p class="font-size-large font-weight-bold">{{ barber.firstName | language }} {{ barber.lastName | language}}</p>
+
+             </mat-checkbox>
+
+            </li>
+          </ul>
+        </span>
+
+    </section>
+
+    <h3 class="text-align-center">{{'configuration.dashboard.pick_date' | translate}}:</h3>
+
+    <!--Radio buttons and date pickers-->
+    <div class="row padding-10">
+
+      <mat-radio-group [disabled]="noCheckboxSelected()" style="width: 25%" class="padding-20" aria-label="Select an option" [(ngModel)]="radioButtonSelection">
+        <mat-radio-button [value]="todayEnum">{{'configuration.dashboard.today' | translate}}</mat-radio-button>
+        <div class="sized-box-height-20"></div>
+        <mat-radio-button [value]="periodEnum">{{'configuration.dashboard.period' | translate}}</mat-radio-button>
+      </mat-radio-group>
+
+      <!--the datepicker input fields-->
+      <div class="col" style="width: 60%" *ngIf="radioButtonSelection === periodEnum">
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'configuration.dashboard.from' | translate }}</mat-label>
+          <input matInput readonly (dateInput)="onChangeDateFrom($event.value)" [matDatepicker]="from">
+          <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+          <mat-datepicker #from></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>{{ 'configuration.dashboard.to' | translate }}</mat-label>
+          <input matInput readonly (dateInput)="onChangeDateTo($event.value)" [matDatepicker]="to">
+          <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+          <mat-datepicker #to></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="padding-50 text-align-center">
+      <button [disabled]="validateGenerateButton()" (click)="generateReport()" mat-raised-button color="primary">
+        <span>{{ 'configuration.dashboard.generate' | translate }}</span>
+      </button>
+    </div>
+
+    <!--Report-->
+    <div class="col">
+      <h3 class="padding-20 text-align-center">{{ 'configuration.dashboard.report' | translate }}:</h3>
+
+      <h2 *ngIf="radioButtonSelection === todayEnum; else period" class=" text-align-center font-weight-normal">
+        {{today | date:'dd MMM yyyy'}}
+      </h2>
+
+      <ng-template #period>
+        <h2 class=" text-align-center font-weight-normal">
+          <label *ngIf="startDate != null && endDate != null">
+            {{startDate | date:'dd MMM yyyy'}} - {{endDate | date:'dd MMM yyyy'}}
+          </label>
+        </h2>
+      </ng-template>
+
+
+      <div class="padding-40 font-size-large">
+        <p class="row">
+          <label class="font-weight-bold">{{ 'configuration.dashboard.barbers' | translate }}:</label>
+          <label class="text-indent-10">{{getBarberNames()}}</label>
+        </p>
+
+        <div class="sized-box-height-10"></div>
+
+        <p class="row">
+          <label class="font-weight-bold">{{ 'configuration.dashboard.total_appointments' | translate }}:</label>
+          <label class="text-indent-10">{{getTotalAppointments()}}</label>
+        </p>
+
+        <div class="sized-box-height-10"></div>
+
+        <p class="row">
+          <label class="font-weight-bold">{{ 'configuration.dashboard.total_price' | translate }}:</label>
+          <label class="text-indent-10">{{getTotalPrice()}}</label>
+          <label class="font-weight-bold text-indent-10">{{ 'booking.bgn' | translate }}</label>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sized-box-width-40"></div>
+
+  <!--Charts-->
+  <div class="col mat-elevation-z8 half-width padding-20 justify-content-space-evenly">
+    <app-stacked-bar-chart [responseModel]="responseModel" [barbers]="barbers"></app-stacked-bar-chart>
+    <app-bar-chart [responseModel]="responseModel" [barbers]="barbers"></app-bar-chart>
+  </div>
+
+</div>
+
+<app-notification></app-notification>

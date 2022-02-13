@@ -92,6 +92,10 @@ import { CartelPaginatorComponent} from './views/cartel-paginator/cartel-paginat
 import { CartelPageItemDirective } from './views/cartel-paginator/cartel-page-item.directive';
 import {DatePipe} from '@angular/common';
 import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
+import { DashboardComponent } from './admin-configuration-panel/dashboard/dashboard.component';
+import {ChartsModule} from 'ng2-charts';
+import { StackedBarChartComponent } from './admin-configuration-panel/dashboard/stacked-bar-chart/stacked-bar-chart.component';
+import {BarChartComponent} from './admin-configuration-panel/dashboard/bar-chart/bar-chart.component';
 
 @NgModule({
   exports: [
@@ -149,6 +153,9 @@ import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
     ServiceFlipCardComponent,
     CartelPaginatorComponent,
     CartelPageItemDirective,
+    DashboardComponent,
+    BarChartComponent,
+    StackedBarChartComponent,
   ],
     imports: [
         BrowserModule,
@@ -192,7 +199,8 @@ import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
             useFactory: adapterFactory,
         }),
         MatSortModule,
-        NgxMatIntlTelInputModule
+        NgxMatIntlTelInputModule,
+        ChartsModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: BasicAuthHttpInterceptorService, multi: true},
@@ -209,7 +217,7 @@ import {NgxMatIntlTelInputModule} from 'ngx-mat-intl-tel-input';
       } as SocialAuthServiceConfig,
     },
     {provide: LanguagePipe},
-    {provide: DatePipe}
+    {provide: DatePipe},
   ],
   bootstrap: [AppComponent],
   entryComponents: [

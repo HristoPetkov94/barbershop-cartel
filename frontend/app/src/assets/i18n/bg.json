@@ -106,6 +106,22 @@
         "noShow": "Не дошъл"
       }
     },
+    "dashboard": {
+      "pick_date": "Изберете дата",
+      "select_barber": "Изберете бръснар",
+      "select_all": "Избери всички",
+      "today": "За днес",
+      "period": "За период",
+      "from": "От",
+      "to": "До",
+      "generate": "Генерирай",
+      "report": "Отчет",
+      "barbers": "Бръснар(и)",
+      "total_appointments": "Общо запазени часове",
+      "total_price": "Обща сума",
+      "chart_price_label": "Обща сума",
+      "chart_appointments_label": "Total amount"
+    },
     "tabs": {
       "home": "Начало",
       "general": "Общи",
@@ -117,6 +133,7 @@
       "calendar": "Календар",
       "availability": "Работно време",
       "clients": "Клиенти",
+      "dashboard": "Визуално табло",
       "logout": "Изход"
     },
     "emails": {

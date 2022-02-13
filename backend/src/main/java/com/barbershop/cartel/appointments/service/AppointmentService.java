@@ -247,8 +247,10 @@ public class AppointmentService implements AppointmentInterface {
         entity.setBarber(barber);
 
         if (appointmentModel.getAssignmentId() != null) {
-            assignmentInterface.getAssignment(appointmentModel.getAssignmentId()).ifPresent(assignment ->
-                    entity.setService(assignment.getService())
+            assignmentInterface.getAssignment(appointmentModel.getAssignmentId()).ifPresent(assignment -> {
+                entity.setService(assignment.getService());
+                entity.setPrice(assignment.getPrice());
+                }
             );
         }
     }

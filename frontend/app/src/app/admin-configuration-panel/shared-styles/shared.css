@@ -131,3 +131,30 @@ li:hover {
 .font-size-small {
   font-size: small
 }
+
+.font-size-large {
+  font-size: large;
+}
+
+.font-weight-bold{
+  font-weight: bold;
+}
+
+.font-weight-normal{
+  font-weight: normal;
+}
+
+.font-style-italic {
+  font-style: italic;
+}
+
+.text-indent-10 {
+  text-indent: 10px;
+}
+
+.word-spacing-2 {
+  word-spacing: 2px;
+}
+
+
+

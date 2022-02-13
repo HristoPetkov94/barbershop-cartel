@@ -22,6 +22,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {EmailConfigurationComponent} from './admin-configuration-panel/email-configuration/email-configuration.component';
 import {CalendarComponent} from './admin-configuration-panel/calendar-component/calendar.component';
 import {ClientsConfigurationComponent} from './admin-configuration-panel/clients-configuration/clients-configuration.component';
+import {DashboardComponent} from './admin-configuration-panel/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -60,9 +61,9 @@ const routes: Routes = [
       {path: 'services', component: ServiceConfigurationComponent},
       {path: 'assignments', component: AssignmentConfigurationComponent},
       {path: 'availability', component: AvailabilityConfigurationComponent},
-      {path: 'store', component: StoreConfigurationComponent},
       {path: 'calendar', component: CalendarComponent},
       {path: 'clients', component: ClientsConfigurationComponent },
+      {path: 'dashboard', component: DashboardComponent },
     ],
     canActivate: [AuthGuardService]
   },

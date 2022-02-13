@@ -106,6 +106,20 @@
         "noShow": "No-Show"
       }
     },
+    "dashboard": {
+      "pick_date": "Pick a date",
+      "select_barber": "Select barber",
+      "select_all": "Select all",
+      "today": "Today",
+      "period": "Period",
+      "from": "From",
+      "to": "To",
+      "generate": "Generate",
+      "report": "Report",
+      "barbers": "Barber(s)",
+      "total_appointments": "Total appointments",
+      "total_price": "Total amount"
+    },
     "tabs": {
       "home": "Home",
       "general": "General",
@@ -117,6 +131,7 @@
       "calendar": "Calendar",
       "availability": "Working hours",
       "clients": "Clients",
+      "dashboard": "Dashboard",
       "logout": "Logout"
     },
     "emails": {

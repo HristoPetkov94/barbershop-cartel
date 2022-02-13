@@ -26,6 +26,9 @@ public class AppointmentEntity {
     @Column(name = "endTime")
     private LocalDateTime endTime;
 
+    @Column(name = "price")
+    private double price;
+
     @Column(name = "email")
     private String email;
 

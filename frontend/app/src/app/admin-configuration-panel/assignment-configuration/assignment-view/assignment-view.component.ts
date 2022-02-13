@@ -75,6 +75,10 @@ export class AssignmentViewComponent implements OnInit, OnChanges {
 
     const unAvailable = [];
 
+    if (this.assignments === undefined) {
+      return [];
+    }
+
     for (const assignment of this.assignments) {
       if (assignment.serviceId) {
         unAvailable.push(+assignment.serviceId);
